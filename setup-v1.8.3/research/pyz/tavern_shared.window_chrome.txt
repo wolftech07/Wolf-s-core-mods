@@ -1,0 +1,755 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'os', 'sys', 'ctypes', 'tempfile', 'base64', 'io', '_ICON_B64', 'icon_data', 'ICON_B64', 'ImportError', '_apply_dark_attribute', '_start_hidden', '_finish_dark_window', '_enable_dark_titlebar', '_set_window_icon', '_header_crop_box')
+CONSTANTS
+0 "\nWindow-chrome helpers shared by both apps: dark title bar tinting, the\napp icon, and the header-banner crop math. Client's versions used\nthroughout (server's copies had only cosmetic drift -- an extra bare\n`except:` here, a slightly different default there -- confirmed via diff\nbefore merging, not just picked arbitrarily).\n"
+1 None
+2 ('ICON_B64',)
+3 CODE _apply_dark_attribute
+4 CODE _start_hidden
+5 CODE _finish_dark_window
+6 CODE _enable_dark_titlebar
+7 CODE _set_window_icon
+8 CODE _header_crop_box
+9 (0.35, 540, 1400)
+
+FUNCTION _apply_dark_attribute
+ARGS ('window', 'hwnd', 'value', 'ok')
+NAMES ('sys', 'platform', 'update_idletasks', 'ctypes', 'windll', 'user32', 'GetParent', 'winfo_id', 'c_int', 'dwmapi', 'DwmSetWindowAttribute', 'byref', 'sizeof', 'Exception')
+CONSTANTS
+0 'Just the DWMWA_USE_IMMERSIVE_DARK_MODE attribute itself, factored\nout since both _enable_dark_titlebar (the original, reapply-after-\nthe-fact approach) and _start_hidden/_finish_dark_window (the new\napply-before-first-show approach) both need it.'
+1 'win32'
+2 None
+
+FUNCTION _start_hidden
+ARGS ('window',)
+NAMES ('withdraw', 'Exception', '_apply_dark_attribute')
+CONSTANTS
+0 'Call this FIRST, immediately after super().__init__(), before any\nwidgets are built. Withdraws the window and applies the dark title\nbar attribute right away -- this works fine on a withdrawn window,\nsince the native HWND exists as soon as the Tk widget itself does,\nregardless of visibility.\n\nPairs with _finish_dark_window() at the end of __init__. Together\nthese replace showing the window immediately (as a plain white\nnative window, before Tkinter has finished building or painting its\nactual dark-themed contents) and then fixing up the title bar\nafterward -- which is what caused the visible white flash every\nwindow previously had for a brief moment on open. Building\neverything while hidden and only revealing it once both the content\nand the title bar are already correct means the very first frame\nthe user ever sees is already right.\n'
+1 None
+
+FUNCTION _finish_dark_window
+ARGS ('window',)
+NAMES ('_apply_dark_attribute', 'update_idletasks', 'deiconify', 'Exception')
+CONSTANTS
+0 "Call this LAST, after all widgets/geometry are fully set up --\nsee _start_hidden()'s docstring. A window that has never been shown\nbefore doesn't need the hide/show repaint trick _enable_dark_titlebar\nuses below -- that trick exists specifically to force DWM to redraw\nan ALREADY-VISIBLE light-mode title bar, which doesn't apply here\nsince deiconify() is this window's first-ever appearance; DWM\ncomposes it correctly from the current attribute value the first\ntime, same as most apps that set this before their first show."
+1 None
+
+FUNCTION _enable_dark_titlebar
+ARGS ('window',)
+NAMES ('sys', 'platform', 'after', 'Exception')
+CONSTANTS
+0 "Tint a Tk window's OS title bar dark. Windows 10 (1809+)/11 only;\nsilently does nothing anywhere else.\n\nKept for anything that shows a window immediately rather than using\nthe _start_hidden/_finish_dark_window pair above -- forces a hide/\nshow cycle after setting the attribute, since DWM only repaints an\n*already-visible* window's caption on a real recompose (a plain\nSetWindowPos frame-changed message isn't reliable enough). Runs once\nimmediately and once more via after(), since the window isn't mapped\nuntil mainloop() starts."
+1 'win32'
+2 None
+3 CODE _enable_dark_titlebar.<locals>._apply
+4 False
+5 ('force_repaint',)
+6 CODE _enable_dark_titlebar.<locals>.<lambda>
+
+FUNCTION _enable_dark_titlebar.<locals>._apply
+ARGS ('force_repaint', 'hwnd', 'SW_HIDE', 'SW_SHOWNA')
+NAMES ('_apply_dark_attribute', 'ctypes', 'windll', 'user32', 'GetParent', 'winfo_id', 'ShowWindow', 'Exception')
+CONSTANTS
+0 None
+
+FUNCTION _enable_dark_titlebar.<locals>.<lambda>
+ARGS ()
+NAMES ()
+CONSTANTS
+0 True
+1 ('force_repaint',)
+
+FUNCTION _set_window_icon
+ARGS ('root', 'tmp', 'f')
+NAMES ('_ICON_B64', 'os', 'path', 'join', 'tempfile', 'gettempdir', 'open', 'write', 'base64', 'b64decode', 'iconbitmap', 'Exception')
+CONSTANTS
+0 None
+1 'tavern_icon.ico'
+2 'wb'
+
+FUNCTION _header_crop_box
+ARGS ('src_w', 'src_h', 'target_w', 'target_h', 'min_reveal', 'min_width', 'reveal_at_width', 'span', 'reveal', 'crop_w', 'crop_h', 'cx', 'cy', 'left', 'top', 'right', 'bottom')
+NAMES ('max', 'int', 'min', 'round')
+CONSTANTS
+0 'A centered crop box (source-image pixel coordinates) matching the\ntarget aspect ratio exactly, so scaling it up to (target_w, target_h)\nafterward never distorts anything — unlike stretching the whole image\nto an arbitrary width, which is what made it look "stretched super far"\non a maximized window. At the smallest window width this shows a\nmodestly zoomed-in slice near the center of the artwork; widening the\nwindow smoothly reveals more of it (rather than stretching the same\ncontent further) up to showing the whole image by reveal_at_width, and\nsimply staying fully revealed (scaled larger) beyond that.'
+1 1.0
+2 0.0
+3 2.0
+   0           RESUME                   0
+
+   1           LOAD_CONST               0 ("\nWindow-chrome helpers shared by both apps: dark title bar tinting, the\napp icon, and the header-banner crop math. Client's versions used\nthroughout (server's copies had only cosmetic drift -- an extra bare\n`except:` here, a slightly different default there -- confirmed via diff\nbefore merging, not just picked arbitrarily).\n")
+               STORE_NAME               0 (__doc__)
+
+   8           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              1 (os)
+               STORE_NAME               1 (os)
+
+   9           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              2 (sys)
+               STORE_NAME               2 (sys)
+
+  10           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              3 (ctypes)
+               STORE_NAME               3 (ctypes)
+
+  11           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              4 (tempfile)
+               STORE_NAME               4 (tempfile)
+
+  12           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              5 (base64)
+               STORE_NAME               5 (base64)
+
+  13           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              6 (io)
+               STORE_NAME               6 (io)
+
+  15           LOAD_CONST               1 (None)
+               STORE_NAME               7 (_ICON_B64)
+
+  16           NOP
+
+  17   L1:     LOAD_SMALL_INT           0
+               LOAD_CONST               2 (('ICON_B64',))
+               IMPORT_NAME              8 (icon_data)
+               IMPORT_FROM              9 (ICON_B64)
+               STORE_NAME               7 (_ICON_B64)
+               POP_TOP
+
+  21   L2:     LOAD_CONST               3 (<code object _apply_dark_attribute at 0x000001CD6BF004B0, file "tavern_shared\window_chrome.py", line 21>)
+               MAKE_FUNCTION
+               STORE_NAME              11 (_apply_dark_attribute)
+
+  43           LOAD_CONST               4 (<code object _start_hidden at 0x000001CD6BD2EE80, file "tavern_shared\window_chrome.py", line 43>)
+               MAKE_FUNCTION
+               STORE_NAME              12 (_start_hidden)
+
+  67           LOAD_CONST               5 (<code object _finish_dark_window at 0x000001CD6BCB3E10, file "tavern_shared\window_chrome.py", line 67>)
+               MAKE_FUNCTION
+               STORE_NAME              13 (_finish_dark_window)
+
+  84           LOAD_CONST               6 (<code object _enable_dark_titlebar at 0x000001CD6BCF77B0, file "tavern_shared\window_chrome.py", line 84>)
+               MAKE_FUNCTION
+               STORE_NAME              14 (_enable_dark_titlebar)
+
+ 117           LOAD_CONST               7 (<code object _set_window_icon at 0x000001CD6C018B00, file "tavern_shared\window_chrome.py", line 117>)
+               MAKE_FUNCTION
+               STORE_NAME              15 (_set_window_icon)
+
+ 126           LOAD_CONST               9 ((0.35, 540, 1400))
+               LOAD_CONST               8 (<code object _header_crop_box at 0x000001CD5355FEA0, file "tavern_shared\window_chrome.py", line 126>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME              16 (_header_crop_box)
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+  18           LOAD_NAME               10 (ImportError)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        4 (to L5)
+               NOT_TAKEN
+               POP_TOP
+
+  19   L4:     POP_EXCEPT
+               JUMP_BACKWARD_NO_INTERRUPT 31 (to L2)
+
+  18   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object _apply_dark_attribute at 0x000001CD6BF004B0, file "tavern_shared\window_chrome.py", line 21>:
+  21           RESUME                   0
+
+  26           LOAD_GLOBAL              0 (sys)
+               LOAD_ATTR                2 (platform)
+               LOAD_CONST               1 ('win32')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE        3 (to L1)
+               NOT_TAKEN
+
+  27           LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  28   L1:     NOP
+
+  29   L2:     LOAD_FAST_BORROW         0 (window)
+               LOAD_ATTR                5 (update_idletasks + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  30           LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR                8 (windll)
+               LOAD_ATTR               10 (user32)
+               LOAD_ATTR               13 (GetParent + NULL|self)
+               LOAD_FAST_BORROW         0 (window)
+               LOAD_ATTR               15 (winfo_id + NULL|self)
+               CALL                     0
+               CALL                     1
+               STORE_FAST               1 (hwnd)
+
+  31           LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR               16 (c_int)
+               PUSH_NULL
+               LOAD_SMALL_INT           1
+               CALL                     1
+               STORE_FAST               2 (value)
+
+  33           LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR                8 (windll)
+               LOAD_ATTR               18 (dwmapi)
+               LOAD_ATTR               21 (DwmSetWindowAttribute + NULL|self)
+
+  34           LOAD_FAST_BORROW         1 (hwnd)
+               LOAD_SMALL_INT          20
+               LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR               22 (byref)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (value)
+               CALL                     1
+               LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR               24 (sizeof)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (value)
+               CALL                     1
+
+  33           CALL                     4
+               STORE_FAST               3 (ok)
+
+  35           LOAD_FAST_BORROW         3 (ok)
+               LOAD_SMALL_INT           0
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       87 (to L4)
+               NOT_TAKEN
+
+  37           LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR                8 (windll)
+               LOAD_ATTR               18 (dwmapi)
+               LOAD_ATTR               21 (DwmSetWindowAttribute + NULL|self)
+
+  38           LOAD_FAST_BORROW         1 (hwnd)
+               LOAD_SMALL_INT          19
+               LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR               22 (byref)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (value)
+               CALL                     1
+               LOAD_GLOBAL              6 (ctypes)
+               LOAD_ATTR               24 (sizeof)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (value)
+               CALL                     1
+
+  37           CALL                     4
+               POP_TOP
+       L3:     LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  35   L4:     LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+  39           LOAD_GLOBAL             26 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L7)
+               NOT_TAKEN
+               POP_TOP
+
+  40   L6:     POP_EXCEPT
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  39   L7:     RERAISE                  0
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L5 [0]
+  L5 to L6 -> L8 [1] lasti
+  L7 to L8 -> L8 [1] lasti
+
+Disassembly of <code object _start_hidden at 0x000001CD6BD2EE80, file "tavern_shared\window_chrome.py", line 43>:
+  43           RESUME                   0
+
+  60           NOP
+
+  61   L1:     LOAD_FAST_BORROW         0 (window)
+               LOAD_ATTR                1 (withdraw + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  64   L2:     LOAD_GLOBAL              5 (_apply_dark_attribute + NULL)
+               LOAD_FAST_BORROW         0 (window)
+               CALL                     1
+               POP_TOP
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+  62           LOAD_GLOBAL              2 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        4 (to L5)
+               NOT_TAKEN
+               POP_TOP
+
+  63   L4:     POP_EXCEPT
+               JUMP_BACKWARD_NO_INTERRUPT 26 (to L2)
+
+  62   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object _finish_dark_window at 0x000001CD6BCB3E10, file "tavern_shared\window_chrome.py", line 67>:
+  67           RESUME                   0
+
+  76           LOAD_GLOBAL              1 (_apply_dark_attribute + NULL)
+               LOAD_FAST_BORROW         0 (window)
+               CALL                     1
+               POP_TOP
+
+  77           NOP
+
+  78   L1:     LOAD_FAST_BORROW         0 (window)
+               LOAD_ATTR                3 (update_idletasks + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  79           LOAD_FAST_BORROW         0 (window)
+               LOAD_ATTR                5 (deiconify + NULL|self)
+               CALL                     0
+               POP_TOP
+       L2:     LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+  80           LOAD_GLOBAL              6 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L5)
+               NOT_TAKEN
+               POP_TOP
+
+  81   L4:     POP_EXCEPT
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  80   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object _enable_dark_titlebar at 0x000001CD6BCF77B0, file "tavern_shared\window_chrome.py", line 84>:
+  --           MAKE_CELL                0 (window)
+               MAKE_CELL                1 (_apply)
+
+  84           RESUME                   0
+
+  95           LOAD_GLOBAL              0 (sys)
+               LOAD_ATTR                2 (platform)
+               LOAD_CONST               1 ('win32')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE        3 (to L1)
+               NOT_TAKEN
+
+  96           LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  98   L1:     LOAD_FAST_BORROW         0 (window)
+               BUILD_TUPLE              1
+               LOAD_CONST               3 (<code object _apply at 0x000001CD6BEC48D0, file "tavern_shared\window_chrome.py", line 98>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_DEREF              1 (_apply)
+
+ 110           LOAD_DEREF               1 (_apply)
+               PUSH_NULL
+               LOAD_CONST               4 (False)
+               LOAD_CONST               5 (('force_repaint',))
+               CALL_KW                  1
+               POP_TOP
+
+ 111           NOP
+
+ 112   L2:     LOAD_DEREF               0 (window)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT          60
+               LOAD_FAST_BORROW         1 (_apply)
+               BUILD_TUPLE              1
+               LOAD_CONST               6 (<code object <lambda> at 0x000001CD6C29EC40, file "tavern_shared\window_chrome.py", line 112>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+       L3:     LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  --   L4:     PUSH_EXC_INFO
+
+ 113           LOAD_GLOBAL              6 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L6)
+               NOT_TAKEN
+               POP_TOP
+
+ 114   L5:     POP_EXCEPT
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+ 113   L6:     RERAISE                  0
+
+  --   L7:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L4 [0]
+  L4 to L5 -> L7 [1] lasti
+  L6 to L7 -> L7 [1] lasti
+
+Disassembly of <code object _apply at 0x000001CD6BEC48D0, file "tavern_shared\window_chrome.py", line 98>:
+  --           COPY_FREE_VARS           1
+
+  98           RESUME                   0
+
+  99           LOAD_GLOBAL              1 (_apply_dark_attribute + NULL)
+               LOAD_DEREF               4 (window)
+               CALL                     1
+               POP_TOP
+
+ 100           LOAD_FAST_BORROW         0 (force_repaint)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+
+ 101           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 102   L1:     NOP
+
+ 103   L2:     LOAD_GLOBAL              2 (ctypes)
+               LOAD_ATTR                4 (windll)
+               LOAD_ATTR                6 (user32)
+               LOAD_ATTR                9 (GetParent + NULL|self)
+               LOAD_DEREF               4 (window)
+               LOAD_ATTR               11 (winfo_id + NULL|self)
+               CALL                     0
+               CALL                     1
+               STORE_FAST               1 (hwnd)
+
+ 104           LOAD_SMALL_INT           0
+               LOAD_SMALL_INT           8
+               STORE_FAST_STORE_FAST   50 (SW_SHOWNA, SW_HIDE)
+
+ 105           LOAD_GLOBAL              2 (ctypes)
+               LOAD_ATTR                4 (windll)
+               LOAD_ATTR                6 (user32)
+               LOAD_ATTR               13 (ShowWindow + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (hwnd, SW_HIDE)
+               CALL                     2
+               POP_TOP
+
+ 106           LOAD_GLOBAL              2 (ctypes)
+               LOAD_ATTR                4 (windll)
+               LOAD_ATTR                6 (user32)
+               LOAD_ATTR               13 (ShowWindow + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 19 (hwnd, SW_SHOWNA)
+               CALL                     2
+               POP_TOP
+       L3:     LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L4:     PUSH_EXC_INFO
+
+ 107           LOAD_GLOBAL             14 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L6)
+               NOT_TAKEN
+               POP_TOP
+
+ 108   L5:     POP_EXCEPT
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 107   L6:     RERAISE                  0
+
+  --   L7:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L4 [0]
+  L4 to L5 -> L7 [1] lasti
+  L6 to L7 -> L7 [1] lasti
+
+Disassembly of <code object <lambda> at 0x000001CD6C29EC40, file "tavern_shared\window_chrome.py", line 112>:
+  --           COPY_FREE_VARS           1
+
+ 112           RESUME                   0
+               LOAD_DEREF               0 (_apply)
+               PUSH_NULL
+               LOAD_CONST               0 (True)
+               LOAD_CONST               1 (('force_repaint',))
+               CALL_KW                  1
+               RETURN_VALUE
+
+Disassembly of <code object _set_window_icon at 0x000001CD6C018B00, file "tavern_shared\window_chrome.py", line 117>:
+ 117            RESUME                   0
+
+ 118            LOAD_GLOBAL              0 (_ICON_B64)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L1)
+                NOT_TAKEN
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 119    L1:     NOP
+
+ 120    L2:     LOAD_GLOBAL              2 (os)
+                LOAD_ATTR                4 (path)
+                LOAD_ATTR                7 (join + NULL|self)
+                LOAD_GLOBAL              8 (tempfile)
+                LOAD_ATTR               10 (gettempdir)
+                PUSH_NULL
+                CALL                     0
+                LOAD_CONST               1 ('tavern_icon.ico')
+                CALL                     2
+                STORE_FAST               1 (tmp)
+
+ 121            LOAD_GLOBAL             13 (open + NULL)
+                LOAD_FAST_BORROW         1 (tmp)
+                LOAD_CONST               2 ('wb')
+                CALL                     2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L3:     STORE_FAST_LOAD_FAST    34 (f, f)
+                LOAD_ATTR               15 (write + NULL|self)
+                LOAD_GLOBAL             16 (base64)
+                LOAD_ATTR               18 (b64decode)
+                PUSH_NULL
+                LOAD_GLOBAL              0 (_ICON_B64)
+                CALL                     1
+                CALL                     1
+                POP_TOP
+        L4:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+
+ 122    L5:     LOAD_FAST_BORROW         0 (root)
+                LOAD_ATTR               21 (iconbitmap + NULL|self)
+                LOAD_FAST_BORROW         1 (tmp)
+                CALL                     1
+                POP_TOP
+        L6:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 121    L7:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L8)
+                NOT_TAKEN
+                RERAISE                  2
+        L8:     POP_TOP
+        L9:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 35 (to L5)
+
+  --   L10:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L11:     PUSH_EXC_INFO
+
+ 123            LOAD_GLOBAL             22 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L13)
+                NOT_TAKEN
+                POP_TOP
+       L12:     POP_EXCEPT
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+       L13:     RERAISE                  0
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L11 [0]
+  L3 to L4 -> L7 [2] lasti
+  L4 to L6 -> L11 [0]
+  L7 to L9 -> L10 [4] lasti
+  L9 to L11 -> L11 [0]
+  L11 to L12 -> L14 [1] lasti
+  L13 to L14 -> L14 [1] lasti
+
+Disassembly of <code object _header_crop_box at 0x000001CD5355FEA0, file "tavern_shared\window_chrome.py", line 126>:
+126           RESUME                   0
+
+137           LOAD_GLOBAL              1 (max + NULL)
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_FAST_BORROW         2 (target_w)
+              CALL                     1
+              LOAD_SMALL_INT           1
+              CALL                     2
+              STORE_FAST               2 (target_w)
+
+138           LOAD_GLOBAL              1 (max + NULL)
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_FAST_BORROW         3 (target_h)
+              CALL                     1
+              LOAD_SMALL_INT           1
+              CALL                     2
+              STORE_FAST               3 (target_h)
+
+139           LOAD_GLOBAL              1 (max + NULL)
+              LOAD_SMALL_INT           1
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 101 (reveal_at_width, min_width)
+              BINARY_OP               10 (-)
+              CALL                     2
+              STORE_FAST               7 (span)
+
+140           LOAD_FAST_BORROW         4 (min_reveal)
+              LOAD_CONST               1 (1.0)
+              LOAD_FAST_BORROW         4 (min_reveal)
+              BINARY_OP               10 (-)
+              LOAD_GLOBAL              5 (min + NULL)
+              LOAD_CONST               1 (1.0)
+              LOAD_GLOBAL              1 (max + NULL)
+              LOAD_CONST               2 (0.0)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 37 (target_w, min_width)
+              BINARY_OP               10 (-)
+              LOAD_FAST_BORROW         7 (span)
+              BINARY_OP               11 (/)
+              CALL                     2
+              CALL                     2
+              BINARY_OP                5 (*)
+              BINARY_OP                0 (+)
+              STORE_FAST               8 (reveal)
+
+141           LOAD_FAST_BORROW_LOAD_FAST_BORROW 8 (src_w, reveal)
+              BINARY_OP                5 (*)
+              STORE_FAST               9 (crop_w)
+
+142           LOAD_FAST_BORROW_LOAD_FAST_BORROW 147 (crop_w, target_h)
+              BINARY_OP                5 (*)
+              LOAD_FAST_BORROW         2 (target_w)
+              BINARY_OP               11 (/)
+              STORE_FAST              10 (crop_h)
+
+143           LOAD_FAST_BORROW_LOAD_FAST_BORROW 161 (crop_h, src_h)
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE       18 (to L1)
+              NOT_TAKEN
+
+144           LOAD_FAST                1 (src_h)
+              STORE_FAST              10 (crop_h)
+
+145           LOAD_FAST_BORROW_LOAD_FAST_BORROW 162 (crop_h, target_w)
+              BINARY_OP                5 (*)
+              LOAD_FAST_BORROW         3 (target_h)
+              BINARY_OP               11 (/)
+              STORE_FAST               9 (crop_w)
+
+146   L1:     LOAD_GLOBAL              5 (min + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 144 (crop_w, src_w)
+              CALL                     2
+              STORE_FAST               9 (crop_w)
+
+147           LOAD_FAST_BORROW         0 (src_w)
+              LOAD_CONST               3 (2.0)
+              BINARY_OP               11 (/)
+              LOAD_FAST_BORROW         1 (src_h)
+              LOAD_CONST               3 (2.0)
+              BINARY_OP               11 (/)
+              STORE_FAST_STORE_FAST  203 (cy, cx)
+
+148           LOAD_GLOBAL              1 (max + NULL)
+              LOAD_SMALL_INT           0
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_GLOBAL              7 (round + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 185 (cx, crop_w)
+              LOAD_CONST               3 (2.0)
+              BINARY_OP               11 (/)
+              BINARY_OP               10 (-)
+              CALL                     1
+              CALL                     1
+              CALL                     2
+              STORE_FAST              13 (left)
+
+149           LOAD_GLOBAL              1 (max + NULL)
+              LOAD_SMALL_INT           0
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_GLOBAL              7 (round + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 202 (cy, crop_h)
+              LOAD_CONST               3 (2.0)
+              BINARY_OP               11 (/)
+              BINARY_OP               10 (-)
+              CALL                     1
+              CALL                     1
+              CALL                     2
+              STORE_FAST              14 (top)
+
+150           LOAD_GLOBAL              5 (min + NULL)
+              LOAD_FAST_BORROW         0 (src_w)
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_GLOBAL              7 (round + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 185 (cx, crop_w)
+              LOAD_CONST               3 (2.0)
+              BINARY_OP               11 (/)
+              BINARY_OP                0 (+)
+              CALL                     1
+              CALL                     1
+              CALL                     2
+              STORE_FAST              15 (right)
+
+151           LOAD_GLOBAL              5 (min + NULL)
+              LOAD_FAST_BORROW         1 (src_h)
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_GLOBAL              7 (round + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 202 (cy, crop_h)
+              LOAD_CONST               3 (2.0)
+              BINARY_OP               11 (/)
+              BINARY_OP                0 (+)
+              CALL                     1
+              CALL                     1
+              CALL                     2
+              STORE_FAST              16 (bottom)
+
+152           LOAD_FAST_BORROW_LOAD_FAST_BORROW 222 (left, top)
+              LOAD_FAST_BORROW        15 (right)
+              LOAD_FAST_BORROW        16 (bottom)
+              BUILD_TUPLE              4
+              RETURN_VALUE

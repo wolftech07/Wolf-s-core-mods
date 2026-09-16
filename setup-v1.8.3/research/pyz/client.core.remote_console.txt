@@ -1,0 +1,2431 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'tkinter', 'tk', 'ttk', 'filedialog', 'messagebox', 'simpledialog', 'threading', 'time', 'json', 'urllib.request', 'urllib', 'tavern_shared.theme', 'BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', 'MONO', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar', 'tavern_shared.window_chrome', '_start_hidden', '_finish_dark_window', '_set_window_icon', 'tavern_shared.ws_console_client', 'WsConsoleClient', 'tavern_shared.console_commands', 'CONSOLE_COMMANDS', 'Toplevel', 'RemoteConsoleWindow')
+CONSTANTS
+0 'Remote-console connection window (uses a console_token from the server owner).'
+1 None
+2 ('ttk', 'filedialog', 'messagebox', 'simpledialog')
+3 ('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', 'MONO', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar')
+4 ('_start_hidden', '_finish_dark_window', '_set_window_icon')
+5 ('WsConsoleClient',)
+6 ('CONSOLE_COMMANDS',)
+7 CODE RemoteConsoleWindow
+8 'RemoteConsoleWindow'
+
+FUNCTION RemoteConsoleWindow
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', '__doc__', '__init__', '_build_connect_form', '_attempt_connect', '_connect_failed', '_connect_succeeded', '_build_console_ui', '_append', '_on_disconnected', '_send', '_on_close', '__static_attributes__', '__classdictcell__', '__classcell__')
+CONSTANTS
+0 'RemoteConsoleWindow'
+1 "Lets a player connect to a server owner's console *remotely*,\nauthenticating with a console_token the owner shares with them\ndirectly — never anything read from a local file, unlike server.exe's\nown ConsoleWindow, since (unlike a server admin talking to their own\nlocally-running game) there's no local console_token.txt for this\nlauncher to trust in the first place. The console UI itself, once\nconnected, is identical to server.exe's version — same protocol, same\nautocomplete, same everything — just reached via a connect step\nfirst instead of an automatic local connection."
+2 CODE RemoteConsoleWindow.__init__
+3 CODE RemoteConsoleWindow._build_connect_form
+4 CODE RemoteConsoleWindow._attempt_connect
+5 CODE RemoteConsoleWindow._connect_failed
+6 CODE RemoteConsoleWindow._connect_succeeded
+7 CODE RemoteConsoleWindow._build_console_ui
+8 CODE RemoteConsoleWindow._append
+9 CODE RemoteConsoleWindow._on_disconnected
+10 CODE RemoteConsoleWindow._send
+11 CODE RemoteConsoleWindow._on_close
+12 ('_ac_frame', '_ac_listbox', '_ac_matches', '_ac_scrollbar', '_ac_visible', '_connect_btn', '_connect_status', '_connected', '_hide_autocomplete', '_host', '_status_var', '_stop', '_ws_client', 'out', 'v_cmd', 'v_host', 'v_token')
+13 ('',)
+
+FUNCTION RemoteConsoleWindow.__init__
+ARGS ('self', 'parent')
+NAMES ('super', '__init__', '_start_hidden', 'title', 'configure', 'BG', 'resizable', '_set_window_icon', '_ws_client', '_connected', 'threading', 'Event', '_stop', 'protocol', '_on_close', '_build_connect_form', '_finish_dark_window')
+CONSTANTS
+0 'Remote Console'
+1 ('bg',)
+2 True
+3 None
+4 False
+5 'WM_DELETE_WINDOW'
+
+FUNCTION RemoteConsoleWindow._build_connect_form
+ARGS ('self', 'h', 'hf', 'host_entry', 'tf')
+NAMES ('geometry', 'tk', 'Frame', 'SURF', 'pack', 'pack_propagate', 'Label', 'AMBER', 'BORDER', 'BG', 'MUTED', '_section_label', '_field', 'StringVar', 'v_host', 'Entry', 'PARCH', 'v_token', '_connect_status', 'RED', '_btn', '_attempt_connect', '_connect_btn', 'bind', 'focus_set', 'update_idletasks', 'winfo_reqheight')
+CONSTANTS
+0 '420x320'
+1 ('bg', 'height')
+2 'x'
+3 ('fill',)
+4 False
+5 '🖥  Remote Console'
+6 ('text', 'bg', 'fg', 'font')
+7 'left'
+8 ('side', 'padx', 'pady')
+9 "Connects to another server owner's console remotely. You'll need the server's IP and the console token they give you directly — this is never read from any file on your own machine."
+10 370
+11 ('text', 'bg', 'fg', 'font', 'wraplength', 'justify')
+12 'w'
+13 ('anchor', 'padx', 'pady')
+14 'SERVER IP'
+15 'flat'
+16 ('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd')
+17 'CONSOLE TOKEN'
+18 '●'
+19 ('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd', 'show')
+20 'Given to you by the server owner — the same token their own server.exe uses for its own local console access.'
+21 ('text', 'bg', 'fg', 'font', 'justify', 'anchor', 'wraplength')
+22 ('fill', 'padx', 'pady')
+23 ''
+24 ('value',)
+25 ('textvariable', 'bg', 'fg', 'font', 'wraplength', 'justify')
+26 'Connect'
+27 'primary'
+28 ('font', 'pady')
+29 '<Return>'
+30 CODE RemoteConsoleWindow._build_connect_form.<locals>.<lambda>
+31 CODE RemoteConsoleWindow._build_connect_form.<locals>.<lambda>
+32 '420x'
+33 None
+34 ('Georgia', 12, 'bold')
+35 ('Segoe UI', 9)
+36 (10, 4)
+37 ('Consolas', 10)
+38 ('Segoe UI', 8)
+39 (2, 4)
+40 (2, 0)
+41 ('Georgia', 10, 'bold')
+42 (10, 16)
+
+FUNCTION RemoteConsoleWindow._build_connect_form.<locals>.<lambda>
+ARGS ('e',)
+NAMES ('focus_set',)
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._build_connect_form.<locals>.<lambda>
+ARGS ('e',)
+NAMES ('_attempt_connect',)
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._attempt_connect
+ARGS ('self', 'worker')
+NAMES ('v_host', 'get', 'strip', 'v_token', '_connect_status', 'set', '_connect_btn', 'config', 'WsConsoleClient', '_ws_client', 'threading', 'Thread', 'start')
+CONSTANTS
+0 '127.0.0.1'
+1 'Enter the console token.'
+2 None
+3 'disabled'
+4 'Connecting…'
+5 ('state', 'text')
+6 ''
+7 CODE RemoteConsoleWindow._attempt_connect.<locals>.worker
+8 True
+9 ('target', 'daemon')
+
+FUNCTION RemoteConsoleWindow._attempt_connect.<locals>.worker
+ARGS ('ok', 'msg')
+NAMES ('_ws_client', 'connect', '_connected', 'after')
+CONSTANTS
+0 CODE RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+1 CODE RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+2 ('on_line', 'on_disc')
+3 True
+4 CODE RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+5 CODE RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+6 None
+
+FUNCTION RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+ARGS ('t',)
+NAMES ('after',)
+CONSTANTS
+0 0
+1 CODE RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>.<locals>.<lambda>
+
+FUNCTION RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>.<locals>.<lambda>
+ARGS ('p',)
+NAMES ('_append',)
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+ARGS ('r',)
+NAMES ('after',)
+CONSTANTS
+0 0
+1 CODE RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>.<locals>.<lambda>
+
+FUNCTION RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>.<locals>.<lambda>
+ARGS ()
+NAMES ('_on_disconnected',)
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('_connect_succeeded',)
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._attempt_connect.<locals>.worker.<locals>.<lambda>
+ARGS ('m',)
+NAMES ('_connect_failed',)
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._connect_failed
+ARGS ('self', 'msg')
+NAMES ('_connect_btn', 'config', '_connect_status', 'set')
+CONSTANTS
+0 'normal'
+1 'Connect'
+2 ('state', 'text')
+3 None
+
+FUNCTION RemoteConsoleWindow._connect_succeeded
+ARGS ('self', 'host', 'child')
+NAMES ('_host', 'list', 'winfo_children', 'destroy', 'minsize', '_build_console_ui', 'protocol', '_on_close', '_append')
+CONSTANTS
+0 1
+1 'WM_DELETE_WINDOW'
+2 '[Connected]\n'
+3 'ok'
+4 None
+
+FUNCTION RemoteConsoleWindow._build_console_ui
+ARGS ('self', 'h', 'lf', 'lb', 'sb', 't', 'c', 'cf', '_update_autocomplete', '_on_return', '_on_listbox_click')
+NAMES ('geometry', 'minsize', 'tk', 'Frame', 'SURF', 'pack', 'pack_propagate', 'Label', '_host', 'AMBER', 'StringVar', '_status_var', 'MUTED', 'BORDER', 'BG', 'Text', 'MONO', 'out', '_mk_scrollbar', 'yview', 'config', 'set', 'GREEN', 'RED', 'CYAN', 'tag_config', 'v_cmd', 'Entry', 'PARCH', 'focus_set', '_btn', '_send', 'SURF2', '_ac_frame', 'Listbox', 'AMBERDIM', '_ac_listbox', '_ac_scrollbar', '_ac_visible', '_ac_matches', 'bind', '_hide_autocomplete')
+CONSTANTS
+0 '700x560'
+1 620
+2 480
+3 ('bg', 'height')
+4 'x'
+5 ('fill',)
+6 False
+7 '🖥  Remote Console — '
+8 ('text', 'bg', 'fg', 'font')
+9 'left'
+10 ('side', 'padx', 'pady')
+11 'Connected'
+12 ('value',)
+13 ('textvariable', 'bg', 'fg', 'font')
+14 'right'
+15 ('side', 'padx')
+16 ('bg',)
+17 'both'
+18 True
+19 ('fill', 'expand', 'padx', 'pady')
+20 ('bg', 'highlightbackground', 'highlightthickness')
+21 ('fill', 'expand')
+22 '#b09a78'
+23 'flat'
+24 'disabled'
+25 'word'
+26 ('bg', 'fg', 'font', 'height', 'relief', 'bd', 'state', 'wrap')
+27 'y'
+28 ('side', 'fill')
+29 ('yscrollcommand',)
+30 ('side', 'fill', 'expand', 'padx', 'pady')
+31 'ok'
+32 'warn'
+33 'err'
+34 'cyan'
+35 ('foreground',)
+36 ('fill', 'padx', 'pady')
+37 ('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd')
+38 ('side', 'fill', 'expand')
+39 'Send'
+40 'primary'
+41 ('font', 'pady', 'padx')
+42 '#ffd080'
+43 'none'
+44 ('bg', 'fg', 'selectbackground', 'selectforeground', 'relief', 'bd', 'highlightthickness', 'font', 'activestyle')
+45 CODE RemoteConsoleWindow._build_console_ui.<locals>._hide_autocomplete
+46 CODE RemoteConsoleWindow._build_console_ui.<locals>._show_autocomplete
+47 None
+48 CODE RemoteConsoleWindow._build_console_ui.<locals>._update_autocomplete
+49 CODE RemoteConsoleWindow._build_console_ui.<locals>._accept_selected
+50 CODE RemoteConsoleWindow._build_console_ui.<locals>._move_selection
+51 CODE RemoteConsoleWindow._build_console_ui.<locals>._on_return
+52 CODE RemoteConsoleWindow._build_console_ui.<locals>._on_listbox_click
+53 '<KeyRelease>'
+54 '<Return>'
+55 '<Tab>'
+56 '<Down>'
+57 CODE RemoteConsoleWindow._build_console_ui.<locals>.<lambda>
+58 '<Up>'
+59 CODE RemoteConsoleWindow._build_console_ui.<locals>.<lambda>
+60 '<Escape>'
+61 CODE RemoteConsoleWindow._build_console_ui.<locals>.<lambda>
+62 '<ButtonRelease-1>'
+63 ('Georgia', 12, 'bold')
+64 ('Segoe UI', 9)
+65 (10, 6)
+66 (0, 12)
+67 ('Consolas', 10)
+68 ('Segoe UI', 9, 'bold')
+69 (6, 0)
+70 (None,)
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>._hide_autocomplete
+ARGS ()
+NAMES ('_ac_visible', '_ac_frame', 'place_forget')
+CONSTANTS
+0 False
+1 None
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>._show_autocomplete
+ARGS ('matches', 'm', 'params', 'display')
+NAMES ('_ac_matches', '_ac_listbox', 'delete', 'CONSOLE_COMMANDS', 'get', 'join', 'insert', 'selection_clear', 'selection_set', 'config', 'min', 'len', '_ac_frame', 'place', 'winfo_width', 'lift', '_ac_visible')
+CONSTANTS
+0 0
+1 'end'
+2 '  ['
+3 ', '
+4 ']'
+5 ('height',)
+6 0.0
+7 'sw'
+8 ('in_', 'x', 'rely', 'anchor', 'width')
+9 True
+10 None
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>._update_autocomplete
+ARGS ('event', 'text', 'c', 'matches')
+NAMES ('keysym', 'v_cmd', 'get', 'strip', 'lower', 'CONSOLE_COMMANDS', 'startswith')
+CONSTANTS
+0 None
+1 ('Down', 'Up', 'Tab', 'Return', 'Escape')
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>._accept_selected
+ARGS ('event', 'sel', 'idx')
+NAMES ('_ac_visible', '_ac_listbox', 'curselection', 'len', '_ac_matches', 'v_cmd', 'set', 'icursor')
+CONSTANTS
+0 None
+1 ' '
+2 'end'
+3 'break'
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>._move_selection
+ARGS ('delta', 'sel', 'idx')
+NAMES ('_ac_visible', '_ac_listbox', 'curselection', 'max', 'min', 'len', '_ac_matches', 'selection_clear', 'selection_set', 'activate', 'see')
+CONSTANTS
+0 None
+1 'end'
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>._on_return
+ARGS ('event',)
+NAMES ('_ac_visible', '_send')
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>._on_listbox_click
+ARGS ('event',)
+NAMES ('focus_set',)
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>.<lambda>
+ARGS ('e',)
+NAMES ()
+CONSTANTS
+0 1
+1 'break'
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>.<lambda>
+ARGS ('e',)
+NAMES ()
+CONSTANTS
+0 1
+1 'break'
+2 -1
+
+FUNCTION RemoteConsoleWindow._build_console_ui.<locals>.<lambda>
+ARGS ('e',)
+NAMES ()
+CONSTANTS
+0 None
+
+FUNCTION RemoteConsoleWindow._append
+ARGS ('self', 'text', 'tag')
+NAMES ('out', 'config', 'insert', 'see')
+CONSTANTS
+0 'normal'
+1 ('state',)
+2 'end'
+3 'disabled'
+4 None
+
+FUNCTION RemoteConsoleWindow._on_disconnected
+ARGS ('self', 'msg')
+NAMES ('_connected', '_status_var', 'set', '_append')
+CONSTANTS
+0 False
+1 'Disconnected'
+2 '\n['
+3 ']\n'
+4 'err'
+5 None
+
+FUNCTION RemoteConsoleWindow._send
+ARGS ('self', 'cmd')
+NAMES ('v_cmd', 'get', 'strip', '_connected', 'set', '_append', '_ws_client', 'send')
+CONSTANTS
+0 None
+1 ''
+2 '> '
+3 '\n'
+4 'cyan'
+
+FUNCTION RemoteConsoleWindow._on_close
+ARGS ('self',)
+NAMES ('_stop', 'set', 'hasattr', '_ws_client', 'disconnect', 'destroy')
+CONSTANTS
+0 '_ws_client'
+1 None
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ('Remote-console connection window (uses a console_token from the server owner).')
+              STORE_NAME               0 (__doc__)
+
+  2           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (tkinter)
+              STORE_NAME               2 (tk)
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('ttk', 'filedialog', 'messagebox', 'simpledialog'))
+              IMPORT_NAME              1 (tkinter)
+              IMPORT_FROM              3 (ttk)
+              STORE_NAME               3 (ttk)
+              IMPORT_FROM              4 (filedialog)
+              STORE_NAME               4 (filedialog)
+              IMPORT_FROM              5 (messagebox)
+              STORE_NAME               5 (messagebox)
+              IMPORT_FROM              6 (simpledialog)
+              STORE_NAME               6 (simpledialog)
+              POP_TOP
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              7 (threading)
+              STORE_NAME               7 (threading)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              8 (time)
+              STORE_NAME               8 (time)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              9 (json)
+              STORE_NAME               9 (json)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME             10 (urllib.request)
+              STORE_NAME              11 (urllib)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', 'MONO', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar'))
+              IMPORT_NAME             12 (tavern_shared.theme)
+              IMPORT_FROM             13 (BG)
+              STORE_NAME              13 (BG)
+              IMPORT_FROM             14 (SURF)
+              STORE_NAME              14 (SURF)
+              IMPORT_FROM             15 (SURF2)
+              STORE_NAME              15 (SURF2)
+              IMPORT_FROM             16 (BORDER)
+              STORE_NAME              16 (BORDER)
+              IMPORT_FROM             17 (AMBER)
+              STORE_NAME              17 (AMBER)
+              IMPORT_FROM             18 (AMBERDIM)
+              STORE_NAME              18 (AMBERDIM)
+              IMPORT_FROM             19 (PARCH)
+              STORE_NAME              19 (PARCH)
+              IMPORT_FROM             20 (MUTED)
+              STORE_NAME              20 (MUTED)
+              IMPORT_FROM             21 (GREEN)
+              STORE_NAME              21 (GREEN)
+              IMPORT_FROM             22 (RED)
+              STORE_NAME              22 (RED)
+              IMPORT_FROM             23 (CYAN)
+              STORE_NAME              23 (CYAN)
+              IMPORT_FROM             24 (MONO)
+              STORE_NAME              24 (MONO)
+              IMPORT_FROM             25 (_btn)
+              STORE_NAME              25 (_btn)
+              IMPORT_FROM             26 (_field)
+              STORE_NAME              26 (_field)
+              IMPORT_FROM             27 (_hint)
+              STORE_NAME              27 (_hint)
+              IMPORT_FROM             28 (_section_label)
+              STORE_NAME              28 (_section_label)
+              IMPORT_FROM             29 (_mk_tree)
+              STORE_NAME              29 (_mk_tree)
+              IMPORT_FROM             30 (_mk_scrollbar)
+              STORE_NAME              30 (_mk_scrollbar)
+              POP_TOP
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('_start_hidden', '_finish_dark_window', '_set_window_icon'))
+              IMPORT_NAME             31 (tavern_shared.window_chrome)
+              IMPORT_FROM             32 (_start_hidden)
+              STORE_NAME              32 (_start_hidden)
+              IMPORT_FROM             33 (_finish_dark_window)
+              STORE_NAME              33 (_finish_dark_window)
+              IMPORT_FROM             34 (_set_window_icon)
+              STORE_NAME              34 (_set_window_icon)
+              POP_TOP
+
+ 12           LOAD_SMALL_INT           0
+              LOAD_CONST               5 (('WsConsoleClient',))
+              IMPORT_NAME             35 (tavern_shared.ws_console_client)
+              IMPORT_FROM             36 (WsConsoleClient)
+              STORE_NAME              36 (WsConsoleClient)
+              POP_TOP
+
+ 13           LOAD_SMALL_INT           0
+              LOAD_CONST               6 (('CONSOLE_COMMANDS',))
+              IMPORT_NAME             37 (tavern_shared.console_commands)
+              IMPORT_FROM             38 (CONSOLE_COMMANDS)
+              STORE_NAME              38 (CONSOLE_COMMANDS)
+              POP_TOP
+
+ 15           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               7 (<code object RemoteConsoleWindow at 0x000001CD6C2B5930, file "client\core\remote_console.py", line 15>)
+              MAKE_FUNCTION
+              LOAD_CONST               8 ('RemoteConsoleWindow')
+              LOAD_NAME                2 (tk)
+              LOAD_ATTR               78 (Toplevel)
+              CALL                     3
+              STORE_NAME              40 (RemoteConsoleWindow)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object RemoteConsoleWindow at 0x000001CD6C2B5930, file "client\core\remote_console.py", line 15>:
+  --           MAKE_CELL                0 (__class__)
+               MAKE_CELL                1 (__classdict__)
+
+  15           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('RemoteConsoleWindow')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT          15
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              1 (__classdict__)
+
+  16           LOAD_CONST               1 ("Lets a player connect to a server owner's console *remotely*,\nauthenticating with a console_token the owner shares with them\ndirectly — never anything read from a local file, unlike server.exe's\nown ConsoleWindow, since (unlike a server admin talking to their own\nlocally-running game) there's no local console_token.txt for this\nlauncher to trust in the first place. The console UI itself, once\nconnected, is identical to server.exe's version — same protocol, same\nautocomplete, same everything — just reached via a connect step\nfirst instead of an automatic local connection.")
+               STORE_NAME               4 (__doc__)
+
+  25           LOAD_FAST_BORROW         0 (__class__)
+               BUILD_TUPLE              1
+               LOAD_CONST               2 (<code object __init__ at 0x000001CD6C0183E0, file "client\core\remote_console.py", line 25>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_NAME               5 (__init__)
+
+  39           LOAD_CONST               3 (<code object _build_connect_form at 0x000001CD6C02C490, file "client\core\remote_console.py", line 39>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (_build_connect_form)
+
+  90           LOAD_CONST               4 (<code object _attempt_connect at 0x000001CD6B8933D0, file "client\core\remote_console.py", line 90>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (_attempt_connect)
+
+ 113           LOAD_CONST               5 (<code object _connect_failed at 0x000001CD6C2C39F0, file "client\core\remote_console.py", line 113>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (_connect_failed)
+
+ 117           LOAD_CONST               6 (<code object _connect_succeeded at 0x000001CD6BCE7290, file "client\core\remote_console.py", line 117>)
+               MAKE_FUNCTION
+               STORE_NAME               9 (_connect_succeeded)
+
+ 126           LOAD_CONST               7 (<code object _build_console_ui at 0x000001CD6C0451D0, file "client\core\remote_console.py", line 126>)
+               MAKE_FUNCTION
+               STORE_NAME              10 (_build_console_ui)
+
+ 258           LOAD_CONST              13 (('',))
+               LOAD_CONST               8 (<code object _append at 0x000001CD6BCDEF70, file "client\core\remote_console.py", line 258>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME              11 (_append)
+
+ 264           LOAD_CONST               9 (<code object _on_disconnected at 0x000001CD6C2C3C90, file "client\core\remote_console.py", line 264>)
+               MAKE_FUNCTION
+               STORE_NAME              12 (_on_disconnected)
+
+ 269           LOAD_CONST              10 (<code object _send at 0x000001CD6C3B8030, file "client\core\remote_console.py", line 269>)
+               MAKE_FUNCTION
+               STORE_NAME              13 (_send)
+
+ 277           LOAD_CONST              11 (<code object _on_close at 0x000001CD6BD3AF70, file "client\core\remote_console.py", line 277>)
+               MAKE_FUNCTION
+               STORE_NAME              14 (_on_close)
+               LOAD_CONST              12 (('_ac_frame', '_ac_listbox', '_ac_matches', '_ac_scrollbar', '_ac_visible', '_connect_btn', '_connect_status', '_connected', '_hide_autocomplete', '_host', '_status_var', '_stop', '_ws_client', 'out', 'v_cmd', 'v_host', 'v_token'))
+               STORE_NAME              15 (__static_attributes__)
+               LOAD_FAST_BORROW         1 (__classdict__)
+               STORE_NAME              16 (__classdictcell__)
+               LOAD_FAST_BORROW         0 (__class__)
+               COPY                     1
+               STORE_NAME              17 (__classcell__)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD6C0183E0, file "client\core\remote_console.py", line 25>:
+  --           COPY_FREE_VARS           1
+
+  25           RESUME                   0
+
+  26           LOAD_GLOBAL              0 (super)
+               LOAD_DEREF               2 (__class__)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_SUPER_ATTR          5 (__init__ + NULL|self)
+               LOAD_FAST_BORROW         1 (parent)
+               CALL                     1
+               POP_TOP
+
+  27           LOAD_GLOBAL              5 (_start_hidden + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  28           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                7 (title + NULL|self)
+               LOAD_CONST               0 ('Remote Console')
+               CALL                     1
+               POP_TOP
+
+  29           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                9 (configure + NULL|self)
+               LOAD_GLOBAL             10 (BG)
+               LOAD_CONST               1 (('bg',))
+               CALL_KW                  1
+               POP_TOP
+
+  30           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               13 (resizable + NULL|self)
+               LOAD_CONST               2 (True)
+               LOAD_CONST               2 (True)
+               CALL                     2
+               POP_TOP
+
+  31           LOAD_GLOBAL             15 (_set_window_icon + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  32           LOAD_CONST               3 (None)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               8 (_ws_client)
+
+  33           LOAD_CONST               4 (False)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               9 (_connected)
+
+  34           LOAD_GLOBAL             20 (threading)
+               LOAD_ATTR               22 (Event)
+               PUSH_NULL
+               CALL                     0
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR              12 (_stop)
+
+  35           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               27 (protocol + NULL|self)
+               LOAD_CONST               5 ('WM_DELETE_WINDOW')
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               28 (_on_close)
+               CALL                     2
+               POP_TOP
+
+  36           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               31 (_build_connect_form + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  37           LOAD_GLOBAL             33 (_finish_dark_window + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _build_connect_form at 0x000001CD6C02C490, file "client\core\remote_console.py", line 39>:
+  --           MAKE_CELL                0 (self)
+               MAKE_CELL                5 (token_entry)
+
+  39           RESUME                   0
+
+  40           LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (geometry + NULL|self)
+               LOAD_CONST               0 ('420x320')
+               CALL                     1
+               POP_TOP
+
+  41           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR                4 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL              6 (SURF)
+               LOAD_SMALL_INT          44
+               LOAD_CONST               1 (('bg', 'height'))
+               CALL_KW                  3
+               STORE_FAST               1 (h)
+
+  42           LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_CONST               3 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+               LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR               11 (pack_propagate + NULL|self)
+               LOAD_CONST               4 (False)
+               CALL                     1
+               POP_TOP
+
+  43           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               12 (Label)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (h)
+               LOAD_CONST               5 ('🖥  Remote Console')
+               LOAD_GLOBAL              6 (SURF)
+               LOAD_GLOBAL             14 (AMBER)
+
+  44           LOAD_CONST              34 (('Georgia', 12, 'bold'))
+
+  43           LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+               CALL_KW                  5
+
+  44           LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST               7 ('left')
+               LOAD_SMALL_INT          16
+               LOAD_SMALL_INT           8
+               LOAD_CONST               8 (('side', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  45           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR                4 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL             16 (BORDER)
+               LOAD_SMALL_INT           1
+               LOAD_CONST               1 (('bg', 'height'))
+               CALL_KW                  3
+               LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_CONST               3 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+
+  47           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               12 (Label)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+
+  48           LOAD_CONST               9 ("Connects to another server owner's console remotely. You'll need the server's IP and the console token they give you directly — this is never read from any file on your own machine.")
+
+  51           LOAD_GLOBAL             18 (BG)
+               LOAD_GLOBAL             20 (MUTED)
+               LOAD_CONST              35 (('Segoe UI', 9))
+               LOAD_CONST              10 (370)
+               LOAD_CONST               7 ('left')
+
+  47           LOAD_CONST              11 (('text', 'bg', 'fg', 'font', 'wraplength', 'justify'))
+               CALL_KW                  7
+
+  52           LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST              12 ('w')
+               LOAD_SMALL_INT          20
+               LOAD_CONST              36 ((10, 4))
+               LOAD_CONST              13 (('anchor', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  54           LOAD_GLOBAL             23 (_section_label + NULL)
+               LOAD_DEREF               0 (self)
+               LOAD_CONST              14 ('SERVER IP')
+               CALL                     2
+               POP_TOP
+
+  55           LOAD_GLOBAL             25 (_field + NULL)
+               LOAD_DEREF               0 (self)
+               CALL                     1
+               STORE_FAST               2 (hf)
+
+  56           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               26 (StringVar)
+               PUSH_NULL
+               CALL                     0
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              14 (v_host)
+
+  57           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               30 (Entry)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (hf)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               28 (v_host)
+               LOAD_GLOBAL              6 (SURF)
+               LOAD_GLOBAL             32 (PARCH)
+
+  58           LOAD_GLOBAL             14 (AMBER)
+               LOAD_CONST              15 ('flat')
+               LOAD_CONST              37 (('Consolas', 10))
+               LOAD_SMALL_INT           6
+
+  57           LOAD_CONST              16 (('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd'))
+               CALL_KW                  8
+               STORE_FAST               3 (host_entry)
+
+  59           LOAD_FAST_BORROW         3 (host_entry)
+               LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_CONST               3 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+
+  61           LOAD_GLOBAL             23 (_section_label + NULL)
+               LOAD_DEREF               0 (self)
+               LOAD_CONST              17 ('CONSOLE TOKEN')
+               CALL                     2
+               POP_TOP
+
+  62           LOAD_GLOBAL             25 (_field + NULL)
+               LOAD_DEREF               0 (self)
+               CALL                     1
+               STORE_FAST               4 (tf)
+
+  63           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               26 (StringVar)
+               PUSH_NULL
+               CALL                     0
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              17 (v_token)
+
+  64           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               30 (Entry)
+               PUSH_NULL
+               LOAD_FAST_BORROW         4 (tf)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               34 (v_token)
+               LOAD_GLOBAL              6 (SURF)
+               LOAD_GLOBAL             32 (PARCH)
+
+  65           LOAD_GLOBAL             14 (AMBER)
+               LOAD_CONST              15 ('flat')
+               LOAD_CONST              37 (('Consolas', 10))
+
+  66           LOAD_SMALL_INT           6
+               LOAD_CONST              18 ('●')
+
+  64           LOAD_CONST              19 (('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd', 'show'))
+               CALL_KW                  9
+               STORE_DEREF              5 (token_entry)
+
+  67           LOAD_DEREF               5 (token_entry)
+               LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_CONST               3 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+
+  68           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               12 (Label)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+
+  69           LOAD_CONST              20 ('Given to you by the server owner — the same token their own server.exe uses for its own local console access.')
+
+  71           LOAD_GLOBAL             18 (BG)
+               LOAD_GLOBAL             20 (MUTED)
+               LOAD_CONST              38 (('Segoe UI', 8))
+               LOAD_CONST               7 ('left')
+               LOAD_CONST              12 ('w')
+
+  72           LOAD_CONST              10 (370)
+
+  68           LOAD_CONST              21 (('text', 'bg', 'fg', 'font', 'justify', 'anchor', 'wraplength'))
+               CALL_KW                  8
+
+  72           LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_SMALL_INT          22
+               LOAD_CONST              39 ((2, 4))
+               LOAD_CONST              22 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  74           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               26 (StringVar)
+               PUSH_NULL
+               LOAD_CONST              23 ('')
+               LOAD_CONST              24 (('value',))
+               CALL_KW                  1
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              18 (_connect_status)
+
+  75           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               12 (Label)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               36 (_connect_status)
+               LOAD_GLOBAL             18 (BG)
+               LOAD_GLOBAL             38 (RED)
+
+  76           LOAD_CONST              35 (('Segoe UI', 9))
+               LOAD_CONST              10 (370)
+               LOAD_CONST               7 ('left')
+
+  75           LOAD_CONST              25 (('textvariable', 'bg', 'fg', 'font', 'wraplength', 'justify'))
+               CALL_KW                  7
+
+  77           LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST              12 ('w')
+               LOAD_SMALL_INT          22
+               LOAD_CONST              40 ((2, 0))
+               LOAD_CONST              13 (('anchor', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  79           LOAD_GLOBAL             41 (_btn + NULL)
+               LOAD_DEREF               0 (self)
+               LOAD_CONST              26 ('Connect')
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               42 (_attempt_connect)
+               LOAD_CONST              27 ('primary')
+
+  80           LOAD_CONST              41 (('Georgia', 10, 'bold'))
+               LOAD_SMALL_INT          10
+
+  79           LOAD_CONST              28 (('font', 'pady'))
+               CALL_KW                  6
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              22 (_connect_btn)
+
+  81           LOAD_DEREF               0 (self)
+               LOAD_ATTR               44 (_connect_btn)
+               LOAD_ATTR                9 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_SMALL_INT          20
+               LOAD_CONST              42 ((10, 16))
+               LOAD_CONST              22 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  83           LOAD_FAST_BORROW         3 (host_entry)
+               LOAD_ATTR               47 (bind + NULL|self)
+               LOAD_CONST              29 ('<Return>')
+               LOAD_FAST_BORROW         5 (token_entry)
+               BUILD_TUPLE              1
+               LOAD_CONST              30 (<code object <lambda> at 0x000001CD6C339630, file "client\core\remote_console.py", line 83>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+  84           LOAD_DEREF               5 (token_entry)
+               LOAD_ATTR               47 (bind + NULL|self)
+               LOAD_CONST              29 ('<Return>')
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              31 (<code object <lambda> at 0x000001CD6C339A30, file "client\core\remote_console.py", line 84>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+  85           LOAD_FAST_BORROW         3 (host_entry)
+               LOAD_ATTR               49 (focus_set + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  87           LOAD_DEREF               0 (self)
+               LOAD_ATTR               51 (update_idletasks + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  88           LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (geometry + NULL|self)
+               LOAD_CONST              32 ('420x')
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               53 (winfo_reqheight + NULL|self)
+               CALL                     0
+               FORMAT_SIMPLE
+               BUILD_STRING             2
+               CALL                     1
+               POP_TOP
+               LOAD_CONST              33 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C339630, file "client\core\remote_console.py", line 83>:
+  --           COPY_FREE_VARS           1
+
+  83           RESUME                   0
+               LOAD_DEREF               1 (token_entry)
+               LOAD_ATTR                1 (focus_set + NULL|self)
+               CALL                     0
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C339A30, file "client\core\remote_console.py", line 84>:
+  --           COPY_FREE_VARS           1
+
+  84           RESUME                   0
+               LOAD_DEREF               1 (self)
+               LOAD_ATTR                1 (_attempt_connect + NULL|self)
+               CALL                     0
+               RETURN_VALUE
+
+Disassembly of <code object _attempt_connect at 0x000001CD6B8933D0, file "client\core\remote_console.py", line 90>:
+  --           MAKE_CELL                0 (self)
+               MAKE_CELL                2 (host)
+               MAKE_CELL                3 (token)
+
+  90           RESUME                   0
+
+  91           LOAD_DEREF               0 (self)
+               LOAD_ATTR                0 (v_host)
+               LOAD_ATTR                3 (get + NULL|self)
+               CALL                     0
+               LOAD_ATTR                5 (strip + NULL|self)
+               CALL                     0
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_CONST               0 ('127.0.0.1')
+       L1:     STORE_DEREF              2 (host)
+
+  92           LOAD_DEREF               0 (self)
+               LOAD_ATTR                6 (v_token)
+               LOAD_ATTR                3 (get + NULL|self)
+               CALL                     0
+               LOAD_ATTR                5 (strip + NULL|self)
+               CALL                     0
+               STORE_DEREF              3 (token)
+
+  93           LOAD_DEREF               3 (token)
+               TO_BOOL
+               POP_JUMP_IF_TRUE        30 (to L2)
+               NOT_TAKEN
+
+  94           LOAD_DEREF               0 (self)
+               LOAD_ATTR                8 (_connect_status)
+               LOAD_ATTR               11 (set + NULL|self)
+               LOAD_CONST               1 ('Enter the console token.')
+               CALL                     1
+               POP_TOP
+
+  95           LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  96   L2:     LOAD_DEREF               0 (self)
+               LOAD_ATTR               12 (_connect_btn)
+               LOAD_ATTR               15 (config + NULL|self)
+               LOAD_CONST               3 ('disabled')
+               LOAD_CONST               4 ('Connecting…')
+               LOAD_CONST               5 (('state', 'text'))
+               CALL_KW                  2
+               POP_TOP
+
+  97           LOAD_DEREF               0 (self)
+               LOAD_ATTR                8 (_connect_status)
+               LOAD_ATTR               11 (set + NULL|self)
+               LOAD_CONST               6 ('')
+               CALL                     1
+               POP_TOP
+
+  98           LOAD_GLOBAL             17 (WsConsoleClient + NULL)
+               CALL                     0
+               LOAD_DEREF               0 (self)
+               STORE_ATTR               9 (_ws_client)
+
+ 100           LOAD_FAST_BORROW         2 (host)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_FAST_BORROW         3 (token)
+               BUILD_TUPLE              3
+               LOAD_CONST               7 (<code object worker at 0x000001CD6BD3AA60, file "client\core\remote_console.py", line 100>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               1 (worker)
+
+ 111           LOAD_GLOBAL             20 (threading)
+               LOAD_ATTR               22 (Thread)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (worker)
+               LOAD_CONST               8 (True)
+               LOAD_CONST               9 (('target', 'daemon'))
+               CALL_KW                  2
+               LOAD_ATTR               25 (start + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+Disassembly of <code object worker at 0x000001CD6BD3AA60, file "client\core\remote_console.py", line 100>:
+  --           COPY_FREE_VARS           3
+
+ 100           RESUME                   0
+
+ 101           LOAD_DEREF               3 (self)
+               LOAD_ATTR                0 (_ws_client)
+               LOAD_ATTR                3 (connect + NULL|self)
+
+ 102           LOAD_DEREF               2 (host)
+               LOAD_DEREF               4 (token)
+
+ 103           LOAD_FAST_BORROW         3 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST               0 (<code object <lambda> at 0x000001CD6C3A0690, file "client\core\remote_console.py", line 103>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+
+ 104           LOAD_FAST_BORROW         3 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST               1 (<code object <lambda> at 0x000001CD6C3A07A0, file "client\core\remote_console.py", line 104>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+
+ 101           LOAD_CONST               2 (('on_line', 'on_disc'))
+               CALL_KW                  4
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST    1 (ok, msg)
+
+ 106           LOAD_FAST_BORROW         0 (ok)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       33 (to L1)
+               NOT_TAKEN
+
+ 107           LOAD_CONST               3 (True)
+               LOAD_DEREF               3 (self)
+               STORE_ATTR               2 (_connected)
+
+ 108           LOAD_DEREF               3 (self)
+               LOAD_ATTR                7 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST_BORROW         2 (host)
+               LOAD_FAST_BORROW         3 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST               4 (<code object <lambda> at 0x000001CD6C339F30, file "client\core\remote_console.py", line 108>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               6 (None)
+               RETURN_VALUE
+
+ 110   L1:     LOAD_DEREF               3 (self)
+               LOAD_ATTR                7 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST_BORROW         1 (msg)
+               BUILD_TUPLE              1
+               LOAD_FAST_BORROW         3 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST               5 (<code object <lambda> at 0x000001CD6C33A030, file "client\core\remote_console.py", line 110>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               6 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C3A0690, file "client\core\remote_console.py", line 103>:
+  --           COPY_FREE_VARS           1
+
+ 103           RESUME                   0
+               LOAD_DEREF               1 (self)
+               LOAD_ATTR                1 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST_BORROW         0 (t)
+               BUILD_TUPLE              1
+               LOAD_FAST_BORROW         1 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST               1 (<code object <lambda> at 0x000001CD6C339D30, file "client\core\remote_console.py", line 103>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               CALL                     2
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C339D30, file "client\core\remote_console.py", line 103>:
+  --           COPY_FREE_VARS           1
+
+ 103           RESUME                   0
+               LOAD_DEREF               1 (self)
+               LOAD_ATTR                1 (_append + NULL|self)
+               LOAD_FAST_BORROW         0 (p)
+               CALL                     1
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C3A07A0, file "client\core\remote_console.py", line 104>:
+  --           COPY_FREE_VARS           1
+               MAKE_CELL                0 (r)
+
+ 104           RESUME                   0
+               LOAD_DEREF               1 (self)
+               LOAD_ATTR                1 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST_BORROW         0 (r)
+               LOAD_FAST_BORROW         1 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST               1 (<code object <lambda> at 0x000001CD6C339E30, file "client\core\remote_console.py", line 104>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C339E30, file "client\core\remote_console.py", line 104>:
+  --           COPY_FREE_VARS           2
+
+ 104           RESUME                   0
+               LOAD_DEREF               1 (self)
+               LOAD_ATTR                1 (_on_disconnected + NULL|self)
+               LOAD_DEREF               0 (r)
+               CALL                     1
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C339F30, file "client\core\remote_console.py", line 108>:
+  --           COPY_FREE_VARS           2
+
+ 108           RESUME                   0
+               LOAD_DEREF               1 (self)
+               LOAD_ATTR                1 (_connect_succeeded + NULL|self)
+               LOAD_DEREF               0 (host)
+               CALL                     1
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C33A030, file "client\core\remote_console.py", line 110>:
+  --           COPY_FREE_VARS           1
+
+ 110           RESUME                   0
+               LOAD_DEREF               1 (self)
+               LOAD_ATTR                1 (_connect_failed + NULL|self)
+               LOAD_FAST_BORROW         0 (m)
+               CALL                     1
+               RETURN_VALUE
+
+Disassembly of <code object _connect_failed at 0x000001CD6C2C39F0, file "client\core\remote_console.py", line 113>:
+113           RESUME                   0
+
+114           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_connect_btn)
+              LOAD_ATTR                3 (config + NULL|self)
+              LOAD_CONST               0 ('normal')
+              LOAD_CONST               1 ('Connect')
+              LOAD_CONST               2 (('state', 'text'))
+              CALL_KW                  2
+              POP_TOP
+
+115           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                4 (_connect_status)
+              LOAD_ATTR                7 (set + NULL|self)
+              LOAD_FAST_BORROW         1 (msg)
+              CALL                     1
+              POP_TOP
+              LOAD_CONST               3 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _connect_succeeded at 0x000001CD6BCE7290, file "client\core\remote_console.py", line 117>:
+117           RESUME                   0
+
+118           LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (host, self)
+              STORE_ATTR               0 (_host)
+
+119           LOAD_GLOBAL              3 (list + NULL)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                5 (winfo_children + NULL|self)
+              CALL                     0
+              CALL                     1
+              GET_ITER
+      L1:     FOR_ITER                19 (to L2)
+              STORE_FAST               2 (child)
+
+120           LOAD_FAST_BORROW         2 (child)
+              LOAD_ATTR                7 (destroy + NULL|self)
+              CALL                     0
+              POP_TOP
+              JUMP_BACKWARD           21 (to L1)
+
+119   L2:     END_FOR
+              POP_ITER
+
+121           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                9 (minsize + NULL|self)
+              LOAD_SMALL_INT           1
+              LOAD_SMALL_INT           1
+              CALL                     2
+              POP_TOP
+
+122           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               11 (_build_console_ui + NULL|self)
+              CALL                     0
+              POP_TOP
+
+123           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               13 (protocol + NULL|self)
+              LOAD_CONST               1 ('WM_DELETE_WINDOW')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               14 (_on_close)
+              CALL                     2
+              POP_TOP
+
+124           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               17 (_append + NULL|self)
+              LOAD_CONST               2 ('[Connected]\n')
+              LOAD_CONST               3 ('ok')
+              CALL                     2
+              POP_TOP
+              LOAD_CONST               4 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _build_console_ui at 0x000001CD6C0451D0, file "client\core\remote_console.py", line 126>:
+  --           MAKE_CELL                0 (self)
+               MAKE_CELL               11 (_accept_selected)
+               MAKE_CELL               12 (_hide_autocomplete)
+               MAKE_CELL               13 (_move_selection)
+               MAKE_CELL               14 (_show_autocomplete)
+               MAKE_CELL               15 (entry)
+
+ 126           RESUME                   0
+
+ 127           LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (geometry + NULL|self)
+               LOAD_CONST               0 ('700x560')
+               CALL                     1
+               POP_TOP
+
+ 128           LOAD_DEREF               0 (self)
+               LOAD_ATTR                3 (minsize + NULL|self)
+               LOAD_CONST               1 (620)
+               LOAD_CONST               2 (480)
+               CALL                     2
+               POP_TOP
+
+ 129           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR                6 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL              8 (SURF)
+               LOAD_SMALL_INT          44
+               LOAD_CONST               3 (('bg', 'height'))
+               CALL_KW                  3
+               STORE_FAST               1 (h)
+
+ 130           LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               4 ('x')
+               LOAD_CONST               5 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+               LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR               13 (pack_propagate + NULL|self)
+               LOAD_CONST               6 (False)
+               CALL                     1
+               POP_TOP
+
+ 131           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR               14 (Label)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (h)
+               LOAD_CONST               7 ('🖥  Remote Console — ')
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               16 (_host)
+               FORMAT_SIMPLE
+               BUILD_STRING             2
+               LOAD_GLOBAL              8 (SURF)
+               LOAD_GLOBAL             18 (AMBER)
+
+ 132           LOAD_CONST              63 (('Georgia', 12, 'bold'))
+
+ 131           LOAD_CONST               8 (('text', 'bg', 'fg', 'font'))
+               CALL_KW                  5
+
+ 132           LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               9 ('left')
+               LOAD_SMALL_INT          16
+               LOAD_SMALL_INT           8
+               LOAD_CONST              10 (('side', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+ 133           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR               20 (StringVar)
+               PUSH_NULL
+               LOAD_CONST              11 ('Connected')
+               LOAD_CONST              12 (('value',))
+               CALL_KW                  1
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              11 (_status_var)
+
+ 134           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR               14 (Label)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (h)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               22 (_status_var)
+               LOAD_GLOBAL              8 (SURF)
+               LOAD_GLOBAL             24 (MUTED)
+
+ 135           LOAD_CONST              64 (('Segoe UI', 9))
+
+ 134           LOAD_CONST              13 (('textvariable', 'bg', 'fg', 'font'))
+               CALL_KW                  5
+
+ 135           LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST              14 ('right')
+               LOAD_SMALL_INT          16
+               LOAD_CONST              15 (('side', 'padx'))
+               CALL_KW                  2
+               POP_TOP
+
+ 136           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR                6 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL             26 (BORDER)
+               LOAD_SMALL_INT           1
+               LOAD_CONST               3 (('bg', 'height'))
+               CALL_KW                  3
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               4 ('x')
+               LOAD_CONST               5 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+
+ 138           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR                6 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL             28 (BG)
+               LOAD_CONST              16 (('bg',))
+               CALL_KW                  2
+               STORE_FAST               2 (lf)
+
+ 139           LOAD_FAST_BORROW         2 (lf)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST              17 ('both')
+               LOAD_CONST              18 (True)
+               LOAD_SMALL_INT          12
+               LOAD_CONST              65 ((10, 6))
+               LOAD_CONST              19 (('fill', 'expand', 'padx', 'pady'))
+               CALL_KW                  4
+               POP_TOP
+
+ 140           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR                6 (Frame)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (lf)
+               LOAD_GLOBAL              8 (SURF)
+               LOAD_GLOBAL             26 (BORDER)
+               LOAD_SMALL_INT           1
+               LOAD_CONST              20 (('bg', 'highlightbackground', 'highlightthickness'))
+               CALL_KW                  4
+               STORE_FAST               3 (lb)
+
+ 141           LOAD_FAST_BORROW         3 (lb)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST              17 ('both')
+               LOAD_CONST              18 (True)
+               LOAD_CONST              21 (('fill', 'expand'))
+               CALL_KW                  2
+               POP_TOP
+
+ 142           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR               30 (Text)
+               PUSH_NULL
+               LOAD_FAST_BORROW         3 (lb)
+               LOAD_GLOBAL              8 (SURF)
+               LOAD_CONST              22 ('#b09a78')
+               LOAD_GLOBAL             32 (MONO)
+               LOAD_SMALL_INT          20
+
+ 143           LOAD_CONST              23 ('flat')
+               LOAD_SMALL_INT           0
+               LOAD_CONST              24 ('disabled')
+               LOAD_CONST              25 ('word')
+
+ 142           LOAD_CONST              26 (('bg', 'fg', 'font', 'height', 'relief', 'bd', 'state', 'wrap'))
+               CALL_KW                  9
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              17 (out)
+
+ 144           LOAD_GLOBAL             37 (_mk_scrollbar + NULL)
+               LOAD_FAST_BORROW         3 (lb)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               34 (out)
+               LOAD_ATTR               38 (yview)
+               CALL                     2
+               STORE_FAST               4 (sb)
+
+ 145           LOAD_FAST_BORROW         4 (sb)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST              14 ('right')
+               LOAD_CONST              27 ('y')
+               LOAD_CONST              28 (('side', 'fill'))
+               CALL_KW                  2
+               POP_TOP
+
+ 146           LOAD_DEREF               0 (self)
+               LOAD_ATTR               34 (out)
+               LOAD_ATTR               41 (config + NULL|self)
+               LOAD_FAST_BORROW         4 (sb)
+               LOAD_ATTR               42 (set)
+               LOAD_CONST              29 (('yscrollcommand',))
+               CALL_KW                  1
+               POP_TOP
+
+ 147           LOAD_DEREF               0 (self)
+               LOAD_ATTR               34 (out)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               9 ('left')
+               LOAD_CONST              17 ('both')
+               LOAD_CONST              18 (True)
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT           6
+               LOAD_CONST              30 (('side', 'fill', 'expand', 'padx', 'pady'))
+               CALL_KW                  5
+               POP_TOP
+
+ 148           LOAD_CONST              31 ('ok')
+               LOAD_GLOBAL             44 (GREEN)
+               BUILD_TUPLE              2
+               LOAD_CONST              32 ('warn')
+               LOAD_GLOBAL             18 (AMBER)
+               BUILD_TUPLE              2
+               LOAD_CONST              33 ('err')
+               LOAD_GLOBAL             46 (RED)
+               BUILD_TUPLE              2
+               LOAD_CONST              34 ('cyan')
+               LOAD_GLOBAL             48 (CYAN)
+               BUILD_TUPLE              2
+               BUILD_TUPLE              4
+               GET_ITER
+       L1:     FOR_ITER                33 (to L2)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   86 (t, c)
+
+ 149           LOAD_DEREF               0 (self)
+               LOAD_ATTR               34 (out)
+               LOAD_ATTR               51 (tag_config + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 86 (t, c)
+               LOAD_CONST              35 (('foreground',))
+               CALL_KW                  2
+               POP_TOP
+               JUMP_BACKWARD           35 (to L1)
+
+ 148   L2:     END_FOR
+               POP_ITER
+
+ 151           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR                6 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL             28 (BG)
+               LOAD_CONST              16 (('bg',))
+               CALL_KW                  2
+               STORE_FAST               7 (cf)
+
+ 152           LOAD_FAST_BORROW         7 (cf)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               4 ('x')
+               LOAD_SMALL_INT          12
+               LOAD_CONST              66 ((0, 12))
+               LOAD_CONST              36 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+ 153           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR               20 (StringVar)
+               PUSH_NULL
+               CALL                     0
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              26 (v_cmd)
+
+ 154           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR               54 (Entry)
+               PUSH_NULL
+               LOAD_FAST_BORROW         7 (cf)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               52 (v_cmd)
+               LOAD_GLOBAL              8 (SURF)
+               LOAD_GLOBAL             56 (PARCH)
+
+ 155           LOAD_GLOBAL             18 (AMBER)
+               LOAD_CONST              23 ('flat')
+               LOAD_CONST              67 (('Consolas', 10))
+
+ 156           LOAD_SMALL_INT           6
+
+ 154           LOAD_CONST              37 (('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd'))
+               CALL_KW                  8
+               STORE_DEREF             15 (entry)
+
+ 157           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               9 ('left')
+               LOAD_CONST               4 ('x')
+               LOAD_CONST              18 (True)
+               LOAD_CONST              38 (('side', 'fill', 'expand'))
+               CALL_KW                  3
+               POP_TOP
+
+ 158           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               59 (focus_set + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 159           LOAD_GLOBAL             61 (_btn + NULL)
+               LOAD_FAST_BORROW         7 (cf)
+               LOAD_CONST              39 ('Send')
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               62 (_send)
+               LOAD_CONST              40 ('primary')
+
+ 160           LOAD_CONST              68 (('Segoe UI', 9, 'bold'))
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          14
+
+ 159           LOAD_CONST              41 (('font', 'pady', 'padx'))
+               CALL_KW                  7
+
+ 160           LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               9 ('left')
+               LOAD_CONST              69 ((6, 0))
+               LOAD_CONST              15 (('side', 'padx'))
+               CALL_KW                  2
+               POP_TOP
+
+ 171           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR                6 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL             64 (SURF2)
+               LOAD_GLOBAL             26 (BORDER)
+
+ 172           LOAD_SMALL_INT           1
+
+ 171           LOAD_CONST              20 (('bg', 'highlightbackground', 'highlightthickness'))
+               CALL_KW                  4
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              33 (_ac_frame)
+
+ 173           LOAD_GLOBAL              4 (tk)
+               LOAD_ATTR               68 (Listbox)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               66 (_ac_frame)
+               LOAD_GLOBAL             64 (SURF2)
+               LOAD_GLOBAL             56 (PARCH)
+
+ 174           LOAD_GLOBAL             70 (AMBERDIM)
+               LOAD_CONST              42 ('#ffd080')
+
+ 175           LOAD_CONST              23 ('flat')
+               LOAD_SMALL_INT           0
+               LOAD_SMALL_INT           0
+
+ 176           LOAD_CONST              67 (('Consolas', 10))
+               LOAD_CONST              43 ('none')
+
+ 173           LOAD_CONST              44 (('bg', 'fg', 'selectbackground', 'selectforeground', 'relief', 'bd', 'highlightthickness', 'font', 'activestyle'))
+               CALL_KW                 10
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              36 (_ac_listbox)
+
+ 177           LOAD_GLOBAL             37 (_mk_scrollbar + NULL)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               66 (_ac_frame)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               72 (_ac_listbox)
+               LOAD_ATTR               38 (yview)
+               CALL                     2
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              37 (_ac_scrollbar)
+
+ 178           LOAD_DEREF               0 (self)
+               LOAD_ATTR               74 (_ac_scrollbar)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST              14 ('right')
+               LOAD_CONST              27 ('y')
+               LOAD_CONST              28 (('side', 'fill'))
+               CALL_KW                  2
+               POP_TOP
+
+ 179           LOAD_DEREF               0 (self)
+               LOAD_ATTR               72 (_ac_listbox)
+               LOAD_ATTR               41 (config + NULL|self)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               74 (_ac_scrollbar)
+               LOAD_ATTR               42 (set)
+               LOAD_CONST              29 (('yscrollcommand',))
+               CALL_KW                  1
+               POP_TOP
+
+ 180           LOAD_DEREF               0 (self)
+               LOAD_ATTR               72 (_ac_listbox)
+               LOAD_ATTR               11 (pack + NULL|self)
+               LOAD_CONST               9 ('left')
+               LOAD_CONST              17 ('both')
+               LOAD_CONST              18 (True)
+               LOAD_CONST              38 (('side', 'fill', 'expand'))
+               CALL_KW                  3
+               POP_TOP
+
+ 181           LOAD_CONST               6 (False)
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              38 (_ac_visible)
+
+ 182           BUILD_LIST               0
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              39 (_ac_matches)
+
+ 184           LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              45 (<code object _hide_autocomplete at 0x000001CD6C2C3B40, file "client\core\remote_console.py", line 184>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_DEREF             12 (_hide_autocomplete)
+
+ 189           LOAD_FAST_BORROW        15 (entry)
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST              46 (<code object _show_autocomplete at 0x000001CD6C029A30, file "client\core\remote_console.py", line 189>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_DEREF             14 (_show_autocomplete)
+
+ 204           LOAD_CONST              70 ((None,))
+               LOAD_FAST_BORROW        12 (_hide_autocomplete)
+               LOAD_FAST_BORROW        14 (_show_autocomplete)
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              3
+               LOAD_CONST              48 (<code object _update_autocomplete at 0x000001CD6BFD9020, file "client\core\remote_console.py", line 204>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_FAST               8 (_update_autocomplete)
+
+ 217           LOAD_CONST              70 ((None,))
+               LOAD_FAST_BORROW        12 (_hide_autocomplete)
+               LOAD_FAST_BORROW        15 (entry)
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              3
+               LOAD_CONST              49 (<code object _accept_selected at 0x000001CD6BEC31B0, file "client\core\remote_console.py", line 217>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_DEREF             11 (_accept_selected)
+
+ 228           LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              50 (<code object _move_selection at 0x000001CD6C027160, file "client\core\remote_console.py", line 228>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_DEREF             13 (_move_selection)
+
+ 239           LOAD_CONST              70 ((None,))
+               LOAD_FAST_BORROW        11 (_accept_selected)
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST              51 (<code object _on_return at 0x000001CD6C345B80, file "client\core\remote_console.py", line 239>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_FAST               9 (_on_return)
+
+ 245           LOAD_CONST              70 ((None,))
+               LOAD_FAST_BORROW        11 (_accept_selected)
+               LOAD_FAST_BORROW        15 (entry)
+               BUILD_TUPLE              2
+               LOAD_CONST              52 (<code object _on_listbox_click at 0x000001CD6C3A08B0, file "client\core\remote_console.py", line 245>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_FAST              10 (_on_listbox_click)
+
+ 249           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               81 (bind + NULL|self)
+               LOAD_CONST              53 ('<KeyRelease>')
+               LOAD_FAST_BORROW         8 (_update_autocomplete)
+               CALL                     2
+               POP_TOP
+
+ 250           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               81 (bind + NULL|self)
+               LOAD_CONST              54 ('<Return>')
+               LOAD_FAST_BORROW         9 (_on_return)
+               CALL                     2
+               POP_TOP
+
+ 251           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               81 (bind + NULL|self)
+               LOAD_CONST              55 ('<Tab>')
+               LOAD_DEREF              11 (_accept_selected)
+               CALL                     2
+               POP_TOP
+
+ 252           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               81 (bind + NULL|self)
+               LOAD_CONST              56 ('<Down>')
+               LOAD_FAST_BORROW        13 (_move_selection)
+               BUILD_TUPLE              1
+               LOAD_CONST              57 (<code object <lambda> at 0x000001CD6C33A130, file "client\core\remote_console.py", line 252>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 253           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               81 (bind + NULL|self)
+               LOAD_CONST              58 ('<Up>')
+               LOAD_FAST_BORROW        13 (_move_selection)
+               BUILD_TUPLE              1
+               LOAD_CONST              59 (<code object <lambda> at 0x000001CD6C33A230, file "client\core\remote_console.py", line 253>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 254           LOAD_DEREF              15 (entry)
+               LOAD_ATTR               81 (bind + NULL|self)
+               LOAD_CONST              60 ('<Escape>')
+               LOAD_FAST_BORROW        12 (_hide_autocomplete)
+               BUILD_TUPLE              1
+               LOAD_CONST              61 (<code object <lambda> at 0x000001CD6C29E5B0, file "client\core\remote_console.py", line 254>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 255           LOAD_DEREF               0 (self)
+               LOAD_ATTR               72 (_ac_listbox)
+               LOAD_ATTR               81 (bind + NULL|self)
+               LOAD_CONST              62 ('<ButtonRelease-1>')
+               LOAD_FAST_BORROW        10 (_on_listbox_click)
+               CALL                     2
+               POP_TOP
+
+ 256           LOAD_DEREF              12 (_hide_autocomplete)
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              41 (_hide_autocomplete)
+               LOAD_CONST              47 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _hide_autocomplete at 0x000001CD6C2C3B40, file "client\core\remote_console.py", line 184>:
+  --           COPY_FREE_VARS           1
+
+ 184           RESUME                   0
+
+ 185           LOAD_DEREF               0 (self)
+               LOAD_ATTR                0 (_ac_visible)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       36 (to L1)
+               NOT_TAKEN
+
+ 186           LOAD_DEREF               0 (self)
+               LOAD_ATTR                2 (_ac_frame)
+               LOAD_ATTR                5 (place_forget + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 187           LOAD_CONST               0 (False)
+               LOAD_DEREF               0 (self)
+               STORE_ATTR               0 (_ac_visible)
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+ 185   L1:     LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _show_autocomplete at 0x000001CD6C029A30, file "client\core\remote_console.py", line 189>:
+  --           COPY_FREE_VARS           2
+
+ 189           RESUME                   0
+
+ 190           LOAD_FAST_BORROW         0 (matches)
+               LOAD_DEREF               5 (self)
+               STORE_ATTR               0 (_ac_matches)
+
+ 191           LOAD_DEREF               5 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR                5 (delete + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_CONST               1 ('end')
+               CALL                     2
+               POP_TOP
+
+ 192           LOAD_FAST_BORROW         0 (matches)
+               GET_ITER
+       L1:     FOR_ITER                87 (to L4)
+               STORE_FAST               1 (m)
+
+ 193           LOAD_GLOBAL              6 (CONSOLE_COMMANDS)
+               LOAD_ATTR                8 (get)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (m)
+               BUILD_LIST               0
+               CALL                     2
+               STORE_FAST               2 (params)
+
+ 194           LOAD_FAST_BORROW         2 (params)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       24 (to L2)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         1 (m)
+               FORMAT_SIMPLE
+               LOAD_CONST               2 ('  [')
+               LOAD_CONST               3 (', ')
+               LOAD_ATTR               11 (join + NULL|self)
+               LOAD_FAST_BORROW         2 (params)
+               CALL                     1
+               FORMAT_SIMPLE
+               LOAD_CONST               4 (']')
+               BUILD_STRING             4
+               JUMP_FORWARD             1 (to L3)
+       L2:     LOAD_FAST                1 (m)
+       L3:     STORE_FAST               3 (display)
+
+ 195           LOAD_DEREF               5 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               13 (insert + NULL|self)
+               LOAD_CONST               1 ('end')
+               LOAD_FAST_BORROW         3 (display)
+               CALL                     2
+               POP_TOP
+               JUMP_BACKWARD           89 (to L1)
+
+ 192   L4:     END_FOR
+               POP_ITER
+
+ 196           LOAD_DEREF               5 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               15 (selection_clear + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_CONST               1 ('end')
+               CALL                     2
+               POP_TOP
+
+ 197           LOAD_DEREF               5 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               17 (selection_set + NULL|self)
+               LOAD_SMALL_INT           0
+               CALL                     1
+               POP_TOP
+
+ 198           LOAD_DEREF               5 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               19 (config + NULL|self)
+               LOAD_GLOBAL             21 (min + NULL)
+               LOAD_SMALL_INT           8
+               LOAD_GLOBAL             23 (len + NULL)
+               LOAD_FAST_BORROW         0 (matches)
+               CALL                     1
+               CALL                     2
+               LOAD_CONST               5 (('height',))
+               CALL_KW                  1
+               POP_TOP
+
+ 199           LOAD_DEREF               5 (self)
+               LOAD_ATTR               24 (_ac_frame)
+               LOAD_ATTR               27 (place + NULL|self)
+               LOAD_DEREF               4 (entry)
+               LOAD_SMALL_INT           0
+               LOAD_CONST               6 (0.0)
+               LOAD_CONST               7 ('sw')
+
+ 200           LOAD_DEREF               4 (entry)
+               LOAD_ATTR               29 (winfo_width + NULL|self)
+               CALL                     0
+
+ 199           LOAD_CONST               8 (('in_', 'x', 'rely', 'anchor', 'width'))
+               CALL_KW                  5
+               POP_TOP
+
+ 201           LOAD_DEREF               5 (self)
+               LOAD_ATTR               24 (_ac_frame)
+               LOAD_ATTR               31 (lift + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 202           LOAD_CONST               9 (True)
+               LOAD_DEREF               5 (self)
+               STORE_ATTR              16 (_ac_visible)
+               LOAD_CONST              10 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _update_autocomplete at 0x000001CD6BFD9020, file "client\core\remote_console.py", line 204>:
+  --            COPY_FREE_VARS           3
+
+ 204            RESUME                   0
+
+ 205            LOAD_FAST_BORROW         0 (event)
+                POP_JUMP_IF_NONE        20 (to L1)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (event)
+                LOAD_ATTR                0 (keysym)
+                LOAD_CONST               1 (('Down', 'Up', 'Tab', 'Return', 'Escape'))
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE        3 (to L1)
+                NOT_TAKEN
+
+ 206            LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 207    L1:     LOAD_DEREF               6 (self)
+                LOAD_ATTR                2 (v_cmd)
+                LOAD_ATTR                5 (get + NULL|self)
+                CALL                     0
+                LOAD_ATTR                7 (strip + NULL|self)
+                CALL                     0
+                LOAD_ATTR                9 (lower + NULL|self)
+                CALL                     0
+                STORE_FAST               1 (text)
+
+ 208            LOAD_FAST_BORROW         1 (text)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        10 (to L2)
+                NOT_TAKEN
+
+ 209            LOAD_DEREF               4 (_hide_autocomplete)
+                PUSH_NULL
+                CALL                     0
+                POP_TOP
+
+ 210            LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 211    L2:     LOAD_GLOBAL             10 (CONSOLE_COMMANDS)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      2 (c)
+                SWAP                     2
+        L3:     BUILD_LIST               0
+                SWAP                     2
+        L4:     FOR_ITER                29 (to L7)
+                STORE_FAST_LOAD_FAST    34 (c, c)
+                LOAD_ATTR               13 (startswith + NULL|self)
+                LOAD_FAST_BORROW         1 (text)
+                CALL                     1
+                TO_BOOL
+        L5:     POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           27 (to L4)
+        L6:     LOAD_FAST_BORROW         2 (c)
+                LIST_APPEND              2
+                JUMP_BACKWARD           31 (to L4)
+        L7:     END_FOR
+                POP_ITER
+        L8:     STORE_FAST               3 (matches)
+                STORE_FAST               2 (c)
+
+ 212            LOAD_FAST_BORROW         3 (matches)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       18 (to L9)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 49 (matches, text)
+                BUILD_LIST               1
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       11 (to L9)
+                NOT_TAKEN
+
+ 213            LOAD_DEREF               5 (_show_autocomplete)
+                PUSH_NULL
+                LOAD_FAST_BORROW         3 (matches)
+                CALL                     1
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 215    L9:     LOAD_DEREF               4 (_hide_autocomplete)
+                PUSH_NULL
+                CALL                     0
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L10:     SWAP                     2
+                POP_TOP
+
+ 211            SWAP                     2
+                STORE_FAST               2 (c)
+                RERAISE                  0
+ExceptionTable:
+  L3 to L5 -> L10 [2]
+  L6 to L8 -> L10 [2]
+
+Disassembly of <code object _accept_selected at 0x000001CD6BEC31B0, file "client\core\remote_console.py", line 217>:
+  --           COPY_FREE_VARS           3
+
+ 217           RESUME                   0
+
+ 218           LOAD_DEREF               5 (self)
+               LOAD_ATTR                0 (_ac_visible)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+
+ 219           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 220   L1:     LOAD_DEREF               5 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR                5 (curselection + NULL|self)
+               CALL                     0
+               STORE_FAST               1 (sel)
+
+ 221           LOAD_FAST_BORROW         1 (sel)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       10 (to L2)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         1 (sel)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               JUMP_FORWARD             1 (to L3)
+       L2:     LOAD_SMALL_INT           0
+       L3:     STORE_FAST               2 (idx)
+
+ 222           LOAD_SMALL_INT           0
+               LOAD_FAST                2 (idx)
+               SWAP                     2
+               COPY                     2
+               COMPARE_OP              58 (bool(<=))
+               POP_JUMP_IF_FALSE       27 (to L4)
+               NOT_TAKEN
+               LOAD_GLOBAL              7 (len + NULL)
+               LOAD_DEREF               5 (self)
+               LOAD_ATTR                8 (_ac_matches)
+               CALL                     1
+               COMPARE_OP              18 (bool(<))
+               POP_JUMP_IF_FALSE       72 (to L6)
+               NOT_TAKEN
+               JUMP_FORWARD             2 (to L5)
+       L4:     POP_TOP
+               JUMP_FORWARD            68 (to L6)
+
+ 223   L5:     LOAD_DEREF               5 (self)
+               LOAD_ATTR               10 (v_cmd)
+               LOAD_ATTR               13 (set + NULL|self)
+               LOAD_DEREF               5 (self)
+               LOAD_ATTR                8 (_ac_matches)
+               LOAD_FAST_BORROW         2 (idx)
+               BINARY_OP               26 ([])
+               LOAD_CONST               1 (' ')
+               BINARY_OP                0 (+)
+               CALL                     1
+               POP_TOP
+
+ 224           LOAD_DEREF               4 (entry)
+               LOAD_ATTR               15 (icursor + NULL|self)
+               LOAD_CONST               2 ('end')
+               CALL                     1
+               POP_TOP
+
+ 225   L6:     LOAD_DEREF               3 (_hide_autocomplete)
+               PUSH_NULL
+               CALL                     0
+               POP_TOP
+
+ 226           LOAD_CONST               3 ('break')
+               RETURN_VALUE
+
+Disassembly of <code object _move_selection at 0x000001CD6C027160, file "client\core\remote_console.py", line 228>:
+  --           COPY_FREE_VARS           1
+
+ 228           RESUME                   0
+
+ 229           LOAD_DEREF               3 (self)
+               LOAD_ATTR                0 (_ac_visible)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+
+ 230           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 231   L1:     LOAD_DEREF               3 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR                5 (curselection + NULL|self)
+               CALL                     0
+               STORE_FAST               1 (sel)
+
+ 232           LOAD_FAST_BORROW         1 (sel)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       10 (to L2)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         1 (sel)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               JUMP_FORWARD             1 (to L3)
+       L2:     LOAD_SMALL_INT           0
+       L3:     STORE_FAST               2 (idx)
+
+ 233           LOAD_GLOBAL              7 (max + NULL)
+               LOAD_SMALL_INT           0
+               LOAD_GLOBAL              9 (min + NULL)
+               LOAD_GLOBAL             11 (len + NULL)
+               LOAD_DEREF               3 (self)
+               LOAD_ATTR               12 (_ac_matches)
+               CALL                     1
+               LOAD_SMALL_INT           1
+               BINARY_OP               10 (-)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (idx, delta)
+               BINARY_OP                0 (+)
+               CALL                     2
+               CALL                     2
+               STORE_FAST               2 (idx)
+
+ 234           LOAD_DEREF               3 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               15 (selection_clear + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_CONST               1 ('end')
+               CALL                     2
+               POP_TOP
+
+ 235           LOAD_DEREF               3 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               17 (selection_set + NULL|self)
+               LOAD_FAST_BORROW         2 (idx)
+               CALL                     1
+               POP_TOP
+
+ 236           LOAD_DEREF               3 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               19 (activate + NULL|self)
+               LOAD_FAST_BORROW         2 (idx)
+               CALL                     1
+               POP_TOP
+
+ 237           LOAD_DEREF               3 (self)
+               LOAD_ATTR                2 (_ac_listbox)
+               LOAD_ATTR               21 (see + NULL|self)
+               LOAD_FAST_BORROW         2 (idx)
+               CALL                     1
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _on_return at 0x000001CD6C345B80, file "client\core\remote_console.py", line 239>:
+  --           COPY_FREE_VARS           2
+
+ 239           RESUME                   0
+
+ 240           LOAD_DEREF               2 (self)
+               LOAD_ATTR                0 (_ac_visible)
+               TO_BOOL
+               POP_JUMP_IF_FALSE        8 (to L1)
+               NOT_TAKEN
+
+ 241           LOAD_DEREF               1 (_accept_selected)
+               PUSH_NULL
+               CALL                     0
+               RETURN_VALUE
+
+ 242   L1:     LOAD_DEREF               2 (self)
+               LOAD_ATTR                3 (_send + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 243           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _on_listbox_click at 0x000001CD6C3A08B0, file "client\core\remote_console.py", line 245>:
+  --           COPY_FREE_VARS           2
+
+ 245           RESUME                   0
+
+ 246           LOAD_DEREF               1 (_accept_selected)
+               PUSH_NULL
+               CALL                     0
+               POP_TOP
+
+ 247           LOAD_DEREF               2 (entry)
+               LOAD_ATTR                1 (focus_set + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C33A130, file "client\core\remote_console.py", line 252>:
+  --           COPY_FREE_VARS           1
+
+ 252           RESUME                   0
+               LOAD_DEREF               1 (_move_selection)
+               PUSH_NULL
+               LOAD_SMALL_INT           1
+               CALL                     1
+               LOAD_CONST               1 ('break')
+               BUILD_TUPLE              2
+               LOAD_SMALL_INT           1
+               BINARY_OP               26 ([])
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C33A230, file "client\core\remote_console.py", line 253>:
+  --           COPY_FREE_VARS           1
+
+ 253           RESUME                   0
+               LOAD_DEREF               1 (_move_selection)
+               PUSH_NULL
+               LOAD_CONST               2 (-1)
+               CALL                     1
+               LOAD_CONST               1 ('break')
+               BUILD_TUPLE              2
+               LOAD_SMALL_INT           1
+               BINARY_OP               26 ([])
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C29E5B0, file "client\core\remote_console.py", line 254>:
+  --           COPY_FREE_VARS           1
+
+ 254           RESUME                   0
+               LOAD_DEREF               1 (_hide_autocomplete)
+               PUSH_NULL
+               CALL                     0
+               RETURN_VALUE
+
+Disassembly of <code object _append at 0x000001CD6BCDEF70, file "client\core\remote_console.py", line 258>:
+258           RESUME                   0
+
+259           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (out)
+              LOAD_ATTR                3 (config + NULL|self)
+              LOAD_CONST               0 ('normal')
+              LOAD_CONST               1 (('state',))
+              CALL_KW                  1
+              POP_TOP
+
+260           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (out)
+              LOAD_ATTR                5 (insert + NULL|self)
+              LOAD_CONST               2 ('end')
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (text, tag)
+              CALL                     3
+              POP_TOP
+
+261           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (out)
+              LOAD_ATTR                7 (see + NULL|self)
+              LOAD_CONST               2 ('end')
+              CALL                     1
+              POP_TOP
+
+262           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (out)
+              LOAD_ATTR                3 (config + NULL|self)
+              LOAD_CONST               3 ('disabled')
+              LOAD_CONST               1 (('state',))
+              CALL_KW                  1
+              POP_TOP
+              LOAD_CONST               4 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _on_disconnected at 0x000001CD6C2C3C90, file "client\core\remote_console.py", line 264>:
+264           RESUME                   0
+
+265           LOAD_CONST               0 (False)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               0 (_connected)
+
+266           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (_status_var)
+              LOAD_ATTR                5 (set + NULL|self)
+              LOAD_CONST               1 ('Disconnected')
+              CALL                     1
+              POP_TOP
+
+267           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                7 (_append + NULL|self)
+              LOAD_CONST               2 ('\n[')
+              LOAD_FAST_BORROW         1 (msg)
+              FORMAT_SIMPLE
+              LOAD_CONST               3 (']\n')
+              BUILD_STRING             3
+              LOAD_CONST               4 ('err')
+              CALL                     2
+              POP_TOP
+              LOAD_CONST               5 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _send at 0x000001CD6C3B8030, file "client\core\remote_console.py", line 269>:
+269           RESUME                   0
+
+270           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (v_cmd)
+              LOAD_ATTR                3 (get + NULL|self)
+              CALL                     0
+              LOAD_ATTR                5 (strip + NULL|self)
+              CALL                     0
+              STORE_FAST               1 (cmd)
+
+271           LOAD_FAST_BORROW         1 (cmd)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       19 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_connected)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+
+272   L1:     LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+273   L2:     LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (v_cmd)
+              LOAD_ATTR                9 (set + NULL|self)
+              LOAD_CONST               1 ('')
+              CALL                     1
+              POP_TOP
+
+274           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               11 (_append + NULL|self)
+              LOAD_CONST               2 ('> ')
+              LOAD_FAST_BORROW         1 (cmd)
+              FORMAT_SIMPLE
+              LOAD_CONST               3 ('\n')
+              BUILD_STRING             3
+              LOAD_CONST               4 ('cyan')
+              CALL                     2
+              POP_TOP
+
+275           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               12 (_ws_client)
+              LOAD_ATTR               15 (send + NULL|self)
+              LOAD_FAST_BORROW         1 (cmd)
+              CALL                     1
+              POP_TOP
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _on_close at 0x000001CD6BD3AF70, file "client\core\remote_console.py", line 277>:
+277           RESUME                   0
+
+278           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_stop)
+              LOAD_ATTR                3 (set + NULL|self)
+              CALL                     0
+              POP_TOP
+
+279           LOAD_GLOBAL              5 (hasattr + NULL)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_CONST               0 ('_ws_client')
+              CALL                     2
+              TO_BOOL
+              POP_JUMP_IF_FALSE       45 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_ws_client)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       27 (to L1)
+              NOT_TAKEN
+
+280           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_ws_client)
+              LOAD_ATTR                9 (disconnect + NULL|self)
+              CALL                     0
+              POP_TOP
+
+281   L1:     LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               11 (destroy + NULL|self)
+              CALL                     0
+              POP_TOP
+              LOAD_CONST               1 (None)
+              RETURN_VALUE

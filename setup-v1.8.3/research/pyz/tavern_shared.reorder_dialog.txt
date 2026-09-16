@@ -1,0 +1,762 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('tkinter', 'tk', 'tavern_shared.theme', 'BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'PARCH', 'MUTED', '_btn', '_mk_scrollbar', 'tavern_shared.window_chrome', '_start_hidden', '_finish_dark_window', '_set_window_icon', 'Toplevel', 'ReorderDialog')
+CONSTANTS
+0 0
+1 None
+2 ('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'PARCH', 'MUTED', '_btn', '_mk_scrollbar')
+3 ('_start_hidden', '_finish_dark_window', '_set_window_icon')
+4 CODE ReorderDialog
+5 'ReorderDialog'
+
+FUNCTION ReorderDialog
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', '__doc__', '__init__', '_build', '_refresh_listbox', '_move', '_save', '__static_attributes__', '__classdictcell__', '__classcell__')
+CONSTANTS
+0 'ReorderDialog'
+1 'Lets the user drag... well, click Up/Down... to rearrange a list\nof {key, label} items from an OrderableRegistry, then save.\n'
+2 CODE ReorderDialog.__init__
+3 CODE ReorderDialog._build
+4 CODE ReorderDialog._refresh_listbox
+5 CODE ReorderDialog._move
+6 CODE ReorderDialog._save
+7 ('_keys', '_labels', '_listbox', '_on_saved', '_registry', '_title_text')
+8 ('Reorder', None)
+
+FUNCTION ReorderDialog.__init__
+ARGS ('self', 'parent', 'registry', 'title', 'on_saved', 'item')
+NAMES ('super', '__init__', '_start_hidden', '_registry', '_on_saved', '_title_text', 'title', 'configure', 'BG', 'resizable', '_set_window_icon', 'ordered_items', '_keys', 'all_items', 'get', '_labels', '_build', '_finish_dark_window', 'update_idletasks', 'geometry', 'max', 'winfo_reqwidth', 'winfo_reqheight')
+CONSTANTS
+0 ('bg',)
+1 True
+2 'key'
+3 'label'
+4 360
+5 'x'
+6 420
+7 None
+
+FUNCTION ReorderDialog._build
+ARGS ('self', 'h', 'body', 'sb', 'row')
+NAMES ('tk', 'Frame', 'SURF', 'pack', 'pack_propagate', 'Label', '_title_text', 'AMBER', 'BORDER', 'Listbox', 'PARCH', '_listbox', '_mk_scrollbar', 'yview', 'config', 'set', '_refresh_listbox', 'BG', '_btn', '_save')
+CONSTANTS
+0 44
+1 ('bg', 'height')
+2 'x'
+3 ('fill',)
+4 False
+5 '↕  '
+6 ('text', 'bg', 'fg', 'font')
+7 'left'
+8 ('side', 'padx', 'pady')
+9 ('bg', 'highlightbackground', 'highlightthickness')
+10 'both'
+11 True
+12 ('fill', 'expand', 'padx', 'pady')
+13 'flat'
+14 'none'
+15 ('bg', 'fg', 'selectbackground', 'selectforeground', 'relief', 'bd', 'font', 'activestyle')
+16 'right'
+17 'y'
+18 ('side', 'fill')
+19 ('yscrollcommand',)
+20 ('side', 'fill', 'expand', 'padx', 'pady')
+21 ('bg',)
+22 ('fill', 'padx', 'pady')
+23 '▲ Up'
+24 CODE ReorderDialog._build.<locals>.<lambda>
+25 ('font', 'pady', 'padx')
+26 ('side',)
+27 '▼ Down'
+28 CODE ReorderDialog._build.<locals>.<lambda>
+29 ('side', 'padx')
+30 'Save Order'
+31 'primary'
+32 ('font', 'pady')
+33 None
+34 ('Georgia', 12, 'bold')
+35 ('Segoe UI', 10)
+36 (0, 4)
+37 ('Segoe UI', 9)
+38 ('Georgia', 10, 'bold')
+39 (4, 16)
+
+FUNCTION ReorderDialog._build.<locals>.<lambda>
+ARGS ()
+NAMES ('_move',)
+CONSTANTS
+0 1
+1 -1
+
+FUNCTION ReorderDialog._build.<locals>.<lambda>
+ARGS ()
+NAMES ('_move',)
+CONSTANTS
+0 1
+
+FUNCTION ReorderDialog._refresh_listbox
+ARGS ('self', 'key')
+NAMES ('_listbox', 'delete', '_keys', 'insert', '_labels', 'get')
+CONSTANTS
+0 0
+1 'end'
+2 None
+
+FUNCTION ReorderDialog._move
+ARGS ('self', 'delta', 'sel', 'i', 'j')
+NAMES ('_listbox', 'curselection', 'len', '_keys', '_refresh_listbox', 'selection_set')
+CONSTANTS
+0 None
+
+FUNCTION ReorderDialog._save
+ARGS ('self',)
+NAMES ('_registry', 'save_order', '_keys', '_on_saved', 'destroy')
+CONSTANTS
+0 None
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (tkinter)
+              STORE_NAME               1 (tk)
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'PARCH', 'MUTED', '_btn', '_mk_scrollbar'))
+              IMPORT_NAME              2 (tavern_shared.theme)
+              IMPORT_FROM              3 (BG)
+              STORE_NAME               3 (BG)
+              IMPORT_FROM              4 (SURF)
+              STORE_NAME               4 (SURF)
+              IMPORT_FROM              5 (SURF2)
+              STORE_NAME               5 (SURF2)
+              IMPORT_FROM              6 (BORDER)
+              STORE_NAME               6 (BORDER)
+              IMPORT_FROM              7 (AMBER)
+              STORE_NAME               7 (AMBER)
+              IMPORT_FROM              8 (PARCH)
+              STORE_NAME               8 (PARCH)
+              IMPORT_FROM              9 (MUTED)
+              STORE_NAME               9 (MUTED)
+              IMPORT_FROM             10 (_btn)
+              STORE_NAME              10 (_btn)
+              IMPORT_FROM             11 (_mk_scrollbar)
+              STORE_NAME              11 (_mk_scrollbar)
+              POP_TOP
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('_start_hidden', '_finish_dark_window', '_set_window_icon'))
+              IMPORT_NAME             12 (tavern_shared.window_chrome)
+              IMPORT_FROM             13 (_start_hidden)
+              STORE_NAME              13 (_start_hidden)
+              IMPORT_FROM             14 (_finish_dark_window)
+              STORE_NAME              14 (_finish_dark_window)
+              IMPORT_FROM             15 (_set_window_icon)
+              STORE_NAME              15 (_set_window_icon)
+              POP_TOP
+
+  7           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               4 (<code object ReorderDialog at 0x000001CD6BD2EE80, file "tavern_shared\reorder_dialog.py", line 7>)
+              MAKE_FUNCTION
+              LOAD_CONST               5 ('ReorderDialog')
+              LOAD_NAME                1 (tk)
+              LOAD_ATTR               32 (Toplevel)
+              CALL                     3
+              STORE_NAME              17 (ReorderDialog)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object ReorderDialog at 0x000001CD6BD2EE80, file "tavern_shared\reorder_dialog.py", line 7>:
+  --           MAKE_CELL                0 (__class__)
+               MAKE_CELL                1 (__classdict__)
+
+   7           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('ReorderDialog')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT           7
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              1 (__classdict__)
+
+   8           LOAD_CONST               1 ('Lets the user drag... well, click Up/Down... to rearrange a list\nof {key, label} items from an OrderableRegistry, then save.\n')
+               STORE_NAME               4 (__doc__)
+
+  12           LOAD_CONST               8 (('Reorder', None))
+               LOAD_FAST_BORROW         0 (__class__)
+               BUILD_TUPLE              1
+               LOAD_CONST               2 (<code object __init__ at 0x000001CD5355FEA0, file "tavern_shared\reorder_dialog.py", line 12>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               5 (__init__)
+
+  31           LOAD_CONST               3 (<code object _build at 0x000001CD6C001010, file "tavern_shared\reorder_dialog.py", line 31>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (_build)
+
+  57           LOAD_CONST               4 (<code object _refresh_listbox at 0x000001CD6BCAEF50, file "tavern_shared\reorder_dialog.py", line 57>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (_refresh_listbox)
+
+  62           LOAD_CONST               5 (<code object _move at 0x000001CD535E0A40, file "tavern_shared\reorder_dialog.py", line 62>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (_move)
+
+  74           LOAD_CONST               6 (<code object _save at 0x000001CD6C361C50, file "tavern_shared\reorder_dialog.py", line 74>)
+               MAKE_FUNCTION
+               STORE_NAME               9 (_save)
+               LOAD_CONST               7 (('_keys', '_labels', '_listbox', '_on_saved', '_registry', '_title_text'))
+               STORE_NAME              10 (__static_attributes__)
+               LOAD_FAST_BORROW         1 (__classdict__)
+               STORE_NAME              11 (__classdictcell__)
+               LOAD_FAST_BORROW         0 (__class__)
+               COPY                     1
+               STORE_NAME              12 (__classcell__)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD5355FEA0, file "tavern_shared\reorder_dialog.py", line 12>:
+  --            COPY_FREE_VARS           1
+
+  12            RESUME                   0
+
+  13            LOAD_GLOBAL              0 (super)
+                LOAD_DEREF               6 (__class__)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_SUPER_ATTR          5 (__init__ + NULL|self)
+                LOAD_FAST_BORROW         1 (parent)
+                CALL                     1
+                POP_TOP
+
+  14            LOAD_GLOBAL              5 (_start_hidden + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                CALL                     1
+                POP_TOP
+
+  15            LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (registry, self)
+                STORE_ATTR               3 (_registry)
+
+  16            LOAD_FAST_BORROW_LOAD_FAST_BORROW 64 (on_saved, self)
+                STORE_ATTR               4 (_on_saved)
+
+  17            LOAD_FAST_BORROW_LOAD_FAST_BORROW 48 (title, self)
+                STORE_ATTR               5 (_title_text)
+
+  18            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               13 (title + NULL|self)
+                LOAD_FAST_BORROW         3 (title)
+                CALL                     1
+                POP_TOP
+
+  19            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               15 (configure + NULL|self)
+                LOAD_GLOBAL             16 (BG)
+                LOAD_CONST               0 (('bg',))
+                CALL_KW                  1
+                POP_TOP
+
+  20            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               19 (resizable + NULL|self)
+                LOAD_CONST               1 (True)
+                LOAD_CONST               1 (True)
+                CALL                     2
+                POP_TOP
+
+  21            LOAD_GLOBAL             21 (_set_window_icon + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                CALL                     1
+                POP_TOP
+
+  23            LOAD_FAST_BORROW         2 (registry)
+                LOAD_ATTR               23 (ordered_items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      5 (item)
+                SWAP                     2
+        L1:     BUILD_LIST               0
+                SWAP                     2
+        L2:     FOR_ITER                11 (to L3)
+                STORE_FAST_LOAD_FAST    85 (item, item)
+                LOAD_CONST               2 ('key')
+                BINARY_OP               26 ([])
+                LIST_APPEND              2
+                JUMP_BACKWARD           13 (to L2)
+        L3:     END_FOR
+                POP_ITER
+        L4:     SWAP                     2
+                STORE_FAST               5 (item)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              12 (_keys)
+
+  24            LOAD_FAST_BORROW         2 (registry)
+                LOAD_ATTR               27 (all_items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      5 (item)
+                SWAP                     2
+        L5:     BUILD_MAP                0
+                SWAP                     2
+        L6:     FOR_ITER                35 (to L7)
+                STORE_FAST_LOAD_FAST    85 (item, item)
+                LOAD_CONST               2 ('key')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         5 (item)
+                LOAD_ATTR               29 (get + NULL|self)
+                LOAD_CONST               3 ('label')
+                LOAD_FAST_BORROW         5 (item)
+                LOAD_CONST               2 ('key')
+                BINARY_OP               26 ([])
+                CALL                     2
+                MAP_ADD                  2
+                JUMP_BACKWARD           37 (to L6)
+        L7:     END_FOR
+                POP_ITER
+        L8:     SWAP                     2
+                STORE_FAST               5 (item)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              15 (_labels)
+
+  26            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               33 (_build + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  27            LOAD_GLOBAL             35 (_finish_dark_window + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                CALL                     1
+                POP_TOP
+
+  28            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               37 (update_idletasks + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  29            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               39 (geometry + NULL|self)
+                LOAD_GLOBAL             41 (max + NULL)
+                LOAD_CONST               4 (360)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               43 (winfo_reqwidth + NULL|self)
+                CALL                     0
+                CALL                     2
+                FORMAT_SIMPLE
+                LOAD_CONST               5 ('x')
+                LOAD_GLOBAL             41 (max + NULL)
+                LOAD_CONST               6 (420)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               45 (winfo_reqheight + NULL|self)
+                CALL                     0
+                CALL                     2
+                FORMAT_SIMPLE
+                BUILD_STRING             3
+                CALL                     1
+                POP_TOP
+                LOAD_CONST               7 (None)
+                RETURN_VALUE
+
+  --    L9:     SWAP                     2
+                POP_TOP
+
+  23            SWAP                     2
+                STORE_FAST               5 (item)
+                RERAISE                  0
+
+  --   L10:     SWAP                     2
+                POP_TOP
+
+  24            SWAP                     2
+                STORE_FAST               5 (item)
+                RERAISE                  0
+ExceptionTable:
+  L1 to L4 -> L9 [2]
+  L5 to L8 -> L10 [2]
+
+Disassembly of <code object _build at 0x000001CD6C001010, file "tavern_shared\reorder_dialog.py", line 31>:
+  --           MAKE_CELL                0 (self)
+
+  31           RESUME                   0
+
+  32           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL              4 (SURF)
+               LOAD_SMALL_INT          44
+               LOAD_CONST               1 (('bg', 'height'))
+               CALL_KW                  3
+               STORE_FAST               1 (h)
+
+  33           LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_CONST               3 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+               LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR                9 (pack_propagate + NULL|self)
+               LOAD_CONST               4 (False)
+               CALL                     1
+               POP_TOP
+
+  34           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR               10 (Label)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (h)
+               LOAD_CONST               5 ('↕  ')
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               12 (_title_text)
+               FORMAT_SIMPLE
+               BUILD_STRING             2
+               LOAD_GLOBAL              4 (SURF)
+               LOAD_GLOBAL             14 (AMBER)
+
+  35           LOAD_CONST              34 (('Georgia', 12, 'bold'))
+
+  34           LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+               CALL_KW                  5
+
+  35           LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               7 ('left')
+               LOAD_SMALL_INT          16
+               LOAD_SMALL_INT           8
+               LOAD_CONST               8 (('side', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  36           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL             16 (BORDER)
+               LOAD_SMALL_INT           1
+               LOAD_CONST               1 (('bg', 'height'))
+               CALL_KW                  3
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_CONST               3 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+
+  38           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL              4 (SURF)
+               LOAD_GLOBAL             16 (BORDER)
+               LOAD_SMALL_INT           1
+               LOAD_CONST               9 (('bg', 'highlightbackground', 'highlightthickness'))
+               CALL_KW                  4
+               STORE_FAST               2 (body)
+
+  39           LOAD_FAST_BORROW         2 (body)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              10 ('both')
+               LOAD_CONST              11 (True)
+               LOAD_SMALL_INT          16
+               LOAD_SMALL_INT          12
+               LOAD_CONST              12 (('fill', 'expand', 'padx', 'pady'))
+               CALL_KW                  4
+               POP_TOP
+
+  40           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR               18 (Listbox)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (body)
+               LOAD_GLOBAL              4 (SURF)
+               LOAD_GLOBAL             20 (PARCH)
+               LOAD_GLOBAL             14 (AMBER)
+
+  41           LOAD_GLOBAL              4 (SURF)
+               LOAD_CONST              13 ('flat')
+               LOAD_SMALL_INT           0
+
+  42           LOAD_CONST              35 (('Segoe UI', 10))
+               LOAD_CONST              14 ('none')
+
+  40           LOAD_CONST              15 (('bg', 'fg', 'selectbackground', 'selectforeground', 'relief', 'bd', 'font', 'activestyle'))
+               CALL_KW                  9
+               LOAD_DEREF               0 (self)
+               STORE_ATTR              11 (_listbox)
+
+  43           LOAD_GLOBAL             25 (_mk_scrollbar + NULL)
+               LOAD_FAST_BORROW         2 (body)
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               22 (_listbox)
+               LOAD_ATTR               26 (yview)
+               CALL                     2
+               STORE_FAST               3 (sb)
+
+  44           LOAD_FAST_BORROW         3 (sb)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              16 ('right')
+               LOAD_CONST              17 ('y')
+               LOAD_CONST              18 (('side', 'fill'))
+               CALL_KW                  2
+               POP_TOP
+
+  45           LOAD_DEREF               0 (self)
+               LOAD_ATTR               22 (_listbox)
+               LOAD_ATTR               29 (config + NULL|self)
+               LOAD_FAST_BORROW         3 (sb)
+               LOAD_ATTR               30 (set)
+               LOAD_CONST              19 (('yscrollcommand',))
+               CALL_KW                  1
+               POP_TOP
+
+  46           LOAD_DEREF               0 (self)
+               LOAD_ATTR               22 (_listbox)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               7 ('left')
+               LOAD_CONST              10 ('both')
+               LOAD_CONST              11 (True)
+               LOAD_SMALL_INT           4
+               LOAD_SMALL_INT           4
+               LOAD_CONST              20 (('side', 'fill', 'expand', 'padx', 'pady'))
+               CALL_KW                  5
+               POP_TOP
+
+  47           LOAD_DEREF               0 (self)
+               LOAD_ATTR               33 (_refresh_listbox + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  49           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               LOAD_GLOBAL             34 (BG)
+               LOAD_CONST              21 (('bg',))
+               CALL_KW                  2
+               STORE_FAST               4 (row)
+
+  50           LOAD_FAST_BORROW         4 (row)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_SMALL_INT          16
+               LOAD_CONST              36 ((0, 4))
+               LOAD_CONST              22 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  51           LOAD_GLOBAL             37 (_btn + NULL)
+               LOAD_FAST_BORROW         4 (row)
+               LOAD_CONST              23 ('▲ Up')
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              24 (<code object <lambda> at 0x000001CD6C296A30, file "tavern_shared\reorder_dialog.py", line 51>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_CONST              37 (('Segoe UI', 9))
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          12
+               LOAD_CONST              25 (('font', 'pady', 'padx'))
+               CALL_KW                  6
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               7 ('left')
+               LOAD_CONST              26 (('side',))
+               CALL_KW                  1
+               POP_TOP
+
+  52           LOAD_GLOBAL             37 (_btn + NULL)
+               LOAD_FAST_BORROW         4 (row)
+               LOAD_CONST              27 ('▼ Down')
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              28 (<code object <lambda> at 0x000001CD6C297230, file "tavern_shared\reorder_dialog.py", line 52>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_CONST              37 (('Segoe UI', 9))
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          12
+               LOAD_CONST              25 (('font', 'pady', 'padx'))
+               CALL_KW                  6
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               7 ('left')
+               LOAD_SMALL_INT           6
+               LOAD_CONST              29 (('side', 'padx'))
+               CALL_KW                  2
+               POP_TOP
+
+  54           LOAD_GLOBAL             37 (_btn + NULL)
+               LOAD_DEREF               0 (self)
+               LOAD_CONST              30 ('Save Order')
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR               38 (_save)
+               LOAD_CONST              31 ('primary')
+
+  55           LOAD_CONST              38 (('Georgia', 10, 'bold'))
+               LOAD_SMALL_INT          10
+
+  54           LOAD_CONST              32 (('font', 'pady'))
+               CALL_KW                  6
+
+  55           LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               2 ('x')
+               LOAD_SMALL_INT          16
+               LOAD_CONST              39 ((4, 16))
+               LOAD_CONST              22 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+               LOAD_CONST              33 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C296A30, file "tavern_shared\reorder_dialog.py", line 51>:
+  --           COPY_FREE_VARS           1
+
+  51           RESUME                   0
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (_move + NULL|self)
+               LOAD_CONST               1 (-1)
+               CALL                     1
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C297230, file "tavern_shared\reorder_dialog.py", line 52>:
+  --           COPY_FREE_VARS           1
+
+  52           RESUME                   0
+               LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (_move + NULL|self)
+               LOAD_SMALL_INT           1
+               CALL                     1
+               RETURN_VALUE
+
+Disassembly of <code object _refresh_listbox at 0x000001CD6BCAEF50, file "tavern_shared\reorder_dialog.py", line 57>:
+ 57           RESUME                   0
+
+ 58           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_listbox)
+              LOAD_ATTR                3 (delete + NULL|self)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 ('end')
+              CALL                     2
+              POP_TOP
+
+ 59           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                4 (_keys)
+              GET_ITER
+      L1:     FOR_ITER                56 (to L2)
+              STORE_FAST               1 (key)
+
+ 60           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_listbox)
+              LOAD_ATTR                7 (insert + NULL|self)
+              LOAD_CONST               1 ('end')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                8 (_labels)
+              LOAD_ATTR               11 (get + NULL|self)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 17 (key, key)
+              CALL                     2
+              CALL                     2
+              POP_TOP
+              JUMP_BACKWARD           58 (to L1)
+
+ 59   L2:     END_FOR
+              POP_ITER
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _move at 0x000001CD535E0A40, file "tavern_shared\reorder_dialog.py", line 62>:
+ 62           RESUME                   0
+
+ 63           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_listbox)
+              LOAD_ATTR                3 (curselection + NULL|self)
+              CALL                     0
+              STORE_FAST               2 (sel)
+
+ 64           LOAD_FAST_BORROW         2 (sel)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+
+ 65           LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+ 66   L1:     LOAD_FAST_BORROW         2 (sel)
+              LOAD_SMALL_INT           0
+              BINARY_OP               26 ([])
+              STORE_FAST               3 (i)
+
+ 67           LOAD_FAST_BORROW_LOAD_FAST_BORROW 49 (i, delta)
+              BINARY_OP                0 (+)
+              STORE_FAST               4 (j)
+
+ 68           LOAD_FAST_BORROW         4 (j)
+              LOAD_SMALL_INT           0
+              COMPARE_OP              18 (bool(<))
+              POP_JUMP_IF_TRUE        27 (to L2)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         4 (j)
+              LOAD_GLOBAL              5 (len + NULL)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_keys)
+              CALL                     1
+              COMPARE_OP             188 (bool(>=))
+              POP_JUMP_IF_FALSE        3 (to L3)
+              NOT_TAKEN
+
+ 69   L2:     LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+ 70   L3:     LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_keys)
+              LOAD_FAST_BORROW         4 (j)
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_keys)
+              LOAD_FAST_BORROW         3 (i)
+              BINARY_OP               26 ([])
+              SWAP                     2
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_keys)
+              LOAD_FAST_BORROW         3 (i)
+              STORE_SUBSCR
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_keys)
+              LOAD_FAST_BORROW         4 (j)
+              STORE_SUBSCR
+
+ 71           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                9 (_refresh_listbox + NULL|self)
+              CALL                     0
+              POP_TOP
+
+ 72           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_listbox)
+              LOAD_ATTR               11 (selection_set + NULL|self)
+              LOAD_FAST_BORROW         4 (j)
+              CALL                     1
+              POP_TOP
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _save at 0x000001CD6C361C50, file "tavern_shared\reorder_dialog.py", line 74>:
+ 74           RESUME                   0
+
+ 75           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_registry)
+              LOAD_ATTR                3 (save_order + NULL|self)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                4 (_keys)
+              CALL                     1
+              POP_TOP
+
+ 76           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_on_saved)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       17 (to L1)
+              NOT_TAKEN
+
+ 77           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                7 (_on_saved + NULL|self)
+              CALL                     0
+              POP_TOP
+
+ 78   L1:     LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                9 (destroy + NULL|self)
+              CALL                     0
+              POP_TOP
+              LOAD_CONST               0 (None)
+              RETURN_VALUE

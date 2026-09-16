@@ -1,0 +1,354 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'os', 'sys', 'shutil', 'hashlib', '_app_dir', '_tavern_data_dir', '_sha256_file', '_migrate_legacy_file')
+CONSTANTS
+0 '\nShared filesystem locations both apps use — one AppData folder for all\npersistent data (config, tokens, macros, custom assets, mod-install\nmarkers), regardless of which folder either .exe happens to run from.\n'
+1 None
+2 CODE _app_dir
+3 CODE _tavern_data_dir
+4 CODE _sha256_file
+5 CODE _migrate_legacy_file
+
+FUNCTION _app_dir
+ARGS ()
+NAMES ('getattr', 'sys', 'os', 'path', 'dirname', 'executable', 'abspath', '__file__')
+CONSTANTS
+0 'frozen'
+1 False
+
+FUNCTION _tavern_data_dir
+ARGS ('base', 'path')
+NAMES ('os', 'environ', 'get', 'path', 'join', 'expanduser', 'makedirs', 'Exception')
+CONSTANTS
+0 "The one shared place BOTH launchers' persistent data lives --\nconfig, tokens, macros, custom assets, the player database,\nwhitelist/blacklist, the console token, mod-install markers -- all of\nit, regardless of which folder either .exe happens to be running\nfrom. Means downloading a new build to a different folder, or a\nfresh install replacing the old one, never requires manually moving\nfiles over; they were never next to the exe in the first place. (The\nPatch/ folder and per-game-install files like .tavern_mods_meta.json\ndeliberately stay where they are -- see the comments at their own\ndefinitions for why.)"
+1 'APPDATA'
+2 '~'
+3 'AppData'
+4 'Roaming'
+5 'TheModdingTavern'
+6 True
+7 ('exist_ok',)
+
+FUNCTION _sha256_file
+ARGS ('path', 'h', 'chunk')
+NAMES ('hashlib', 'sha256', 'open', 'iter', 'update', 'hexdigest')
+CONSTANTS
+0 'rb'
+1 CODE _sha256_file.<locals>.<lambda>
+2 b''
+3 None
+
+FUNCTION _sha256_file.<locals>.<lambda>
+ARGS ()
+NAMES ('read',)
+CONSTANTS
+0 1
+1 1048576
+
+FUNCTION _migrate_legacy_file
+ARGS ('old_path', 'new_path')
+NAMES ('os', 'path', 'isfile', 'makedirs', 'dirname', 'shutil', 'move', 'Exception')
+CONSTANTS
+0 'One-time move from before file storage was unified into\n_tavern_data_dir(). Safe to call every startup — a no-op once the file\nhas already been moved, or if it never existed at the old location.'
+1 True
+2 ('exist_ok',)
+3 None
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ('\nShared filesystem locations both apps use — one AppData folder for all\npersistent data (config, tokens, macros, custom assets, mod-install\nmarkers), regardless of which folder either .exe happens to run from.\n')
+              STORE_NAME               0 (__doc__)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (os)
+              STORE_NAME               1 (os)
+
+  7           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (sys)
+              STORE_NAME               2 (sys)
+
+  8           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              3 (shutil)
+              STORE_NAME               3 (shutil)
+
+  9           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              4 (hashlib)
+              STORE_NAME               4 (hashlib)
+
+ 11           LOAD_CONST               2 (<code object _app_dir at 0x000001CD6BD034B0, file "tavern_shared\paths.py", line 11>)
+              MAKE_FUNCTION
+              STORE_NAME               5 (_app_dir)
+
+ 16           LOAD_CONST               3 (<code object _tavern_data_dir at 0x000001CD6BA36360, file "tavern_shared\paths.py", line 16>)
+              MAKE_FUNCTION
+              STORE_NAME               6 (_tavern_data_dir)
+
+ 33           LOAD_CONST               4 (<code object _sha256_file at 0x000001CD6BCE7290, file "tavern_shared\paths.py", line 33>)
+              MAKE_FUNCTION
+              STORE_NAME               7 (_sha256_file)
+
+ 42           LOAD_CONST               5 (<code object _migrate_legacy_file at 0x000001CD6BFDC3E0, file "tavern_shared\paths.py", line 42>)
+              MAKE_FUNCTION
+              STORE_NAME               8 (_migrate_legacy_file)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _app_dir at 0x000001CD6BD034B0, file "tavern_shared\paths.py", line 11>:
+ 11           RESUME                   0
+
+ 12           LOAD_GLOBAL              1 (getattr + NULL)
+              LOAD_GLOBAL              2 (sys)
+              LOAD_CONST               0 ('frozen')
+              LOAD_CONST               1 (False)
+              CALL                     3
+              TO_BOOL
+              POP_JUMP_IF_FALSE       46 (to L1)
+              NOT_TAKEN
+              LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR                9 (dirname + NULL|self)
+              LOAD_GLOBAL              2 (sys)
+              LOAD_ATTR               10 (executable)
+              CALL                     1
+              RETURN_VALUE
+
+ 13   L1:     LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR                9 (dirname + NULL|self)
+              LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR               13 (abspath + NULL|self)
+              LOAD_GLOBAL             14 (__file__)
+              CALL                     1
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object _tavern_data_dir at 0x000001CD6BA36360, file "tavern_shared\paths.py", line 16>:
+  16           RESUME                   0
+
+  27           LOAD_GLOBAL              0 (os)
+               LOAD_ATTR                2 (environ)
+               LOAD_ATTR                5 (get + NULL|self)
+               LOAD_CONST               1 ('APPDATA')
+               LOAD_GLOBAL              0 (os)
+               LOAD_ATTR                6 (path)
+               LOAD_ATTR                9 (join + NULL|self)
+               LOAD_GLOBAL              0 (os)
+               LOAD_ATTR                6 (path)
+               LOAD_ATTR               11 (expanduser + NULL|self)
+               LOAD_CONST               2 ('~')
+               CALL                     1
+               LOAD_CONST               3 ('AppData')
+               LOAD_CONST               4 ('Roaming')
+               CALL                     3
+               CALL                     2
+               STORE_FAST               0 (base)
+
+  28           LOAD_GLOBAL              0 (os)
+               LOAD_ATTR                6 (path)
+               LOAD_ATTR                9 (join + NULL|self)
+               LOAD_FAST_BORROW         0 (base)
+               LOAD_CONST               5 ('TheModdingTavern')
+               CALL                     2
+               STORE_FAST               1 (path)
+
+  29   L1:     LOAD_GLOBAL              0 (os)
+               LOAD_ATTR               12 (makedirs)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (path)
+               LOAD_CONST               6 (True)
+               LOAD_CONST               7 (('exist_ok',))
+               CALL_KW                  2
+               POP_TOP
+
+  31   L2:     LOAD_FAST_BORROW         1 (path)
+               RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+  30           LOAD_GLOBAL             14 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L5)
+               NOT_TAKEN
+               POP_TOP
+       L4:     POP_EXCEPT
+
+  31           LOAD_FAST                1 (path)
+               RETURN_VALUE
+
+  30   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object _sha256_file at 0x000001CD6BCE7290, file "tavern_shared\paths.py", line 33>:
+  --           MAKE_CELL                3 (f)
+
+  33           RESUME                   0
+
+  34           LOAD_GLOBAL              0 (hashlib)
+               LOAD_ATTR                2 (sha256)
+               PUSH_NULL
+               CALL                     0
+               STORE_FAST               1 (h)
+
+  35           LOAD_GLOBAL              5 (open + NULL)
+               LOAD_FAST_BORROW         0 (path)
+               LOAD_CONST               0 ('rb')
+               CALL                     2
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     STORE_DEREF              3 (f)
+
+  36           LOAD_GLOBAL              7 (iter + NULL)
+               LOAD_FAST_BORROW         3 (f)
+               BUILD_TUPLE              1
+               LOAD_CONST               1 (<code object <lambda> at 0x000001CD6BCA3E30, file "tavern_shared\paths.py", line 36>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_CONST               2 (b'')
+               CALL                     2
+               GET_ITER
+       L2:     FOR_ITER                20 (to L3)
+               STORE_FAST               2 (chunk)
+
+  37           LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR                9 (update + NULL|self)
+               LOAD_FAST_BORROW         2 (chunk)
+               CALL                     1
+               POP_TOP
+               JUMP_BACKWARD           22 (to L2)
+
+  36   L3:     END_FOR
+               POP_ITER
+
+  35   L4:     LOAD_CONST               3 (None)
+               LOAD_CONST               3 (None)
+               LOAD_CONST               3 (None)
+               CALL                     3
+               POP_TOP
+
+  38           LOAD_FAST_BORROW         1 (h)
+               LOAD_ATTR               11 (hexdigest + NULL|self)
+               CALL                     0
+               RETURN_VALUE
+
+  35   L5:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L6)
+               NOT_TAKEN
+               RERAISE                  2
+       L6:     POP_TOP
+       L7:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+
+  38           LOAD_FAST                1 (h)
+               LOAD_ATTR               11 (hexdigest + NULL|self)
+               CALL                     0
+               RETURN_VALUE
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L5 [2] lasti
+  L5 to L7 -> L8 [4] lasti
+
+Disassembly of <code object <lambda> at 0x000001CD6BCA3E30, file "tavern_shared\paths.py", line 36>:
+  --           COPY_FREE_VARS           1
+
+  36           RESUME                   0
+               LOAD_DEREF               0 (f)
+               LOAD_ATTR                1 (read + NULL|self)
+               LOAD_CONST               1 (1048576)
+               CALL                     1
+               RETURN_VALUE
+
+Disassembly of <code object _migrate_legacy_file at 0x000001CD6BFDC3E0, file "tavern_shared\paths.py", line 42>:
+  42            RESUME                   0
+
+  46            NOP
+
+  47    L1:     LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                2 (path)
+                LOAD_ATTR                5 (isfile + NULL|self)
+                LOAD_FAST_BORROW         0 (old_path)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE      117 (to L8)
+        L2:     NOT_TAKEN
+        L3:     LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                2 (path)
+                LOAD_ATTR                5 (isfile + NULL|self)
+                LOAD_FAST_BORROW         1 (new_path)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        78 (to L7)
+        L4:     NOT_TAKEN
+
+  48    L5:     LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                6 (makedirs)
+                PUSH_NULL
+                LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                2 (path)
+                LOAD_ATTR                9 (dirname + NULL|self)
+                LOAD_FAST_BORROW         1 (new_path)
+                CALL                     1
+                LOAD_CONST               1 (True)
+                LOAD_CONST               2 (('exist_ok',))
+                CALL_KW                  2
+                POP_TOP
+
+  49            LOAD_GLOBAL             10 (shutil)
+                LOAD_ATTR               12 (move)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (old_path, new_path)
+                CALL                     2
+                POP_TOP
+        L6:     LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  47    L7:     LOAD_CONST               3 (None)
+                RETURN_VALUE
+        L8:     LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  --    L9:     PUSH_EXC_INFO
+
+  50            LOAD_GLOBAL             14 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L11)
+                NOT_TAKEN
+                POP_TOP
+
+  51   L10:     POP_EXCEPT
+                LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  50   L11:     RERAISE                  0
+
+  --   L12:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L9 [0]
+  L3 to L4 -> L9 [0]
+  L5 to L6 -> L9 [0]
+  L9 to L10 -> L12 [1] lasti
+  L11 to L12 -> L12 [1] lasti

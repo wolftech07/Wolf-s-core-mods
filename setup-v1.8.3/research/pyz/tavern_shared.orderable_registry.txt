@@ -1,0 +1,497 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('os', 'json', 'OrderableRegistry')
+CONSTANTS
+0 0
+1 None
+2 CODE OrderableRegistry
+3 'OrderableRegistry'
+
+FUNCTION OrderableRegistry
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', '__doc__', '__init__', 'register', 'all_items', 'ordered_items', 'save_order', '_load_saved_order', '__static_attributes__', '__classdictcell__')
+CONSTANTS
+0 'OrderableRegistry'
+1 'A list of registered items, orderable by the user and persisted\nto disk. Registration order (with built-in items always sorted\nbefore non-built-in ones) is just the default/fallback -- a saved\nuser order always wins once one exists.\n'
+2 CODE OrderableRegistry.__init__
+3 CODE OrderableRegistry.register
+4 CODE OrderableRegistry.all_items
+5 CODE OrderableRegistry.ordered_items
+6 CODE OrderableRegistry.save_order
+7 CODE OrderableRegistry._load_saved_order
+8 ('_items', '_order_file')
+9 None
+10 (False,)
+
+FUNCTION OrderableRegistry.__init__
+ARGS ('self', 'order_file')
+NAMES ('_items', '_order_file')
+CONSTANTS
+0 None
+
+FUNCTION OrderableRegistry.register
+ARGS ('self', 'key', 'built_in', 'data')
+NAMES ('_items', 'append')
+CONSTANTS
+0 'key'
+1 'built_in'
+2 None
+
+FUNCTION OrderableRegistry.all_items
+ARGS ('self',)
+NAMES ('list', '_items')
+CONSTANTS
+0 None
+
+FUNCTION OrderableRegistry.ordered_items
+ARGS ('self', 'saved', 'item', 'by_key', 'k', 'ordered', 'remaining')
+NAMES ('_load_saved_order', '_items', 'sort')
+CONSTANTS
+0 'key'
+1 CODE OrderableRegistry.ordered_items.<locals>.<lambda>
+2 ('key',)
+
+FUNCTION OrderableRegistry.ordered_items.<locals>.<lambda>
+ARGS ('item',)
+NAMES ('get',)
+CONSTANTS
+0 'built_in'
+
+FUNCTION OrderableRegistry.save_order
+ARGS ('self', 'keys', 'f')
+NAMES ('os', 'makedirs', 'path', 'dirname', '_order_file', 'open', 'json', 'dump', 'list', 'Exception')
+CONSTANTS
+0 True
+1 ('exist_ok',)
+2 'w'
+3 'utf-8'
+4 ('encoding',)
+5 None
+
+FUNCTION OrderableRegistry._load_saved_order
+ARGS ('self', 'f', 'data')
+NAMES ('open', '_order_file', 'json', 'load', 'isinstance', 'list', 'Exception')
+CONSTANTS
+0 'r'
+1 'utf-8'
+2 ('encoding',)
+3 None
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (os)
+              STORE_NAME               0 (os)
+
+  2           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (json)
+              STORE_NAME               1 (json)
+
+  5           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               2 (<code object OrderableRegistry at 0x000001CD6C2A7090, file "tavern_shared\orderable_registry.py", line 5>)
+              MAKE_FUNCTION
+              LOAD_CONST               3 ('OrderableRegistry')
+              CALL                     2
+              STORE_NAME               2 (OrderableRegistry)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object OrderableRegistry at 0x000001CD6C2A7090, file "tavern_shared\orderable_registry.py", line 5>:
+  --           MAKE_CELL                0 (__classdict__)
+
+   5           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('OrderableRegistry')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT           5
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              0 (__classdict__)
+
+   6           LOAD_CONST               1 ('A list of registered items, orderable by the user and persisted\nto disk. Registration order (with built-in items always sorted\nbefore non-built-in ones) is just the default/fallback -- a saved\nuser order always wins once one exists.\n')
+               STORE_NAME               4 (__doc__)
+
+  12           LOAD_CONST               2 (<code object __init__ at 0x000001CD6C29E880, file "tavern_shared\orderable_registry.py", line 12>)
+               MAKE_FUNCTION
+               STORE_NAME               5 (__init__)
+
+  16           LOAD_CONST              10 ((False,))
+               LOAD_CONST               3 (<code object register at 0x000001CD6C2A7750, file "tavern_shared\orderable_registry.py", line 16>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               6 (register)
+
+  19           LOAD_CONST               4 (<code object all_items at 0x000001CD6C297230, file "tavern_shared\orderable_registry.py", line 19>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (all_items)
+
+  22           LOAD_CONST               5 (<code object ordered_items at 0x000001CD6BA36360, file "tavern_shared\orderable_registry.py", line 22>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (ordered_items)
+
+  32           LOAD_CONST               6 (<code object save_order at 0x000001CD6BFD9020, file "tavern_shared\orderable_registry.py", line 32>)
+               MAKE_FUNCTION
+               STORE_NAME               9 (save_order)
+
+  40           LOAD_CONST               7 (<code object _load_saved_order at 0x000001CD6BD034B0, file "tavern_shared\orderable_registry.py", line 40>)
+               MAKE_FUNCTION
+               STORE_NAME              10 (_load_saved_order)
+               LOAD_CONST               8 (('_items', '_order_file'))
+               STORE_NAME              11 (__static_attributes__)
+               LOAD_FAST_BORROW         0 (__classdict__)
+               STORE_NAME              12 (__classdictcell__)
+               LOAD_CONST               9 (None)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD6C29E880, file "tavern_shared\orderable_registry.py", line 12>:
+ 12           RESUME                   0
+
+ 13           BUILD_LIST               0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               0 (_items)
+
+ 14           LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (order_file, self)
+              STORE_ATTR               1 (_order_file)
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object register at 0x000001CD6C2A7750, file "tavern_shared\orderable_registry.py", line 16>:
+ 16           RESUME                   0
+
+ 17           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_items)
+              LOAD_ATTR                3 (append + NULL|self)
+              LOAD_CONST               0 ('key')
+              LOAD_FAST_BORROW         1 (key)
+              LOAD_CONST               1 ('built_in')
+              LOAD_FAST_BORROW         2 (built_in)
+              BUILD_MAP                2
+              LOAD_FAST_BORROW         3 (data)
+              DICT_UPDATE              1
+              CALL                     1
+              POP_TOP
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object all_items at 0x000001CD6C297230, file "tavern_shared\orderable_registry.py", line 19>:
+ 19           RESUME                   0
+
+ 20           LOAD_GLOBAL              1 (list + NULL)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (_items)
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object ordered_items at 0x000001CD6BA36360, file "tavern_shared\orderable_registry.py", line 22>:
+  22            RESUME                   0
+
+  23            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                1 (_load_saved_order + NULL|self)
+                CALL                     0
+                STORE_FAST               1 (saved)
+
+  24            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_items)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      2 (item)
+                SWAP                     2
+        L1:     BUILD_MAP                0
+                SWAP                     2
+        L2:     FOR_ITER                12 (to L3)
+                STORE_FAST_LOAD_FAST    34 (item, item)
+                LOAD_CONST               0 ('key')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (item)
+                MAP_ADD                  2
+                JUMP_BACKWARD           14 (to L2)
+        L3:     END_FOR
+                POP_ITER
+        L4:     STORE_FAST               3 (by_key)
+                STORE_FAST               2 (item)
+
+  25            LOAD_FAST_BORROW         1 (saved)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      4 (k)
+                SWAP                     2
+        L5:     BUILD_LIST               0
+                SWAP                     2
+        L6:     FOR_ITER                19 (to L9)
+                STORE_FAST_LOAD_FAST    68 (k, k)
+                LOAD_FAST_BORROW         3 (by_key)
+                CONTAINS_OP              0 (in)
+        L7:     POP_JUMP_IF_TRUE         3 (to L8)
+                NOT_TAKEN
+                JUMP_BACKWARD           11 (to L6)
+        L8:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 52 (by_key, k)
+                BINARY_OP               26 ([])
+                LIST_APPEND              2
+                JUMP_BACKWARD           21 (to L6)
+        L9:     END_FOR
+                POP_ITER
+       L10:     STORE_FAST               5 (ordered)
+                STORE_FAST               4 (k)
+
+  26            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_items)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      2 (item)
+                SWAP                     2
+       L11:     BUILD_LIST               0
+                SWAP                     2
+       L12:     FOR_ITER                20 (to L15)
+                STORE_FAST_LOAD_FAST    34 (item, item)
+                LOAD_CONST               0 ('key')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         1 (saved)
+                CONTAINS_OP              1 (not in)
+       L13:     POP_JUMP_IF_TRUE         3 (to L14)
+                NOT_TAKEN
+                JUMP_BACKWARD           18 (to L12)
+       L14:     LOAD_FAST_BORROW         2 (item)
+                LIST_APPEND              2
+                JUMP_BACKWARD           22 (to L12)
+       L15:     END_FOR
+                POP_ITER
+       L16:     STORE_FAST               6 (remaining)
+                STORE_FAST               2 (item)
+
+  29            LOAD_FAST_BORROW         6 (remaining)
+                LOAD_ATTR                5 (sort + NULL|self)
+                LOAD_CONST               1 (<code object <lambda> at 0x000001CD6C32FCC0, file "tavern_shared\orderable_registry.py", line 29>)
+                MAKE_FUNCTION
+                LOAD_CONST               2 (('key',))
+                CALL_KW                  1
+                POP_TOP
+
+  30            LOAD_FAST_BORROW_LOAD_FAST_BORROW 86 (ordered, remaining)
+                BINARY_OP                0 (+)
+                RETURN_VALUE
+
+  --   L17:     SWAP                     2
+                POP_TOP
+
+  24            SWAP                     2
+                STORE_FAST               2 (item)
+                RERAISE                  0
+
+  --   L18:     SWAP                     2
+                POP_TOP
+
+  25            SWAP                     2
+                STORE_FAST               4 (k)
+                RERAISE                  0
+
+  --   L19:     SWAP                     2
+                POP_TOP
+
+  26            SWAP                     2
+                STORE_FAST               2 (item)
+                RERAISE                  0
+ExceptionTable:
+  L1 to L4 -> L17 [2]
+  L5 to L7 -> L18 [2]
+  L8 to L10 -> L18 [2]
+  L11 to L13 -> L19 [2]
+  L14 to L16 -> L19 [2]
+
+Disassembly of <code object <lambda> at 0x000001CD6C32FCC0, file "tavern_shared\orderable_registry.py", line 29>:
+ 29           RESUME                   0
+              LOAD_FAST_BORROW         0 (item)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               0 ('built_in')
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_SMALL_INT           0
+              RETURN_VALUE
+      L1:     LOAD_SMALL_INT           1
+              RETURN_VALUE
+
+Disassembly of <code object save_order at 0x000001CD6BFD9020, file "tavern_shared\orderable_registry.py", line 32>:
+  32            RESUME                   0
+
+  33            NOP
+
+  34    L1:     LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                2 (makedirs)
+                PUSH_NULL
+                LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                4 (path)
+                LOAD_ATTR                7 (dirname + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                8 (_order_file)
+                CALL                     1
+                LOAD_CONST               0 (True)
+                LOAD_CONST               1 (('exist_ok',))
+                CALL_KW                  2
+                POP_TOP
+
+  35            LOAD_GLOBAL             11 (open + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                8 (_order_file)
+                LOAD_CONST               2 ('w')
+                LOAD_CONST               3 ('utf-8')
+                LOAD_CONST               4 (('encoding',))
+                CALL_KW                  3
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               2 (f)
+
+  36            LOAD_GLOBAL             12 (json)
+                LOAD_ATTR               14 (dump)
+                PUSH_NULL
+                LOAD_GLOBAL             17 (list + NULL)
+                LOAD_FAST_BORROW         1 (keys)
+                CALL                     1
+                LOAD_FAST_BORROW         2 (f)
+                CALL                     2
+                POP_TOP
+
+  35    L3:     LOAD_CONST               5 (None)
+                LOAD_CONST               5 (None)
+                LOAD_CONST               5 (None)
+                CALL                     3
+                POP_TOP
+        L4:     LOAD_CONST               5 (None)
+                RETURN_VALUE
+        L5:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L6)
+                NOT_TAKEN
+                RERAISE                  2
+        L6:     POP_TOP
+        L7:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+        L8:     LOAD_CONST               5 (None)
+                RETURN_VALUE
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+  37            LOAD_GLOBAL             18 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  38   L11:     POP_EXCEPT
+                LOAD_CONST               5 (None)
+                RETURN_VALUE
+
+  37   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L5 [2] lasti
+  L3 to L4 -> L10 [0]
+  L5 to L7 -> L9 [4] lasti
+  L7 to L8 -> L10 [0]
+  L9 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object _load_saved_order at 0x000001CD6BD034B0, file "tavern_shared\orderable_registry.py", line 40>:
+  40            RESUME                   0
+
+  41            NOP
+
+  42    L1:     LOAD_GLOBAL              1 (open + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_order_file)
+                LOAD_CONST               0 ('r')
+                LOAD_CONST               1 ('utf-8')
+                LOAD_CONST               2 (('encoding',))
+                CALL_KW                  3
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               1 (f)
+
+  43            LOAD_GLOBAL              4 (json)
+                LOAD_ATTR                6 (load)
+                PUSH_NULL
+                LOAD_FAST_BORROW         1 (f)
+                CALL                     1
+                STORE_FAST               2 (data)
+
+  42    L3:     LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                CALL                     3
+                POP_TOP
+
+  44    L4:     LOAD_GLOBAL              9 (isinstance + NULL)
+                LOAD_FAST_CHECK          2 (data)
+                LOAD_GLOBAL             10 (list)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L6)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         2 (data)
+        L5:     RETURN_VALUE
+        L6:     BUILD_LIST               0
+        L7:     RETURN_VALUE
+
+  42    L8:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L9)
+                NOT_TAKEN
+                RERAISE                  2
+        L9:     POP_TOP
+       L10:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 42 (to L4)
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L12:     PUSH_EXC_INFO
+
+  45            LOAD_GLOBAL             12 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L14)
+                NOT_TAKEN
+                POP_TOP
+
+  46            BUILD_LIST               0
+                SWAP                     2
+       L13:     POP_EXCEPT
+                RETURN_VALUE
+
+  45   L14:     RERAISE                  0
+
+  --   L15:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L12 [0]
+  L2 to L3 -> L8 [2] lasti
+  L3 to L5 -> L12 [0]
+  L6 to L7 -> L12 [0]
+  L8 to L10 -> L11 [4] lasti
+  L10 to L12 -> L12 [0]
+  L12 to L13 -> L15 [1] lasti
+  L14 to L15 -> L15 [1] lasti

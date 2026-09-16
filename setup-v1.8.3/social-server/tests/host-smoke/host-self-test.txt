@@ -1,0 +1,1 @@
+PASS host startup, local HTTP health, connection button, live log, automatic file log and stop.

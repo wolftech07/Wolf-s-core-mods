@@ -1,0 +1,9 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ()
+CONSTANTS
+0 None
+          RESUME                   0
+          LOAD_CONST               0 (None)
+          RETURN_VALUE

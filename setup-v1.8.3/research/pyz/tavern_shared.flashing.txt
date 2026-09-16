@@ -1,0 +1,275 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('start_flashing_button', 'start_flashing_tab')
+CONSTANTS
+0 650
+1 CODE start_flashing_button
+2 CODE start_flashing_tab
+3 None
+4 (650,)
+
+FUNCTION start_flashing_button
+ARGS ('widget', 'should_flash', 'normal_bg', 'alert_bg', 'interval_ms')
+NAMES ()
+CONSTANTS
+0 "Alternates a button's background between normal_bg and alert_bg,\non and off, for as long as should_flash() returns True. Checks\nshould_flash() on every tick, so it starts/stops on its own as\nconditions change -- nothing else needs to explicitly turn it off.\n"
+1 'on'
+2 False
+3 CODE start_flashing_button.<locals>._tick
+4 None
+
+FUNCTION start_flashing_button.<locals>._tick
+ARGS ()
+NAMES ('winfo_exists', 'config', 'after')
+CONSTANTS
+0 None
+1 'on'
+2 ('bg',)
+3 False
+
+FUNCTION start_flashing_tab
+ARGS ('notebook', 'tab_index', 'should_flash', 'plain_label', 'alert_label', 'interval_ms')
+NAMES ()
+CONSTANTS
+0 "Same idea as start_flashing_button, but for a ttk.Notebook tab --\nalternates its text between plain_label and alert_label, since\nper-tab background color isn't something ttk.Notebook supports\nwithout far more style hacking than this is worth.\n"
+1 'on'
+2 False
+3 CODE start_flashing_tab.<locals>._tick
+4 None
+
+FUNCTION start_flashing_tab.<locals>._tick
+ARGS ()
+NAMES ('winfo_exists', 'tab', 'after')
+CONSTANTS
+0 None
+1 'on'
+2 ('text',)
+3 False
+  0           RESUME                   0
+
+  1           LOAD_CONST               4 ((650,))
+              LOAD_CONST               1 (<code object start_flashing_button at 0x000001CD6C2A7990, file "tavern_shared\flashing.py", line 1>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               0 (start_flashing_button)
+
+ 23           LOAD_CONST               4 ((650,))
+              LOAD_CONST               2 (<code object start_flashing_tab at 0x000001CD6C2A7BD0, file "tavern_shared\flashing.py", line 23>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               1 (start_flashing_tab)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE
+
+Disassembly of <code object start_flashing_button at 0x000001CD6C2A7990, file "tavern_shared\flashing.py", line 1>:
+  --           MAKE_CELL                0 (widget)
+               MAKE_CELL                1 (should_flash)
+               MAKE_CELL                2 (normal_bg)
+               MAKE_CELL                3 (alert_bg)
+               MAKE_CELL                4 (interval_ms)
+               MAKE_CELL                5 (_tick)
+               MAKE_CELL                6 (state)
+
+   1           RESUME                   0
+
+   7           LOAD_CONST               1 ('on')
+               LOAD_CONST               2 (False)
+               BUILD_MAP                1
+               STORE_DEREF              6 (state)
+
+   9           LOAD_FAST_BORROW         5 (_tick)
+               LOAD_FAST_BORROW         3 (alert_bg)
+               LOAD_FAST_BORROW         4 (interval_ms)
+               LOAD_FAST_BORROW         2 (normal_bg)
+               LOAD_FAST_BORROW         1 (should_flash)
+               LOAD_FAST_BORROW         6 (state)
+               LOAD_FAST_BORROW         0 (widget)
+               BUILD_TUPLE              7
+               LOAD_CONST               3 (<code object _tick at 0x000001CD6BD034B0, file "tavern_shared\flashing.py", line 9>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_DEREF              5 (_tick)
+
+  20           LOAD_DEREF               5 (_tick)
+               PUSH_NULL
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               4 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _tick at 0x000001CD6BD034B0, file "tavern_shared\flashing.py", line 9>:
+  --           COPY_FREE_VARS           7
+
+   9           RESUME                   0
+
+  10           LOAD_DEREF               6 (widget)
+               LOAD_ATTR                1 (winfo_exists + NULL|self)
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+
+  11           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  12   L1:     LOAD_DEREF               4 (should_flash)
+               PUSH_NULL
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_FALSE       54 (to L4)
+               NOT_TAKEN
+
+  13           LOAD_DEREF               5 (state)
+               LOAD_CONST               1 ('on')
+               BINARY_OP               26 ([])
+               TO_BOOL
+               UNARY_NOT
+               LOAD_DEREF               5 (state)
+               LOAD_CONST               1 ('on')
+               STORE_SUBSCR
+
+  14           LOAD_DEREF               6 (widget)
+               LOAD_ATTR                3 (config + NULL|self)
+               LOAD_DEREF               5 (state)
+               LOAD_CONST               1 ('on')
+               BINARY_OP               26 ([])
+               TO_BOOL
+               POP_JUMP_IF_FALSE        3 (to L2)
+               NOT_TAKEN
+               LOAD_DEREF               1 (alert_bg)
+               JUMP_FORWARD             1 (to L3)
+       L2:     LOAD_DEREF               3 (normal_bg)
+       L3:     LOAD_CONST               2 (('bg',))
+               CALL_KW                  1
+               POP_TOP
+               JUMP_FORWARD            23 (to L5)
+
+  16   L4:     LOAD_CONST               3 (False)
+               LOAD_DEREF               5 (state)
+               LOAD_CONST               1 ('on')
+               STORE_SUBSCR
+
+  17           LOAD_DEREF               6 (widget)
+               LOAD_ATTR                3 (config + NULL|self)
+               LOAD_DEREF               3 (normal_bg)
+               LOAD_CONST               2 (('bg',))
+               CALL_KW                  1
+               POP_TOP
+
+  18   L5:     LOAD_DEREF               6 (widget)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_DEREF               2 (interval_ms)
+               LOAD_DEREF               0 (_tick)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object start_flashing_tab at 0x000001CD6C2A7BD0, file "tavern_shared\flashing.py", line 23>:
+  --           MAKE_CELL                0 (notebook)
+               MAKE_CELL                1 (tab_index)
+               MAKE_CELL                2 (should_flash)
+               MAKE_CELL                3 (plain_label)
+               MAKE_CELL                4 (alert_label)
+               MAKE_CELL                5 (interval_ms)
+               MAKE_CELL                6 (_tick)
+               MAKE_CELL                7 (state)
+
+  23           RESUME                   0
+
+  29           LOAD_CONST               1 ('on')
+               LOAD_CONST               2 (False)
+               BUILD_MAP                1
+               STORE_DEREF              7 (state)
+
+  31           LOAD_FAST_BORROW         6 (_tick)
+               LOAD_FAST_BORROW         4 (alert_label)
+               LOAD_FAST_BORROW         5 (interval_ms)
+               LOAD_FAST_BORROW         0 (notebook)
+               LOAD_FAST_BORROW         3 (plain_label)
+               LOAD_FAST_BORROW         2 (should_flash)
+               LOAD_FAST_BORROW         7 (state)
+               LOAD_FAST_BORROW         1 (tab_index)
+               BUILD_TUPLE              8
+               LOAD_CONST               3 (<code object _tick at 0x000001CD6BCE7A50, file "tavern_shared\flashing.py", line 31>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_DEREF              6 (_tick)
+
+  42           LOAD_DEREF               6 (_tick)
+               PUSH_NULL
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               4 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _tick at 0x000001CD6BCE7A50, file "tavern_shared\flashing.py", line 31>:
+  --           COPY_FREE_VARS           8
+
+  31           RESUME                   0
+
+  32           LOAD_DEREF               3 (notebook)
+               LOAD_ATTR                1 (winfo_exists + NULL|self)
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+
+  33           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  34   L1:     LOAD_DEREF               5 (should_flash)
+               PUSH_NULL
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_FALSE       55 (to L4)
+               NOT_TAKEN
+
+  35           LOAD_DEREF               6 (state)
+               LOAD_CONST               1 ('on')
+               BINARY_OP               26 ([])
+               TO_BOOL
+               UNARY_NOT
+               LOAD_DEREF               6 (state)
+               LOAD_CONST               1 ('on')
+               STORE_SUBSCR
+
+  36           LOAD_DEREF               3 (notebook)
+               LOAD_ATTR                3 (tab + NULL|self)
+               LOAD_DEREF               7 (tab_index)
+               LOAD_DEREF               6 (state)
+               LOAD_CONST               1 ('on')
+               BINARY_OP               26 ([])
+               TO_BOOL
+               POP_JUMP_IF_FALSE        3 (to L2)
+               NOT_TAKEN
+               LOAD_DEREF               1 (alert_label)
+               JUMP_FORWARD             1 (to L3)
+       L2:     LOAD_DEREF               4 (plain_label)
+       L3:     LOAD_CONST               2 (('text',))
+               CALL_KW                  2
+               POP_TOP
+               JUMP_FORWARD            24 (to L5)
+
+  38   L4:     LOAD_CONST               3 (False)
+               LOAD_DEREF               6 (state)
+               LOAD_CONST               1 ('on')
+               STORE_SUBSCR
+
+  39           LOAD_DEREF               3 (notebook)
+               LOAD_ATTR                3 (tab + NULL|self)
+               LOAD_DEREF               7 (tab_index)
+               LOAD_DEREF               4 (plain_label)
+               LOAD_CONST               2 (('text',))
+               CALL_KW                  2
+               POP_TOP
+
+  40   L5:     LOAD_DEREF               3 (notebook)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_DEREF               2 (interval_ms)
+               LOAD_DEREF               0 (_tick)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE

@@ -1,0 +1,3145 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'tkinter', 'tk', 'ttk', 'filedialog', 'messagebox', 'simpledialog', 'threading', 'time', 'json', 'urllib.request', 'urllib', 'tavern_shared.theme', 'BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar', '_fix_combobox_popdown_colors', 'tavern_shared.window_chrome', '_start_hidden', '_finish_dark_window', '_set_window_icon', 'client.core.config', 'load_cfg', 'save_cfg', '_mark_tickets_seen', '_remember_ticket_state', '_get_last_ticket_state', 'client.core.auth', 'ticket_request', '_resolve_ip_for_game', 'AUTH_PORT', '_get_or_create_token', 'client.core.server_list_panel', 'ServerListPanel', 'Toplevel', 'TicketsWindow')
+CONSTANTS
+0 'Player-facing support ticket window.'
+1 None
+2 ('ttk', 'filedialog', 'messagebox', 'simpledialog')
+3 ('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar', '_fix_combobox_popdown_colors')
+4 ('_start_hidden', '_finish_dark_window', '_set_window_icon')
+5 ('load_cfg', 'save_cfg', '_mark_tickets_seen', '_remember_ticket_state', '_get_last_ticket_state')
+6 ('ticket_request', '_resolve_ip_for_game', 'AUTH_PORT')
+7 ('_get_or_create_token',)
+8 ('ServerListPanel',)
+9 CODE TicketsWindow
+10 'TicketsWindow'
+
+FUNCTION TicketsWindow
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', '__doc__', '__init__', '_build', '_current_host_username', '_pick_saved_server', '_refresh', '_apply_tickets', '_on_select', '_new_ticket', '_selected_ticket_id', '_respond', '_close_ticket', '__static_attributes__', '__classdictcell__', '__classcell__')
+CONSTANTS
+0 'TicketsWindow'
+1 "Player-facing support tickets — create one, see the server owner's\nreplies, respond, or close it yourself. Tied to whichever server +\nusername the player is actually using, since a ticket only means\nanything in the context of one specific server's own ticket database."
+2 CODE TicketsWindow.__init__
+3 CODE TicketsWindow._build
+4 CODE TicketsWindow._current_host_username
+5 CODE TicketsWindow._pick_saved_server
+6 CODE TicketsWindow._refresh
+7 CODE TicketsWindow._apply_tickets
+8 CODE TicketsWindow._on_select
+9 CODE TicketsWindow._new_ticket
+10 CODE TicketsWindow._selected_ticket_id
+11 CODE TicketsWindow._respond
+12 CODE TicketsWindow._close_ticket
+13 ('_recent_hosts', '_selected_ticket', '_tickets', 'thread_text', 'tree', 'v_detail_title', 'v_host', 'v_reply', 'v_username')
+14 ('', '')
+15 (False,)
+16 (None,)
+
+FUNCTION TicketsWindow.__init__
+ARGS ('self', 'parent', 'default_host', 'default_username', 'last_host', 'last_username', 'fit_w', 'fit_h')
+NAMES ('super', '__init__', '_start_hidden', 'title', 'configure', 'BG', 'geometry', 'resizable', '_set_window_icon', 'ttk', 'Style', 'theme_use', '_tickets', '_selected_ticket', '_get_last_ticket_state', '_recent_hosts', '_build', '_finish_dark_window', '_refresh', 'update_idletasks', 'max', 'winfo_reqwidth', 'winfo_reqheight', 'minsize')
+CONSTANTS
+0 'Support Tickets'
+1 ('bg',)
+2 '640x600'
+3 True
+4 'clam'
+5 None
+6 ('silent',)
+7 640
+8 600
+9 'x'
+
+FUNCTION TicketsWindow._build
+ARGS ('self', 'default_host', 'default_username', 'h', 'sf', 'style', 'host_combo', 'br', 'body', 'tree_container', 'detail', 'thread_frame', 'tsb', 'action_row')
+NAMES ('tk', 'Frame', 'SURF', 'pack', 'pack_propagate', 'Label', 'AMBER', 'BORDER', 'BG', 'MUTED', 'StringVar', 'v_host', 'ttk', 'Style', 'configure', 'SURF2', 'PARCH', 'AMBERDIM', 'map', 'Combobox', '_recent_hosts', '_fix_combobox_popdown_colors', 'v_username', 'Entry', '_btn', '_pick_saved_server', '_hint', '_refresh', '_new_ticket', '_mk_tree', 'tree', 'bind', '_on_select', 'v_detail_title', 'Text', 'thread_text', '_mk_scrollbar', 'yview', 'config', 'set', 'tag_config', 'CYAN', 'v_reply', '_respond', '_close_ticket')
+CONSTANTS
+0 44
+1 ('bg', 'height')
+2 'x'
+3 ('fill',)
+4 False
+5 '🎫  Support Tickets'
+6 ('text', 'bg', 'fg', 'font')
+7 'left'
+8 ('side', 'padx', 'pady')
+9 ('bg',)
+10 ('fill', 'padx', 'pady')
+11 'Server:'
+12 ('side',)
+13 ('value',)
+14 'Tav.TicketHost.TCombobox'
+15 ('fieldbackground', 'background', 'foreground', 'selectbackground', 'selectforeground', 'arrowcolor', 'borderwidth')
+16 'readonly'
+17 '!disabled'
+18 ('fieldbackground', 'foreground', 'selectbackground', 'selectforeground')
+19 ('textvariable', 'values', 'font', 'style', 'width')
+20 ('side', 'padx')
+21 '#ffd080'
+22 'Username:'
+23 'flat'
+24 ('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd', 'width')
+25 '⚑ Pick Saved'
+26 ('font', 'pady', 'padx')
+27 'Tickets are tied to whichever username+server you actually play on.'
+28 '⟳ Refresh My Tickets'
+29 'primary'
+30 '+ New Ticket'
+31 'both'
+32 True
+33 ('fill', 'expand', 'padx', 'pady')
+34 ('height',)
+35 '<<TreeviewSelect>>'
+36 ('bg', 'highlightbackground', 'highlightthickness')
+37 ('fill', 'expand', 'pady')
+38 'Select a ticket, or open a new one.'
+39 560
+40 ('textvariable', 'bg', 'fg', 'font', 'wraplength', 'justify')
+41 'w'
+42 ('anchor', 'padx', 'pady')
+43 'word'
+44 'disabled'
+45 ('bg', 'fg', 'relief', 'bd', 'wrap', 'state', 'font', 'height')
+46 'right'
+47 'y'
+48 ('side', 'fill')
+49 ('yscrollcommand',)
+50 ('side', 'fill', 'expand')
+51 'player'
+52 ('foreground',)
+53 'owner'
+54 'meta'
+55 ('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'highlightbackground', 'highlightcolor', 'highlightthickness', 'font', 'bd')
+56 'Reply'
+57 'Close Ticket'
+58 'danger'
+59 None
+60 ('Georgia', 12, 'bold')
+61 (10, 4)
+62 ('Segoe UI', 9)
+63 ('Consolas', 10)
+64 (6, 10)
+65 (6, 0)
+66 ('Segoe UI', 8)
+67 (8, 0)
+68 (0, 8)
+69 (0, 10)
+70 ('title', 'status', 'updated')
+71 (280, 80, 140)
+72 ('Georgia', 10, 'bold')
+73 (0, 6)
+74 ('Consolas', 9)
+
+FUNCTION TicketsWindow._current_host_username
+ARGS ('self', 'silent', 'host', 'username')
+NAMES ('v_host', 'get', 'strip', 'v_username', 'messagebox', 'showerror')
+CONSTANTS
+0 'Missing info'
+1 'Enter both a server and a username.'
+2 ('parent',)
+3 (None, None)
+
+FUNCTION TicketsWindow._pick_saved_server
+ARGS ('self', 'on_select')
+NAMES ('ServerListPanel',)
+CONSTANTS
+0 '1757'
+1 CODE TicketsWindow._pick_saved_server.<locals>.on_select
+2 None
+3 ('1757',)
+
+FUNCTION TicketsWindow._pick_saved_server.<locals>.on_select
+ARGS ('ip', 'name', 'port')
+NAMES ('v_host', 'set', '_refresh')
+CONSTANTS
+0 True
+1 ('silent',)
+2 None
+
+FUNCTION TicketsWindow._refresh
+ARGS ('self', 'silent', 'host', '_', 'worker')
+NAMES ('_current_host_username', '_remember_ticket_state', '_resolve_ip_for_game', '_get_or_create_token', 'threading', 'Thread', 'start')
+CONSTANTS
+0 ('silent',)
+1 None
+2 CODE TicketsWindow._refresh.<locals>.worker
+3 True
+4 ('target', 'daemon')
+
+FUNCTION TicketsWindow._refresh.<locals>.worker
+ARGS ()
+NAMES ('ticket_request', 'Exception', 'after', 'get')
+CONSTANTS
+0 'list_mine'
+1 CODE TicketsWindow._refresh.<locals>.worker.<locals>.<lambda>
+2 None
+3 'status'
+4 'ok'
+5 CODE TicketsWindow._refresh.<locals>.worker.<locals>.<lambda>
+6 CODE TicketsWindow._refresh.<locals>.worker.<locals>.<lambda>
+
+FUNCTION TicketsWindow._refresh.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'str')
+CONSTANTS
+0 "Couldn't fetch tickets"
+1 ('parent',)
+
+FUNCTION TicketsWindow._refresh.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'get')
+CONSTANTS
+0 'Error'
+1 'message'
+2 'Unknown error'
+3 ('parent',)
+
+FUNCTION TicketsWindow._refresh.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('_apply_tickets', 'get')
+CONSTANTS
+0 'tickets'
+
+FUNCTION TicketsWindow._apply_tickets
+ARGS ('self', 'tickets', 'host', 'r', 't', 'ts')
+NAMES ('_tickets', 'tree', 'get_children', 'delete', 'sorted', 'time', 'strftime', 'localtime', 'insert', '_mark_tickets_seen')
+CONSTANTS
+0 CODE TicketsWindow._apply_tickets.<locals>.<lambda>
+1 True
+2 ('key', 'reverse')
+3 '%Y-%m-%d %H:%M'
+4 'updated_at'
+5 ''
+6 'end'
+7 'ticket_id'
+8 'title'
+9 'status'
+10 ('iid', 'values')
+11 None
+
+FUNCTION TicketsWindow._apply_tickets.<locals>.<lambda>
+ARGS ('t',)
+NAMES ()
+CONSTANTS
+0 'updated_at'
+
+FUNCTION TicketsWindow._on_select
+ARGS ('self', '_', 't', 'c', 'who', 'tag', 'ts')
+NAMES ('tree', 'selection', 'next', '_tickets', '_selected_ticket', 'v_detail_title', 'set', 'thread_text', 'config', 'delete', 'insert', 'get', 'time', 'strftime', 'localtime', 'see')
+CONSTANTS
+0 None
+1 CODE TicketsWindow._on_select.<locals>.<genexpr>
+2 'title'
+3 '  ('
+4 'status'
+5 ')'
+6 'normal'
+7 ('state',)
+8 '1.0'
+9 'end'
+10 'description'
+11 '\n\n'
+12 'comments'
+13 'from'
+14 'owner'
+15 'Server Owner'
+16 'You'
+17 'player'
+18 '%Y-%m-%d %H:%M'
+19 'at'
+20 '['
+21 '] '
+22 ': '
+23 'message'
+24 '\n'
+25 'disabled'
+
+FUNCTION TicketsWindow._on_select.<locals>.<genexpr>
+ARGS ('.0', 'x')
+NAMES ()
+CONSTANTS
+0 'ticket_id'
+1 None
+
+FUNCTION TicketsWindow._new_ticket
+ARGS ('self', 'tf', 'df', '_submit')
+NAMES ('_current_host_username', 'tk', 'Toplevel', '_start_hidden', 'title', 'configure', 'BG', 'resizable', '_set_window_icon', '_section_label', '_field', 'StringVar', 'Entry', 'SURF', 'PARCH', 'AMBER', 'pack', 'Frame', 'BORDER', 'Text', '_btn', 'update_idletasks', 'geometry', 'winfo_reqheight', '_finish_dark_window', 'transient', 'grab_set')
+CONSTANTS
+0 None
+1 'New Ticket'
+2 ('bg',)
+3 False
+4 'TITLE'
+5 'flat'
+6 ('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd')
+7 'x'
+8 ('fill',)
+9 'DESCRIPTION'
+10 ('bg', 'highlightbackground', 'highlightthickness')
+11 'both'
+12 True
+13 ('fill', 'expand', 'padx', 'pady')
+14 'word'
+15 ('bg', 'fg', 'insertbackground', 'relief', 'bd', 'wrap', 'height', 'font')
+16 ('fill', 'expand')
+17 CODE TicketsWindow._new_ticket.<locals>._submit
+18 ('bg', 'height')
+19 ('fill', 'padx', 'pady')
+20 '📨  Submit Ticket'
+21 'primary'
+22 ('font', 'pady')
+23 '420x'
+24 ('Consolas', 10)
+25 (0, 6)
+26 ('Segoe UI', 9)
+27 (4, 6)
+28 ('Georgia', 11, 'bold')
+29 (0, 16)
+
+FUNCTION TicketsWindow._new_ticket.<locals>._submit
+ARGS ('_', 'worker')
+NAMES ('get', 'strip', 'messagebox', 'showerror', '_resolve_ip_for_game', '_get_or_create_token', 'threading', 'Thread', 'start')
+CONSTANTS
+0 '1.0'
+1 'end'
+2 'Missing info'
+3 'Title and description are both required.'
+4 ('parent',)
+5 None
+6 CODE TicketsWindow._new_ticket.<locals>._submit.<locals>.worker
+7 True
+8 ('target', 'daemon')
+
+FUNCTION TicketsWindow._new_ticket.<locals>._submit.<locals>.worker
+ARGS ('_done',)
+NAMES ('ticket_request', 'Exception', 'after', 'get')
+CONSTANTS
+0 'create'
+1 ('title', 'description', 'server')
+2 CODE TicketsWindow._new_ticket.<locals>._submit.<locals>.worker.<locals>.<lambda>
+3 None
+4 'status'
+5 'ok'
+6 CODE TicketsWindow._new_ticket.<locals>._submit.<locals>.worker.<locals>.<lambda>
+7 CODE TicketsWindow._new_ticket.<locals>._submit.<locals>.worker.<locals>._done
+
+FUNCTION TicketsWindow._new_ticket.<locals>._submit.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'str')
+CONSTANTS
+0 "Couldn't submit ticket"
+1 ('parent',)
+
+FUNCTION TicketsWindow._new_ticket.<locals>._submit.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'get')
+CONSTANTS
+0 'Error'
+1 'message'
+2 'Unknown error'
+3 ('parent',)
+
+FUNCTION TicketsWindow._new_ticket.<locals>._submit.<locals>.worker.<locals>._done
+ARGS ()
+NAMES ('destroy', '_refresh')
+CONSTANTS
+0 None
+
+FUNCTION TicketsWindow._selected_ticket_id
+ARGS ('self',)
+NAMES ('_selected_ticket', 'messagebox', 'showinfo')
+CONSTANTS
+0 'No selection'
+1 'Select a ticket first.'
+2 ('parent',)
+3 None
+4 'ticket_id'
+
+FUNCTION TicketsWindow._respond
+ARGS ('self', 'host', '_', 'worker')
+NAMES ('_selected_ticket_id', 'v_reply', 'get', 'strip', '_selected_ticket', 'messagebox', 'showinfo', '_current_host_username', '_resolve_ip_for_game', '_get_or_create_token', 'threading', 'Thread', 'start')
+CONSTANTS
+0 None
+1 'status'
+2 'open'
+3 'Ticket closed'
+4 'This ticket is already closed.'
+5 ('parent',)
+6 CODE TicketsWindow._respond.<locals>.worker
+7 True
+8 ('target', 'daemon')
+
+FUNCTION TicketsWindow._respond.<locals>.worker
+ARGS ('_done',)
+NAMES ('ticket_request', 'Exception', 'after', 'get')
+CONSTANTS
+0 'respond'
+1 ('ticket_id', 'message')
+2 CODE TicketsWindow._respond.<locals>.worker.<locals>.<lambda>
+3 None
+4 'status'
+5 'ok'
+6 CODE TicketsWindow._respond.<locals>.worker.<locals>.<lambda>
+7 CODE TicketsWindow._respond.<locals>.worker.<locals>._done
+
+FUNCTION TicketsWindow._respond.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'str')
+CONSTANTS
+0 "Couldn't send reply"
+1 ('parent',)
+
+FUNCTION TicketsWindow._respond.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'get')
+CONSTANTS
+0 'Error'
+1 'message'
+2 'Unknown error'
+3 ('parent',)
+
+FUNCTION TicketsWindow._respond.<locals>.worker.<locals>._done
+ARGS ()
+NAMES ('v_reply', 'set', '_refresh')
+CONSTANTS
+0 ''
+1 None
+
+FUNCTION TicketsWindow._close_ticket
+ARGS ('self', 'host', '_', 'worker')
+NAMES ('_selected_ticket_id', '_selected_ticket', 'get', 'messagebox', 'showinfo', 'simpledialog', 'askstring', 'askyesno', '_current_host_username', '_resolve_ip_for_game', '_get_or_create_token', 'threading', 'Thread', 'start')
+CONSTANTS
+0 None
+1 'status'
+2 'open'
+3 'Already closed'
+4 'This ticket is already closed.'
+5 ('parent',)
+6 'Close Ticket'
+7 'Optional closing message (e.g. "fixed it myself"):'
+8 ''
+9 "Close this ticket? You won't be able to reply to it afterward."
+10 CODE TicketsWindow._close_ticket.<locals>.worker
+11 True
+12 ('target', 'daemon')
+
+FUNCTION TicketsWindow._close_ticket.<locals>.worker
+ARGS ()
+NAMES ('ticket_request', 'Exception', 'after', 'get', '_refresh')
+CONSTANTS
+0 'close'
+1 ('ticket_id', 'message')
+2 CODE TicketsWindow._close_ticket.<locals>.worker.<locals>.<lambda>
+3 None
+4 'status'
+5 'ok'
+6 CODE TicketsWindow._close_ticket.<locals>.worker.<locals>.<lambda>
+
+FUNCTION TicketsWindow._close_ticket.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'str')
+CONSTANTS
+0 "Couldn't close ticket"
+1 ('parent',)
+
+FUNCTION TicketsWindow._close_ticket.<locals>.worker.<locals>.<lambda>
+ARGS ()
+NAMES ('messagebox', 'showerror', 'get')
+CONSTANTS
+0 'Error'
+1 'message'
+2 'Unknown error'
+3 ('parent',)
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ('Player-facing support ticket window.')
+              STORE_NAME               0 (__doc__)
+
+  2           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (tkinter)
+              STORE_NAME               2 (tk)
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('ttk', 'filedialog', 'messagebox', 'simpledialog'))
+              IMPORT_NAME              1 (tkinter)
+              IMPORT_FROM              3 (ttk)
+              STORE_NAME               3 (ttk)
+              IMPORT_FROM              4 (filedialog)
+              STORE_NAME               4 (filedialog)
+              IMPORT_FROM              5 (messagebox)
+              STORE_NAME               5 (messagebox)
+              IMPORT_FROM              6 (simpledialog)
+              STORE_NAME               6 (simpledialog)
+              POP_TOP
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              7 (threading)
+              STORE_NAME               7 (threading)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              8 (time)
+              STORE_NAME               8 (time)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              9 (json)
+              STORE_NAME               9 (json)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME             10 (urllib.request)
+              STORE_NAME              11 (urllib)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar', '_fix_combobox_popdown_colors'))
+              IMPORT_NAME             12 (tavern_shared.theme)
+              IMPORT_FROM             13 (BG)
+              STORE_NAME              13 (BG)
+              IMPORT_FROM             14 (SURF)
+              STORE_NAME              14 (SURF)
+              IMPORT_FROM             15 (SURF2)
+              STORE_NAME              15 (SURF2)
+              IMPORT_FROM             16 (BORDER)
+              STORE_NAME              16 (BORDER)
+              IMPORT_FROM             17 (AMBER)
+              STORE_NAME              17 (AMBER)
+              IMPORT_FROM             18 (AMBERDIM)
+              STORE_NAME              18 (AMBERDIM)
+              IMPORT_FROM             19 (PARCH)
+              STORE_NAME              19 (PARCH)
+              IMPORT_FROM             20 (MUTED)
+              STORE_NAME              20 (MUTED)
+              IMPORT_FROM             21 (GREEN)
+              STORE_NAME              21 (GREEN)
+              IMPORT_FROM             22 (RED)
+              STORE_NAME              22 (RED)
+              IMPORT_FROM             23 (CYAN)
+              STORE_NAME              23 (CYAN)
+              IMPORT_FROM             24 (_btn)
+              STORE_NAME              24 (_btn)
+              IMPORT_FROM             25 (_field)
+              STORE_NAME              25 (_field)
+              IMPORT_FROM             26 (_hint)
+              STORE_NAME              26 (_hint)
+              IMPORT_FROM             27 (_section_label)
+              STORE_NAME              27 (_section_label)
+              IMPORT_FROM             28 (_mk_tree)
+              STORE_NAME              28 (_mk_tree)
+              IMPORT_FROM             29 (_mk_scrollbar)
+              STORE_NAME              29 (_mk_scrollbar)
+              IMPORT_FROM             30 (_fix_combobox_popdown_colors)
+              STORE_NAME              30 (_fix_combobox_popdown_colors)
+              POP_TOP
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('_start_hidden', '_finish_dark_window', '_set_window_icon'))
+              IMPORT_NAME             31 (tavern_shared.window_chrome)
+              IMPORT_FROM             32 (_start_hidden)
+              STORE_NAME              32 (_start_hidden)
+              IMPORT_FROM             33 (_finish_dark_window)
+              STORE_NAME              33 (_finish_dark_window)
+              IMPORT_FROM             34 (_set_window_icon)
+              STORE_NAME              34 (_set_window_icon)
+              POP_TOP
+
+ 12           LOAD_SMALL_INT           0
+              LOAD_CONST               5 (('load_cfg', 'save_cfg', '_mark_tickets_seen', '_remember_ticket_state', '_get_last_ticket_state'))
+              IMPORT_NAME             35 (client.core.config)
+              IMPORT_FROM             36 (load_cfg)
+              STORE_NAME              36 (load_cfg)
+              IMPORT_FROM             37 (save_cfg)
+              STORE_NAME              37 (save_cfg)
+              IMPORT_FROM             38 (_mark_tickets_seen)
+              STORE_NAME              38 (_mark_tickets_seen)
+              IMPORT_FROM             39 (_remember_ticket_state)
+              STORE_NAME              39 (_remember_ticket_state)
+              IMPORT_FROM             40 (_get_last_ticket_state)
+              STORE_NAME              40 (_get_last_ticket_state)
+              POP_TOP
+
+ 13           LOAD_SMALL_INT           0
+              LOAD_CONST               6 (('ticket_request', '_resolve_ip_for_game', 'AUTH_PORT'))
+              IMPORT_NAME             41 (client.core.auth)
+              IMPORT_FROM             42 (ticket_request)
+              STORE_NAME              42 (ticket_request)
+              IMPORT_FROM             43 (_resolve_ip_for_game)
+              STORE_NAME              43 (_resolve_ip_for_game)
+              IMPORT_FROM             44 (AUTH_PORT)
+              STORE_NAME              44 (AUTH_PORT)
+              POP_TOP
+
+ 14           LOAD_SMALL_INT           0
+              LOAD_CONST               7 (('_get_or_create_token',))
+              IMPORT_NAME             35 (client.core.config)
+              IMPORT_FROM             45 (_get_or_create_token)
+              STORE_NAME              45 (_get_or_create_token)
+              POP_TOP
+
+ 15           LOAD_SMALL_INT           0
+              LOAD_CONST               8 (('ServerListPanel',))
+              IMPORT_NAME             46 (client.core.server_list_panel)
+              IMPORT_FROM             47 (ServerListPanel)
+              STORE_NAME              47 (ServerListPanel)
+              POP_TOP
+
+ 17           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               9 (<code object TicketsWindow at 0x000001CD6C3E4030, file "client\core\tickets_window.py", line 17>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 ('TicketsWindow')
+              LOAD_NAME                2 (tk)
+              LOAD_ATTR               96 (Toplevel)
+              CALL                     3
+              STORE_NAME              49 (TicketsWindow)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object TicketsWindow at 0x000001CD6C3E4030, file "client\core\tickets_window.py", line 17>:
+  --           MAKE_CELL                0 (__class__)
+               MAKE_CELL                1 (__classdict__)
+
+  17           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('TicketsWindow')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT          17
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              1 (__classdict__)
+
+  18           LOAD_CONST               1 ("Player-facing support tickets — create one, see the server owner's\nreplies, respond, or close it yourself. Tied to whichever server +\nusername the player is actually using, since a ticket only means\nanything in the context of one specific server's own ticket database.")
+               STORE_NAME               4 (__doc__)
+
+  22           LOAD_CONST              14 (('', ''))
+               LOAD_FAST_BORROW         0 (__class__)
+               BUILD_TUPLE              1
+               LOAD_CONST               2 (<code object __init__ at 0x000001CD6BF8A5A0, file "client\core\tickets_window.py", line 22>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               5 (__init__)
+
+  60           LOAD_CONST               3 (<code object _build at 0x000001CD6BF8E6C0, file "client\core\tickets_window.py", line 60>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (_build)
+
+ 152           LOAD_CONST              15 ((False,))
+               LOAD_CONST               4 (<code object _current_host_username at 0x000001CD6BD03690, file "client\core\tickets_window.py", line 152>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               7 (_current_host_username)
+
+ 162           LOAD_CONST               5 (<code object _pick_saved_server at 0x000001CD6C339930, file "client\core\tickets_window.py", line 162>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (_pick_saved_server)
+
+ 168           LOAD_CONST              15 ((False,))
+               LOAD_CONST               6 (<code object _refresh at 0x000001CD6BC8E0D0, file "client\core\tickets_window.py", line 168>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               9 (_refresh)
+
+ 195           LOAD_CONST               7 (<code object _apply_tickets at 0x000001CD53611E20, file "client\core\tickets_window.py", line 195>)
+               MAKE_FUNCTION
+               STORE_NAME              10 (_apply_tickets)
+
+ 203           LOAD_CONST              16 ((None,))
+               LOAD_CONST               8 (<code object _on_select at 0x000001CD6BF8A9A0, file "client\core\tickets_window.py", line 203>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME              11 (_on_select)
+
+ 222           LOAD_CONST               9 (<code object _new_ticket at 0x000001CD6C011930, file "client\core\tickets_window.py", line 222>)
+               MAKE_FUNCTION
+               STORE_NAME              12 (_new_ticket)
+
+ 285           LOAD_CONST              10 (<code object _selected_ticket_id at 0x000001CD6BCB3E10, file "client\core\tickets_window.py", line 285>)
+               MAKE_FUNCTION
+               STORE_NAME              13 (_selected_ticket_id)
+
+ 291           LOAD_CONST              11 (<code object _respond at 0x000001CD6BF8AE30, file "client\core\tickets_window.py", line 291>)
+               MAKE_FUNCTION
+               STORE_NAME              14 (_respond)
+
+ 320           LOAD_CONST              12 (<code object _close_ticket at 0x000001CD6BF05A80, file "client\core\tickets_window.py", line 320>)
+               MAKE_FUNCTION
+               STORE_NAME              15 (_close_ticket)
+               LOAD_CONST              13 (('_recent_hosts', '_selected_ticket', '_tickets', 'thread_text', 'tree', 'v_detail_title', 'v_host', 'v_reply', 'v_username'))
+               STORE_NAME              16 (__static_attributes__)
+               LOAD_FAST_BORROW         1 (__classdict__)
+               STORE_NAME              17 (__classdictcell__)
+               LOAD_FAST_BORROW         0 (__class__)
+               COPY                     1
+               STORE_NAME              18 (__classcell__)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD6BF8A5A0, file "client\core\tickets_window.py", line 22>:
+  --           COPY_FREE_VARS           1
+
+  22           RESUME                   0
+
+  23           LOAD_GLOBAL              0 (super)
+               LOAD_DEREF               8 (__class__)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_SUPER_ATTR          5 (__init__ + NULL|self)
+               LOAD_FAST_BORROW         1 (parent)
+               CALL                     1
+               POP_TOP
+
+  24           LOAD_GLOBAL              5 (_start_hidden + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  25           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                7 (title + NULL|self)
+               LOAD_CONST               0 ('Support Tickets')
+               CALL                     1
+               POP_TOP
+
+  26           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                9 (configure + NULL|self)
+               LOAD_GLOBAL             10 (BG)
+               LOAD_CONST               1 (('bg',))
+               CALL_KW                  1
+               POP_TOP
+
+  27           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               13 (geometry + NULL|self)
+               LOAD_CONST               2 ('640x600')
+               CALL                     1
+               POP_TOP
+
+  28           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               15 (resizable + NULL|self)
+               LOAD_CONST               3 (True)
+               LOAD_CONST               3 (True)
+               CALL                     2
+               POP_TOP
+
+  29           LOAD_GLOBAL             17 (_set_window_icon + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  38           LOAD_GLOBAL             18 (ttk)
+               LOAD_ATTR               20 (Style)
+               PUSH_NULL
+               CALL                     0
+               LOAD_ATTR               23 (theme_use + NULL|self)
+               CALL                     0
+               LOAD_CONST               4 ('clam')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       37 (to L1)
+               NOT_TAKEN
+
+  39           LOAD_GLOBAL             18 (ttk)
+               LOAD_ATTR               20 (Style)
+               PUSH_NULL
+               CALL                     0
+               LOAD_ATTR               23 (theme_use + NULL|self)
+               LOAD_CONST               4 ('clam')
+               CALL                     1
+               POP_TOP
+
+  40   L1:     BUILD_LIST               0
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR              12 (_tickets)
+
+  41           LOAD_CONST               5 (None)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR              13 (_selected_ticket)
+
+  47           LOAD_GLOBAL             29 (_get_last_ticket_state + NULL)
+               CALL                     0
+               UNPACK_SEQUENCE          3
+               STORE_FAST_STORE_FAST   69 (last_host, last_username)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR              15 (_recent_hosts)
+
+  48           LOAD_FAST                0 (self)
+               LOAD_ATTR               33 (_build + NULL|self)
+               LOAD_FAST                4 (last_host)
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L2)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_FAST                2 (default_host)
+       L2:     LOAD_FAST                5 (last_username)
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L3)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_FAST                3 (default_username)
+       L3:     CALL                     2
+               POP_TOP
+
+  49           LOAD_GLOBAL             35 (_finish_dark_window + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  50           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               37 (_refresh + NULL|self)
+               LOAD_CONST               3 (True)
+               LOAD_CONST               6 (('silent',))
+               CALL_KW                  1
+               POP_TOP
+
+  54           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               39 (update_idletasks + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  55           LOAD_GLOBAL             41 (max + NULL)
+               LOAD_CONST               7 (640)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               43 (winfo_reqwidth + NULL|self)
+               CALL                     0
+               CALL                     2
+               STORE_FAST               6 (fit_w)
+
+  56           LOAD_GLOBAL             41 (max + NULL)
+               LOAD_CONST               8 (600)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               45 (winfo_reqheight + NULL|self)
+               CALL                     0
+               CALL                     2
+               STORE_FAST               7 (fit_h)
+
+  57           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               13 (geometry + NULL|self)
+               LOAD_FAST_BORROW         6 (fit_w)
+               FORMAT_SIMPLE
+               LOAD_CONST               9 ('x')
+               LOAD_FAST_BORROW         7 (fit_h)
+               FORMAT_SIMPLE
+               BUILD_STRING             3
+               CALL                     1
+               POP_TOP
+
+  58           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               47 (minsize + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 103 (fit_w, fit_h)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               5 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _build at 0x000001CD6BF8E6C0, file "client\core\tickets_window.py", line 60>:
+ 60           RESUME                   0
+
+ 61           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_SMALL_INT          44
+              LOAD_CONST               1 (('bg', 'height'))
+              CALL_KW                  3
+              STORE_FAST               3 (h)
+
+ 62           LOAD_FAST_BORROW         3 (h)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_CONST               3 (('fill',))
+              CALL_KW                  1
+              POP_TOP
+              LOAD_FAST_BORROW         3 (h)
+              LOAD_ATTR                9 (pack_propagate + NULL|self)
+              LOAD_CONST               4 (False)
+              CALL                     1
+              POP_TOP
+
+ 63           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               10 (Label)
+              PUSH_NULL
+              LOAD_FAST_BORROW         3 (h)
+              LOAD_CONST               5 ('🎫  Support Tickets')
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             12 (AMBER)
+
+ 64           LOAD_CONST              60 (('Georgia', 12, 'bold'))
+
+ 63           LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+              CALL_KW                  5
+
+ 64           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_SMALL_INT          16
+              LOAD_SMALL_INT           8
+              LOAD_CONST               8 (('side', 'padx', 'pady'))
+              CALL_KW                  3
+              POP_TOP
+
+ 65           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_GLOBAL             14 (BORDER)
+              LOAD_SMALL_INT           1
+              LOAD_CONST               1 (('bg', 'height'))
+              CALL_KW                  3
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_CONST               3 (('fill',))
+              CALL_KW                  1
+              POP_TOP
+
+ 67           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_GLOBAL             16 (BG)
+              LOAD_CONST               9 (('bg',))
+              CALL_KW                  2
+              STORE_FAST               4 (sf)
+
+ 68           LOAD_FAST_BORROW         4 (sf)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_SMALL_INT          16
+              LOAD_CONST              61 ((10, 4))
+              LOAD_CONST              10 (('fill', 'padx', 'pady'))
+              CALL_KW                  3
+              POP_TOP
+
+ 69           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               10 (Label)
+              PUSH_NULL
+              LOAD_FAST_BORROW         4 (sf)
+              LOAD_CONST              11 ('Server:')
+              LOAD_GLOBAL             16 (BG)
+              LOAD_GLOBAL             18 (MUTED)
+              LOAD_CONST              62 (('Segoe UI', 9))
+              LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+              CALL_KW                  5
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              12 (('side',))
+              CALL_KW                  1
+              POP_TOP
+
+ 70           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               20 (StringVar)
+              PUSH_NULL
+              LOAD_FAST_BORROW         1 (default_host)
+              LOAD_CONST              13 (('value',))
+              CALL_KW                  1
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              11 (v_host)
+
+ 71           LOAD_GLOBAL             24 (ttk)
+              LOAD_ATTR               26 (Style)
+              PUSH_NULL
+              CALL                     0
+              STORE_FAST               5 (style)
+
+ 72           LOAD_FAST_BORROW         5 (style)
+              LOAD_ATTR               29 (configure + NULL|self)
+              LOAD_CONST              14 ('Tav.TicketHost.TCombobox')
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             30 (SURF2)
+
+ 73           LOAD_GLOBAL             32 (PARCH)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             32 (PARCH)
+
+ 74           LOAD_GLOBAL             34 (AMBERDIM)
+              LOAD_SMALL_INT           0
+
+ 72           LOAD_CONST              15 (('fieldbackground', 'background', 'foreground', 'selectbackground', 'selectforeground', 'arrowcolor', 'borderwidth'))
+              CALL_KW                  8
+              POP_TOP
+
+ 80           LOAD_FAST_BORROW         5 (style)
+              LOAD_ATTR               37 (map + NULL|self)
+              LOAD_CONST              14 ('Tav.TicketHost.TCombobox')
+
+ 81           LOAD_CONST              16 ('readonly')
+              LOAD_GLOBAL              4 (SURF)
+              BUILD_TUPLE              2
+              LOAD_CONST              17 ('!disabled')
+              LOAD_GLOBAL              4 (SURF)
+              BUILD_TUPLE              2
+              BUILD_LIST               2
+
+ 82           LOAD_CONST              16 ('readonly')
+              LOAD_GLOBAL             32 (PARCH)
+              BUILD_TUPLE              2
+              LOAD_CONST              17 ('!disabled')
+              LOAD_GLOBAL             32 (PARCH)
+              BUILD_TUPLE              2
+              BUILD_LIST               2
+
+ 83           LOAD_CONST              16 ('readonly')
+              LOAD_GLOBAL              4 (SURF)
+              BUILD_TUPLE              2
+              LOAD_CONST              17 ('!disabled')
+              LOAD_GLOBAL              4 (SURF)
+              BUILD_TUPLE              2
+              BUILD_LIST               2
+
+ 84           LOAD_CONST              16 ('readonly')
+              LOAD_GLOBAL             32 (PARCH)
+              BUILD_TUPLE              2
+              LOAD_CONST              17 ('!disabled')
+              LOAD_GLOBAL             32 (PARCH)
+              BUILD_TUPLE              2
+              BUILD_LIST               2
+
+ 80           LOAD_CONST              18 (('fieldbackground', 'foreground', 'selectbackground', 'selectforeground'))
+              CALL_KW                  5
+              POP_TOP
+
+ 85           LOAD_GLOBAL             24 (ttk)
+              LOAD_ATTR               38 (Combobox)
+              PUSH_NULL
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 64 (sf, self)
+              LOAD_ATTR               22 (v_host)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               40 (_recent_hosts)
+
+ 86           LOAD_CONST              63 (('Consolas', 10))
+              LOAD_CONST              14 ('Tav.TicketHost.TCombobox')
+              LOAD_SMALL_INT          20
+
+ 85           LOAD_CONST              19 (('textvariable', 'values', 'font', 'style', 'width'))
+              CALL_KW                  6
+              STORE_FAST               6 (host_combo)
+
+ 87           LOAD_FAST_BORROW         6 (host_combo)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              64 ((6, 10))
+              LOAD_CONST              20 (('side', 'padx'))
+              CALL_KW                  2
+              POP_TOP
+
+ 88           LOAD_GLOBAL             43 (_fix_combobox_popdown_colors + NULL)
+              LOAD_FAST_BORROW         6 (host_combo)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             32 (PARCH)
+              LOAD_GLOBAL             34 (AMBERDIM)
+              LOAD_CONST              21 ('#ffd080')
+              CALL                     5
+              POP_TOP
+
+ 89           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               10 (Label)
+              PUSH_NULL
+              LOAD_FAST_BORROW         4 (sf)
+              LOAD_CONST              22 ('Username:')
+              LOAD_GLOBAL             16 (BG)
+              LOAD_GLOBAL             18 (MUTED)
+              LOAD_CONST              62 (('Segoe UI', 9))
+              LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+              CALL_KW                  5
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              12 (('side',))
+              CALL_KW                  1
+              POP_TOP
+
+ 90           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               20 (StringVar)
+              PUSH_NULL
+              LOAD_FAST_BORROW         2 (default_username)
+              LOAD_CONST              13 (('value',))
+              CALL_KW                  1
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              22 (v_username)
+
+ 91           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               46 (Entry)
+              PUSH_NULL
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 64 (sf, self)
+              LOAD_ATTR               44 (v_username)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             32 (PARCH)
+
+ 92           LOAD_GLOBAL             12 (AMBER)
+              LOAD_CONST              23 ('flat')
+              LOAD_CONST              63 (('Consolas', 10))
+
+ 93           LOAD_SMALL_INT           6
+              LOAD_SMALL_INT          14
+
+ 91           LOAD_CONST              24 (('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd', 'width'))
+              CALL_KW                  9
+
+ 93           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              65 ((6, 0))
+              LOAD_CONST              20 (('side', 'padx'))
+              CALL_KW                  2
+              POP_TOP
+
+ 94           LOAD_GLOBAL             49 (_btn + NULL)
+              LOAD_FAST_BORROW         4 (sf)
+              LOAD_CONST              25 ('⚑ Pick Saved')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               50 (_pick_saved_server)
+
+ 95           LOAD_CONST              66 (('Segoe UI', 8))
+              LOAD_SMALL_INT           4
+              LOAD_SMALL_INT           6
+
+ 94           LOAD_CONST              26 (('font', 'pady', 'padx'))
+              CALL_KW                  6
+
+ 95           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              67 ((8, 0))
+              LOAD_CONST              20 (('side', 'padx'))
+              CALL_KW                  2
+              POP_TOP
+
+ 96           LOAD_GLOBAL             53 (_hint + NULL)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_CONST              27 ('Tickets are tied to whichever username+server you actually play on.')
+              CALL                     2
+              POP_TOP
+
+ 98           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_GLOBAL             16 (BG)
+              LOAD_CONST               9 (('bg',))
+              CALL_KW                  2
+              STORE_FAST               7 (br)
+
+ 99           LOAD_FAST_BORROW         7 (br)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_SMALL_INT          16
+              LOAD_CONST              68 ((0, 8))
+              LOAD_CONST              10 (('fill', 'padx', 'pady'))
+              CALL_KW                  3
+              POP_TOP
+
+100           LOAD_GLOBAL             49 (_btn + NULL)
+              LOAD_FAST_BORROW         7 (br)
+              LOAD_CONST              28 ('⟳ Refresh My Tickets')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               54 (_refresh)
+              LOAD_CONST              29 ('primary')
+
+101           LOAD_CONST              62 (('Segoe UI', 9))
+              LOAD_SMALL_INT           6
+              LOAD_SMALL_INT          10
+
+100           LOAD_CONST              26 (('font', 'pady', 'padx'))
+              CALL_KW                  7
+
+101           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              12 (('side',))
+              CALL_KW                  1
+              POP_TOP
+
+102           LOAD_GLOBAL             49 (_btn + NULL)
+              LOAD_FAST_BORROW         7 (br)
+              LOAD_CONST              30 ('+ New Ticket')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               56 (_new_ticket)
+
+103           LOAD_CONST              62 (('Segoe UI', 9))
+              LOAD_SMALL_INT           6
+              LOAD_SMALL_INT          10
+
+102           LOAD_CONST              26 (('font', 'pady', 'padx'))
+              CALL_KW                  6
+
+103           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              65 ((6, 0))
+              LOAD_CONST              20 (('side', 'padx'))
+              CALL_KW                  2
+              POP_TOP
+
+105           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_GLOBAL             16 (BG)
+              LOAD_CONST               9 (('bg',))
+              CALL_KW                  2
+              STORE_FAST               8 (body)
+
+106           LOAD_FAST_BORROW         8 (body)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST              31 ('both')
+              LOAD_CONST              32 (True)
+              LOAD_SMALL_INT          16
+              LOAD_CONST              69 ((0, 10))
+              LOAD_CONST              33 (('fill', 'expand', 'padx', 'pady'))
+              CALL_KW                  4
+              POP_TOP
+
+114           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         8 (body)
+              LOAD_GLOBAL             16 (BG)
+              LOAD_CONST               9 (('bg',))
+              CALL_KW                  2
+              STORE_FAST               9 (tree_container)
+
+115           LOAD_FAST_BORROW         9 (tree_container)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_CONST               3 (('fill',))
+              CALL_KW                  1
+              POP_TOP
+
+116           LOAD_GLOBAL             59 (_mk_tree + NULL)
+              LOAD_FAST_BORROW         9 (tree_container)
+              LOAD_CONST              70 (('title', 'status', 'updated'))
+              BUILD_LIST               0
+              LOAD_CONST              71 ((280, 80, 140))
+              LIST_EXTEND              1
+              LOAD_SMALL_INT           7
+              LOAD_CONST              34 (('height',))
+              CALL_KW                  4
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              30 (tree)
+
+117           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               60 (tree)
+              LOAD_ATTR               63 (bind + NULL|self)
+              LOAD_CONST              35 ('<<TreeviewSelect>>')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               64 (_on_select)
+              CALL                     2
+              POP_TOP
+
+119           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         8 (body)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             14 (BORDER)
+              LOAD_SMALL_INT           1
+              LOAD_CONST              36 (('bg', 'highlightbackground', 'highlightthickness'))
+              CALL_KW                  4
+              STORE_FAST              10 (detail)
+
+120           LOAD_FAST_BORROW        10 (detail)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST              31 ('both')
+              LOAD_CONST              32 (True)
+              LOAD_CONST              67 ((8, 0))
+              LOAD_CONST              37 (('fill', 'expand', 'pady'))
+              CALL_KW                  3
+              POP_TOP
+
+122           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               20 (StringVar)
+              PUSH_NULL
+              LOAD_CONST              38 ('Select a ticket, or open a new one.')
+              LOAD_CONST              13 (('value',))
+              CALL_KW                  1
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              33 (v_detail_title)
+
+123           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               10 (Label)
+              PUSH_NULL
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 160 (detail, self)
+              LOAD_ATTR               66 (v_detail_title)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             12 (AMBER)
+
+124           LOAD_CONST              72 (('Georgia', 10, 'bold'))
+              LOAD_CONST              39 (560)
+              LOAD_CONST               7 ('left')
+
+123           LOAD_CONST              40 (('textvariable', 'bg', 'fg', 'font', 'wraplength', 'justify'))
+              CALL_KW                  7
+
+125           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST              41 ('w')
+              LOAD_SMALL_INT          10
+              LOAD_CONST              61 ((10, 4))
+              LOAD_CONST              42 (('anchor', 'padx', 'pady'))
+              CALL_KW                  3
+              POP_TOP
+
+127           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW        10 (detail)
+              LOAD_GLOBAL             16 (BG)
+              LOAD_CONST               9 (('bg',))
+              CALL_KW                  2
+              STORE_FAST              11 (thread_frame)
+
+128           LOAD_FAST_BORROW        11 (thread_frame)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST              31 ('both')
+              LOAD_CONST              32 (True)
+              LOAD_SMALL_INT          10
+              LOAD_CONST              73 ((0, 6))
+              LOAD_CONST              33 (('fill', 'expand', 'padx', 'pady'))
+              CALL_KW                  4
+              POP_TOP
+
+129           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               68 (Text)
+              PUSH_NULL
+              LOAD_FAST_BORROW        11 (thread_frame)
+              LOAD_GLOBAL             30 (SURF2)
+              LOAD_GLOBAL             32 (PARCH)
+              LOAD_CONST              23 ('flat')
+
+130           LOAD_SMALL_INT           0
+              LOAD_CONST              43 ('word')
+              LOAD_CONST              44 ('disabled')
+
+131           LOAD_CONST              62 (('Segoe UI', 9))
+              LOAD_SMALL_INT           8
+
+129           LOAD_CONST              45 (('bg', 'fg', 'relief', 'bd', 'wrap', 'state', 'font', 'height'))
+              CALL_KW                  9
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              35 (thread_text)
+
+132           LOAD_GLOBAL             73 (_mk_scrollbar + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 176 (thread_frame, self)
+              LOAD_ATTR               70 (thread_text)
+              LOAD_ATTR               74 (yview)
+              CALL                     2
+              STORE_FAST              12 (tsb)
+
+133           LOAD_FAST_BORROW        12 (tsb)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST              46 ('right')
+              LOAD_CONST              47 ('y')
+              LOAD_CONST              48 (('side', 'fill'))
+              CALL_KW                  2
+              POP_TOP
+
+134           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               70 (thread_text)
+              LOAD_ATTR               77 (config + NULL|self)
+              LOAD_FAST_BORROW        12 (tsb)
+              LOAD_ATTR               78 (set)
+              LOAD_CONST              49 (('yscrollcommand',))
+              CALL_KW                  1
+              POP_TOP
+
+135           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               70 (thread_text)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              31 ('both')
+              LOAD_CONST              32 (True)
+              LOAD_CONST              50 (('side', 'fill', 'expand'))
+              CALL_KW                  3
+              POP_TOP
+
+136           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               70 (thread_text)
+              LOAD_ATTR               81 (tag_config + NULL|self)
+              LOAD_CONST              51 ('player')
+              LOAD_GLOBAL             82 (CYAN)
+              LOAD_CONST              52 (('foreground',))
+              CALL_KW                  2
+              POP_TOP
+
+137           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               70 (thread_text)
+              LOAD_ATTR               81 (tag_config + NULL|self)
+              LOAD_CONST              53 ('owner')
+              LOAD_GLOBAL             12 (AMBER)
+              LOAD_CONST              52 (('foreground',))
+              CALL_KW                  2
+              POP_TOP
+
+138           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               70 (thread_text)
+              LOAD_ATTR               81 (tag_config + NULL|self)
+              LOAD_CONST              54 ('meta')
+              LOAD_GLOBAL             18 (MUTED)
+              LOAD_CONST              52 (('foreground',))
+              CALL_KW                  2
+              POP_TOP
+
+140           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW        10 (detail)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_CONST               9 (('bg',))
+              CALL_KW                  2
+              STORE_FAST              13 (action_row)
+
+141           LOAD_FAST_BORROW        13 (action_row)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_SMALL_INT          10
+              LOAD_CONST              69 ((0, 10))
+              LOAD_CONST              10 (('fill', 'padx', 'pady'))
+              CALL_KW                  3
+              POP_TOP
+
+142           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               20 (StringVar)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              42 (v_reply)
+
+143           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               46 (Entry)
+              PUSH_NULL
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 208 (action_row, self)
+              LOAD_ATTR               84 (v_reply)
+              LOAD_GLOBAL             30 (SURF2)
+              LOAD_GLOBAL             32 (PARCH)
+
+144           LOAD_GLOBAL             12 (AMBER)
+              LOAD_CONST              23 ('flat')
+
+145           LOAD_GLOBAL             14 (BORDER)
+              LOAD_GLOBAL             12 (AMBER)
+              LOAD_SMALL_INT           1
+
+146           LOAD_CONST              74 (('Consolas', 9))
+              LOAD_SMALL_INT           6
+
+143           LOAD_CONST              55 (('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'highlightbackground', 'highlightcolor', 'highlightthickness', 'font', 'bd'))
+              CALL_KW                 11
+
+146           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST               2 ('x')
+              LOAD_CONST              32 (True)
+              LOAD_CONST              50 (('side', 'fill', 'expand'))
+              CALL_KW                  3
+              POP_TOP
+
+147           LOAD_GLOBAL             49 (_btn + NULL)
+              LOAD_FAST_BORROW        13 (action_row)
+              LOAD_CONST              56 ('Reply')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               86 (_respond)
+              LOAD_CONST              62 (('Segoe UI', 9))
+
+148           LOAD_SMALL_INT           6
+              LOAD_SMALL_INT           8
+
+147           LOAD_CONST              26 (('font', 'pady', 'padx'))
+              CALL_KW                  6
+
+148           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              65 ((6, 0))
+              LOAD_CONST              20 (('side', 'padx'))
+              CALL_KW                  2
+              POP_TOP
+
+149           LOAD_GLOBAL             49 (_btn + NULL)
+              LOAD_FAST_BORROW        13 (action_row)
+              LOAD_CONST              57 ('Close Ticket')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               88 (_close_ticket)
+              LOAD_CONST              58 ('danger')
+
+150           LOAD_CONST              62 (('Segoe UI', 9))
+              LOAD_SMALL_INT           6
+              LOAD_SMALL_INT           8
+
+149           LOAD_CONST              26 (('font', 'pady', 'padx'))
+              CALL_KW                  7
+
+150           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_CONST              65 ((6, 0))
+              LOAD_CONST              20 (('side', 'padx'))
+              CALL_KW                  2
+              POP_TOP
+              LOAD_CONST              59 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _current_host_username at 0x000001CD6BD03690, file "client\core\tickets_window.py", line 152>:
+152           RESUME                   0
+
+153           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (v_host)
+              LOAD_ATTR                3 (get + NULL|self)
+              CALL                     0
+              LOAD_ATTR                5 (strip + NULL|self)
+              CALL                     0
+              STORE_FAST               2 (host)
+
+154           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (v_username)
+              LOAD_ATTR                3 (get + NULL|self)
+              CALL                     0
+              LOAD_ATTR                5 (strip + NULL|self)
+              CALL                     0
+              STORE_FAST               3 (username)
+
+155           LOAD_FAST_BORROW         2 (host)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        9 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         3 (username)
+              TO_BOOL
+              POP_JUMP_IF_TRUE        36 (to L3)
+              NOT_TAKEN
+
+156   L1:     LOAD_FAST_BORROW         1 (silent)
+              TO_BOOL
+              POP_JUMP_IF_TRUE        26 (to L2)
+              NOT_TAKEN
+
+157           LOAD_GLOBAL              8 (messagebox)
+              LOAD_ATTR               10 (showerror)
+              PUSH_NULL
+              LOAD_CONST               0 ('Missing info')
+
+158           LOAD_CONST               1 ('Enter both a server and a username.')
+              LOAD_FAST_BORROW         0 (self)
+
+157           LOAD_CONST               2 (('parent',))
+              CALL_KW                  3
+              POP_TOP
+
+159   L2:     LOAD_CONST               3 ((None, None))
+              RETURN_VALUE
+
+160   L3:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 35 (host, username)
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object _pick_saved_server at 0x000001CD6C339930, file "client\core\tickets_window.py", line 162>:
+  --           MAKE_CELL                0 (self)
+
+ 162           RESUME                   0
+
+ 163           LOAD_CONST               3 (('1757',))
+               LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST               1 (<code object on_select at 0x000001CD6C2B6470, file "client\core\tickets_window.py", line 163>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_FAST               1 (on_select)
+
+ 166           LOAD_GLOBAL              1 (ServerListPanel + NULL)
+               LOAD_DEREF               0 (self)
+               LOAD_FAST_BORROW         1 (on_select)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+Disassembly of <code object on_select at 0x000001CD6C2B6470, file "client\core\tickets_window.py", line 163>:
+  --           COPY_FREE_VARS           1
+
+ 163           RESUME                   0
+
+ 164           LOAD_DEREF               3 (self)
+               LOAD_ATTR                0 (v_host)
+               LOAD_ATTR                3 (set + NULL|self)
+               LOAD_FAST_BORROW         0 (ip)
+               CALL                     1
+               POP_TOP
+
+ 165           LOAD_DEREF               3 (self)
+               LOAD_ATTR                5 (_refresh + NULL|self)
+               LOAD_CONST               0 (True)
+               LOAD_CONST               1 (('silent',))
+               CALL_KW                  1
+               POP_TOP
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _refresh at 0x000001CD6BC8E0D0, file "client\core\tickets_window.py", line 168>:
+  --           MAKE_CELL                0 (self)
+               MAKE_CELL                1 (silent)
+               MAKE_CELL                5 (resolved)
+               MAKE_CELL                6 (token)
+               MAKE_CELL                7 (username)
+
+ 168           RESUME                   0
+
+ 169           LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (_current_host_username + NULL|self)
+               LOAD_DEREF               1 (silent)
+               LOAD_CONST               0 (('silent',))
+               CALL_KW                  1
+               UNPACK_SEQUENCE          2
+               STORE_FAST               2 (host)
+               STORE_DEREF              7 (username)
+
+ 170           LOAD_FAST_BORROW         2 (host)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+ 171   L1:     LOAD_GLOBAL              3 (_remember_ticket_state + NULL)
+               LOAD_FAST_BORROW         2 (host)
+               LOAD_DEREF               7 (username)
+               CALL                     2
+               POP_TOP
+
+ 172           LOAD_GLOBAL              5 (_resolve_ip_for_game + NULL)
+               LOAD_FAST_BORROW         2 (host)
+               CALL                     1
+               STORE_DEREF              5 (resolved)
+
+ 173           LOAD_GLOBAL              7 (_get_or_create_token + NULL)
+               LOAD_DEREF               5 (resolved)
+               LOAD_DEREF               7 (username)
+               CALL                     2
+               UNPACK_SEQUENCE          2
+               STORE_DEREF              6 (token)
+               STORE_FAST               3 (_)
+
+ 174           LOAD_FAST_BORROW         5 (resolved)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_FAST_BORROW         1 (silent)
+               LOAD_FAST_BORROW         6 (token)
+               LOAD_FAST_BORROW         7 (username)
+               BUILD_TUPLE              5
+               LOAD_CONST               2 (<code object worker at 0x000001CD6BEDEDB0, file "client\core\tickets_window.py", line 174>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               4 (worker)
+
+ 193           LOAD_GLOBAL              8 (threading)
+               LOAD_ATTR               10 (Thread)
+               PUSH_NULL
+               LOAD_FAST_BORROW         4 (worker)
+               LOAD_CONST               3 (True)
+               LOAD_CONST               4 (('target', 'daemon'))
+               CALL_KW                  2
+               LOAD_ATTR               13 (start + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+Disassembly of <code object worker at 0x000001CD6BEDEDB0, file "client\core\tickets_window.py", line 174>:
+  --            COPY_FREE_VARS           5
+                MAKE_CELL                0 (e)
+                MAKE_CELL                1 (resp)
+
+ 174            RESUME                   0
+
+ 175            NOP
+
+ 176    L1:     LOAD_GLOBAL              1 (ticket_request + NULL)
+                LOAD_DEREF               2 (resolved)
+                LOAD_CONST               0 ('list_mine')
+                LOAD_DEREF               6 (username)
+                LOAD_DEREF               5 (token)
+                CALL                     4
+                STORE_DEREF              1 (resp)
+
+ 182    L2:     LOAD_DEREF               1 (resp)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST               3 ('status')
+                CALL                     1
+                LOAD_CONST               4 ('ok')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       34 (to L4)
+                NOT_TAKEN
+
+ 188            LOAD_DEREF               4 (silent)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        24 (to L3)
+                NOT_TAKEN
+
+ 189            LOAD_DEREF               3 (self)
+                LOAD_ATTR                5 (after + NULL|self)
+                LOAD_SMALL_INT           0
+                LOAD_FAST                1 (resp)
+                LOAD_FAST                3 (self)
+                BUILD_TUPLE              2
+                LOAD_CONST               5 (<code object <lambda> at 0x000001CD6C346170, file "client\core\tickets_window.py", line 189>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                CALL                     2
+                POP_TOP
+
+ 191    L3:     LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+ 192    L4:     LOAD_DEREF               3 (self)
+                LOAD_ATTR                5 (after + NULL|self)
+                LOAD_SMALL_INT           0
+                LOAD_FAST                2 (resolved)
+                LOAD_FAST                1 (resp)
+                LOAD_FAST                3 (self)
+                BUILD_TUPLE              3
+                LOAD_CONST               6 (<code object <lambda> at 0x000001CD6C2A7990, file "client\core\tickets_window.py", line 192>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                CALL                     2
+                POP_TOP
+                LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+  --    L5:     PUSH_EXC_INFO
+
+ 177            LOAD_GLOBAL              2 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       43 (to L9)
+                NOT_TAKEN
+                STORE_DEREF              0 (e)
+
+ 178    L6:     LOAD_DEREF               4 (silent)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        24 (to L7)
+                NOT_TAKEN
+
+ 179            LOAD_DEREF               3 (self)
+                LOAD_ATTR                5 (after + NULL|self)
+                LOAD_SMALL_INT           0
+                LOAD_FAST                0 (e)
+                LOAD_FAST                3 (self)
+                BUILD_TUPLE              2
+                LOAD_CONST               1 (<code object <lambda> at 0x000001CD6C2A7630, file "client\core\tickets_window.py", line 179>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                CALL                     2
+                POP_TOP
+
+ 181    L7:     POP_EXCEPT
+                LOAD_CONST               2 (None)
+                STORE_DEREF              0 (e)
+                DELETE_DEREF             0 (e)
+                LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+  --    L8:     LOAD_CONST               2 (None)
+                STORE_DEREF              0 (e)
+                DELETE_DEREF             0 (e)
+                RERAISE                  1
+
+ 177    L9:     RERAISE                  0
+
+  --   L10:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L5 [0]
+  L5 to L6 -> L10 [1] lasti
+  L6 to L7 -> L8 [1] lasti
+  L8 to L10 -> L10 [1] lasti
+
+Disassembly of <code object <lambda> at 0x000001CD6C2A7630, file "client\core\tickets_window.py", line 179>:
+  --           COPY_FREE_VARS           2
+
+ 179           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 180           LOAD_CONST               0 ("Couldn't fetch tickets")
+               LOAD_GLOBAL              5 (str + NULL)
+               LOAD_DEREF               0 (e)
+               CALL                     1
+               LOAD_DEREF               1 (self)
+
+ 179           LOAD_CONST               1 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C346170, file "client\core\tickets_window.py", line 189>:
+  --           COPY_FREE_VARS           2
+
+ 189           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 190           LOAD_CONST               0 ('Error')
+               LOAD_DEREF               0 (resp)
+               LOAD_ATTR                5 (get + NULL|self)
+               LOAD_CONST               1 ('message')
+               LOAD_CONST               2 ('Unknown error')
+               CALL                     2
+               LOAD_DEREF               1 (self)
+
+ 189           LOAD_CONST               3 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C2A7990, file "client\core\tickets_window.py", line 192>:
+  --           COPY_FREE_VARS           3
+
+ 192           RESUME                   0
+               LOAD_DEREF               2 (self)
+               LOAD_ATTR                1 (_apply_tickets + NULL|self)
+               LOAD_DEREF               1 (resp)
+               LOAD_ATTR                3 (get + NULL|self)
+               LOAD_CONST               0 ('tickets')
+               BUILD_LIST               0
+               CALL                     2
+               LOAD_DEREF               0 (resolved)
+               CALL                     2
+               RETURN_VALUE
+
+Disassembly of <code object _apply_tickets at 0x000001CD53611E20, file "client\core\tickets_window.py", line 195>:
+195           RESUME                   0
+
+196           LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (tickets, self)
+              STORE_ATTR               0 (_tickets)
+
+197           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (tree)
+              LOAD_ATTR                5 (get_children + NULL|self)
+              CALL                     0
+              GET_ITER
+      L1:     FOR_ITER                29 (to L2)
+              STORE_FAST_LOAD_FAST    48 (r, self)
+              LOAD_ATTR                2 (tree)
+              LOAD_ATTR                7 (delete + NULL|self)
+              LOAD_FAST_BORROW         3 (r)
+              CALL                     1
+              POP_TOP
+              JUMP_BACKWARD           31 (to L1)
+      L2:     END_FOR
+              POP_ITER
+
+198           LOAD_GLOBAL              9 (sorted + NULL)
+              LOAD_FAST_BORROW         1 (tickets)
+              LOAD_CONST               0 (<code object <lambda> at 0x000001CD6C29ED30, file "client\core\tickets_window.py", line 198>)
+              MAKE_FUNCTION
+              LOAD_CONST               1 (True)
+              LOAD_CONST               2 (('key', 'reverse'))
+              CALL_KW                  3
+              GET_ITER
+      L3:     FOR_ITER               108 (to L4)
+              STORE_FAST               4 (t)
+
+199           LOAD_GLOBAL             10 (time)
+              LOAD_ATTR               12 (strftime)
+              PUSH_NULL
+              LOAD_CONST               3 ('%Y-%m-%d %H:%M')
+              LOAD_GLOBAL             10 (time)
+              LOAD_ATTR               14 (localtime)
+              PUSH_NULL
+              LOAD_FAST_BORROW         4 (t)
+              LOAD_CONST               4 ('updated_at')
+              BINARY_OP               26 ([])
+              CALL                     1
+              CALL                     2
+              STORE_FAST               5 (ts)
+
+200           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (tree)
+              LOAD_ATTR               17 (insert + NULL|self)
+              LOAD_CONST               5 ('')
+              LOAD_CONST               6 ('end')
+              LOAD_FAST_BORROW         4 (t)
+              LOAD_CONST               7 ('ticket_id')
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         4 (t)
+              LOAD_CONST               8 ('title')
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         4 (t)
+              LOAD_CONST               9 ('status')
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         5 (ts)
+              BUILD_TUPLE              3
+              LOAD_CONST              10 (('iid', 'values'))
+              CALL_KW                  4
+              POP_TOP
+              JUMP_BACKWARD          110 (to L3)
+
+198   L4:     END_FOR
+              POP_ITER
+
+201           LOAD_GLOBAL             19 (_mark_tickets_seen + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 33 (host, tickets)
+              CALL                     2
+              POP_TOP
+              LOAD_CONST              11 (None)
+              RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C29ED30, file "client\core\tickets_window.py", line 198>:
+198           RESUME                   0
+              LOAD_FAST_BORROW         0 (t)
+              LOAD_CONST               0 ('updated_at')
+              BINARY_OP               26 ([])
+              RETURN_VALUE
+
+Disassembly of <code object _on_select at 0x000001CD6BF8A9A0, file "client\core\tickets_window.py", line 203>:
+  --           MAKE_CELL                7 (sel)
+
+ 203           RESUME                   0
+
+ 204           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (tree)
+               LOAD_ATTR                3 (selection + NULL|self)
+               CALL                     0
+               STORE_DEREF              7 (sel)
+
+ 205           LOAD_DEREF               7 (sel)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 206   L1:     LOAD_GLOBAL              5 (next + NULL)
+               LOAD_FAST_BORROW         7 (sel)
+               BUILD_TUPLE              1
+               LOAD_CONST               1 (<code object <genexpr> at 0x000001CD6C3462A0, file "client\core\tickets_window.py", line 206>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                6 (_tickets)
+               GET_ITER
+               CALL                     0
+               LOAD_CONST               0 (None)
+               CALL                     2
+               STORE_FAST               2 (t)
+
+ 207           LOAD_FAST_BORROW         2 (t)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L2)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 208   L2:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (t, self)
+               STORE_ATTR               4 (_selected_ticket)
+
+ 209           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               10 (v_detail_title)
+               LOAD_ATTR               13 (set + NULL|self)
+               LOAD_FAST_BORROW         2 (t)
+               LOAD_CONST               2 ('title')
+               BINARY_OP               26 ([])
+               FORMAT_SIMPLE
+               LOAD_CONST               3 ('  (')
+               LOAD_FAST_BORROW         2 (t)
+               LOAD_CONST               4 ('status')
+               BINARY_OP               26 ([])
+               FORMAT_SIMPLE
+               LOAD_CONST               5 (')')
+               BUILD_STRING             4
+               CALL                     1
+               POP_TOP
+
+ 210           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (thread_text)
+               LOAD_ATTR               17 (config + NULL|self)
+               LOAD_CONST               6 ('normal')
+               LOAD_CONST               7 (('state',))
+               CALL_KW                  1
+               POP_TOP
+
+ 211           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (thread_text)
+               LOAD_ATTR               19 (delete + NULL|self)
+               LOAD_CONST               8 ('1.0')
+               LOAD_CONST               9 ('end')
+               CALL                     2
+               POP_TOP
+
+ 212           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (thread_text)
+               LOAD_ATTR               21 (insert + NULL|self)
+               LOAD_CONST               9 ('end')
+               LOAD_FAST_BORROW         2 (t)
+               LOAD_CONST              10 ('description')
+               BINARY_OP               26 ([])
+               LOAD_CONST              11 ('\n\n')
+               BINARY_OP                0 (+)
+               CALL                     2
+               POP_TOP
+
+ 213           LOAD_FAST_BORROW         2 (t)
+               LOAD_ATTR               23 (get + NULL|self)
+               LOAD_CONST              12 ('comments')
+               BUILD_LIST               0
+               CALL                     2
+               GET_ITER
+       L3:     FOR_ITER               163 (to L8)
+               STORE_FAST               3 (c)
+
+ 214           LOAD_FAST_BORROW         3 (c)
+               LOAD_CONST              13 ('from')
+               BINARY_OP               26 ([])
+               LOAD_CONST              14 ('owner')
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE        3 (to L4)
+               NOT_TAKEN
+               LOAD_CONST              15 ('Server Owner')
+               JUMP_FORWARD             1 (to L5)
+       L4:     LOAD_CONST              16 ('You')
+       L5:     STORE_FAST               4 (who)
+
+ 215           LOAD_FAST_BORROW         3 (c)
+               LOAD_CONST              13 ('from')
+               BINARY_OP               26 ([])
+               LOAD_CONST              14 ('owner')
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE        3 (to L6)
+               NOT_TAKEN
+               LOAD_CONST              14 ('owner')
+               JUMP_FORWARD             1 (to L7)
+       L6:     LOAD_CONST              17 ('player')
+       L7:     STORE_FAST               5 (tag)
+
+ 216           LOAD_GLOBAL             24 (time)
+               LOAD_ATTR               26 (strftime)
+               PUSH_NULL
+               LOAD_CONST              18 ('%Y-%m-%d %H:%M')
+               LOAD_GLOBAL             24 (time)
+               LOAD_ATTR               28 (localtime)
+               PUSH_NULL
+               LOAD_FAST_BORROW         3 (c)
+               LOAD_CONST              19 ('at')
+               BINARY_OP               26 ([])
+               CALL                     1
+               CALL                     2
+               STORE_FAST               6 (ts)
+
+ 217           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (thread_text)
+               LOAD_ATTR               21 (insert + NULL|self)
+               LOAD_CONST               9 ('end')
+               LOAD_CONST              20 ('[')
+               LOAD_FAST_BORROW         6 (ts)
+               FORMAT_SIMPLE
+               LOAD_CONST              21 ('] ')
+               LOAD_FAST_BORROW         4 (who)
+               FORMAT_SIMPLE
+               LOAD_CONST              22 (': ')
+               BUILD_STRING             5
+               LOAD_FAST_BORROW         5 (tag)
+               CALL                     3
+               POP_TOP
+
+ 218           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (thread_text)
+               LOAD_ATTR               21 (insert + NULL|self)
+               LOAD_CONST               9 ('end')
+               LOAD_FAST_BORROW         3 (c)
+               LOAD_CONST              23 ('message')
+               BINARY_OP               26 ([])
+               FORMAT_SIMPLE
+               LOAD_CONST              24 ('\n')
+               BUILD_STRING             2
+               CALL                     2
+               POP_TOP
+               JUMP_BACKWARD          165 (to L3)
+
+ 213   L8:     END_FOR
+               POP_ITER
+
+ 219           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (thread_text)
+               LOAD_ATTR               31 (see + NULL|self)
+               LOAD_CONST               9 ('end')
+               CALL                     1
+               POP_TOP
+
+ 220           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (thread_text)
+               LOAD_ATTR               17 (config + NULL|self)
+               LOAD_CONST              25 ('disabled')
+               LOAD_CONST               7 (('state',))
+               CALL_KW                  1
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x000001CD6C3462A0, file "client\core\tickets_window.py", line 206>:
+  --           COPY_FREE_VARS           1
+
+ 206           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                29 (to L5)
+               STORE_FAST_LOAD_FAST    17 (x, x)
+               LOAD_CONST               0 ('ticket_id')
+               BINARY_OP               26 ([])
+               LOAD_DEREF               2 (sel)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               COMPARE_OP              88 (bool(==))
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           25 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (x)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           31 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object _new_ticket at 0x000001CD6C011930, file "client\core\tickets_window.py", line 222>:
+  --           MAKE_CELL                0 (self)
+               MAKE_CELL                4 (desc_text)
+               MAKE_CELL                5 (host)
+               MAKE_CELL                6 (username)
+               MAKE_CELL                7 (v_title)
+               MAKE_CELL                8 (win)
+
+ 222           RESUME                   0
+
+ 223           LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (_current_host_username + NULL|self)
+               CALL                     0
+               UNPACK_SEQUENCE          2
+               STORE_DEREF              5 (host)
+               STORE_DEREF              6 (username)
+
+ 224           LOAD_DEREF               5 (host)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 226   L1:     LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR                4 (Toplevel)
+               PUSH_NULL
+               LOAD_DEREF               0 (self)
+               CALL                     1
+               STORE_DEREF              8 (win)
+
+ 227           LOAD_GLOBAL              7 (_start_hidden + NULL)
+               LOAD_DEREF               8 (win)
+               CALL                     1
+               POP_TOP
+
+ 228           LOAD_DEREF               8 (win)
+               LOAD_ATTR                9 (title + NULL|self)
+               LOAD_CONST               1 ('New Ticket')
+               CALL                     1
+               POP_TOP
+
+ 229           LOAD_DEREF               8 (win)
+               LOAD_ATTR               11 (configure + NULL|self)
+               LOAD_GLOBAL             12 (BG)
+               LOAD_CONST               2 (('bg',))
+               CALL_KW                  1
+               POP_TOP
+
+ 230           LOAD_DEREF               8 (win)
+               LOAD_ATTR               15 (resizable + NULL|self)
+               LOAD_CONST               3 (False)
+               LOAD_CONST               3 (False)
+               CALL                     2
+               POP_TOP
+
+ 231           LOAD_GLOBAL             17 (_set_window_icon + NULL)
+               LOAD_DEREF               8 (win)
+               CALL                     1
+               POP_TOP
+
+ 233           LOAD_GLOBAL             19 (_section_label + NULL)
+               LOAD_DEREF               8 (win)
+               LOAD_CONST               4 ('TITLE')
+               CALL                     2
+               POP_TOP
+
+ 234           LOAD_GLOBAL             21 (_field + NULL)
+               LOAD_DEREF               8 (win)
+               CALL                     1
+               STORE_FAST               1 (tf)
+
+ 235           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               22 (StringVar)
+               PUSH_NULL
+               CALL                     0
+               STORE_DEREF              7 (v_title)
+
+ 236           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               24 (Entry)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (tf)
+               LOAD_DEREF               7 (v_title)
+               LOAD_GLOBAL             26 (SURF)
+               LOAD_GLOBAL             28 (PARCH)
+
+ 237           LOAD_GLOBAL             30 (AMBER)
+               LOAD_CONST               5 ('flat')
+               LOAD_CONST              24 (('Consolas', 10))
+
+ 238           LOAD_SMALL_INT           6
+
+ 236           LOAD_CONST               6 (('textvariable', 'bg', 'fg', 'insertbackground', 'relief', 'font', 'bd'))
+               CALL_KW                  8
+
+ 238           LOAD_ATTR               33 (pack + NULL|self)
+               LOAD_CONST               7 ('x')
+               LOAD_CONST               8 (('fill',))
+               CALL_KW                  1
+               POP_TOP
+
+ 240           LOAD_GLOBAL             19 (_section_label + NULL)
+               LOAD_DEREF               8 (win)
+               LOAD_CONST               9 ('DESCRIPTION')
+               CALL                     2
+               POP_TOP
+
+ 241           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               34 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               8 (win)
+               LOAD_GLOBAL             26 (SURF)
+               LOAD_GLOBAL             36 (BORDER)
+               LOAD_SMALL_INT           1
+               LOAD_CONST              10 (('bg', 'highlightbackground', 'highlightthickness'))
+               CALL_KW                  4
+               STORE_FAST               2 (df)
+
+ 242           LOAD_FAST_BORROW         2 (df)
+               LOAD_ATTR               33 (pack + NULL|self)
+               LOAD_CONST              11 ('both')
+               LOAD_CONST              12 (True)
+               LOAD_SMALL_INT          20
+               LOAD_CONST              25 ((0, 6))
+               LOAD_CONST              13 (('fill', 'expand', 'padx', 'pady'))
+               CALL_KW                  4
+               POP_TOP
+
+ 243           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               38 (Text)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (df)
+               LOAD_GLOBAL             26 (SURF)
+               LOAD_GLOBAL             28 (PARCH)
+               LOAD_GLOBAL             30 (AMBER)
+
+ 244           LOAD_CONST               5 ('flat')
+               LOAD_SMALL_INT           6
+               LOAD_CONST              14 ('word')
+               LOAD_SMALL_INT           8
+
+ 245           LOAD_CONST              26 (('Segoe UI', 9))
+
+ 243           LOAD_CONST              15 (('bg', 'fg', 'insertbackground', 'relief', 'bd', 'wrap', 'height', 'font'))
+               CALL_KW                  9
+               STORE_DEREF              4 (desc_text)
+
+ 246           LOAD_DEREF               4 (desc_text)
+               LOAD_ATTR               33 (pack + NULL|self)
+               LOAD_CONST              11 ('both')
+               LOAD_CONST              12 (True)
+               LOAD_CONST              16 (('fill', 'expand'))
+               CALL_KW                  2
+               POP_TOP
+
+ 248           LOAD_FAST_BORROW         4 (desc_text)
+               LOAD_FAST_BORROW         5 (host)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_FAST_BORROW         6 (username)
+               LOAD_FAST_BORROW         7 (v_title)
+               LOAD_FAST_BORROW         8 (win)
+               BUILD_TUPLE              6
+               LOAD_CONST              17 (<code object _submit at 0x000001CD6C018D60, file "client\core\tickets_window.py", line 248>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               3 (_submit)
+
+ 275           LOAD_GLOBAL              2 (tk)
+               LOAD_ATTR               34 (Frame)
+               PUSH_NULL
+               LOAD_DEREF               8 (win)
+               LOAD_GLOBAL             36 (BORDER)
+               LOAD_SMALL_INT           1
+               LOAD_CONST              18 (('bg', 'height'))
+               CALL_KW                  3
+               LOAD_ATTR               33 (pack + NULL|self)
+               LOAD_CONST               7 ('x')
+               LOAD_SMALL_INT          20
+               LOAD_CONST              27 ((4, 6))
+               LOAD_CONST              19 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+ 276           LOAD_GLOBAL             41 (_btn + NULL)
+               LOAD_DEREF               8 (win)
+               LOAD_CONST              20 ('📨  Submit Ticket')
+               LOAD_FAST_BORROW         3 (_submit)
+               LOAD_CONST              21 ('primary')
+
+ 277           LOAD_CONST              28 (('Georgia', 11, 'bold'))
+               LOAD_SMALL_INT          12
+
+ 276           LOAD_CONST              22 (('font', 'pady'))
+               CALL_KW                  6
+
+ 277           LOAD_ATTR               33 (pack + NULL|self)
+               LOAD_CONST               7 ('x')
+               LOAD_SMALL_INT          20
+               LOAD_CONST              29 ((0, 16))
+               LOAD_CONST              19 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+ 279           LOAD_DEREF               8 (win)
+               LOAD_ATTR               43 (update_idletasks + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 280           LOAD_DEREF               8 (win)
+               LOAD_ATTR               45 (geometry + NULL|self)
+               LOAD_CONST              23 ('420x')
+               LOAD_DEREF               8 (win)
+               LOAD_ATTR               47 (winfo_reqheight + NULL|self)
+               CALL                     0
+               FORMAT_SIMPLE
+               BUILD_STRING             2
+               CALL                     1
+               POP_TOP
+
+ 281           LOAD_GLOBAL             49 (_finish_dark_window + NULL)
+               LOAD_DEREF               8 (win)
+               CALL                     1
+               POP_TOP
+
+ 282           LOAD_DEREF               8 (win)
+               LOAD_ATTR               51 (transient + NULL|self)
+               LOAD_DEREF               0 (self)
+               CALL                     1
+               POP_TOP
+
+ 283           LOAD_DEREF               8 (win)
+               LOAD_ATTR               53 (grab_set + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _submit at 0x000001CD6C018D60, file "client\core\tickets_window.py", line 248>:
+  --           COPY_FREE_VARS           6
+               MAKE_CELL                2 (description)
+               MAKE_CELL                3 (resolved)
+               MAKE_CELL                4 (title)
+               MAKE_CELL                5 (token)
+
+ 248           RESUME                   0
+
+ 249           LOAD_DEREF              10 (v_title)
+               LOAD_ATTR                1 (get + NULL|self)
+               CALL                     0
+               LOAD_ATTR                3 (strip + NULL|self)
+               CALL                     0
+               STORE_DEREF              4 (title)
+
+ 250           LOAD_DEREF               6 (desc_text)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               0 ('1.0')
+               LOAD_CONST               1 ('end')
+               CALL                     2
+               LOAD_ATTR                3 (strip + NULL|self)
+               CALL                     0
+               STORE_DEREF              2 (description)
+
+ 251           LOAD_DEREF               4 (title)
+               TO_BOOL
+               POP_JUMP_IF_FALSE        9 (to L1)
+               NOT_TAKEN
+               LOAD_DEREF               2 (description)
+               TO_BOOL
+               POP_JUMP_IF_TRUE        28 (to L2)
+               NOT_TAKEN
+
+ 252   L1:     LOAD_GLOBAL              4 (messagebox)
+               LOAD_ATTR                6 (showerror)
+               PUSH_NULL
+               LOAD_CONST               2 ('Missing info')
+
+ 253           LOAD_CONST               3 ('Title and description are both required.')
+               LOAD_DEREF              11 (win)
+
+ 252           LOAD_CONST               4 (('parent',))
+               CALL_KW                  3
+               POP_TOP
+
+ 254           LOAD_CONST               5 (None)
+               RETURN_VALUE
+
+ 255   L2:     LOAD_GLOBAL              9 (_resolve_ip_for_game + NULL)
+               LOAD_DEREF               7 (host)
+               CALL                     1
+               STORE_DEREF              3 (resolved)
+
+ 256           LOAD_GLOBAL             11 (_get_or_create_token + NULL)
+               LOAD_DEREF               3 (resolved)
+               LOAD_DEREF               9 (username)
+               CALL                     2
+               UNPACK_SEQUENCE          2
+               STORE_DEREF              5 (token)
+               STORE_FAST               0 (_)
+
+ 257           LOAD_FAST_BORROW         2 (description)
+               LOAD_FAST_BORROW         7 (host)
+               LOAD_FAST_BORROW         3 (resolved)
+               LOAD_FAST_BORROW         8 (self)
+               LOAD_FAST_BORROW         4 (title)
+               LOAD_FAST_BORROW         5 (token)
+               LOAD_FAST_BORROW         9 (username)
+               LOAD_FAST_BORROW        11 (win)
+               BUILD_TUPLE              8
+               LOAD_CONST               6 (<code object worker at 0x000001CD6C3BC630, file "client\core\tickets_window.py", line 257>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               1 (worker)
+
+ 273           LOAD_GLOBAL             12 (threading)
+               LOAD_ATTR               14 (Thread)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (worker)
+               LOAD_CONST               7 (True)
+               LOAD_CONST               8 (('target', 'daemon'))
+               CALL_KW                  2
+               LOAD_ATTR               17 (start + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               5 (None)
+               RETURN_VALUE
+
+Disassembly of <code object worker at 0x000001CD6C3BC630, file "client\core\tickets_window.py", line 257>:
+  --           COPY_FREE_VARS           8
+               MAKE_CELL                1 (e)
+               MAKE_CELL                2 (resp)
+
+ 257           RESUME                   0
+
+ 258           NOP
+
+ 259   L1:     LOAD_GLOBAL              1 (ticket_request + NULL)
+               LOAD_DEREF               5 (resolved)
+               LOAD_CONST               0 ('create')
+               LOAD_DEREF               9 (username)
+               LOAD_DEREF               8 (token)
+
+ 260           LOAD_DEREF               7 (title)
+               LOAD_DEREF               3 (description)
+               LOAD_DEREF               4 (host)
+
+ 259           LOAD_CONST               1 (('title', 'description', 'server'))
+               CALL_KW                  7
+               STORE_DEREF              2 (resp)
+
+ 265   L2:     LOAD_DEREF               2 (resp)
+               LOAD_ATTR                7 (get + NULL|self)
+               LOAD_CONST               4 ('status')
+               CALL                     1
+               LOAD_CONST               5 ('ok')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       26 (to L3)
+               NOT_TAKEN
+
+ 266           LOAD_DEREF               6 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                2 (resp)
+               LOAD_FAST               10 (win)
+               BUILD_TUPLE              2
+               LOAD_CONST               6 (<code object <lambda> at 0x000001CD6C3463D0, file "client\core\tickets_window.py", line 266>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 268           LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+ 269   L3:     LOAD_FAST                6 (self)
+               LOAD_FAST               10 (win)
+               BUILD_TUPLE              2
+               LOAD_CONST               7 (<code object _done at 0x000001CD6C2A7AB0, file "client\core\tickets_window.py", line 269>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               0 (_done)
+
+ 272           LOAD_DEREF               6 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                0 (_done)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  --   L4:     PUSH_EXC_INFO
+
+ 261           LOAD_GLOBAL              2 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE       35 (to L8)
+               NOT_TAKEN
+               STORE_DEREF              1 (e)
+
+ 262   L5:     LOAD_DEREF               6 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                1 (e)
+               LOAD_FAST               10 (win)
+               BUILD_TUPLE              2
+               LOAD_CONST               2 (<code object <lambda> at 0x000001CD6C2A7510, file "client\core\tickets_window.py", line 262>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 264   L6:     POP_EXCEPT
+               LOAD_CONST               3 (None)
+               STORE_DEREF              1 (e)
+               DELETE_DEREF             1 (e)
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  --   L7:     LOAD_CONST               3 (None)
+               STORE_DEREF              1 (e)
+               DELETE_DEREF             1 (e)
+               RERAISE                  1
+
+ 261   L8:     RERAISE                  0
+
+  --   L9:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L4 [0]
+  L4 to L5 -> L9 [1] lasti
+  L5 to L6 -> L7 [1] lasti
+  L7 to L9 -> L9 [1] lasti
+
+Disassembly of <code object <lambda> at 0x000001CD6C2A7510, file "client\core\tickets_window.py", line 262>:
+  --           COPY_FREE_VARS           2
+
+ 262           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 263           LOAD_CONST               0 ("Couldn't submit ticket")
+               LOAD_GLOBAL              5 (str + NULL)
+               LOAD_DEREF               0 (e)
+               CALL                     1
+               LOAD_DEREF               1 (win)
+
+ 262           LOAD_CONST               1 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C3463D0, file "client\core\tickets_window.py", line 266>:
+  --           COPY_FREE_VARS           2
+
+ 266           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 267           LOAD_CONST               0 ('Error')
+               LOAD_DEREF               0 (resp)
+               LOAD_ATTR                5 (get + NULL|self)
+               LOAD_CONST               1 ('message')
+               LOAD_CONST               2 ('Unknown error')
+               CALL                     2
+               LOAD_DEREF               1 (win)
+
+ 266           LOAD_CONST               3 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE
+
+Disassembly of <code object _done at 0x000001CD6C2A7AB0, file "client\core\tickets_window.py", line 269>:
+  --           COPY_FREE_VARS           2
+
+ 269           RESUME                   0
+
+ 270           LOAD_DEREF               1 (win)
+               LOAD_ATTR                1 (destroy + NULL|self)
+               CALL                     0
+               POP_TOP
+
+ 271           LOAD_DEREF               0 (self)
+               LOAD_ATTR                3 (_refresh + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _selected_ticket_id at 0x000001CD6BCB3E10, file "client\core\tickets_window.py", line 285>:
+285           RESUME                   0
+
+286           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_selected_ticket)
+              TO_BOOL
+              POP_JUMP_IF_TRUE        28 (to L1)
+              NOT_TAKEN
+
+287           LOAD_GLOBAL              2 (messagebox)
+              LOAD_ATTR                4 (showinfo)
+              PUSH_NULL
+              LOAD_CONST               0 ('No selection')
+              LOAD_CONST               1 ('Select a ticket first.')
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_CONST               2 (('parent',))
+              CALL_KW                  3
+              POP_TOP
+
+288           LOAD_CONST               3 (None)
+              RETURN_VALUE
+
+289   L1:     LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_selected_ticket)
+              LOAD_CONST               4 ('ticket_id')
+              BINARY_OP               26 ([])
+              RETURN_VALUE
+
+Disassembly of <code object _respond at 0x000001CD6BF8AE30, file "client\core\tickets_window.py", line 291>:
+  --           MAKE_CELL                0 (self)
+               MAKE_CELL                4 (msg)
+               MAKE_CELL                5 (resolved)
+               MAKE_CELL                6 (tid)
+               MAKE_CELL                7 (token)
+               MAKE_CELL                8 (username)
+
+ 291           RESUME                   0
+
+ 292           LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (_selected_ticket_id + NULL|self)
+               CALL                     0
+               STORE_DEREF              6 (tid)
+
+ 293           LOAD_DEREF               6 (tid)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 294   L1:     LOAD_DEREF               0 (self)
+               LOAD_ATTR                2 (v_reply)
+               LOAD_ATTR                5 (get + NULL|self)
+               CALL                     0
+               LOAD_ATTR                7 (strip + NULL|self)
+               CALL                     0
+               STORE_DEREF              4 (msg)
+
+ 295           LOAD_DEREF               4 (msg)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L2)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 296   L2:     LOAD_DEREF               0 (self)
+               LOAD_ATTR                8 (_selected_ticket)
+               LOAD_ATTR                5 (get + NULL|self)
+               LOAD_CONST               1 ('status')
+               CALL                     1
+               LOAD_CONST               2 ('open')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       28 (to L3)
+               NOT_TAKEN
+
+ 297           LOAD_GLOBAL             10 (messagebox)
+               LOAD_ATTR               12 (showinfo)
+               PUSH_NULL
+               LOAD_CONST               3 ('Ticket closed')
+               LOAD_CONST               4 ('This ticket is already closed.')
+               LOAD_DEREF               0 (self)
+               LOAD_CONST               5 (('parent',))
+               CALL_KW                  3
+               POP_TOP
+
+ 298           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 299   L3:     LOAD_DEREF               0 (self)
+               LOAD_ATTR               15 (_current_host_username + NULL|self)
+               CALL                     0
+               UNPACK_SEQUENCE          2
+               STORE_FAST               1 (host)
+               STORE_DEREF              8 (username)
+
+ 300           LOAD_GLOBAL             17 (_resolve_ip_for_game + NULL)
+               LOAD_FAST_BORROW         1 (host)
+               CALL                     1
+               STORE_DEREF              5 (resolved)
+
+ 301           LOAD_GLOBAL             19 (_get_or_create_token + NULL)
+               LOAD_DEREF               5 (resolved)
+               LOAD_DEREF               8 (username)
+               CALL                     2
+               UNPACK_SEQUENCE          2
+               STORE_DEREF              7 (token)
+               STORE_FAST               2 (_)
+
+ 302           LOAD_FAST_BORROW         4 (msg)
+               LOAD_FAST_BORROW         5 (resolved)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_FAST_BORROW         6 (tid)
+               LOAD_FAST_BORROW         7 (token)
+               LOAD_FAST_BORROW         8 (username)
+               BUILD_TUPLE              6
+               LOAD_CONST               6 (<code object worker at 0x000001CD6BCE7860, file "client\core\tickets_window.py", line 302>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               3 (worker)
+
+ 318           LOAD_GLOBAL             20 (threading)
+               LOAD_ATTR               22 (Thread)
+               PUSH_NULL
+               LOAD_FAST_BORROW         3 (worker)
+               LOAD_CONST               7 (True)
+               LOAD_CONST               8 (('target', 'daemon'))
+               CALL_KW                  2
+               LOAD_ATTR               25 (start + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object worker at 0x000001CD6BCE7860, file "client\core\tickets_window.py", line 302>:
+  --           COPY_FREE_VARS           6
+               MAKE_CELL                1 (e)
+               MAKE_CELL                2 (resp)
+
+ 302           RESUME                   0
+
+ 303           NOP
+
+ 304   L1:     LOAD_GLOBAL              1 (ticket_request + NULL)
+               LOAD_DEREF               4 (resolved)
+               LOAD_CONST               0 ('respond')
+               LOAD_DEREF               8 (username)
+               LOAD_DEREF               7 (token)
+
+ 305           LOAD_DEREF               6 (tid)
+               LOAD_DEREF               3 (msg)
+
+ 304           LOAD_CONST               1 (('ticket_id', 'message'))
+               CALL_KW                  6
+               STORE_DEREF              2 (resp)
+
+ 310   L2:     LOAD_DEREF               2 (resp)
+               LOAD_ATTR                7 (get + NULL|self)
+               LOAD_CONST               4 ('status')
+               CALL                     1
+               LOAD_CONST               5 ('ok')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       26 (to L3)
+               NOT_TAKEN
+
+ 311           LOAD_DEREF               5 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                2 (resp)
+               LOAD_FAST                5 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST               6 (<code object <lambda> at 0x000001CD6C346500, file "client\core\tickets_window.py", line 311>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 313           LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+ 314   L3:     LOAD_FAST                5 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST               7 (<code object _done at 0x000001CD6C346630, file "client\core\tickets_window.py", line 314>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               0 (_done)
+
+ 317           LOAD_DEREF               5 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                0 (_done)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  --   L4:     PUSH_EXC_INFO
+
+ 306           LOAD_GLOBAL              2 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE       35 (to L8)
+               NOT_TAKEN
+               STORE_DEREF              1 (e)
+
+ 307   L5:     LOAD_DEREF               5 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                1 (e)
+               LOAD_FAST                5 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST               2 (<code object <lambda> at 0x000001CD6C2A7BD0, file "client\core\tickets_window.py", line 307>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 309   L6:     POP_EXCEPT
+               LOAD_CONST               3 (None)
+               STORE_DEREF              1 (e)
+               DELETE_DEREF             1 (e)
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  --   L7:     LOAD_CONST               3 (None)
+               STORE_DEREF              1 (e)
+               DELETE_DEREF             1 (e)
+               RERAISE                  1
+
+ 306   L8:     RERAISE                  0
+
+  --   L9:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L4 [0]
+  L4 to L5 -> L9 [1] lasti
+  L5 to L6 -> L7 [1] lasti
+  L7 to L9 -> L9 [1] lasti
+
+Disassembly of <code object <lambda> at 0x000001CD6C2A7BD0, file "client\core\tickets_window.py", line 307>:
+  --           COPY_FREE_VARS           2
+
+ 307           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 308           LOAD_CONST               0 ("Couldn't send reply")
+               LOAD_GLOBAL              5 (str + NULL)
+               LOAD_DEREF               0 (e)
+               CALL                     1
+               LOAD_DEREF               1 (self)
+
+ 307           LOAD_CONST               1 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C346500, file "client\core\tickets_window.py", line 311>:
+  --           COPY_FREE_VARS           2
+
+ 311           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 312           LOAD_CONST               0 ('Error')
+               LOAD_DEREF               0 (resp)
+               LOAD_ATTR                5 (get + NULL|self)
+               LOAD_CONST               1 ('message')
+               LOAD_CONST               2 ('Unknown error')
+               CALL                     2
+               LOAD_DEREF               1 (self)
+
+ 311           LOAD_CONST               3 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE
+
+Disassembly of <code object _done at 0x000001CD6C346630, file "client\core\tickets_window.py", line 314>:
+  --           COPY_FREE_VARS           1
+
+ 314           RESUME                   0
+
+ 315           LOAD_DEREF               0 (self)
+               LOAD_ATTR                0 (v_reply)
+               LOAD_ATTR                3 (set + NULL|self)
+               LOAD_CONST               0 ('')
+               CALL                     1
+               POP_TOP
+
+ 316           LOAD_DEREF               0 (self)
+               LOAD_ATTR                5 (_refresh + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _close_ticket at 0x000001CD6BF05A80, file "client\core\tickets_window.py", line 320>:
+  --           MAKE_CELL                0 (self)
+               MAKE_CELL                4 (msg)
+               MAKE_CELL                5 (resolved)
+               MAKE_CELL                6 (tid)
+               MAKE_CELL                7 (token)
+               MAKE_CELL                8 (username)
+
+ 320           RESUME                   0
+
+ 321           LOAD_DEREF               0 (self)
+               LOAD_ATTR                1 (_selected_ticket_id + NULL|self)
+               CALL                     0
+               STORE_DEREF              6 (tid)
+
+ 322           LOAD_DEREF               6 (tid)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 323   L1:     LOAD_DEREF               0 (self)
+               LOAD_ATTR                2 (_selected_ticket)
+               LOAD_ATTR                5 (get + NULL|self)
+               LOAD_CONST               1 ('status')
+               CALL                     1
+               LOAD_CONST               2 ('open')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       28 (to L2)
+               NOT_TAKEN
+
+ 324           LOAD_GLOBAL              6 (messagebox)
+               LOAD_ATTR                8 (showinfo)
+               PUSH_NULL
+               LOAD_CONST               3 ('Already closed')
+               LOAD_CONST               4 ('This ticket is already closed.')
+               LOAD_DEREF               0 (self)
+               LOAD_CONST               5 (('parent',))
+               CALL_KW                  3
+               POP_TOP
+
+ 325           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 326   L2:     LOAD_GLOBAL             10 (simpledialog)
+               LOAD_ATTR               12 (askstring)
+               PUSH_NULL
+               LOAD_CONST               6 ('Close Ticket')
+
+ 327           LOAD_CONST               7 ('Optional closing message (e.g. "fixed it myself"):')
+               LOAD_DEREF               0 (self)
+
+ 326           LOAD_CONST               5 (('parent',))
+               CALL_KW                  3
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L3)
+               NOT_TAKEN
+               POP_TOP
+
+ 327           LOAD_CONST               8 ('')
+
+ 326   L3:     STORE_DEREF              4 (msg)
+
+ 328           LOAD_GLOBAL              6 (messagebox)
+               LOAD_ATTR               14 (askyesno)
+               PUSH_NULL
+               LOAD_CONST               6 ('Close Ticket')
+
+ 329           LOAD_CONST               9 ("Close this ticket? You won't be able to reply to it afterward.")
+               LOAD_DEREF               0 (self)
+
+ 328           LOAD_CONST               5 (('parent',))
+               CALL_KW                  3
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+
+ 330           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 331   L4:     LOAD_DEREF               0 (self)
+               LOAD_ATTR               17 (_current_host_username + NULL|self)
+               CALL                     0
+               UNPACK_SEQUENCE          2
+               STORE_FAST               1 (host)
+               STORE_DEREF              8 (username)
+
+ 332           LOAD_GLOBAL             19 (_resolve_ip_for_game + NULL)
+               LOAD_FAST_BORROW         1 (host)
+               CALL                     1
+               STORE_DEREF              5 (resolved)
+
+ 333           LOAD_GLOBAL             21 (_get_or_create_token + NULL)
+               LOAD_DEREF               5 (resolved)
+               LOAD_DEREF               8 (username)
+               CALL                     2
+               UNPACK_SEQUENCE          2
+               STORE_DEREF              7 (token)
+               STORE_FAST               2 (_)
+
+ 334           LOAD_FAST_BORROW         4 (msg)
+               LOAD_FAST_BORROW         5 (resolved)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_FAST_BORROW         6 (tid)
+               LOAD_FAST_BORROW         7 (token)
+               LOAD_FAST_BORROW         8 (username)
+               BUILD_TUPLE              6
+               LOAD_CONST              10 (<code object worker at 0x000001CD6C3BCA30, file "client\core\tickets_window.py", line 334>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               3 (worker)
+
+ 347           LOAD_GLOBAL             22 (threading)
+               LOAD_ATTR               24 (Thread)
+               PUSH_NULL
+               LOAD_FAST_BORROW         3 (worker)
+               LOAD_CONST              11 (True)
+               LOAD_CONST              12 (('target', 'daemon'))
+               CALL_KW                  2
+               LOAD_ATTR               27 (start + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object worker at 0x000001CD6C3BCA30, file "client\core\tickets_window.py", line 334>:
+  --           COPY_FREE_VARS           6
+               MAKE_CELL                0 (e)
+               MAKE_CELL                1 (resp)
+
+ 334           RESUME                   0
+
+ 335           NOP
+
+ 336   L1:     LOAD_GLOBAL              1 (ticket_request + NULL)
+               LOAD_DEREF               3 (resolved)
+               LOAD_CONST               0 ('close')
+               LOAD_DEREF               7 (username)
+               LOAD_DEREF               6 (token)
+
+ 337           LOAD_DEREF               5 (tid)
+               LOAD_DEREF               2 (msg)
+
+ 336           LOAD_CONST               1 (('ticket_id', 'message'))
+               CALL_KW                  6
+               STORE_DEREF              1 (resp)
+
+ 342   L2:     LOAD_DEREF               1 (resp)
+               LOAD_ATTR                7 (get + NULL|self)
+               LOAD_CONST               4 ('status')
+               CALL                     1
+               LOAD_CONST               5 ('ok')
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       26 (to L3)
+               NOT_TAKEN
+
+ 343           LOAD_DEREF               4 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                1 (resp)
+               LOAD_FAST                4 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST               6 (<code object <lambda> at 0x000001CD6C346760, file "client\core\tickets_window.py", line 343>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 345           LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+ 346   L3:     LOAD_DEREF               4 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_DEREF               4 (self)
+               LOAD_ATTR                8 (_refresh)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  --   L4:     PUSH_EXC_INFO
+
+ 338           LOAD_GLOBAL              2 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE       35 (to L8)
+               NOT_TAKEN
+               STORE_DEREF              0 (e)
+
+ 339   L5:     LOAD_DEREF               4 (self)
+               LOAD_ATTR                5 (after + NULL|self)
+               LOAD_SMALL_INT           0
+               LOAD_FAST                0 (e)
+               LOAD_FAST                4 (self)
+               BUILD_TUPLE              2
+               LOAD_CONST               2 (<code object <lambda> at 0x000001CD6C2A7CF0, file "client\core\tickets_window.py", line 339>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               CALL                     2
+               POP_TOP
+
+ 341   L6:     POP_EXCEPT
+               LOAD_CONST               3 (None)
+               STORE_DEREF              0 (e)
+               DELETE_DEREF             0 (e)
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  --   L7:     LOAD_CONST               3 (None)
+               STORE_DEREF              0 (e)
+               DELETE_DEREF             0 (e)
+               RERAISE                  1
+
+ 338   L8:     RERAISE                  0
+
+  --   L9:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L4 [0]
+  L4 to L5 -> L9 [1] lasti
+  L5 to L6 -> L7 [1] lasti
+  L7 to L9 -> L9 [1] lasti
+
+Disassembly of <code object <lambda> at 0x000001CD6C2A7CF0, file "client\core\tickets_window.py", line 339>:
+  --           COPY_FREE_VARS           2
+
+ 339           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 340           LOAD_CONST               0 ("Couldn't close ticket")
+               LOAD_GLOBAL              5 (str + NULL)
+               LOAD_DEREF               0 (e)
+               CALL                     1
+               LOAD_DEREF               1 (self)
+
+ 339           LOAD_CONST               1 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C346760, file "client\core\tickets_window.py", line 343>:
+  --           COPY_FREE_VARS           2
+
+ 343           RESUME                   0
+               LOAD_GLOBAL              0 (messagebox)
+               LOAD_ATTR                2 (showerror)
+               PUSH_NULL
+
+ 344           LOAD_CONST               0 ('Error')
+               LOAD_DEREF               0 (resp)
+               LOAD_ATTR                5 (get + NULL|self)
+               LOAD_CONST               1 ('message')
+               LOAD_CONST               2 ('Unknown error')
+               CALL                     2
+               LOAD_DEREF               1 (self)
+
+ 343           LOAD_CONST               3 (('parent',))
+               CALL_KW                  3
+               RETURN_VALUE

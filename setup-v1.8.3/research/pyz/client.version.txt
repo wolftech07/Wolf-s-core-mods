@@ -1,0 +1,17 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('APP_VERSION', 'UPDATE_APP_FOLDER')
+CONSTANTS
+0 '1.8.3'
+1 'Client'
+2 None
+  0           RESUME                   0
+
+  6           LOAD_CONST               0 ('1.8.3')
+              STORE_NAME               0 (APP_VERSION)
+
+ 11           LOAD_CONST               1 ('Client')
+              STORE_NAME               1 (UPDATE_APP_FOLDER)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE

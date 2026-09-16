@@ -1,0 +1,8 @@
+{
+  "Entries": [
+    { "Source": "TavernNativeMenu.dll", "Scope": "game", "Target": "Mods/TavernNativeMenu.dll" },
+    { "Source": "addons/tavern_native_menu/__init__.py", "Scope": "launcher", "Target": "addons/tavern_native_menu/__init__.py" },
+    { "Source": "addons/tavern_native_menu/client.py", "Scope": "launcher", "Target": "addons/tavern_native_menu/client.py" },
+    { "Source": "addons/tavern_native_menu/author.json", "Scope": "launcher", "Target": "addons/tavern_native_menu/author.json" }
+  ]
+}

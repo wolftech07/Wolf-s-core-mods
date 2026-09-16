@@ -1,0 +1,17 @@
+2026-09-16T16:43:49.1398747-04:00 Ready. This host stores private friendships and recipient-only invitations, never community server listings.
+2026-09-16T16:43:49.1989150-04:00 Automatic diagnostic log: C:\Users\goodg\Documents\ChatGPT\att launcher\setup-v1.8.3\social-server\tests\host-smoke\host.log
+2026-09-16T16:43:49.2579916-04:00 Relay listening on 127.0.0.1:64499. Public clients need an HTTPS reverse proxy.
+2026-09-16T16:43:49.2649876-04:00 Checking local listener...
+2026-09-16T16:43:49.3473425-04:00 GET /v1/health -> 200
+2026-09-16T16:43:49.3684526-04:00 System.InvalidOperationException: Host connection check failed.
+   at TavernNativeSocial.HostForm.SelfTest(String folder)
+   at TavernNativeSocial.HostForm.Main(String[] args)
+2026-09-16T16:44:25.5362134-04:00 Ready. This host stores private friendships and recipient-only invitations, never community server listings.
+2026-09-16T16:44:25.5573331-04:00 Automatic diagnostic log: C:\Users\goodg\Documents\ChatGPT\att launcher\setup-v1.8.3\social-server\tests\host-smoke\host.log
+2026-09-16T16:44:25.5853107-04:00 Relay listening on 127.0.0.1:50998. Public clients need an HTTPS reverse proxy.
+2026-09-16T16:44:25.5903147-04:00 Checking local listener...
+2026-09-16T16:44:25.6572807-04:00 GET /v1/health -> 200
+2026-09-16T16:44:25.6733540-04:00 [OK] Local relay health check passed.
+2026-09-16T16:44:25.6744494-04:00 Local test only: other computers need the public HTTPS address described in Hosting guide.
+2026-09-16T16:44:25.6764565-04:00 Relay stopped.
+2026-09-16T16:44:25.6774571-04:00 [OK] Host startup, connection check, live log and stop smoke test passed.

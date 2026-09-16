@@ -1,0 +1,784 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'os', 'io', 'csv', 'time', 'threading', 'GameLogTailer')
+CONSTANTS
+0 '\nTails the game\'s own unity-log.csv and emits parsed (timestamp, level,\nlogger, message) rows -- used by both apps\' "Game Log" panels.\n'
+1 None
+2 CODE GameLogTailer
+3 'GameLogTailer'
+
+FUNCTION GameLogTailer
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', 'INITIAL_TAIL_LINES', 'INITIAL_TAIL_BYTES', '__init__', 'start', 'stop', '_run', '_emit_initial_tail', 'staticmethod', '_split', '_emit', '__static_attributes__', '__classdictcell__')
+CONSTANTS
+0 'GameLogTailer'
+1 200000
+2 None
+3 CODE GameLogTailer.__init__
+4 CODE GameLogTailer.start
+5 CODE GameLogTailer.stop
+6 CODE GameLogTailer._run
+7 CODE GameLogTailer._emit_initial_tail
+8 CODE GameLogTailer._split
+9 CODE GameLogTailer._emit
+10 ('_stop', 'on_line', 'on_status', 'path')
+11 (None,)
+
+FUNCTION GameLogTailer.__init__
+ARGS ('self', 'path', 'on_line', 'on_status')
+NAMES ('path', 'on_line', 'on_status', 'threading', 'Event', '_stop')
+CONSTANTS
+0 None
+
+FUNCTION GameLogTailer.start
+ARGS ('self',)
+NAMES ('threading', 'Thread', '_run', 'start')
+CONSTANTS
+0 True
+1 ('target', 'daemon')
+2 None
+
+FUNCTION GameLogTailer.stop
+ARGS ('self',)
+NAMES ('_stop', 'set')
+CONSTANTS
+0 None
+
+FUNCTION GameLogTailer._run
+ARGS ('self', 'last', 'f', 'buf', 'sz', 'chunk', 'rows')
+NAMES ('_stop', 'is_set', 'os', 'path', 'exists', 'time', 'sleep', 'getsize', 'close', '_emit_initial_tail', 'open', 'seek', 'SEEK_END', 'on_status', 'read', '_split', '_emit')
+CONSTANTS
+0 1
+1 None
+2 ''
+3 'r'
+4 'utf-8-sig'
+5 'replace'
+6 ('encoding', 'errors', 'newline')
+7 'watching'
+8 0.4
+9 -1
+
+FUNCTION GameLogTailer._emit_initial_tail
+ARGS ('self', 'sz', 'read_from', 'bf', 'raw', 'text', 'nl', 'rows', '_', 'tail_rows')
+NAMES ('max', 'INITIAL_TAIL_BYTES', 'open', 'path', 'seek', 'read', 'decode', 'find', '_split', 'INITIAL_TAIL_LINES', '_emit', 'Exception')
+CONSTANTS
+0 'Read just the last chunk of the file (in binary, so an arbitrary\nbyte offset is always safe to seek to) and emit only its last\nINITIAL_TAIL_LINES complete rows.'
+1 'rb'
+2 None
+3 'utf-8-sig'
+4 'replace'
+5 ('errors',)
+6 '\n'
+7 ''
+8 -1
+
+FUNCTION GameLogTailer._split
+ARGS ('buf', 'recs', 'i', 'n', 's', 'q', 'c')
+NAMES ('len', 'append')
+CONSTANTS
+0 0
+1 False
+2 '"'
+3 '\n'
+4 None
+
+FUNCTION GameLogTailer._emit
+ARGS ('self', 'rows', 'row', 't', 'lv', 'lg', 'msg', 'ts')
+NAMES ('csv', 'reader', 'io', 'StringIO', 'join', 'len', 'on_line', 'split')
+CONSTANTS
+0 ''
+1 slice(11, 19, None)
+2 '\n'
+3 None
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ('\nTails the game\'s own unity-log.csv and emits parsed (timestamp, level,\nlogger, message) rows -- used by both apps\' "Game Log" panels.\n')
+              STORE_NAME               0 (__doc__)
+
+  5           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (os)
+              STORE_NAME               1 (os)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (io)
+              STORE_NAME               2 (io)
+
+  7           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              3 (csv)
+              STORE_NAME               3 (csv)
+
+  8           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              4 (time)
+              STORE_NAME               4 (time)
+
+  9           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              5 (threading)
+              STORE_NAME               5 (threading)
+
+ 11           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               2 (<code object GameLogTailer at 0x000001CD6BD2E760, file "tavern_shared\log_tailer.py", line 11>)
+              MAKE_FUNCTION
+              LOAD_CONST               3 ('GameLogTailer')
+              CALL                     2
+              STORE_NAME               6 (GameLogTailer)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object GameLogTailer at 0x000001CD6BD2E760, file "tavern_shared\log_tailer.py", line 11>:
+  --           MAKE_CELL                0 (__classdict__)
+
+  11           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('GameLogTailer')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT          11
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              0 (__classdict__)
+
+  12           LOAD_SMALL_INT          50
+               STORE_NAME               4 (INITIAL_TAIL_LINES)
+
+  13           LOAD_CONST               1 (200000)
+               STORE_NAME               5 (INITIAL_TAIL_BYTES)
+
+  15           LOAD_CONST              11 ((None,))
+               LOAD_CONST               3 (<code object __init__ at 0x000001CD6C2B6470, file "tavern_shared\log_tailer.py", line 15>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               6 (__init__)
+
+  18           LOAD_CONST               4 (<code object start at 0x000001CD6C2B60B0, file "tavern_shared\log_tailer.py", line 18>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (start)
+
+  19           LOAD_CONST               5 (<code object stop at 0x000001CD6C28F330, file "tavern_shared\log_tailer.py", line 19>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (stop)
+
+  20           LOAD_CONST               6 (<code object _run at 0x000001CD6BF00040, file "tavern_shared\log_tailer.py", line 20>)
+               MAKE_FUNCTION
+               STORE_NAME               9 (_run)
+
+  49           LOAD_CONST               7 (<code object _emit_initial_tail at 0x000001CD6B8FA430, file "tavern_shared\log_tailer.py", line 49>)
+               MAKE_FUNCTION
+               STORE_NAME              10 (_emit_initial_tail)
+
+  68           LOAD_NAME               11 (staticmethod)
+
+  69           LOAD_CONST               8 (<code object _split at 0x000001CD6BCDF130, file "tavern_shared\log_tailer.py", line 68>)
+               MAKE_FUNCTION
+
+  68           CALL                     0
+
+  69           STORE_NAME              12 (_split)
+
+  77           LOAD_CONST               9 (<code object _emit at 0x000001CD6B893970, file "tavern_shared\log_tailer.py", line 77>)
+               MAKE_FUNCTION
+               STORE_NAME              13 (_emit)
+               LOAD_CONST              10 (('_stop', 'on_line', 'on_status', 'path'))
+               STORE_NAME              14 (__static_attributes__)
+               LOAD_FAST_BORROW         0 (__classdict__)
+               STORE_NAME              15 (__classdictcell__)
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD6C2B6470, file "tavern_shared\log_tailer.py", line 15>:
+ 15           RESUME                   0
+
+ 16           LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (path, on_line)
+              LOAD_FAST_BORROW         3 (on_status)
+              SWAP                     3
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               0 (path)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               1 (on_line)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               2 (on_status)
+
+ 17           LOAD_GLOBAL              6 (threading)
+              LOAD_ATTR                8 (Event)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               5 (_stop)
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object start at 0x000001CD6C2B60B0, file "tavern_shared\log_tailer.py", line 18>:
+ 18           RESUME                   0
+              LOAD_GLOBAL              0 (threading)
+              LOAD_ATTR                2 (Thread)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                4 (_run)
+              LOAD_CONST               0 (True)
+              LOAD_CONST               1 (('target', 'daemon'))
+              CALL_KW                  2
+              LOAD_ATTR                7 (start + NULL|self)
+              CALL                     0
+              POP_TOP
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object stop at 0x000001CD6C28F330, file "tavern_shared\log_tailer.py", line 19>:
+ 19           RESUME                   0
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_stop)
+              LOAD_ATTR                3 (set + NULL|self)
+              CALL                     0
+              POP_TOP
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _run at 0x000001CD6BF00040, file "tavern_shared\log_tailer.py", line 20>:
+  20            RESUME                   0
+
+  21            LOAD_CONST               9 (-1)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               2 ('')
+                STORE_FAST_STORE_FAST   50 (buf, f)
+                STORE_FAST               1 (last)
+
+  22    L1:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_stop)
+                LOAD_ATTR                3 (is_set + NULL|self)
+                CALL                     0
+                TO_BOOL
+                EXTENDED_ARG             1
+                POP_JUMP_IF_TRUE       369 (to L16)
+                NOT_TAKEN
+
+  23            NOP
+
+  24    L2:     LOAD_GLOBAL              4 (os)
+                LOAD_ATTR                6 (path)
+                LOAD_ATTR                9 (exists + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (path)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        25 (to L6)
+        L3:     NOT_TAKEN
+        L4:     LOAD_GLOBAL             10 (time)
+                LOAD_ATTR               12 (sleep)
+                PUSH_NULL
+                LOAD_SMALL_INT           1
+                CALL                     1
+                POP_TOP
+        L5:     JUMP_BACKWARD          105 (to L1)
+
+  25    L6:     LOAD_GLOBAL              4 (os)
+                LOAD_ATTR                6 (path)
+                LOAD_ATTR               15 (getsize + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (path)
+                CALL                     1
+                STORE_FAST               4 (sz)
+
+  26            LOAD_FAST_BORROW         2 (f)
+                POP_JUMP_IF_NONE         7 (to L7)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 65 (sz, last)
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE      137 (to L11)
+                NOT_TAKEN
+
+  27    L7:     LOAD_FAST_BORROW         2 (f)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L10)
+        L8:     NOT_TAKEN
+
+  28    L9:     LOAD_FAST_BORROW         2 (f)
+                LOAD_ATTR               17 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  32   L10:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               19 (_emit_initial_tail + NULL|self)
+                LOAD_FAST_BORROW         4 (sz)
+                CALL                     1
+                POP_TOP
+
+  33            LOAD_GLOBAL             21 (open + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (path)
+                LOAD_CONST               3 ('r')
+                LOAD_CONST               4 ('utf-8-sig')
+                LOAD_CONST               5 ('replace')
+                LOAD_CONST               2 ('')
+                LOAD_CONST               6 (('encoding', 'errors', 'newline'))
+                CALL_KW                  5
+                STORE_FAST               2 (f)
+
+  34            LOAD_FAST_BORROW         2 (f)
+                LOAD_ATTR               23 (seek + NULL|self)
+                LOAD_SMALL_INT           0
+                LOAD_GLOBAL              4 (os)
+                LOAD_ATTR               24 (SEEK_END)
+                CALL                     2
+                POP_TOP
+
+  35            LOAD_CONST               2 ('')
+                STORE_FAST               3 (buf)
+
+  36            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               26 (on_status)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       18 (to L11)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               27 (on_status + NULL|self)
+                LOAD_CONST               7 ('watching')
+                CALL                     1
+                POP_TOP
+
+  37   L11:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 65 (sz, last)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       77 (to L14)
+                NOT_TAKEN
+
+  38            LOAD_FAST_BORROW         2 (f)
+                LOAD_ATTR               29 (read + NULL|self)
+                CALL                     0
+                STORE_FAST               5 (chunk)
+
+  39            LOAD_FAST_BORROW         5 (chunk)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       53 (to L14)
+       L12:     NOT_TAKEN
+
+  40   L13:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 53 (buf, chunk)
+                BINARY_OP               13 (+=)
+                STORE_FAST               3 (buf)
+
+  41            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               31 (_split + NULL|self)
+                LOAD_FAST_BORROW         3 (buf)
+                CALL                     1
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   99 (rows, buf)
+
+  42            LOAD_FAST_BORROW         6 (rows)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       18 (to L14)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               33 (_emit + NULL|self)
+                LOAD_FAST_BORROW         6 (rows)
+                CALL                     1
+                POP_TOP
+
+  43   L14:     LOAD_FAST                4 (sz)
+                STORE_FAST               1 (last)
+
+  45   L15:     LOAD_GLOBAL             10 (time)
+                LOAD_ATTR               12 (sleep)
+                PUSH_NULL
+                LOAD_CONST               8 (0.4)
+                CALL                     1
+                POP_TOP
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          401 (to L1)
+
+  46   L16:     LOAD_FAST_BORROW         2 (f)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L19)
+                NOT_TAKEN
+
+  47   L17:     LOAD_FAST_BORROW         2 (f)
+                LOAD_ATTR               17 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+       L18:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  46   L19:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L20:     PUSH_EXC_INFO
+
+  29            POP_TOP
+       L21:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 253 (to L10)
+
+  --   L22:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L23:     PUSH_EXC_INFO
+
+  44            POP_TOP
+       L24:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 64 (to L15)
+
+  --   L25:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L26:     PUSH_EXC_INFO
+
+  48            POP_TOP
+       L27:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L28:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L23 [0]
+  L4 to L5 -> L23 [0]
+  L6 to L8 -> L23 [0]
+  L9 to L10 -> L20 [0]
+  L10 to L12 -> L23 [0]
+  L13 to L15 -> L23 [0]
+  L17 to L18 -> L26 [0]
+  L20 to L21 -> L22 [1] lasti
+  L21 to L23 -> L23 [0]
+  L23 to L24 -> L25 [1] lasti
+  L26 to L27 -> L28 [1] lasti
+
+Disassembly of <code object _emit_initial_tail at 0x000001CD6B8FA430, file "tavern_shared\log_tailer.py", line 49>:
+  49            RESUME                   0
+
+  53            NOP
+
+  54    L1:     LOAD_GLOBAL              1 (max + NULL)
+                LOAD_SMALL_INT           0
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (sz, self)
+                LOAD_ATTR                2 (INITIAL_TAIL_BYTES)
+                BINARY_OP               10 (-)
+                CALL                     2
+                STORE_FAST               2 (read_from)
+
+  55            LOAD_GLOBAL              5 (open + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (path)
+                LOAD_CONST               1 ('rb')
+                CALL                     2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               3 (bf)
+
+  56            LOAD_FAST_BORROW         3 (bf)
+                LOAD_ATTR                9 (seek + NULL|self)
+                LOAD_FAST_BORROW         2 (read_from)
+                CALL                     1
+                POP_TOP
+
+  57            LOAD_FAST_BORROW         3 (bf)
+                LOAD_ATTR               11 (read + NULL|self)
+                CALL                     0
+                STORE_FAST               4 (raw)
+
+  55    L3:     LOAD_CONST               2 (None)
+                LOAD_CONST               2 (None)
+                LOAD_CONST               2 (None)
+                CALL                     3
+                POP_TOP
+
+  58    L4:     LOAD_FAST_CHECK          4 (raw)
+                LOAD_ATTR               13 (decode + NULL|self)
+                LOAD_CONST               3 ('utf-8-sig')
+                LOAD_CONST               4 ('replace')
+                LOAD_CONST               5 (('errors',))
+                CALL_KW                  2
+                STORE_FAST               5 (text)
+
+  59            LOAD_FAST_BORROW         2 (read_from)
+                LOAD_SMALL_INT           0
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       38 (to L7)
+                NOT_TAKEN
+
+  61            LOAD_FAST_BORROW         5 (text)
+                LOAD_ATTR               15 (find + NULL|self)
+                LOAD_CONST               6 ('\n')
+                CALL                     1
+                STORE_FAST               6 (nl)
+
+  62            LOAD_FAST_BORROW         6 (nl)
+                LOAD_CONST               8 (-1)
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       12 (to L5)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 86 (text, nl)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                LOAD_CONST               2 (None)
+                BINARY_SLICE
+                JUMP_FORWARD             1 (to L6)
+        L5:     LOAD_CONST               7 ('')
+        L6:     STORE_FAST               5 (text)
+
+  63    L7:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               17 (_split + NULL|self)
+                LOAD_FAST_BORROW         5 (text)
+                CALL                     1
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  120 (rows, _)
+
+  64            LOAD_FAST_BORROW_LOAD_FAST_BORROW 112 (rows, self)
+                LOAD_ATTR               18 (INITIAL_TAIL_LINES)
+                UNARY_NEGATIVE
+                LOAD_CONST               2 (None)
+                BINARY_SLICE
+                STORE_FAST               9 (tail_rows)
+
+  65            LOAD_FAST_BORROW         9 (tail_rows)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       20 (to L9)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               21 (_emit + NULL|self)
+                LOAD_FAST_BORROW         9 (tail_rows)
+                CALL                     1
+                POP_TOP
+        L8:     LOAD_CONST               2 (None)
+                RETURN_VALUE
+        L9:     LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+  55   L10:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L11)
+                NOT_TAKEN
+                RERAISE                  2
+       L11:     POP_TOP
+       L12:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 142 (to L4)
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L14:     PUSH_EXC_INFO
+
+  66            LOAD_GLOBAL             22 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L16)
+                NOT_TAKEN
+                POP_TOP
+
+  67   L15:     POP_EXCEPT
+                LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+  66   L16:     RERAISE                  0
+
+  --   L17:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L14 [0]
+  L2 to L3 -> L10 [2] lasti
+  L3 to L8 -> L14 [0]
+  L10 to L12 -> L13 [4] lasti
+  L12 to L14 -> L14 [0]
+  L14 to L15 -> L17 [1] lasti
+  L16 to L17 -> L17 [1] lasti
+
+Disassembly of <code object _split at 0x000001CD6BCDF130, file "tavern_shared\log_tailer.py", line 68>:
+ 68           RESUME                   0
+
+ 70           BUILD_LIST               0
+              LOAD_SMALL_INT           0
+              LOAD_GLOBAL              1 (len + NULL)
+              LOAD_FAST_BORROW         0 (buf)
+              CALL                     1
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (False)
+              BUILD_TUPLE              5
+              UNPACK_SEQUENCE          5
+              STORE_FAST_STORE_FAST   18 (recs, i)
+              STORE_FAST_STORE_FAST   52 (n, s)
+              STORE_FAST               5 (q)
+
+ 71   L1:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 35 (i, n)
+              COMPARE_OP              18 (bool(<))
+              POP_JUMP_IF_FALSE       85 (to L4)
+              NOT_TAKEN
+
+ 72           LOAD_FAST_BORROW_LOAD_FAST_BORROW 2 (buf, i)
+              BINARY_OP               26 ([])
+              STORE_FAST               6 (c)
+
+ 73           LOAD_FAST_BORROW         6 (c)
+              LOAD_CONST               2 ('"')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        9 (to L2)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         5 (q)
+              TO_BOOL
+              UNARY_NOT
+              STORE_FAST               5 (q)
+              JUMP_FORWARD            50 (to L3)
+
+ 74   L2:     LOAD_FAST_BORROW         6 (c)
+              LOAD_CONST               3 ('\n')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       44 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         5 (q)
+              TO_BOOL
+              POP_JUMP_IF_TRUE        36 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         1 (recs)
+              LOAD_ATTR                3 (append + NULL|self)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 4 (buf, s)
+              LOAD_FAST_BORROW         2 (i)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              BINARY_SLICE
+              CALL                     1
+              POP_TOP
+              LOAD_FAST_BORROW         2 (i)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              STORE_FAST               4 (s)
+
+ 75   L3:     LOAD_FAST_BORROW         2 (i)
+              LOAD_SMALL_INT           1
+              BINARY_OP               13 (+=)
+              STORE_FAST               2 (i)
+              JUMP_BACKWARD           90 (to L1)
+
+ 76   L4:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (recs, buf)
+              LOAD_FAST_BORROW         4 (s)
+              LOAD_CONST               4 (None)
+              BINARY_SLICE
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object _emit at 0x000001CD6B893970, file "tavern_shared\log_tailer.py", line 77>:
+  77            RESUME                   0
+
+  78            NOP
+
+  79    L1:     LOAD_GLOBAL              0 (csv)
+                LOAD_ATTR                2 (reader)
+                PUSH_NULL
+                LOAD_GLOBAL              4 (io)
+                LOAD_ATTR                6 (StringIO)
+                PUSH_NULL
+                LOAD_CONST               0 ('')
+                LOAD_ATTR                9 (join + NULL|self)
+                LOAD_FAST_BORROW         1 (rows)
+                CALL                     1
+                CALL                     1
+                CALL                     1
+                GET_ITER
+        L2:     FOR_ITER               174 (to L8)
+                STORE_FAST               2 (row)
+
+  80            LOAD_GLOBAL             11 (len + NULL)
+                LOAD_FAST_BORROW         2 (row)
+                CALL                     1
+                LOAD_SMALL_INT           4
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_FALSE       39 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         2 (row)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (row)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (row)
+                LOAD_SMALL_INT           2
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (row)
+                LOAD_SMALL_INT           3
+                BINARY_OP               26 ([])
+                BUILD_TUPLE              4
+                UNPACK_SEQUENCE          4
+                STORE_FAST_STORE_FAST   52 (t, lv)
+                STORE_FAST_STORE_FAST   86 (lg, msg)
+                JUMP_FORWARD            49 (to L5)
+
+  81    L3:     LOAD_GLOBAL             11 (len + NULL)
+                LOAD_FAST_BORROW         2 (row)
+                CALL                     1
+                LOAD_SMALL_INT           3
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       32 (to L4)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         2 (row)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (row)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_CONST               0 ('')
+                LOAD_FAST_BORROW         2 (row)
+                LOAD_SMALL_INT           2
+                BINARY_OP               26 ([])
+                BUILD_TUPLE              4
+                UNPACK_SEQUENCE          4
+                STORE_FAST_STORE_FAST   52 (t, lv)
+                STORE_FAST_STORE_FAST   86 (lg, msg)
+                JUMP_FORWARD             2 (to L5)
+
+  82    L4:     JUMP_BACKWARD          106 (to L2)
+
+  83    L5:     LOAD_GLOBAL             11 (len + NULL)
+                LOAD_FAST_BORROW         3 (t)
+                CALL                     1
+                LOAD_SMALL_INT          19
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_FALSE       10 (to L6)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         3 (t)
+                LOAD_CONST               1 (slice(11, 19, None))
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L7)
+        L6:     LOAD_FAST                3 (t)
+        L7:     STORE_FAST               7 (ts)
+
+  84            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               13 (on_line + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 116 (ts, lv)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 86 (lg, msg)
+                LOAD_ATTR               15 (split + NULL|self)
+                LOAD_CONST               2 ('\n')
+                LOAD_SMALL_INT           1
+                CALL                     2
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                CALL                     4
+                POP_TOP
+                JUMP_BACKWARD          176 (to L2)
+
+  79    L8:     END_FOR
+                POP_ITER
+        L9:     LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  --   L10:     PUSH_EXC_INFO
+
+  85            POP_TOP
+       L11:     POP_EXCEPT
+                LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  --   L12:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L9 -> L10 [0]
+  L10 to L11 -> L12 [1] lasti

@@ -1,0 +1,1408 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'json', 'threading', 'WS_CONSOLE_PORT', 'WsConsoleClient')
+CONSTANTS
+0 "\nWebSocket client for the game console (port 1760). Shared by both apps --\nserver's local ConsoleWindow and client's RemoteConsoleWindow/TavernKeeper\nall talk to the same protocol.\n"
+1 None
+2 1760
+3 CODE WsConsoleClient
+4 'WsConsoleClient'
+
+FUNCTION WsConsoleClient
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', '__doc__', '__init__', 'connect', 'disconnect', 'send', 'send_capture', '_recv_loop', '_handle', '__static_attributes__', '__classdictcell__')
+CONSTANTS
+0 'WsConsoleClient'
+1 'WebSocket client for the game console on port 1760.'
+2 CODE WsConsoleClient.__init__
+3 None
+4 CODE WsConsoleClient.connect
+5 CODE WsConsoleClient.disconnect
+6 CODE WsConsoleClient.send
+7 CODE WsConsoleClient.send_capture
+8 CODE WsConsoleClient._recv_loop
+9 CODE WsConsoleClient._handle
+10 ('_cmd_id', '_connected', '_lock', '_on_disc', '_on_line', '_pending', '_stop', '_ws')
+11 (None, None, 6)
+12 (20.0,)
+
+FUNCTION WsConsoleClient.__init__
+ARGS ('self',)
+NAMES ('_ws', 'threading', 'Lock', '_lock', '_connected', '_cmd_id', '_pending', 'Event', '_stop', '_on_line', '_on_disc')
+CONSTANTS
+0 None
+1 False
+
+FUNCTION WsConsoleClient.connect
+ARGS ('self', 'host', 'token', 'on_line', 'on_disc', 'timeout', '_wslib', 'ws', 'raw', 'msg', 'data', 'e')
+NAMES ('websocket', '_on_line', '_on_disc', '_stop', 'clear', 'WebSocket', 'settimeout', 'connect', 'WS_CONSOLE_PORT', 'send', 'recv', 'json', 'loads', 'get', 'str', '_ws', '_connected', 'threading', 'Thread', '_recv_loop', 'start', 'close', 'Exception')
+CONSTANTS
+0 0
+1 None
+2 'ws://'
+3 ':'
+4 'type'
+5 'SystemMessage'
+6 'data'
+7 ''
+8 'Connection Succeeded'
+9 True
+10 ('target', 'daemon')
+11 False
+12 'Unexpected auth response: '
+
+FUNCTION WsConsoleClient.disconnect
+ARGS ('self', 'ws', 'ev', 'holder')
+NAMES ('_stop', 'set', '_connected', '_ws', 'close', '_lock', '_pending', 'values', 'clear')
+CONSTANTS
+0 False
+1 None
+2 'Disconnected'
+3 'error'
+
+FUNCTION WsConsoleClient.send
+ARGS ('self', 'cmd', 'cid')
+NAMES ('_connected', '_ws', '_lock', '_cmd_id', 'send', 'json', 'dumps', 'Exception')
+CONSTANTS
+0 None
+1 'id'
+2 'content'
+
+FUNCTION WsConsoleClient.send_capture
+ARGS ('self', 'cmd', 'timeout', 'cid', 'ev', 'holder', 'e')
+NAMES ('_connected', '_ws', '_lock', '_cmd_id', 'threading', 'Event', '_pending', 'send', 'json', 'dumps', 'Exception', 'pop', 'str', 'wait')
+CONSTANTS
+0 ''
+1 None
+2 'result_string'
+3 'result_data'
+4 'error'
+5 'id'
+6 'content'
+7 ('', None, 'Not connected')
+
+FUNCTION WsConsoleClient._recv_loop
+ARGS ('self', 'ws', 'raw', 'e', 'reason', 'ev', 'holder')
+NAMES ('_ws', '_stop', 'is_set', 'recv', '_handle', 'Exception', '_connected', 'str', '_on_disc', '_lock', '_pending', 'values', 'set', 'clear')
+CONSTANTS
+0 False
+1 'Connection lost'
+2 'error'
+3 None
+
+FUNCTION WsConsoleClient._handle
+ARGS ('self', 'raw', 'msg', 'msg_type', 'data', 'cmd_id', 'rs', 'rd', '_json', 'display', 'entry', 'text')
+NAMES ('json', 'loads', 'Exception', '_on_line', 'get', 'isinstance', 'dict', 'str', 'startswith', 'endswith', 'dumps', '_lock', '_pending', 'set')
+CONSTANTS
+0 '\n'
+1 None
+2 'type'
+3 ''
+4 'data'
+5 'commandId'
+6 'CommandResult'
+7 'ResultString'
+8 'Result'
+9 'System.'
+10 ('indent',)
+11 'result_string'
+12 'result_data'
+13 'SystemMessage'
+14 '['
+15 ']\n'
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ("\nWebSocket client for the game console (port 1760). Shared by both apps --\nserver's local ConsoleWindow and client's RemoteConsoleWindow/TavernKeeper\nall talk to the same protocol.\n")
+              STORE_NAME               0 (__doc__)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (json)
+              STORE_NAME               1 (json)
+
+  7           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (threading)
+              STORE_NAME               2 (threading)
+
+  9           LOAD_CONST               2 (1760)
+              STORE_NAME               3 (WS_CONSOLE_PORT)
+
+ 11           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               3 (<code object WsConsoleClient at 0x000001CD6BD2E760, file "tavern_shared\ws_console_client.py", line 11>)
+              MAKE_FUNCTION
+              LOAD_CONST               4 ('WsConsoleClient')
+              CALL                     2
+              STORE_NAME               4 (WsConsoleClient)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object WsConsoleClient at 0x000001CD6BD2E760, file "tavern_shared\ws_console_client.py", line 11>:
+  --           MAKE_CELL                0 (__classdict__)
+
+  11           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('WsConsoleClient')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT          11
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              0 (__classdict__)
+
+  12           LOAD_CONST               1 ('WebSocket client for the game console on port 1760.')
+               STORE_NAME               4 (__doc__)
+
+  14           LOAD_CONST               2 (<code object __init__ at 0x000001CD6BCAEF50, file "tavern_shared\ws_console_client.py", line 14>)
+               MAKE_FUNCTION
+               STORE_NAME               5 (__init__)
+
+  24           LOAD_CONST              11 ((None, None, 6))
+               LOAD_CONST               4 (<code object connect at 0x000001CD6BEE2740, file "tavern_shared\ws_console_client.py", line 24>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               6 (connect)
+
+  51           LOAD_CONST               5 (<code object disconnect at 0x000001CD6BEFDA20, file "tavern_shared\ws_console_client.py", line 51>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (disconnect)
+
+  64           LOAD_CONST               6 (<code object send at 0x000001CD6C019E00, file "tavern_shared\ws_console_client.py", line 64>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (send)
+
+  75           LOAD_CONST              12 ((20.0,))
+               LOAD_CONST               7 (<code object send_capture at 0x000001CD6C049280, file "tavern_shared\ws_console_client.py", line 75>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               9 (send_capture)
+
+  95           LOAD_CONST               8 (<code object _recv_loop at 0x000001CD6BEF36B0, file "tavern_shared\ws_console_client.py", line 95>)
+               MAKE_FUNCTION
+               STORE_NAME              10 (_recv_loop)
+
+ 116           LOAD_CONST               9 (<code object _handle at 0x000001CD6BFD4940, file "tavern_shared\ws_console_client.py", line 116>)
+               MAKE_FUNCTION
+               STORE_NAME              11 (_handle)
+               LOAD_CONST              10 (('_cmd_id', '_connected', '_lock', '_on_disc', '_on_line', '_pending', '_stop', '_ws'))
+               STORE_NAME              12 (__static_attributes__)
+               LOAD_FAST_BORROW         0 (__classdict__)
+               STORE_NAME              13 (__classdictcell__)
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD6BCAEF50, file "tavern_shared\ws_console_client.py", line 14>:
+ 14           RESUME                   0
+
+ 15           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               0 (_ws)
+
+ 16           LOAD_GLOBAL              2 (threading)
+              LOAD_ATTR                4 (Lock)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               3 (_lock)
+
+ 17           LOAD_CONST               1 (False)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               4 (_connected)
+
+ 18           LOAD_SMALL_INT           0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               5 (_cmd_id)
+
+ 19           BUILD_MAP                0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               6 (_pending)
+
+ 20           LOAD_GLOBAL              2 (threading)
+              LOAD_ATTR               14 (Event)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               8 (_stop)
+
+ 21           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               9 (_on_line)
+
+ 22           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              10 (_on_disc)
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object connect at 0x000001CD6BEE2740, file "tavern_shared\ws_console_client.py", line 24>:
+  24            RESUME                   0
+
+  25            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (websocket)
+                STORE_FAST               6 (_wslib)
+
+  26            LOAD_FAST_BORROW_LOAD_FAST_BORROW 48 (on_line, self)
+                STORE_ATTR               1 (_on_line)
+
+  27            LOAD_FAST_BORROW_LOAD_FAST_BORROW 64 (on_disc, self)
+                STORE_ATTR               2 (_on_disc)
+
+  28            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (_stop)
+                LOAD_ATTR                9 (clear + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  29            NOP
+
+  30    L1:     LOAD_FAST_BORROW         6 (_wslib)
+                LOAD_ATTR               11 (WebSocket + NULL|self)
+                CALL                     0
+                STORE_FAST               7 (ws)
+
+  31            LOAD_FAST_BORROW         7 (ws)
+                LOAD_ATTR               13 (settimeout + NULL|self)
+                LOAD_FAST_BORROW         5 (timeout)
+                CALL                     1
+                POP_TOP
+
+  32            LOAD_FAST_BORROW         7 (ws)
+                LOAD_ATTR               15 (connect + NULL|self)
+                LOAD_CONST               2 ('ws://')
+                LOAD_FAST_BORROW         1 (host)
+                FORMAT_SIMPLE
+                LOAD_CONST               3 (':')
+                LOAD_GLOBAL             16 (WS_CONSOLE_PORT)
+                FORMAT_SIMPLE
+                BUILD_STRING             4
+                CALL                     1
+                POP_TOP
+
+  33            LOAD_FAST_BORROW         7 (ws)
+                LOAD_ATTR               19 (send + NULL|self)
+                LOAD_FAST_BORROW         2 (token)
+                CALL                     1
+                POP_TOP
+
+  34            LOAD_FAST_BORROW         7 (ws)
+                LOAD_ATTR               21 (recv + NULL|self)
+                CALL                     0
+                STORE_FAST               8 (raw)
+
+  35            LOAD_GLOBAL             22 (json)
+                LOAD_ATTR               24 (loads)
+                PUSH_NULL
+                LOAD_FAST_BORROW         8 (raw)
+                CALL                     1
+                STORE_FAST               9 (msg)
+
+  36            LOAD_FAST_BORROW         9 (msg)
+                LOAD_ATTR               27 (get + NULL|self)
+                LOAD_CONST               4 ('type')
+                CALL                     1
+                LOAD_CONST               5 ('SystemMessage')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE      137 (to L5)
+                NOT_TAKEN
+
+  37            LOAD_GLOBAL             29 (str + NULL)
+                LOAD_FAST_BORROW         9 (msg)
+                LOAD_ATTR               27 (get + NULL|self)
+                LOAD_CONST               6 ('data')
+                LOAD_CONST               7 ('')
+                CALL                     2
+                CALL                     1
+                STORE_FAST              10 (data)
+
+  38            LOAD_CONST               8 ('Connection Succeeded')
+                LOAD_FAST_BORROW        10 (data)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       83 (to L3)
+                NOT_TAKEN
+
+  39            LOAD_FAST_BORROW         7 (ws)
+                LOAD_ATTR               13 (settimeout + NULL|self)
+                LOAD_CONST               1 (None)
+                CALL                     1
+                POP_TOP
+
+  40            LOAD_FAST_BORROW_LOAD_FAST_BORROW 112 (ws, self)
+                STORE_ATTR              15 (_ws)
+
+  41            LOAD_CONST               9 (True)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              16 (_connected)
+
+  42            LOAD_GLOBAL             34 (threading)
+                LOAD_ATTR               36 (Thread)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               38 (_recv_loop)
+                LOAD_CONST               9 (True)
+                LOAD_CONST              10 (('target', 'daemon'))
+                CALL_KW                  2
+                LOAD_ATTR               41 (start + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  43            LOAD_CONST               9 (True)
+                LOAD_FAST_BORROW        10 (data)
+                BUILD_TUPLE              2
+        L2:     RETURN_VALUE
+
+  44    L3:     LOAD_FAST_BORROW         7 (ws)
+                LOAD_ATTR               43 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  45            LOAD_CONST              11 (False)
+                LOAD_FAST_BORROW        10 (data)
+                BUILD_TUPLE              2
+        L4:     RETURN_VALUE
+
+  46    L5:     LOAD_FAST_BORROW         7 (ws)
+                LOAD_ATTR               43 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  47            LOAD_CONST              11 (False)
+                LOAD_CONST              12 ('Unexpected auth response: ')
+                LOAD_FAST_BORROW         9 (msg)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                BUILD_TUPLE              2
+        L6:     RETURN_VALUE
+
+  --    L7:     PUSH_EXC_INFO
+
+  48            LOAD_GLOBAL             44 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       24 (to L12)
+                NOT_TAKEN
+                STORE_FAST              11 (e)
+
+  49    L8:     LOAD_CONST              11 (False)
+                LOAD_GLOBAL             29 (str + NULL)
+                LOAD_FAST               11 (e)
+                CALL                     1
+                BUILD_TUPLE              2
+        L9:     SWAP                     2
+       L10:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                STORE_FAST              11 (e)
+                DELETE_FAST             11 (e)
+                RETURN_VALUE
+
+  --   L11:     LOAD_CONST               1 (None)
+                STORE_FAST              11 (e)
+                DELETE_FAST             11 (e)
+                RERAISE                  1
+
+  48   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L7 [0]
+  L3 to L4 -> L7 [0]
+  L5 to L6 -> L7 [0]
+  L7 to L8 -> L13 [1] lasti
+  L8 to L9 -> L11 [1] lasti
+  L9 to L10 -> L13 [1] lasti
+  L11 to L13 -> L13 [1] lasti
+
+Disassembly of <code object disconnect at 0x000001CD6BEFDA20, file "tavern_shared\ws_console_client.py", line 51>:
+  51            RESUME                   0
+
+  52            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_stop)
+                LOAD_ATTR                3 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  53            LOAD_CONST               0 (False)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               2 (_connected)
+
+  54            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (_ws)
+                LOAD_CONST               1 (None)
+                SWAP                     2
+                STORE_FAST_LOAD_FAST    16 (ws, self)
+                STORE_ATTR               3 (_ws)
+
+  55            LOAD_FAST_BORROW         1 (ws)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L2)
+                NOT_TAKEN
+
+  56    L1:     LOAD_FAST_BORROW         1 (ws)
+                LOAD_ATTR                9 (close + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  58    L2:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               10 (_lock)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L3:     POP_TOP
+
+  59            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               12 (_pending)
+                LOAD_ATTR               15 (values + NULL|self)
+                CALL                     0
+                GET_ITER
+        L4:     FOR_ITER                26 (to L5)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   35 (ev, holder)
+
+  60            LOAD_CONST               2 ('Disconnected')
+                LOAD_FAST_BORROW         3 (holder)
+                LOAD_CONST               3 ('error')
+                STORE_SUBSCR
+
+  61            LOAD_FAST_BORROW         2 (ev)
+                LOAD_ATTR                3 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+                JUMP_BACKWARD           28 (to L4)
+
+  59    L5:     END_FOR
+                POP_ITER
+
+  62            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               12 (_pending)
+                LOAD_ATTR               17 (clear + NULL|self)
+                CALL                     0
+                POP_TOP
+
+  58    L6:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --    L7:     PUSH_EXC_INFO
+
+  57            POP_TOP
+        L8:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 117 (to L2)
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+  58   L10:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L11)
+                NOT_TAKEN
+                RERAISE                  2
+       L11:     POP_TOP
+       L12:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L7 [0]
+  L3 to L6 -> L10 [2] lasti
+  L7 to L8 -> L9 [1] lasti
+  L10 to L12 -> L13 [4] lasti
+
+Disassembly of <code object send at 0x000001CD6C019E00, file "tavern_shared\ws_console_client.py", line 64>:
+  64            RESUME                   0
+
+  65            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_connected)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L1)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_ws)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L2)
+                NOT_TAKEN
+
+  66    L1:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  67    L2:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                4 (_lock)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L3:     POP_TOP
+
+  68            LOAD_FAST_BORROW         0 (self)
+                COPY                     1
+                LOAD_ATTR                6 (_cmd_id)
+                LOAD_SMALL_INT           1
+                BINARY_OP               13 (+=)
+                SWAP                     2
+                STORE_ATTR               3 (_cmd_id)
+
+  69            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (_cmd_id)
+                STORE_FAST               2 (cid)
+
+  67    L4:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+
+  70    L5:     NOP
+
+  71    L6:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_ws)
+                LOAD_ATTR                9 (send + NULL|self)
+                LOAD_GLOBAL             10 (json)
+                LOAD_ATTR               12 (dumps)
+                PUSH_NULL
+                LOAD_CONST               1 ('id')
+                LOAD_FAST_CHECK          2 (cid)
+                LOAD_CONST               2 ('content')
+                LOAD_FAST_BORROW         1 (cmd)
+                BUILD_MAP                2
+                CALL                     1
+                CALL                     1
+                POP_TOP
+        L7:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  67    L8:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L9)
+                NOT_TAKEN
+                RERAISE                  2
+        L9:     POP_TOP
+       L10:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 70 (to L5)
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L12:     PUSH_EXC_INFO
+
+  72            LOAD_GLOBAL             14 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L14)
+                NOT_TAKEN
+                POP_TOP
+
+  73   L13:     POP_EXCEPT
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  72   L14:     RERAISE                  0
+
+  --   L15:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L8 [2] lasti
+  L6 to L7 -> L12 [0]
+  L8 to L10 -> L11 [4] lasti
+  L12 to L13 -> L15 [1] lasti
+  L14 to L15 -> L15 [1] lasti
+
+Disassembly of <code object send_capture at 0x000001CD6C049280, file "tavern_shared\ws_console_client.py", line 75>:
+  75            RESUME                   0
+
+  76            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_connected)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L1)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_ws)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L2)
+                NOT_TAKEN
+
+  77    L1:     LOAD_CONST               7 (('', None, 'Not connected'))
+                RETURN_VALUE
+
+  78    L2:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                4 (_lock)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L3:     POP_TOP
+
+  79            LOAD_FAST_BORROW         0 (self)
+                COPY                     1
+                LOAD_ATTR                6 (_cmd_id)
+                LOAD_SMALL_INT           1
+                BINARY_OP               13 (+=)
+                SWAP                     2
+                STORE_ATTR               3 (_cmd_id)
+
+  80            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (_cmd_id)
+                STORE_FAST               3 (cid)
+
+  81            LOAD_GLOBAL              8 (threading)
+                LOAD_ATTR               10 (Event)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               4 (ev)
+
+  82            LOAD_CONST               2 ('result_string')
+                LOAD_CONST               0 ('')
+                LOAD_CONST               3 ('result_data')
+                LOAD_CONST               1 (None)
+                LOAD_CONST               4 ('error')
+                LOAD_CONST               1 (None)
+                BUILD_MAP                3
+                STORE_FAST               5 (holder)
+
+  83            LOAD_FAST_BORROW_LOAD_FAST_BORROW 69 (ev, holder)
+                BUILD_TUPLE              2
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               12 (_pending)
+                LOAD_FAST_BORROW         3 (cid)
+                STORE_SUBSCR
+
+  78    L4:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+  84    L5:     NOP
+
+  85    L6:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_ws)
+                LOAD_ATTR               15 (send + NULL|self)
+                LOAD_GLOBAL             16 (json)
+                LOAD_ATTR               18 (dumps)
+                PUSH_NULL
+                LOAD_CONST               5 ('id')
+                LOAD_FAST_CHECK          3 (cid)
+                LOAD_CONST               6 ('content')
+                LOAD_FAST_BORROW         1 (cmd)
+                BUILD_MAP                2
+                CALL                     1
+                CALL                     1
+                POP_TOP
+
+  90    L7:     LOAD_FAST_CHECK          4 (ev)
+                LOAD_ATTR               27 (wait + NULL|self)
+                LOAD_FAST                2 (timeout)
+                CALL                     1
+                POP_TOP
+
+  91            LOAD_FAST                0 (self)
+                LOAD_ATTR                4 (_lock)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L8:     POP_TOP
+
+  92            LOAD_FAST                0 (self)
+                LOAD_ATTR               12 (_pending)
+                LOAD_ATTR               23 (pop + NULL|self)
+                LOAD_FAST                3 (cid)
+                LOAD_CONST               1 (None)
+                CALL                     2
+                POP_TOP
+
+  91    L9:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+  93   L10:     LOAD_FAST_CHECK          5 (holder)
+                LOAD_CONST               2 ('result_string')
+                BINARY_OP               26 ([])
+                LOAD_FAST                5 (holder)
+                LOAD_CONST               3 ('result_data')
+                BINARY_OP               26 ([])
+                LOAD_FAST                5 (holder)
+                LOAD_CONST               4 ('error')
+                BINARY_OP               26 ([])
+                BUILD_TUPLE              3
+                RETURN_VALUE
+
+  78   L11:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L12)
+                NOT_TAKEN
+                RERAISE                  2
+       L12:     POP_TOP
+       L13:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 168 (to L5)
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L15:     PUSH_EXC_INFO
+
+  86            LOAD_GLOBAL             20 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE      102 (to L27)
+                NOT_TAKEN
+                STORE_FAST               6 (e)
+
+  87   L16:     LOAD_FAST                0 (self)
+                LOAD_ATTR                4 (_lock)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+       L17:     POP_TOP
+
+  88            LOAD_FAST                0 (self)
+                LOAD_ATTR               12 (_pending)
+                LOAD_ATTR               23 (pop + NULL|self)
+                LOAD_FAST_CHECK          3 (cid)
+                LOAD_CONST               1 (None)
+                CALL                     2
+                POP_TOP
+
+  87   L18:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+                JUMP_FORWARD            19 (to L23)
+       L19:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L20)
+                NOT_TAKEN
+                RERAISE                  2
+       L20:     POP_TOP
+       L21:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_FORWARD             3 (to L23)
+
+  --   L22:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+  89   L23:     LOAD_CONST               0 ('')
+                LOAD_CONST               1 (None)
+                LOAD_GLOBAL             25 (str + NULL)
+                LOAD_FAST                6 (e)
+                CALL                     1
+                BUILD_TUPLE              3
+       L24:     SWAP                     2
+       L25:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                STORE_FAST               6 (e)
+                DELETE_FAST              6 (e)
+                RETURN_VALUE
+
+  --   L26:     LOAD_CONST               1 (None)
+                STORE_FAST               6 (e)
+                DELETE_FAST              6 (e)
+                RERAISE                  1
+
+  86   L27:     RERAISE                  0
+
+  --   L28:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+  91   L29:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L30)
+                NOT_TAKEN
+                RERAISE                  2
+       L30:     POP_TOP
+       L31:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 176 (to L10)
+
+  --   L32:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L11 [2] lasti
+  L6 to L7 -> L15 [0]
+  L8 to L9 -> L29 [2] lasti
+  L11 to L13 -> L14 [4] lasti
+  L15 to L16 -> L28 [1] lasti
+  L16 to L17 -> L26 [1] lasti
+  L17 to L18 -> L19 [3] lasti
+  L18 to L19 -> L26 [1] lasti
+  L19 to L21 -> L22 [5] lasti
+  L21 to L24 -> L26 [1] lasti
+  L24 to L25 -> L28 [1] lasti
+  L26 to L28 -> L28 [1] lasti
+  L29 to L31 -> L32 [4] lasti
+
+Disassembly of <code object _recv_loop at 0x000001CD6BEF36B0, file "tavern_shared\ws_console_client.py", line 95>:
+  95            RESUME                   0
+
+  96            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_ws)
+                STORE_FAST               1 (ws)
+
+  97    L1:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_stop)
+                LOAD_ATTR                5 (is_set + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_TRUE        47 (to L6)
+                NOT_TAKEN
+
+  98            NOP
+
+  99    L2:     LOAD_FAST_BORROW         1 (ws)
+                LOAD_ATTR                7 (recv + NULL|self)
+                CALL                     0
+                STORE_FAST               2 (raw)
+
+ 100            LOAD_FAST_BORROW         2 (raw)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L4)
+        L3:     NOT_TAKEN
+
+ 101            LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+ 102    L4:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                9 (_handle + NULL|self)
+                LOAD_FAST_BORROW         2 (raw)
+                CALL                     1
+                POP_TOP
+        L5:     JUMP_BACKWARD           78 (to L1)
+
+  97    L6:     LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  --    L7:     PUSH_EXC_INFO
+
+ 103            LOAD_GLOBAL             10 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE      237 (to L25)
+                NOT_TAKEN
+                STORE_FAST               3 (e)
+
+ 104    L8:     LOAD_FAST                0 (self)
+                LOAD_ATTR                2 (_stop)
+                LOAD_ATTR                5 (is_set + NULL|self)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_TRUE       194 (to L23)
+                NOT_TAKEN
+
+ 105            LOAD_CONST               0 (False)
+                LOAD_FAST                0 (self)
+                STORE_ATTR               6 (_connected)
+
+ 106            LOAD_GLOBAL             15 (str + NULL)
+                LOAD_FAST                3 (e)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L11)
+        L9:     NOT_TAKEN
+       L10:     POP_TOP
+                LOAD_CONST               1 ('Connection lost')
+       L11:     STORE_FAST               4 (reason)
+
+ 107            LOAD_FAST                0 (self)
+                LOAD_ATTR               16 (_on_disc)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       18 (to L14)
+       L12:     NOT_TAKEN
+
+ 108   L13:     LOAD_FAST                0 (self)
+                LOAD_ATTR               17 (_on_disc + NULL|self)
+                LOAD_FAST                4 (reason)
+                CALL                     1
+                POP_TOP
+
+ 109   L14:     LOAD_FAST                0 (self)
+                LOAD_ATTR               18 (_lock)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+       L15:     POP_TOP
+
+ 110            LOAD_FAST                0 (self)
+                LOAD_ATTR               20 (_pending)
+                LOAD_ATTR               23 (values + NULL|self)
+                CALL                     0
+                GET_ITER
+       L16:     FOR_ITER                25 (to L17)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   86 (ev, holder)
+
+ 111            LOAD_FAST_LOAD_FAST     70 (reason, holder)
+                LOAD_CONST               2 ('error')
+                STORE_SUBSCR
+
+ 112            LOAD_FAST                5 (ev)
+                LOAD_ATTR               25 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+                JUMP_BACKWARD           27 (to L16)
+
+ 110   L17:     END_FOR
+                POP_ITER
+
+ 113            LOAD_FAST                0 (self)
+                LOAD_ATTR               20 (_pending)
+                LOAD_ATTR               27 (clear + NULL|self)
+                CALL                     0
+                POP_TOP
+
+ 109   L18:     LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                CALL                     3
+                POP_TOP
+                JUMP_FORWARD            19 (to L23)
+       L19:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L20)
+                NOT_TAKEN
+                RERAISE                  2
+       L20:     POP_TOP
+       L21:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_FORWARD             3 (to L23)
+
+  --   L22:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+ 114   L23:     POP_EXCEPT
+                LOAD_CONST               3 (None)
+                STORE_FAST               3 (e)
+                DELETE_FAST              3 (e)
+                LOAD_CONST               3 (None)
+                RETURN_VALUE
+
+  --   L24:     LOAD_CONST               3 (None)
+                STORE_FAST               3 (e)
+                DELETE_FAST              3 (e)
+                RERAISE                  1
+
+ 103   L25:     RERAISE                  0
+
+  --   L26:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L7 [0]
+  L4 to L5 -> L7 [0]
+  L7 to L8 -> L26 [1] lasti
+  L8 to L9 -> L24 [1] lasti
+  L10 to L12 -> L24 [1] lasti
+  L13 to L15 -> L24 [1] lasti
+  L15 to L18 -> L19 [3] lasti
+  L18 to L19 -> L24 [1] lasti
+  L19 to L21 -> L22 [5] lasti
+  L21 to L23 -> L24 [1] lasti
+  L24 to L26 -> L26 [1] lasti
+
+Disassembly of <code object _handle at 0x000001CD6BFD4940, file "tavern_shared\ws_console_client.py", line 116>:
+ 116            RESUME                   0
+
+ 117            NOP
+
+ 118    L1:     LOAD_GLOBAL              0 (json)
+                LOAD_ATTR                2 (loads)
+                PUSH_NULL
+                LOAD_FAST_BORROW         1 (raw)
+                CALL                     1
+                STORE_FAST               2 (msg)
+
+ 123    L2:     LOAD_FAST                2 (msg)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               2 ('type')
+                LOAD_CONST               3 ('')
+                CALL                     2
+                STORE_FAST               3 (msg_type)
+
+ 124            LOAD_FAST                2 (msg)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               4 ('data')
+                CALL                     1
+                STORE_FAST               4 (data)
+
+ 125            LOAD_FAST                2 (msg)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               5 ('commandId')
+                CALL                     1
+                STORE_FAST               5 (cmd_id)
+
+ 127            LOAD_FAST                3 (msg_type)
+                LOAD_CONST               6 ('CommandResult')
+                COMPARE_OP              88 (bool(==))
+                EXTENDED_ARG             1
+                POP_JUMP_IF_FALSE      380 (to L17)
+                NOT_TAKEN
+
+ 128            LOAD_CONST               3 ('')
+                STORE_FAST               6 (rs)
+
+ 129            LOAD_CONST               1 (None)
+                STORE_FAST               7 (rd)
+
+ 130            LOAD_GLOBAL             11 (isinstance + NULL)
+                LOAD_FAST                4 (data)
+                LOAD_GLOBAL             12 (dict)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE       55 (to L4)
+                NOT_TAKEN
+
+ 131            LOAD_GLOBAL             15 (str + NULL)
+                LOAD_FAST                4 (data)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               7 ('ResultString')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L3)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST               3 ('')
+        L3:     CALL                     1
+                STORE_FAST               6 (rs)
+
+ 132            LOAD_FAST                4 (data)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               8 ('Result')
+                CALL                     1
+                STORE_FAST               7 (rd)
+                JUMP_FORWARD            15 (to L5)
+
+ 133    L4:     LOAD_FAST                4 (data)
+                POP_JUMP_IF_NONE        12 (to L5)
+                NOT_TAKEN
+
+ 134            LOAD_GLOBAL             15 (str + NULL)
+                LOAD_FAST                4 (data)
+                CALL                     1
+                STORE_FAST               6 (rs)
+
+ 135    L5:     LOAD_FAST                0 (self)
+                LOAD_ATTR                6 (_on_line)
+                TO_BOOL
+                POP_JUMP_IF_FALSE      148 (to L11)
+                NOT_TAKEN
+
+ 136            LOAD_FAST                6 (rs)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       74 (to L8)
+                NOT_TAKEN
+                LOAD_FAST                6 (rs)
+                LOAD_ATTR               17 (startswith + NULL|self)
+                LOAD_CONST               9 ('System.')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        51 (to L8)
+                NOT_TAKEN
+
+ 137            LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_on_line + NULL|self)
+                LOAD_FAST                6 (rs)
+                LOAD_ATTR               19 (endswith + NULL|self)
+                LOAD_CONST               0 ('\n')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L6)
+                NOT_TAKEN
+                LOAD_FAST                6 (rs)
+                JUMP_FORWARD             8 (to L7)
+        L6:     LOAD_FAST                6 (rs)
+                LOAD_CONST               0 ('\n')
+                BINARY_OP                0 (+)
+        L7:     CALL                     1
+                POP_TOP
+                JUMP_FORWARD            66 (to L11)
+
+ 138    L8:     LOAD_FAST                7 (rd)
+                POP_JUMP_IF_NONE        63 (to L11)
+                NOT_TAKEN
+                LOAD_FAST                7 (rd)
+                BUILD_LIST               0
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       56 (to L11)
+                NOT_TAKEN
+                LOAD_FAST                7 (rd)
+                LOAD_CONST               3 ('')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       49 (to L11)
+                NOT_TAKEN
+
+ 140            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (json)
+                STORE_FAST               8 (_json)
+
+ 141            NOP
+
+ 142    L9:     LOAD_FAST                8 (_json)
+                LOAD_ATTR               21 (dumps + NULL|self)
+                LOAD_FAST                7 (rd)
+                LOAD_SMALL_INT           2
+                LOAD_CONST              10 (('indent',))
+                CALL_KW                  2
+                STORE_FAST               9 (display)
+
+ 145   L10:     LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_on_line + NULL|self)
+                LOAD_FAST                9 (display)
+                LOAD_CONST               0 ('\n')
+                BINARY_OP                0 (+)
+                CALL                     1
+                POP_TOP
+
+ 146   L11:     LOAD_FAST                5 (cmd_id)
+                POP_JUMP_IF_NONE       114 (to L16)
+                NOT_TAKEN
+
+ 147            LOAD_FAST                0 (self)
+                LOAD_ATTR               22 (_lock)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+       L12:     POP_TOP
+
+ 148            LOAD_FAST                0 (self)
+                LOAD_ATTR               24 (_pending)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_FAST                5 (cmd_id)
+                CALL                     1
+                STORE_FAST              10 (entry)
+
+ 147   L13:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+ 149   L14:     LOAD_FAST_CHECK         10 (entry)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       48 (to L15)
+                NOT_TAKEN
+
+ 150            LOAD_FAST_LOAD_FAST    106 (rs, entry)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_CONST              11 ('result_string')
+                STORE_SUBSCR
+
+ 151            LOAD_FAST_LOAD_FAST    122 (rd, entry)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_CONST              12 ('result_data')
+                STORE_SUBSCR
+
+ 152            LOAD_FAST               10 (entry)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_ATTR               27 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 149   L15:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 146   L16:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 154   L17:     LOAD_FAST                3 (msg_type)
+                LOAD_CONST              13 ('SystemMessage')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       75 (to L22)
+                NOT_TAKEN
+
+ 155            LOAD_FAST                4 (data)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       12 (to L18)
+                NOT_TAKEN
+                LOAD_GLOBAL             15 (str + NULL)
+                LOAD_FAST                4 (data)
+                CALL                     1
+                JUMP_FORWARD             1 (to L19)
+       L18:     LOAD_CONST               3 ('')
+       L19:     STORE_FAST              11 (text)
+
+ 156            LOAD_FAST               11 (text)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       44 (to L21)
+                NOT_TAKEN
+                LOAD_FAST                0 (self)
+                LOAD_ATTR                6 (_on_line)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       24 (to L20)
+                NOT_TAKEN
+
+ 157            LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_on_line + NULL|self)
+                LOAD_CONST              14 ('[')
+                LOAD_FAST               11 (text)
+                FORMAT_SIMPLE
+                LOAD_CONST              15 (']\n')
+                BUILD_STRING             3
+                CALL                     1
+                POP_TOP
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 156   L20:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+       L21:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 159   L22:     LOAD_FAST                0 (self)
+                LOAD_ATTR                6 (_on_line)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       27 (to L23)
+                NOT_TAKEN
+
+ 160            LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_on_line + NULL|self)
+                LOAD_FAST                1 (raw)
+                LOAD_CONST               0 ('\n')
+                BINARY_OP                0 (+)
+                CALL                     1
+                POP_TOP
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 159   L23:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L24:     PUSH_EXC_INFO
+
+ 119            LOAD_GLOBAL              4 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       47 (to L28)
+                NOT_TAKEN
+                POP_TOP
+
+ 120            LOAD_FAST                0 (self)
+                LOAD_ATTR                6 (_on_line)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       25 (to L27)
+       L25:     NOT_TAKEN
+
+ 121   L26:     LOAD_FAST                0 (self)
+                LOAD_ATTR                7 (_on_line + NULL|self)
+                LOAD_FAST                1 (raw)
+                LOAD_CONST               0 ('\n')
+                BINARY_OP                0 (+)
+                CALL                     1
+                POP_TOP
+
+ 122   L27:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 119   L28:     RERAISE                  0
+
+  --   L29:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L30:     PUSH_EXC_INFO
+
+ 143            LOAD_GLOBAL              4 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       16 (to L32)
+                NOT_TAKEN
+                POP_TOP
+
+ 144            LOAD_GLOBAL             15 (str + NULL)
+                LOAD_FAST                7 (rd)
+                CALL                     1
+                STORE_FAST               9 (display)
+       L31:     POP_EXCEPT
+                EXTENDED_ARG             1
+                JUMP_BACKWARD_NO_INTERRUPT 355 (to L10)
+
+ 143   L32:     RERAISE                  0
+
+  --   L33:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+ 147   L34:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L35)
+                NOT_TAKEN
+                RERAISE                  2
+       L35:     POP_TOP
+       L36:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                EXTENDED_ARG             1
+                JUMP_BACKWARD_NO_INTERRUPT 292 (to L14)
+
+  --   L37:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L24 [0]
+  L9 to L10 -> L30 [0]
+  L12 to L13 -> L34 [2] lasti
+  L24 to L25 -> L29 [1] lasti
+  L26 to L27 -> L29 [1] lasti
+  L28 to L29 -> L29 [1] lasti
+  L30 to L31 -> L33 [1] lasti
+  L32 to L33 -> L33 [1] lasti
+  L34 to L36 -> L37 [4] lasti

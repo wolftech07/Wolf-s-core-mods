@@ -1,0 +1,110 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('tavern_shared.orderable_registry', 'OrderableRegistry', 'tavern_shared.paths', '_tavern_data_dir', 'os', 'path', 'join', '_registry', 'register_tab', 'ordered_tabs', 'registry')
+CONSTANTS
+0 0
+1 ('OrderableRegistry',)
+2 ('_tavern_data_dir',)
+3 None
+4 'tavernkeeper_tab_order.json'
+5 CODE register_tab
+6 CODE ordered_tabs
+7 CODE registry
+8 (False,)
+
+FUNCTION register_tab
+ARGS ('key', 'label', 'build_fn', 'built_in')
+NAMES ('_registry', 'register')
+CONSTANTS
+0 "build_fn(parent, window) builds the tab's contents. Core tabs and\naddon tabs register the exact same way -- the only difference is\nbuilt_in=True, which only affects the DEFAULT order (core first)\nbefore the user has ever saved their own order via Reorder Tabs.\n"
+1 ('built_in', 'label', 'build_fn')
+2 None
+
+FUNCTION ordered_tabs
+ARGS ()
+NAMES ('_registry', 'ordered_items')
+CONSTANTS
+0 None
+
+FUNCTION registry
+ARGS ()
+NAMES ('_registry',)
+CONSTANTS
+0 None
+  0           RESUME                   0
+
+  1           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('OrderableRegistry',))
+              IMPORT_NAME              0 (tavern_shared.orderable_registry)
+              IMPORT_FROM              1 (OrderableRegistry)
+              STORE_NAME               1 (OrderableRegistry)
+              POP_TOP
+
+  2           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('_tavern_data_dir',))
+              IMPORT_NAME              2 (tavern_shared.paths)
+              IMPORT_FROM              3 (_tavern_data_dir)
+              STORE_NAME               3 (_tavern_data_dir)
+              POP_TOP
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (None)
+              IMPORT_NAME              4 (os)
+              STORE_NAME               4 (os)
+
+  5           LOAD_NAME                1 (OrderableRegistry)
+              PUSH_NULL
+              LOAD_NAME                4 (os)
+              LOAD_ATTR               10 (path)
+              LOAD_ATTR               13 (join + NULL|self)
+              LOAD_NAME                3 (_tavern_data_dir)
+              PUSH_NULL
+              CALL                     0
+              LOAD_CONST               4 ('tavernkeeper_tab_order.json')
+              CALL                     2
+              CALL                     1
+              STORE_NAME               7 (_registry)
+
+  8           LOAD_CONST               8 ((False,))
+              LOAD_CONST               5 (<code object register_tab at 0x000001CD6C28F330, file "client\core\tavernkeeper\registry.py", line 8>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               8 (register_tab)
+
+ 17           LOAD_CONST               6 (<code object ordered_tabs at 0x000001CD6C296D30, file "client\core\tavernkeeper\registry.py", line 17>)
+              MAKE_FUNCTION
+              STORE_NAME               9 (ordered_tabs)
+
+ 21           LOAD_CONST               7 (<code object registry at 0x000001CD6C326170, file "client\core\tavernkeeper\registry.py", line 21>)
+              MAKE_FUNCTION
+              STORE_NAME              10 (registry)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE
+
+Disassembly of <code object register_tab at 0x000001CD6C28F330, file "client\core\tavernkeeper\registry.py", line 8>:
+  8           RESUME                   0
+
+ 14           LOAD_GLOBAL              0 (_registry)
+              LOAD_ATTR                3 (register + NULL|self)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 3 (key, built_in)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (label, build_fn)
+              LOAD_CONST               1 (('built_in', 'label', 'build_fn'))
+              CALL_KW                  4
+              POP_TOP
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object ordered_tabs at 0x000001CD6C296D30, file "client\core\tavernkeeper\registry.py", line 17>:
+ 17           RESUME                   0
+
+ 18           LOAD_GLOBAL              0 (_registry)
+              LOAD_ATTR                3 (ordered_items + NULL|self)
+              CALL                     0
+              RETURN_VALUE
+
+Disassembly of <code object registry at 0x000001CD6C326170, file "client\core\tavernkeeper\registry.py", line 21>:
+ 21           RESUME                   0
+
+ 22           LOAD_GLOBAL              0 (_registry)
+              RETURN_VALUE

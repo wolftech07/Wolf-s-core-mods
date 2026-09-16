@@ -1,0 +1,961 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'tkinter', 'tk', 'ttk', 'tavern_shared.theme', 'BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_section_label', 'tavern_shared.window_chrome', '_start_hidden', '_finish_dark_window', '_set_window_icon', 'tavern_shared.addon_manifest', 'load_addon_manifest', 'is_dependency_installed', 'Toplevel', 'AddonManagerWindow')
+CONSTANTS
+0 "\nThe Addons window -- lets a non-technical user enable/disable whatever\naddons are sitting in the addons/ folder next to this .exe, without\nneeding Python, PyInstaller, or the source repo at all. Shared between\nboth apps: each just passes in its own addon_loader module (client's or\nserver's) and a label for the window title, since the two loaders are\notherwise identical in shape but deliberately kept as separate files/\npreference files (see either addon_loader.py's own comment on why).\n"
+1 None
+2 ('ttk',)
+3 ('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_section_label')
+4 ('_start_hidden', '_finish_dark_window', '_set_window_icon')
+5 ('load_addon_manifest', 'is_dependency_installed')
+6 CODE AddonManagerWindow
+7 'AddonManagerWindow'
+
+FUNCTION AddonManagerWindow
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', '__init__', '_build', '_on_save', '__static_attributes__', '__classdictcell__', '__classcell__')
+CONSTANTS
+0 'AddonManagerWindow'
+1 CODE AddonManagerWindow.__init__
+2 CODE AddonManagerWindow._build
+3 CODE AddonManagerWindow._on_save
+4 ('_addon_loader', '_app_label', '_get_game_dir', '_status', '_vars')
+5 (None,)
+
+FUNCTION AddonManagerWindow.__init__
+ARGS ('self', 'parent', 'addon_loader', 'app_label', 'get_game_dir', 'fit_w', 'fit_h')
+NAMES ('super', '__init__', '_start_hidden', '_addon_loader', '_app_label', '_get_game_dir', 'title', 'configure', 'BG', 'resizable', '_set_window_icon', '_vars', '_build', '_finish_dark_window', 'update_idletasks', 'max', 'winfo_reqwidth', 'winfo_reqheight', 'geometry', 'minsize')
+CONSTANTS
+0 CODE AddonManagerWindow.__init__.<locals>.<lambda>
+1 'Addons ('
+2 ')'
+3 ('bg',)
+4 True
+5 480
+6 420
+7 'x'
+8 None
+
+FUNCTION AddonManagerWindow.__init__.<locals>.<lambda>
+ARGS ()
+NAMES ()
+CONSTANTS
+0 None
+
+FUNCTION AddonManagerWindow._build
+ARGS ('self', 'h', 'game_dir', 'body', 'available', 'enabled', 'addons_dir', 'folder_name', 'info', 'row', 'var', 'cb', 'text_col', 'r', 'requirements', 'req_row', 'req', 'subfolder', 'found')
+NAMES ('tk', 'Frame', 'SURF', 'pack', 'pack_propagate', 'Label', '_app_label', 'AMBER', 'BORDER', 'BG', 'MUTED', '_section_label', '_get_game_dir', '_addon_loader', 'discover_addons', 'load_enabled_addon_names', 'addons_dir', 'load_addon_manifest', 'BooleanVar', '_vars', 'Checkbutton', 'AMBERDIM', 'PARCH', 'is_dependency_installed', 'GREEN', 'RED', 'StringVar', '_status', 'CYAN', '_btn', '_on_save')
+CONSTANTS
+0 44
+1 ('bg', 'height')
+2 'x'
+3 ('fill',)
+4 False
+5 '🧩  Addons — '
+6 ('text', 'bg', 'fg', 'font')
+7 'left'
+8 ('side', 'padx', 'pady')
+9 'Enable or disable optional TavernLauncher features. These are stored in the /addons folder in the same directory as this launcher. Be careful installing them from locations other than the  official TavernLauncher repo!'
+10 440
+11 ('text', 'bg', 'fg', 'font', 'wraplength', 'justify')
+12 'w'
+13 ('anchor', 'padx', 'pady')
+14 'AVAILABLE ADDONS'
+15 None
+16 'Set your game executable path above to check whether required mods/plugins are installed -- shown as red below until then.'
+17 ('bg', 'highlightbackground', 'highlightthickness')
+18 'both'
+19 True
+20 ('fill', 'expand', 'padx', 'pady')
+21 'No addons found in the addons/ folder next to this program.'
+22 420
+23 ('bg',)
+24 ('fill', 'padx', 'pady')
+25 ('value',)
+26 'flat'
+27 ('variable', 'bg', 'activebackground', 'selectcolor', 'relief', 'highlightthickness', 'bd')
+28 'n'
+29 ('side', 'anchor', 'pady')
+30 ('side', 'fill', 'expand')
+31 'name'
+32 '  v'
+33 'version'
+34 ('text', 'bg', 'fg', 'font', 'anchor', 'justify')
+35 ('anchor',)
+36 'by '
+37 'author'
+38 'required_mods'
+39 'Mods'
+40 'required_plugins'
+41 'Plugins'
+42 ('anchor', 'pady')
+43 'filename'
+44 '● '
+45 'title'
+46 ('side', 'padx')
+47 ''
+48 ('textvariable', 'bg', 'fg', 'font', 'wraplength', 'justify')
+49 '💾 Save (restart required to apply)'
+50 'primary'
+51 ('font', 'pady')
+52 ('Georgia', 12, 'bold')
+53 ('Segoe UI', 9)
+54 (10, 6)
+55 ('Segoe UI', 8)
+56 (0, 4)
+57 (0, 8)
+58 (2, 0)
+59 ('Segoe UI', 10, 'bold')
+60 (3, 0)
+61 ('Georgia', 10, 'bold')
+62 (0, 16)
+
+FUNCTION AddonManagerWindow._on_save
+ARGS ('self', 'name', 'var', 'chosen')
+NAMES ('_vars', 'items', 'get', '_addon_loader', 'save_enabled_addon_names', '_status', 'set', '_app_label')
+CONSTANTS
+0 'Saved. Restart '
+1 ' for this to take effect — addons are only loaded once, at startup.'
+2 None
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ("\nThe Addons window -- lets a non-technical user enable/disable whatever\naddons are sitting in the addons/ folder next to this .exe, without\nneeding Python, PyInstaller, or the source repo at all. Shared between\nboth apps: each just passes in its own addon_loader module (client's or\nserver's) and a label for the window title, since the two loaders are\notherwise identical in shape but deliberately kept as separate files/\npreference files (see either addon_loader.py's own comment on why).\n")
+              STORE_NAME               0 (__doc__)
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (tkinter)
+              STORE_NAME               2 (tk)
+
+ 11           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('ttk',))
+              IMPORT_NAME              1 (tkinter)
+              IMPORT_FROM              3 (ttk)
+              STORE_NAME               3 (ttk)
+              POP_TOP
+
+ 13           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_section_label'))
+              IMPORT_NAME              4 (tavern_shared.theme)
+              IMPORT_FROM              5 (BG)
+              STORE_NAME               5 (BG)
+              IMPORT_FROM              6 (SURF)
+              STORE_NAME               6 (SURF)
+              IMPORT_FROM              7 (SURF2)
+              STORE_NAME               7 (SURF2)
+              IMPORT_FROM              8 (BORDER)
+              STORE_NAME               8 (BORDER)
+              IMPORT_FROM              9 (AMBER)
+              STORE_NAME               9 (AMBER)
+              IMPORT_FROM             10 (AMBERDIM)
+              STORE_NAME              10 (AMBERDIM)
+              IMPORT_FROM             11 (PARCH)
+              STORE_NAME              11 (PARCH)
+              IMPORT_FROM             12 (MUTED)
+              STORE_NAME              12 (MUTED)
+              IMPORT_FROM             13 (GREEN)
+              STORE_NAME              13 (GREEN)
+              IMPORT_FROM             14 (RED)
+              STORE_NAME              14 (RED)
+              IMPORT_FROM             15 (CYAN)
+              STORE_NAME              15 (CYAN)
+              IMPORT_FROM             16 (_btn)
+              STORE_NAME              16 (_btn)
+              IMPORT_FROM             17 (_section_label)
+              STORE_NAME              17 (_section_label)
+              POP_TOP
+
+ 17           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('_start_hidden', '_finish_dark_window', '_set_window_icon'))
+              IMPORT_NAME             18 (tavern_shared.window_chrome)
+              IMPORT_FROM             19 (_start_hidden)
+              STORE_NAME              19 (_start_hidden)
+              IMPORT_FROM             20 (_finish_dark_window)
+              STORE_NAME              20 (_finish_dark_window)
+              IMPORT_FROM             21 (_set_window_icon)
+              STORE_NAME              21 (_set_window_icon)
+              POP_TOP
+
+ 18           LOAD_SMALL_INT           0
+              LOAD_CONST               5 (('load_addon_manifest', 'is_dependency_installed'))
+              IMPORT_NAME             22 (tavern_shared.addon_manifest)
+              IMPORT_FROM             23 (load_addon_manifest)
+              STORE_NAME              23 (load_addon_manifest)
+              IMPORT_FROM             24 (is_dependency_installed)
+              STORE_NAME              24 (is_dependency_installed)
+              POP_TOP
+
+ 21           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               6 (<code object AddonManagerWindow at 0x000001CD6C2A6D30, file "tavern_shared\addon_manager_window.py", line 21>)
+              MAKE_FUNCTION
+              LOAD_CONST               7 ('AddonManagerWindow')
+              LOAD_NAME                2 (tk)
+              LOAD_ATTR               50 (Toplevel)
+              CALL                     3
+              STORE_NAME              26 (AddonManagerWindow)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object AddonManagerWindow at 0x000001CD6C2A6D30, file "tavern_shared\addon_manager_window.py", line 21>:
+  --           MAKE_CELL                0 (__class__)
+               MAKE_CELL                1 (__classdict__)
+
+  21           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('AddonManagerWindow')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT          21
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              1 (__classdict__)
+
+  22           LOAD_CONST               5 ((None,))
+               LOAD_FAST_BORROW         0 (__class__)
+               BUILD_TUPLE              1
+               LOAD_CONST               1 (<code object __init__ at 0x000001CD6BEF36B0, file "tavern_shared\addon_manager_window.py", line 22>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               4 (__init__)
+
+  41           LOAD_CONST               2 (<code object _build at 0x000001CD6C028D90, file "tavern_shared\addon_manager_window.py", line 41>)
+               MAKE_FUNCTION
+               STORE_NAME               5 (_build)
+
+ 118           LOAD_CONST               3 (<code object _on_save at 0x000001CD6BC9B830, file "tavern_shared\addon_manager_window.py", line 118>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (_on_save)
+               LOAD_CONST               4 (('_addon_loader', '_app_label', '_get_game_dir', '_status', '_vars'))
+               STORE_NAME               7 (__static_attributes__)
+               LOAD_FAST_BORROW         1 (__classdict__)
+               STORE_NAME               8 (__classdictcell__)
+               LOAD_FAST_BORROW         0 (__class__)
+               COPY                     1
+               STORE_NAME               9 (__classcell__)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD6BEF36B0, file "tavern_shared\addon_manager_window.py", line 22>:
+  --           COPY_FREE_VARS           1
+
+  22           RESUME                   0
+
+  23           LOAD_GLOBAL              0 (super)
+               LOAD_DEREF               7 (__class__)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_SUPER_ATTR          5 (__init__ + NULL|self)
+               LOAD_FAST_BORROW         1 (parent)
+               CALL                     1
+               POP_TOP
+
+  24           LOAD_GLOBAL              5 (_start_hidden + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  25           LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (addon_loader, self)
+               STORE_ATTR               3 (_addon_loader)
+
+  26           LOAD_FAST_BORROW_LOAD_FAST_BORROW 48 (app_label, self)
+               STORE_ATTR               4 (_app_label)
+
+  27           LOAD_FAST                4 (get_game_dir)
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         4 (to L1)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_CONST               0 (<code object <lambda> at 0x000001CD6C2C79F0, file "tavern_shared\addon_manager_window.py", line 27>)
+               MAKE_FUNCTION
+       L1:     LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               5 (_get_game_dir)
+
+  28           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               13 (title + NULL|self)
+               LOAD_CONST               1 ('Addons (')
+               LOAD_FAST_BORROW         3 (app_label)
+               FORMAT_SIMPLE
+               LOAD_CONST               2 (')')
+               BUILD_STRING             3
+               CALL                     1
+               POP_TOP
+
+  29           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               15 (configure + NULL|self)
+               LOAD_GLOBAL             16 (BG)
+               LOAD_CONST               3 (('bg',))
+               CALL_KW                  1
+               POP_TOP
+
+  30           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               19 (resizable + NULL|self)
+               LOAD_CONST               4 (True)
+               LOAD_CONST               4 (True)
+               CALL                     2
+               POP_TOP
+
+  31           LOAD_GLOBAL             21 (_set_window_icon + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  32           BUILD_MAP                0
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR              11 (_vars)
+
+  33           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               25 (_build + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  34           LOAD_GLOBAL             27 (_finish_dark_window + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  35           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               29 (update_idletasks + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  36           LOAD_GLOBAL             31 (max + NULL)
+               LOAD_CONST               5 (480)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               33 (winfo_reqwidth + NULL|self)
+               CALL                     0
+               CALL                     2
+               STORE_FAST               5 (fit_w)
+
+  37           LOAD_GLOBAL             31 (max + NULL)
+               LOAD_CONST               6 (420)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               35 (winfo_reqheight + NULL|self)
+               CALL                     0
+               CALL                     2
+               STORE_FAST               6 (fit_h)
+
+  38           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               37 (geometry + NULL|self)
+               LOAD_FAST_BORROW         5 (fit_w)
+               FORMAT_SIMPLE
+               LOAD_CONST               7 ('x')
+               LOAD_FAST_BORROW         6 (fit_h)
+               FORMAT_SIMPLE
+               BUILD_STRING             3
+               CALL                     1
+               POP_TOP
+
+  39           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               39 (minsize + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 86 (fit_w, fit_h)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               8 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x000001CD6C2C79F0, file "tavern_shared\addon_manager_window.py", line 27>:
+ 27           RESUME                   0
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _build at 0x000001CD6C028D90, file "tavern_shared\addon_manager_window.py", line 41>:
+  41            RESUME                   0
+
+  42            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR                2 (Frame)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_SMALL_INT          44
+                LOAD_CONST               1 (('bg', 'height'))
+                CALL_KW                  3
+                STORE_FAST               1 (h)
+
+  43            LOAD_FAST_BORROW         1 (h)
+                LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               2 ('x')
+                LOAD_CONST               3 (('fill',))
+                CALL_KW                  1
+                POP_TOP
+                LOAD_FAST_BORROW         1 (h)
+                LOAD_ATTR                9 (pack_propagate + NULL|self)
+                LOAD_CONST               4 (False)
+                CALL                     1
+                POP_TOP
+
+  44            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST_BORROW         1 (h)
+                LOAD_CONST               5 ('🧩  Addons — ')
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               12 (_app_label)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_GLOBAL             14 (AMBER)
+
+  45            LOAD_CONST              52 (('Georgia', 12, 'bold'))
+
+  44            LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+                CALL_KW                  5
+
+  45            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               7 ('left')
+                LOAD_SMALL_INT          16
+                LOAD_SMALL_INT           8
+                LOAD_CONST               8 (('side', 'padx', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+
+  46            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR                2 (Frame)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_GLOBAL             16 (BORDER)
+                LOAD_SMALL_INT           1
+                LOAD_CONST               1 (('bg', 'height'))
+                CALL_KW                  3
+                LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               2 ('x')
+                LOAD_CONST               3 (('fill',))
+                CALL_KW                  1
+                POP_TOP
+
+  48            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (self)
+
+  49            LOAD_CONST               9 ('Enable or disable optional TavernLauncher features. These are stored in the /addons folder in the same directory as this launcher. Be careful installing them from locations other than the  official TavernLauncher repo!')
+
+  53            LOAD_GLOBAL             18 (BG)
+                LOAD_GLOBAL             20 (MUTED)
+                LOAD_CONST              53 (('Segoe UI', 9))
+                LOAD_CONST              10 (440)
+                LOAD_CONST               7 ('left')
+
+  48            LOAD_CONST              11 (('text', 'bg', 'fg', 'font', 'wraplength', 'justify'))
+                CALL_KW                  7
+
+  54            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              12 ('w')
+                LOAD_SMALL_INT          20
+                LOAD_CONST              54 ((10, 6))
+                LOAD_CONST              13 (('anchor', 'padx', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+
+  56            LOAD_GLOBAL             23 (_section_label + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_CONST              14 ('AVAILABLE ADDONS')
+                CALL                     2
+                POP_TOP
+
+  58            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               25 (_get_game_dir + NULL|self)
+                CALL                     0
+                STORE_FAST               2 (game_dir)
+
+  59            LOAD_FAST_BORROW         2 (game_dir)
+                POP_JUMP_IF_NOT_NONE    56 (to L1)
+                NOT_TAKEN
+
+  60            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (self)
+
+  61            LOAD_CONST              16 ('Set your game executable path above to check whether required mods/plugins are installed -- shown as red below until then.')
+
+  63            LOAD_GLOBAL             18 (BG)
+                LOAD_GLOBAL             20 (MUTED)
+                LOAD_CONST              55 (('Segoe UI', 8))
+                LOAD_CONST              10 (440)
+                LOAD_CONST               7 ('left')
+
+  60            LOAD_CONST              11 (('text', 'bg', 'fg', 'font', 'wraplength', 'justify'))
+                CALL_KW                  7
+
+  64            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              12 ('w')
+                LOAD_SMALL_INT          20
+                LOAD_CONST              56 ((0, 4))
+                LOAD_CONST              13 (('anchor', 'padx', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+
+  66    L1:     LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR                2 (Frame)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_GLOBAL             16 (BORDER)
+                LOAD_SMALL_INT           1
+                LOAD_CONST              17 (('bg', 'highlightbackground', 'highlightthickness'))
+                CALL_KW                  4
+                STORE_FAST               3 (body)
+
+  67            LOAD_FAST_BORROW         3 (body)
+                LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              18 ('both')
+                LOAD_CONST              19 (True)
+                LOAD_SMALL_INT          16
+                LOAD_CONST              57 ((0, 8))
+                LOAD_CONST              20 (('fill', 'expand', 'padx', 'pady'))
+                CALL_KW                  4
+                POP_TOP
+
+  69            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               26 (_addon_loader)
+                LOAD_ATTR               29 (discover_addons + NULL|self)
+                CALL                     0
+                STORE_FAST               4 (available)
+
+  70            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               26 (_addon_loader)
+                LOAD_ATTR               31 (load_enabled_addon_names + NULL|self)
+                CALL                     0
+                STORE_FAST               5 (enabled)
+
+  71            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               26 (_addon_loader)
+                LOAD_ATTR               33 (addons_dir + NULL|self)
+                CALL                     0
+                STORE_FAST               6 (addons_dir)
+
+  73            LOAD_FAST_BORROW         4 (available)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        58 (to L2)
+                NOT_TAKEN
+
+  74            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST_BORROW         3 (body)
+                LOAD_CONST              21 ('No addons found in the addons/ folder next to this program.')
+
+  75            LOAD_GLOBAL              4 (SURF)
+                LOAD_GLOBAL             20 (MUTED)
+                LOAD_CONST              53 (('Segoe UI', 9))
+                LOAD_CONST              22 (420)
+
+  76            LOAD_CONST               7 ('left')
+
+  74            LOAD_CONST              11 (('text', 'bg', 'fg', 'font', 'wraplength', 'justify'))
+                CALL_KW                  7
+
+  76            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              12 ('w')
+                LOAD_SMALL_INT          12
+                LOAD_SMALL_INT          16
+                LOAD_CONST              13 (('anchor', 'padx', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+                EXTENDED_ARG             2
+                JUMP_FORWARD           575 (to L18)
+
+  78    L2:     LOAD_FAST_BORROW         4 (available)
+                GET_ITER
+        L3:     EXTENDED_ARG             2
+                FOR_ITER               568 (to L17)
+                STORE_FAST               7 (folder_name)
+
+  79            LOAD_GLOBAL             35 (load_addon_manifest + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 103 (addons_dir, folder_name)
+                CALL                     2
+                STORE_FAST               8 (info)
+
+  80            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR                2 (Frame)
+                PUSH_NULL
+                LOAD_FAST_BORROW         3 (body)
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_CONST              23 (('bg',))
+                CALL_KW                  2
+                STORE_FAST               9 (row)
+
+  81            LOAD_FAST_BORROW         9 (row)
+                LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               2 ('x')
+                LOAD_SMALL_INT          10
+                LOAD_SMALL_INT           6
+                LOAD_CONST              24 (('fill', 'padx', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+
+  82            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               36 (BooleanVar)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 117 (folder_name, enabled)
+                CONTAINS_OP              0 (in)
+                LOAD_CONST              25 (('value',))
+                CALL_KW                  1
+                STORE_FAST              10 (var)
+
+  83            LOAD_FAST_BORROW_LOAD_FAST_BORROW 160 (var, self)
+                LOAD_ATTR               38 (_vars)
+                LOAD_FAST_BORROW         7 (folder_name)
+                STORE_SUBSCR
+
+  84            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               40 (Checkbutton)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 154 (row, var)
+                LOAD_GLOBAL              4 (SURF)
+
+  85            LOAD_GLOBAL              4 (SURF)
+                LOAD_GLOBAL             42 (AMBERDIM)
+
+  86            LOAD_CONST              26 ('flat')
+                LOAD_SMALL_INT           0
+                LOAD_SMALL_INT           0
+
+  84            LOAD_CONST              27 (('variable', 'bg', 'activebackground', 'selectcolor', 'relief', 'highlightthickness', 'bd'))
+                CALL_KW                  8
+                STORE_FAST              11 (cb)
+
+  87            LOAD_FAST_BORROW        11 (cb)
+                LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               7 ('left')
+                LOAD_CONST              28 ('n')
+                LOAD_CONST              58 ((2, 0))
+                LOAD_CONST              29 (('side', 'anchor', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+
+  88            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR                2 (Frame)
+                PUSH_NULL
+                LOAD_FAST_BORROW         9 (row)
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_CONST              23 (('bg',))
+                CALL_KW                  2
+                STORE_FAST              12 (text_col)
+
+  89            LOAD_FAST_BORROW        12 (text_col)
+                LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               7 ('left')
+                LOAD_CONST               2 ('x')
+                LOAD_CONST              19 (True)
+                LOAD_CONST              30 (('side', 'fill', 'expand'))
+                CALL_KW                  3
+                POP_TOP
+
+  90            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 200 (text_col, info)
+                LOAD_CONST              31 ('name')
+                BINARY_OP               26 ([])
+                FORMAT_SIMPLE
+                LOAD_CONST              32 ('  v')
+                LOAD_FAST_BORROW         8 (info)
+                LOAD_CONST              33 ('version')
+                BINARY_OP               26 ([])
+                FORMAT_SIMPLE
+                BUILD_STRING             3
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_GLOBAL             44 (PARCH)
+
+  91            LOAD_CONST              59 (('Segoe UI', 10, 'bold'))
+                LOAD_CONST              12 ('w')
+                LOAD_CONST               7 ('left')
+
+  90            LOAD_CONST              34 (('text', 'bg', 'fg', 'font', 'anchor', 'justify'))
+                CALL_KW                  7
+
+  92            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              12 ('w')
+                LOAD_CONST              35 (('anchor',))
+                CALL_KW                  1
+                POP_TOP
+
+  93            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST_BORROW        12 (text_col)
+                LOAD_CONST              36 ('by ')
+                LOAD_FAST_BORROW         8 (info)
+                LOAD_CONST              37 ('author')
+                BINARY_OP               26 ([])
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_GLOBAL             20 (MUTED)
+
+  94            LOAD_CONST              55 (('Segoe UI', 8))
+                LOAD_CONST              12 ('w')
+                LOAD_CONST               7 ('left')
+
+  93            LOAD_CONST              34 (('text', 'bg', 'fg', 'font', 'anchor', 'justify'))
+                CALL_KW                  7
+
+  95            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              12 ('w')
+                LOAD_CONST              35 (('anchor',))
+                CALL_KW                  1
+                POP_TOP
+
+  98            LOAD_FAST_BORROW         8 (info)
+                LOAD_CONST              38 ('required_mods')
+                BINARY_OP               26 ([])
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     13 (r)
+                SWAP                     2
+        L4:     BUILD_LIST               0
+                SWAP                     2
+        L5:     FOR_ITER                 6 (to L6)
+                STORE_FAST_LOAD_FAST   221 (r, r)
+                LOAD_CONST              39 ('Mods')
+                BUILD_TUPLE              2
+                LIST_APPEND              2
+                JUMP_BACKWARD            8 (to L5)
+        L6:     END_FOR
+                POP_ITER
+        L7:     SWAP                     2
+                STORE_FAST              13 (r)
+
+  99            LOAD_FAST_BORROW         8 (info)
+                LOAD_CONST              40 ('required_plugins')
+                BINARY_OP               26 ([])
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     13 (r)
+                SWAP                     2
+        L8:     BUILD_LIST               0
+                SWAP                     2
+        L9:     FOR_ITER                 6 (to L10)
+                STORE_FAST_LOAD_FAST   221 (r, r)
+                LOAD_CONST              41 ('Plugins')
+                BUILD_TUPLE              2
+                LIST_APPEND              2
+                JUMP_BACKWARD            8 (to L9)
+       L10:     END_FOR
+                POP_ITER
+       L11:     SWAP                     2
+                STORE_FAST              13 (r)
+
+  98            BINARY_OP                0 (+)
+
+  97            STORE_FAST              14 (requirements)
+
+ 101            LOAD_FAST_BORROW        14 (requirements)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         4 (to L12)
+                NOT_TAKEN
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          413 (to L3)
+
+ 102   L12:     LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR                2 (Frame)
+                PUSH_NULL
+                LOAD_FAST_BORROW        12 (text_col)
+                LOAD_GLOBAL              4 (SURF)
+                LOAD_CONST              23 (('bg',))
+                CALL_KW                  2
+                STORE_FAST              15 (req_row)
+
+ 103            LOAD_FAST_BORROW        15 (req_row)
+                LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              12 ('w')
+                LOAD_CONST              60 ((3, 0))
+                LOAD_CONST              42 (('anchor', 'pady'))
+                CALL_KW                  2
+                POP_TOP
+
+ 104            LOAD_FAST_BORROW        14 (requirements)
+                GET_ITER
+       L13:     FOR_ITER               102 (to L16)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              16 (req)
+                STORE_FAST              17 (subfolder)
+
+ 105            LOAD_GLOBAL             47 (is_dependency_installed + NULL)
+                LOAD_FAST_BORROW         2 (game_dir)
+                LOAD_FAST_BORROW        16 (req)
+                LOAD_CONST              43 ('filename')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        17 (subfolder)
+                CALL                     3
+                STORE_FAST              18 (found)
+
+ 106            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST               15 (req_row)
+                LOAD_CONST              44 ('● ')
+                LOAD_FAST_BORROW        16 (req)
+                LOAD_CONST              45 ('title')
+                BINARY_OP               26 ([])
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+
+ 107            LOAD_GLOBAL              4 (SURF)
+                LOAD_FAST_BORROW        18 (found)
+                TO_BOOL
+                POP_JUMP_IF_FALSE        7 (to L14)
+                NOT_TAKEN
+                LOAD_GLOBAL             48 (GREEN)
+                JUMP_FORWARD             5 (to L15)
+       L14:     LOAD_GLOBAL             50 (RED)
+
+ 108   L15:     LOAD_CONST              55 (('Segoe UI', 8))
+
+ 106            LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+                CALL_KW                  5
+
+ 108            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               7 ('left')
+                LOAD_CONST              57 ((0, 8))
+                LOAD_CONST              46 (('side', 'padx'))
+                CALL_KW                  2
+                POP_TOP
+                JUMP_BACKWARD          104 (to L13)
+
+ 104   L16:     END_FOR
+                POP_ITER
+                EXTENDED_ARG             2
+                JUMP_BACKWARD          571 (to L3)
+
+  78   L17:     END_FOR
+                POP_ITER
+
+ 110   L18:     LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               52 (StringVar)
+                PUSH_NULL
+                LOAD_CONST              47 ('')
+                LOAD_CONST              25 (('value',))
+                CALL_KW                  1
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              27 (_status)
+
+ 111            LOAD_GLOBAL              0 (tk)
+                LOAD_ATTR               10 (Label)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 0 (self, self)
+                LOAD_ATTR               54 (_status)
+                LOAD_GLOBAL             18 (BG)
+                LOAD_GLOBAL             56 (CYAN)
+
+ 112            LOAD_CONST              53 (('Segoe UI', 9))
+                LOAD_CONST              10 (440)
+                LOAD_CONST               7 ('left')
+
+ 111            LOAD_CONST              48 (('textvariable', 'bg', 'fg', 'font', 'wraplength', 'justify'))
+                CALL_KW                  7
+
+ 113            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST              12 ('w')
+                LOAD_SMALL_INT          20
+                LOAD_CONST              56 ((0, 4))
+                LOAD_CONST              13 (('anchor', 'padx', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+
+ 115            LOAD_GLOBAL             59 (_btn + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_CONST              49 ('💾 Save (restart required to apply)')
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               60 (_on_save)
+                LOAD_CONST              50 ('primary')
+
+ 116            LOAD_CONST              61 (('Georgia', 10, 'bold'))
+                LOAD_SMALL_INT          10
+
+ 115            LOAD_CONST              51 (('font', 'pady'))
+                CALL_KW                  6
+
+ 116            LOAD_ATTR                7 (pack + NULL|self)
+                LOAD_CONST               2 ('x')
+                LOAD_SMALL_INT          16
+                LOAD_CONST              62 ((0, 16))
+                LOAD_CONST              24 (('fill', 'padx', 'pady'))
+                CALL_KW                  3
+                POP_TOP
+                LOAD_CONST              15 (None)
+                RETURN_VALUE
+
+  --   L19:     SWAP                     2
+                POP_TOP
+
+  98            SWAP                     2
+                STORE_FAST              13 (r)
+                RERAISE                  0
+
+  --   L20:     SWAP                     2
+                POP_TOP
+
+  99            SWAP                     2
+                STORE_FAST              13 (r)
+                RERAISE                  0
+ExceptionTable:
+  L4 to L7 -> L19 [3]
+  L8 to L11 -> L20 [4]
+
+Disassembly of <code object _on_save at 0x000001CD6BC9B830, file "tavern_shared\addon_manager_window.py", line 118>:
+ 118           RESUME                   0
+
+ 119           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_vars)
+               LOAD_ATTR                3 (items + NULL|self)
+               CALL                     0
+               GET_ITER
+               LOAD_FAST_AND_CLEAR      1 (name)
+               LOAD_FAST_AND_CLEAR      2 (var)
+               SWAP                     3
+       L1:     BUILD_SET                0
+               SWAP                     2
+       L2:     FOR_ITER                31 (to L5)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   18 (name, var)
+               LOAD_FAST_BORROW         2 (var)
+               LOAD_ATTR                5 (get + NULL|self)
+               CALL                     0
+               TO_BOOL
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           29 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (name)
+               SET_ADD                  2
+               JUMP_BACKWARD           33 (to L2)
+       L5:     END_FOR
+               POP_ITER
+       L6:     STORE_FAST               3 (chosen)
+               STORE_FAST               1 (name)
+               STORE_FAST               2 (var)
+
+ 120           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                6 (_addon_loader)
+               LOAD_ATTR                9 (save_enabled_addon_names + NULL|self)
+               LOAD_FAST_BORROW         3 (chosen)
+               CALL                     1
+               POP_TOP
+
+ 121           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               10 (_status)
+               LOAD_ATTR               13 (set + NULL|self)
+
+ 122           LOAD_CONST               0 ('Saved. Restart ')
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               14 (_app_label)
+               FORMAT_SIMPLE
+               LOAD_CONST               1 (' for this to take effect — addons are only loaded once, at startup.')
+               BUILD_STRING             3
+
+ 121           CALL                     1
+               POP_TOP
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  --   L7:     SWAP                     2
+               POP_TOP
+
+ 119           SWAP                     3
+               STORE_FAST               2 (var)
+               STORE_FAST               1 (name)
+               RERAISE                  0
+ExceptionTable:
+  L1 to L3 -> L7 [3]
+  L4 to L6 -> L7 [3]

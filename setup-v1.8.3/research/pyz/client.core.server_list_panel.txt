@@ -1,0 +1,1635 @@
+
+FUNCTION <module>
+ARGS ()
+NAMES ('__doc__', 'tkinter', 'tk', 'ttk', 'filedialog', 'messagebox', 'simpledialog', 'threading', 'time', 'json', 'urllib.request', 'urllib', 'tavern_shared.theme', 'BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar', 'tavern_shared.window_chrome', '_start_hidden', '_finish_dark_window', '_set_window_icon', 'client.core.config', 'load_cfg', 'save_cfg', 'Toplevel', 'ServerListPanel')
+CONSTANTS
+0 'Saved/Recent servers panel.'
+1 None
+2 ('ttk', 'filedialog', 'messagebox', 'simpledialog')
+3 ('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar')
+4 ('_start_hidden', '_finish_dark_window', '_set_window_icon')
+5 ('load_cfg', 'save_cfg')
+6 CODE ServerListPanel
+7 'ServerListPanel'
+
+FUNCTION ServerListPanel
+ARGS ()
+NAMES ('__name__', '__module__', '__qualname__', '__firstlineno__', '__init__', '_build', '_build_fav_tab', '_build_recent_tab', '__static_attributes__', '__classdictcell__', '__classcell__')
+CONSTANTS
+0 'ServerListPanel'
+1 CODE ServerListPanel.__init__
+2 CODE ServerListPanel._build
+3 CODE ServerListPanel._build_fav_tab
+4 CODE ServerListPanel._build_recent_tab
+5 ('_on_select', 'fav_tree', 'rec_tree')
+
+FUNCTION ServerListPanel.__init__
+ARGS ('self', 'parent', 'on_select')
+NAMES ('super', '__init__', '_start_hidden', 'title', 'configure', 'BG', 'geometry', 'resizable', '_on_select', '_build', '_finish_dark_window')
+CONSTANTS
+0 'Saved & Recent Servers'
+1 ('bg',)
+2 '520x460'
+3 False
+4 None
+
+FUNCTION ServerListPanel._build
+ARGS ('self', 'h', 'nb', 'style', 'fav_tab', 'recent_tab')
+NAMES ('tk', 'Frame', 'SURF', 'pack', 'pack_propagate', 'Label', 'AMBER', 'BORDER', 'ttk', 'Notebook', 'Style', 'configure', 'BG', 'SURF2', 'PARCH', 'map', 'AMBERDIM', 'add', '_build_fav_tab', '_build_recent_tab')
+CONSTANTS
+0 44
+1 ('bg', 'height')
+2 'x'
+3 ('fill',)
+4 False
+5 '⚑  Your Servers'
+6 ('text', 'bg', 'fg', 'font')
+7 'left'
+8 ('side', 'padx', 'pady')
+9 'TavNB.TNotebook'
+10 ('background', 'borderwidth')
+11 'TavNB.TNotebook.Tab'
+12 ('background', 'foreground', 'padding', 'font')
+13 'selected'
+14 ('background', 'foreground')
+15 ('style',)
+16 'both'
+17 True
+18 ('fill', 'expand', 'padx', 'pady')
+19 ('bg',)
+20 '  Favourites  '
+21 ('text',)
+22 '  Recent  '
+23 None
+24 ('Georgia', 12, 'bold')
+25 (12, 5)
+26 ('Georgia', 9)
+27 ('selected', '#ffd080')
+
+FUNCTION ServerListPanel._build_fav_tab
+ARGS ('self', 'parent', 'lf', 'cfg', 's', 'br', 'connect', 'remove', 'add_manual')
+NAMES ('tk', 'Frame', 'BG', 'pack', '_mk_tree', 'fav_tree', 'load_cfg', 'get', 'insert', '_btn')
+CONSTANTS
+0 ('bg',)
+1 'both'
+2 True
+3 ('fill', 'expand', 'padx', 'pady')
+4 'ip'
+5 ('height',)
+6 'saved_servers'
+7 ''
+8 'end'
+9 'name'
+10 ('values',)
+11 'x'
+12 ('fill', 'padx', 'pady')
+13 CODE ServerListPanel._build_fav_tab.<locals>.connect
+14 CODE ServerListPanel._build_fav_tab.<locals>.remove
+15 CODE ServerListPanel._build_fav_tab.<locals>.add_manual
+16 'Connect'
+17 'primary'
+18 ('font', 'pady', 'padx')
+19 'left'
+20 ('side',)
+21 '+ Add IP'
+22 'normal'
+23 ('style', 'font', 'pady', 'padx')
+24 ('side', 'padx')
+25 '✕ Remove'
+26 'danger'
+27 None
+28 (8, 4)
+29 ('label', 'ip')
+30 (0, 8)
+31 ('Georgia', 10, 'bold')
+32 ('Segoe UI', 9)
+
+FUNCTION ServerListPanel._build_fav_tab.<locals>.connect
+ARGS ('sel', 'vals', 'entry')
+NAMES ('fav_tree', 'selection', 'item', 'next', 'load_cfg', 'get', '_on_select', 'destroy')
+CONSTANTS
+0 None
+1 'values'
+2 CODE ServerListPanel._build_fav_tab.<locals>.connect.<locals>.<genexpr>
+3 'saved_servers'
+4 'port'
+5 '1757'
+
+FUNCTION ServerListPanel._build_fav_tab.<locals>.connect.<locals>.<genexpr>
+ARGS ('.0', 's')
+NAMES ('get',)
+CONSTANTS
+0 'ip'
+1 None
+
+FUNCTION ServerListPanel._build_fav_tab.<locals>.remove
+ARGS ('sel', 'vals', 'cfg', 's')
+NAMES ('fav_tree', 'selection', 'item', 'load_cfg', 'get', 'save_cfg', 'delete')
+CONSTANTS
+0 None
+1 'values'
+2 'saved_servers'
+3 'ip'
+
+FUNCTION ServerListPanel._build_fav_tab.<locals>.add_manual
+ARGS ('ip', 'label', 'port', 'cfg', 'saved')
+NAMES ('simpledialog', 'askstring', 'strip', 'load_cfg', 'get', 'append', 'save_cfg', 'fav_tree', 'insert')
+CONSTANTS
+0 'Add Server'
+1 'Server IP:'
+2 ('parent',)
+3 None
+4 'Label for this server:'
+5 'Port (leave blank for 1757):'
+6 '1757'
+7 'saved_servers'
+8 'name'
+9 'ip'
+10 'port'
+11 ''
+12 'end'
+13 ('values',)
+
+FUNCTION ServerListPanel._build_recent_tab
+ARGS ('self', 'parent', 'lf', 'cfg', 's', 'br', 'connect', 'save_fav')
+NAMES ('tk', 'Frame', 'BG', 'pack', '_mk_tree', 'rec_tree', 'load_cfg', 'get', 'insert', '_btn')
+CONSTANTS
+0 ('bg',)
+1 'both'
+2 True
+3 ('fill', 'expand', 'padx', 'pady')
+4 'name'
+5 'ip'
+6 ('height',)
+7 'recent_servers'
+8 ''
+9 'end'
+10 ('values',)
+11 'x'
+12 ('fill', 'padx', 'pady')
+13 CODE ServerListPanel._build_recent_tab.<locals>.connect
+14 CODE ServerListPanel._build_recent_tab.<locals>.save_fav
+15 'Connect'
+16 'primary'
+17 ('font', 'pady', 'padx')
+18 'left'
+19 ('side',)
+20 '★ Save as Fav'
+21 'normal'
+22 ('style', 'font', 'pady', 'padx')
+23 ('side', 'padx')
+24 None
+25 (8, 4)
+26 ('name', 'ip')
+27 (0, 8)
+28 ('Georgia', 10, 'bold')
+29 ('Segoe UI', 9)
+
+FUNCTION ServerListPanel._build_recent_tab.<locals>.connect
+ARGS ('sel', 'vals', 'entry')
+NAMES ('rec_tree', 'selection', 'item', 'next', 'load_cfg', 'get', '_on_select', 'destroy')
+CONSTANTS
+0 None
+1 'values'
+2 CODE ServerListPanel._build_recent_tab.<locals>.connect.<locals>.<genexpr>
+3 'recent_servers'
+4 'port'
+5 '1757'
+
+FUNCTION ServerListPanel._build_recent_tab.<locals>.connect.<locals>.<genexpr>
+ARGS ('.0', 's')
+NAMES ('get',)
+CONSTANTS
+0 'ip'
+1 None
+
+FUNCTION ServerListPanel._build_recent_tab.<locals>.save_fav
+ARGS ('sel', 'vals', 'name', 'port', 'cfg', 'saved')
+NAMES ('rec_tree', 'selection', 'item', 'simpledialog', 'askstring', 'next', 'load_cfg', 'get', 'any', 'append', 'save_cfg', 'messagebox', 'showinfo')
+CONSTANTS
+0 None
+1 'values'
+2 'Save Favourite'
+3 'Label for '
+4 ':'
+5 ('parent',)
+6 CODE ServerListPanel._build_recent_tab.<locals>.save_fav.<locals>.<genexpr>
+7 'recent_servers'
+8 '1757'
+9 'saved_servers'
+10 CODE ServerListPanel._build_recent_tab.<locals>.save_fav.<locals>.<genexpr>
+11 True
+12 False
+13 'name'
+14 'ip'
+15 'port'
+16 'Saved'
+17 "'"
+18 "' added to favourites."
+
+FUNCTION ServerListPanel._build_recent_tab.<locals>.save_fav.<locals>.<genexpr>
+ARGS ('.0', 's')
+NAMES ('get',)
+CONSTANTS
+0 'ip'
+1 'port'
+2 '1757'
+3 None
+
+FUNCTION ServerListPanel._build_recent_tab.<locals>.save_fav.<locals>.<genexpr>
+ARGS ('.0', 's')
+NAMES ()
+CONSTANTS
+0 'ip'
+1 None
+  0           RESUME                   0
+
+  1           LOAD_CONST               0 ('Saved/Recent servers panel.')
+              STORE_NAME               0 (__doc__)
+
+  2           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (tkinter)
+              STORE_NAME               2 (tk)
+
+  3           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('ttk', 'filedialog', 'messagebox', 'simpledialog'))
+              IMPORT_NAME              1 (tkinter)
+              IMPORT_FROM              3 (ttk)
+              STORE_NAME               3 (ttk)
+              IMPORT_FROM              4 (filedialog)
+              STORE_NAME               4 (filedialog)
+              IMPORT_FROM              5 (messagebox)
+              STORE_NAME               5 (messagebox)
+              IMPORT_FROM              6 (simpledialog)
+              STORE_NAME               6 (simpledialog)
+              POP_TOP
+
+  4           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              7 (threading)
+              STORE_NAME               7 (threading)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              8 (time)
+              STORE_NAME               8 (time)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              9 (json)
+              STORE_NAME               9 (json)
+              LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME             10 (urllib.request)
+              STORE_NAME              11 (urllib)
+
+  6           LOAD_SMALL_INT           0
+              LOAD_CONST               3 (('BG', 'SURF', 'SURF2', 'BORDER', 'AMBER', 'AMBERDIM', 'PARCH', 'MUTED', 'GREEN', 'RED', 'CYAN', '_btn', '_field', '_hint', '_section_label', '_mk_tree', '_mk_scrollbar'))
+              IMPORT_NAME             12 (tavern_shared.theme)
+              IMPORT_FROM             13 (BG)
+              STORE_NAME              13 (BG)
+              IMPORT_FROM             14 (SURF)
+              STORE_NAME              14 (SURF)
+              IMPORT_FROM             15 (SURF2)
+              STORE_NAME              15 (SURF2)
+              IMPORT_FROM             16 (BORDER)
+              STORE_NAME              16 (BORDER)
+              IMPORT_FROM             17 (AMBER)
+              STORE_NAME              17 (AMBER)
+              IMPORT_FROM             18 (AMBERDIM)
+              STORE_NAME              18 (AMBERDIM)
+              IMPORT_FROM             19 (PARCH)
+              STORE_NAME              19 (PARCH)
+              IMPORT_FROM             20 (MUTED)
+              STORE_NAME              20 (MUTED)
+              IMPORT_FROM             21 (GREEN)
+              STORE_NAME              21 (GREEN)
+              IMPORT_FROM             22 (RED)
+              STORE_NAME              22 (RED)
+              IMPORT_FROM             23 (CYAN)
+              STORE_NAME              23 (CYAN)
+              IMPORT_FROM             24 (_btn)
+              STORE_NAME              24 (_btn)
+              IMPORT_FROM             25 (_field)
+              STORE_NAME              25 (_field)
+              IMPORT_FROM             26 (_hint)
+              STORE_NAME              26 (_hint)
+              IMPORT_FROM             27 (_section_label)
+              STORE_NAME              27 (_section_label)
+              IMPORT_FROM             28 (_mk_tree)
+              STORE_NAME              28 (_mk_tree)
+              IMPORT_FROM             29 (_mk_scrollbar)
+              STORE_NAME              29 (_mk_scrollbar)
+              POP_TOP
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               4 (('_start_hidden', '_finish_dark_window', '_set_window_icon'))
+              IMPORT_NAME             30 (tavern_shared.window_chrome)
+              IMPORT_FROM             31 (_start_hidden)
+              STORE_NAME              31 (_start_hidden)
+              IMPORT_FROM             32 (_finish_dark_window)
+              STORE_NAME              32 (_finish_dark_window)
+              IMPORT_FROM             33 (_set_window_icon)
+              STORE_NAME              33 (_set_window_icon)
+              POP_TOP
+
+ 12           LOAD_SMALL_INT           0
+              LOAD_CONST               5 (('load_cfg', 'save_cfg'))
+              IMPORT_NAME             34 (client.core.config)
+              IMPORT_FROM             35 (load_cfg)
+              STORE_NAME              35 (load_cfg)
+              IMPORT_FROM             36 (save_cfg)
+              STORE_NAME              36 (save_cfg)
+              POP_TOP
+
+ 14           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               6 (<code object ServerListPanel at 0x000001CD6C2A6D30, file "client\core\server_list_panel.py", line 14>)
+              MAKE_FUNCTION
+              LOAD_CONST               7 ('ServerListPanel')
+              LOAD_NAME                2 (tk)
+              LOAD_ATTR               74 (Toplevel)
+              CALL                     3
+              STORE_NAME              38 (ServerListPanel)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object ServerListPanel at 0x000001CD6C2A6D30, file "client\core\server_list_panel.py", line 14>:
+  --           MAKE_CELL                0 (__class__)
+               MAKE_CELL                1 (__classdict__)
+
+  14           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('ServerListPanel')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT          14
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              1 (__classdict__)
+
+  15           LOAD_FAST_BORROW         0 (__class__)
+               BUILD_TUPLE              1
+               LOAD_CONST               1 (<code object __init__ at 0x000001CD6BCE6CC0, file "client\core\server_list_panel.py", line 15>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_NAME               4 (__init__)
+
+  26           LOAD_CONST               2 (<code object _build at 0x000001CD6BF00040, file "client\core\server_list_panel.py", line 26>)
+               MAKE_FUNCTION
+               STORE_NAME               5 (_build)
+
+  52           LOAD_CONST               3 (<code object _build_fav_tab at 0x000001CD6C028D90, file "client\core\server_list_panel.py", line 52>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (_build_fav_tab)
+
+ 104           LOAD_CONST               4 (<code object _build_recent_tab at 0x000001CD6BEF36B0, file "client\core\server_list_panel.py", line 104>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (_build_recent_tab)
+               LOAD_CONST               5 (('_on_select', 'fav_tree', 'rec_tree'))
+               STORE_NAME               8 (__static_attributes__)
+               LOAD_FAST_BORROW         1 (__classdict__)
+               STORE_NAME               9 (__classdictcell__)
+               LOAD_FAST_BORROW         0 (__class__)
+               COPY                     1
+               STORE_NAME              10 (__classcell__)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x000001CD6BCE6CC0, file "client\core\server_list_panel.py", line 15>:
+  --           COPY_FREE_VARS           1
+
+  15           RESUME                   0
+
+  16           LOAD_GLOBAL              0 (super)
+               LOAD_DEREF               3 (__class__)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_SUPER_ATTR          5 (__init__ + NULL|self)
+               LOAD_FAST_BORROW         1 (parent)
+               CALL                     1
+               POP_TOP
+
+  17           LOAD_GLOBAL              5 (_start_hidden + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+
+  18           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                7 (title + NULL|self)
+               LOAD_CONST               0 ('Saved & Recent Servers')
+               CALL                     1
+               POP_TOP
+
+  19           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                9 (configure + NULL|self)
+               LOAD_GLOBAL             10 (BG)
+               LOAD_CONST               1 (('bg',))
+               CALL_KW                  1
+               POP_TOP
+
+  20           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               13 (geometry + NULL|self)
+               LOAD_CONST               2 ('520x460')
+               CALL                     1
+               POP_TOP
+
+  21           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               15 (resizable + NULL|self)
+               LOAD_CONST               3 (False)
+               LOAD_CONST               3 (False)
+               CALL                     2
+               POP_TOP
+
+  22           LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (on_select, self)
+               STORE_ATTR               8 (_on_select)
+
+  23           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               19 (_build + NULL|self)
+               CALL                     0
+               POP_TOP
+
+  24           LOAD_GLOBAL             21 (_finish_dark_window + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               CALL                     1
+               POP_TOP
+               LOAD_CONST               4 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _build at 0x000001CD6BF00040, file "client\core\server_list_panel.py", line 26>:
+ 26           RESUME                   0
+
+ 27           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_SMALL_INT          44
+              LOAD_CONST               1 (('bg', 'height'))
+              CALL_KW                  3
+              STORE_FAST               1 (h)
+
+ 28           LOAD_FAST_BORROW         1 (h)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_CONST               3 (('fill',))
+              CALL_KW                  1
+              POP_TOP
+              LOAD_FAST_BORROW         1 (h)
+              LOAD_ATTR                9 (pack_propagate + NULL|self)
+              LOAD_CONST               4 (False)
+              CALL                     1
+              POP_TOP
+
+ 29           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR               10 (Label)
+              PUSH_NULL
+              LOAD_FAST_BORROW         1 (h)
+              LOAD_CONST               5 ('⚑  Your Servers')
+              LOAD_GLOBAL              4 (SURF)
+              LOAD_GLOBAL             12 (AMBER)
+
+ 30           LOAD_CONST              24 (('Georgia', 12, 'bold'))
+
+ 29           LOAD_CONST               6 (('text', 'bg', 'fg', 'font'))
+              CALL_KW                  5
+
+ 30           LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               7 ('left')
+              LOAD_SMALL_INT          16
+              LOAD_SMALL_INT           8
+              LOAD_CONST               8 (('side', 'padx', 'pady'))
+              CALL_KW                  3
+              POP_TOP
+
+ 31           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_GLOBAL             14 (BORDER)
+              LOAD_SMALL_INT           1
+              LOAD_CONST               1 (('bg', 'height'))
+              CALL_KW                  3
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST               2 ('x')
+              LOAD_CONST               3 (('fill',))
+              CALL_KW                  1
+              POP_TOP
+
+ 33           LOAD_GLOBAL             16 (ttk)
+              LOAD_ATTR               18 (Notebook)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              CALL                     1
+              STORE_FAST               2 (nb)
+
+ 34           LOAD_GLOBAL             16 (ttk)
+              LOAD_ATTR               20 (Style)
+              PUSH_NULL
+              CALL                     0
+              STORE_FAST               3 (style)
+
+ 35           LOAD_FAST_BORROW         3 (style)
+              LOAD_ATTR               23 (configure + NULL|self)
+              LOAD_CONST               9 ('TavNB.TNotebook')
+              LOAD_GLOBAL             24 (BG)
+              LOAD_SMALL_INT           0
+              LOAD_CONST              10 (('background', 'borderwidth'))
+              CALL_KW                  3
+              POP_TOP
+
+ 36           LOAD_FAST_BORROW         3 (style)
+              LOAD_ATTR               23 (configure + NULL|self)
+              LOAD_CONST              11 ('TavNB.TNotebook.Tab')
+              LOAD_GLOBAL             26 (SURF2)
+              LOAD_GLOBAL             28 (PARCH)
+
+ 37           LOAD_CONST              25 ((12, 5))
+              LOAD_CONST              26 (('Georgia', 9))
+
+ 36           LOAD_CONST              12 (('background', 'foreground', 'padding', 'font'))
+              CALL_KW                  5
+              POP_TOP
+
+ 38           LOAD_FAST_BORROW         3 (style)
+              LOAD_ATTR               31 (map + NULL|self)
+              LOAD_CONST              11 ('TavNB.TNotebook.Tab')
+
+ 39           LOAD_CONST              13 ('selected')
+              LOAD_GLOBAL             32 (AMBERDIM)
+              BUILD_TUPLE              2
+              BUILD_LIST               1
+
+ 40           LOAD_CONST              27 (('selected', '#ffd080'))
+              BUILD_LIST               1
+
+ 38           LOAD_CONST              14 (('background', 'foreground'))
+              CALL_KW                  3
+              POP_TOP
+
+ 41           LOAD_FAST_BORROW         2 (nb)
+              LOAD_ATTR               23 (configure + NULL|self)
+              LOAD_CONST               9 ('TavNB.TNotebook')
+              LOAD_CONST              15 (('style',))
+              CALL_KW                  1
+              POP_TOP
+
+ 42           LOAD_FAST_BORROW         2 (nb)
+              LOAD_ATTR                7 (pack + NULL|self)
+              LOAD_CONST              16 ('both')
+              LOAD_CONST              17 (True)
+              LOAD_SMALL_INT          10
+              LOAD_SMALL_INT          10
+              LOAD_CONST              18 (('fill', 'expand', 'padx', 'pady'))
+              CALL_KW                  4
+              POP_TOP
+
+ 44           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         2 (nb)
+              LOAD_GLOBAL             24 (BG)
+              LOAD_CONST              19 (('bg',))
+              CALL_KW                  2
+              STORE_FAST               4 (fav_tab)
+
+ 45           LOAD_GLOBAL              0 (tk)
+              LOAD_ATTR                2 (Frame)
+              PUSH_NULL
+              LOAD_FAST_BORROW         2 (nb)
+              LOAD_GLOBAL             24 (BG)
+              LOAD_CONST              19 (('bg',))
+              CALL_KW                  2
+              STORE_FAST               5 (recent_tab)
+
+ 46           LOAD_FAST_BORROW         2 (nb)
+              LOAD_ATTR               35 (add + NULL|self)
+              LOAD_FAST_BORROW         4 (fav_tab)
+              LOAD_CONST              20 ('  Favourites  ')
+              LOAD_CONST              21 (('text',))
+              CALL_KW                  2
+              POP_TOP
+
+ 47           LOAD_FAST_BORROW         2 (nb)
+              LOAD_ATTR               35 (add + NULL|self)
+              LOAD_FAST_BORROW         5 (recent_tab)
+              LOAD_CONST              22 ('  Recent  ')
+              LOAD_CONST              21 (('text',))
+              CALL_KW                  2
+              POP_TOP
+
+ 49           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               37 (_build_fav_tab + NULL|self)
+              LOAD_FAST_BORROW         4 (fav_tab)
+              CALL                     1
+              POP_TOP
+
+ 50           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               39 (_build_recent_tab + NULL|self)
+              LOAD_FAST_BORROW         5 (recent_tab)
+              CALL                     1
+              POP_TOP
+              LOAD_CONST              23 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _build_fav_tab at 0x000001CD6C028D90, file "client\core\server_list_panel.py", line 52>:
+  --           MAKE_CELL                0 (self)
+
+  52           RESUME                   0
+
+  53           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (parent)
+               LOAD_GLOBAL              4 (BG)
+               LOAD_CONST               0 (('bg',))
+               CALL_KW                  2
+               STORE_FAST               2 (lf)
+
+  54           LOAD_FAST_BORROW         2 (lf)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               1 ('both')
+               LOAD_CONST               2 (True)
+               LOAD_SMALL_INT           8
+               LOAD_CONST              28 ((8, 4))
+               LOAD_CONST               3 (('fill', 'expand', 'padx', 'pady'))
+               CALL_KW                  4
+               POP_TOP
+
+  55           LOAD_GLOBAL              9 (_mk_tree + NULL)
+               LOAD_FAST_BORROW         2 (lf)
+               LOAD_CONST              29 (('label', 'ip'))
+               LOAD_SMALL_INT         240
+               LOAD_SMALL_INT         200
+               BUILD_LIST               2
+               LOAD_SMALL_INT           9
+               LOAD_CONST               5 (('height',))
+               CALL_KW                  4
+               LOAD_DEREF               0 (self)
+               STORE_ATTR               5 (fav_tree)
+
+  56           LOAD_GLOBAL             13 (load_cfg + NULL)
+               CALL                     0
+               STORE_FAST               3 (cfg)
+
+  57           LOAD_FAST_BORROW         3 (cfg)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               6 ('saved_servers')
+               BUILD_LIST               0
+               CALL                     2
+               GET_ITER
+       L1:     FOR_ITER                83 (to L2)
+               STORE_FAST               4 (s)
+
+  58           LOAD_DEREF               0 (self)
+               LOAD_ATTR               10 (fav_tree)
+               LOAD_ATTR               17 (insert + NULL|self)
+               LOAD_CONST               7 ('')
+               LOAD_CONST               8 ('end')
+               LOAD_FAST_BORROW         4 (s)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               9 ('name')
+               LOAD_FAST_BORROW         4 (s)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               4 ('ip')
+               LOAD_CONST               7 ('')
+               CALL                     2
+               CALL                     2
+               LOAD_FAST_BORROW         4 (s)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               4 ('ip')
+               LOAD_CONST               7 ('')
+               CALL                     2
+               BUILD_TUPLE              2
+               LOAD_CONST              10 (('values',))
+               CALL_KW                  3
+               POP_TOP
+               JUMP_BACKWARD           85 (to L1)
+
+  57   L2:     END_FOR
+               POP_ITER
+
+  60           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (parent)
+               LOAD_GLOBAL              4 (BG)
+               LOAD_CONST               0 (('bg',))
+               CALL_KW                  2
+               STORE_FAST               5 (br)
+
+  61           LOAD_FAST_BORROW         5 (br)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              11 ('x')
+               LOAD_SMALL_INT           8
+               LOAD_CONST              30 ((0, 8))
+               LOAD_CONST              12 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+  63           LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              13 (<code object connect at 0x000001CD6C018180, file "client\core\server_list_panel.py", line 63>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               6 (connect)
+
+  72           LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              14 (<code object remove at 0x000001CD535E0A40, file "client\core\server_list_panel.py", line 72>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               7 (remove)
+
+  81           LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              15 (<code object add_manual at 0x000001CD6B9FA7B0, file "client\core\server_list_panel.py", line 81>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               8 (add_manual)
+
+  97           LOAD_GLOBAL             19 (_btn + NULL)
+               LOAD_FAST_BORROW         5 (br)
+               LOAD_CONST              16 ('Connect')
+               LOAD_FAST_BORROW         6 (connect)
+               LOAD_CONST              17 ('primary')
+               LOAD_CONST              31 (('Georgia', 10, 'bold'))
+
+  98           LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          14
+
+  97           LOAD_CONST              18 (('font', 'pady', 'padx'))
+               CALL_KW                  7
+
+  98           LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              19 ('left')
+               LOAD_CONST              20 (('side',))
+               CALL_KW                  1
+               POP_TOP
+
+  99           LOAD_GLOBAL             19 (_btn + NULL)
+               LOAD_FAST_BORROW         5 (br)
+               LOAD_CONST              21 ('+ Add IP')
+               LOAD_FAST_BORROW         8 (add_manual)
+               LOAD_CONST              22 ('normal')
+
+ 100           LOAD_CONST              32 (('Segoe UI', 9))
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          10
+
+  99           LOAD_CONST              23 (('style', 'font', 'pady', 'padx'))
+               CALL_KW                  7
+
+ 100           LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              19 ('left')
+               LOAD_SMALL_INT           6
+               LOAD_CONST              24 (('side', 'padx'))
+               CALL_KW                  2
+               POP_TOP
+
+ 101           LOAD_GLOBAL             19 (_btn + NULL)
+               LOAD_FAST_BORROW         5 (br)
+               LOAD_CONST              25 ('✕ Remove')
+               LOAD_FAST_BORROW         7 (remove)
+               LOAD_CONST              26 ('danger')
+
+ 102           LOAD_CONST              32 (('Segoe UI', 9))
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          10
+
+ 101           LOAD_CONST              18 (('font', 'pady', 'padx'))
+               CALL_KW                  7
+
+ 102           LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              19 ('left')
+               LOAD_CONST              20 (('side',))
+               CALL_KW                  1
+               POP_TOP
+               LOAD_CONST              27 (None)
+               RETURN_VALUE
+
+Disassembly of <code object connect at 0x000001CD6C018180, file "client\core\server_list_panel.py", line 63>:
+  --           COPY_FREE_VARS           1
+               MAKE_CELL                3 (ip)
+
+  63           RESUME                   0
+
+  64           LOAD_DEREF               4 (self)
+               LOAD_ATTR                0 (fav_tree)
+               LOAD_ATTR                3 (selection + NULL|self)
+               CALL                     0
+               STORE_FAST               0 (sel)
+
+  65           LOAD_FAST_BORROW         0 (sel)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  66   L1:     LOAD_DEREF               4 (self)
+               LOAD_ATTR                0 (fav_tree)
+               LOAD_ATTR                5 (item + NULL|self)
+               LOAD_FAST_BORROW         0 (sel)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               LOAD_CONST               1 ('values')
+               CALL                     2
+               STORE_FAST               1 (vals)
+
+  67           LOAD_FAST_BORROW         1 (vals)
+               LOAD_SMALL_INT           1
+               BINARY_OP               26 ([])
+               STORE_DEREF              3 (ip)
+
+  68           LOAD_GLOBAL              7 (next + NULL)
+               LOAD_FAST_BORROW         3 (ip)
+               BUILD_TUPLE              1
+               LOAD_CONST               2 (<code object <genexpr> at 0x000001CD6BD2E760, file "client\core\server_list_panel.py", line 68>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_GLOBAL              9 (load_cfg + NULL)
+               CALL                     0
+               LOAD_ATTR               11 (get + NULL|self)
+               LOAD_CONST               3 ('saved_servers')
+               BUILD_LIST               0
+               CALL                     2
+               GET_ITER
+               CALL                     0
+
+  69           BUILD_MAP                0
+
+  68           CALL                     2
+               STORE_FAST               2 (entry)
+
+  70           LOAD_DEREF               4 (self)
+               LOAD_ATTR               13 (_on_select + NULL|self)
+               LOAD_DEREF               3 (ip)
+               LOAD_FAST_BORROW         1 (vals)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               LOAD_FAST_BORROW         2 (entry)
+               LOAD_ATTR               11 (get + NULL|self)
+               LOAD_CONST               4 ('port')
+               LOAD_CONST               5 ('1757')
+               CALL                     2
+               CALL                     3
+               POP_TOP
+               LOAD_DEREF               4 (self)
+               LOAD_ATTR               15 (destroy + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x000001CD6BD2E760, file "client\core\server_list_panel.py", line 68>:
+  --           COPY_FREE_VARS           1
+
+  68           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                31 (to L5)
+               STORE_FAST               1 (s)
+
+  69           LOAD_FAST_BORROW         1 (s)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               0 ('ip')
+               CALL                     1
+               LOAD_DEREF               2 (ip)
+               COMPARE_OP              88 (bool(==))
+
+  68   L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           27 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (s)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           33 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object remove at 0x000001CD535E0A40, file "client\core\server_list_panel.py", line 72>:
+  --           COPY_FREE_VARS           1
+
+  72           RESUME                   0
+
+  73           LOAD_DEREF               4 (self)
+               LOAD_ATTR                0 (fav_tree)
+               LOAD_ATTR                3 (selection + NULL|self)
+               CALL                     0
+               STORE_FAST               0 (sel)
+
+  74           LOAD_FAST_BORROW         0 (sel)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  75   L1:     LOAD_DEREF               4 (self)
+               LOAD_ATTR                0 (fav_tree)
+               LOAD_ATTR                5 (item + NULL|self)
+               LOAD_FAST_BORROW         0 (sel)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               LOAD_CONST               1 ('values')
+               CALL                     2
+               STORE_FAST               1 (vals)
+
+  76           LOAD_GLOBAL              7 (load_cfg + NULL)
+               CALL                     0
+               STORE_FAST               2 (cfg)
+
+  77           LOAD_FAST_BORROW         2 (cfg)
+               LOAD_ATTR                9 (get + NULL|self)
+               LOAD_CONST               2 ('saved_servers')
+               BUILD_LIST               0
+               CALL                     2
+               GET_ITER
+               LOAD_FAST_AND_CLEAR      3 (s)
+               SWAP                     2
+       L2:     BUILD_LIST               0
+               SWAP                     2
+       L3:     FOR_ITER                36 (to L6)
+               STORE_FAST               3 (s)
+
+  78           LOAD_FAST_BORROW         3 (s)
+               LOAD_ATTR                9 (get + NULL|self)
+               LOAD_CONST               3 ('ip')
+               CALL                     1
+               LOAD_FAST_BORROW         1 (vals)
+               LOAD_SMALL_INT           1
+               BINARY_OP               26 ([])
+               COMPARE_OP             119 (bool(!=))
+
+  77   L4:     POP_JUMP_IF_TRUE         3 (to L5)
+               NOT_TAKEN
+               JUMP_BACKWARD           34 (to L3)
+       L5:     LOAD_FAST_BORROW         3 (s)
+               LIST_APPEND              2
+               JUMP_BACKWARD           38 (to L3)
+       L6:     END_FOR
+               POP_ITER
+       L7:     SWAP                     2
+               STORE_FAST               3 (s)
+               LOAD_FAST_BORROW         2 (cfg)
+               LOAD_CONST               2 ('saved_servers')
+               STORE_SUBSCR
+
+  79           LOAD_GLOBAL             11 (save_cfg + NULL)
+               LOAD_FAST_BORROW         2 (cfg)
+               CALL                     1
+               POP_TOP
+               LOAD_DEREF               4 (self)
+               LOAD_ATTR                0 (fav_tree)
+               LOAD_ATTR               13 (delete + NULL|self)
+               LOAD_FAST_BORROW         0 (sel)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               CALL                     1
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L8:     SWAP                     2
+               POP_TOP
+
+  77           SWAP                     2
+               STORE_FAST               3 (s)
+               RERAISE                  0
+ExceptionTable:
+  L2 to L4 -> L8 [2]
+  L5 to L7 -> L8 [2]
+
+Disassembly of <code object add_manual at 0x000001CD6B9FA7B0, file "client\core\server_list_panel.py", line 81>:
+  --           COPY_FREE_VARS           1
+
+  81           RESUME                   0
+
+  82           LOAD_GLOBAL              0 (simpledialog)
+               LOAD_ATTR                2 (askstring)
+               PUSH_NULL
+               LOAD_CONST               0 ('Add Server')
+
+  83           LOAD_CONST               1 ('Server IP:')
+               LOAD_DEREF               5 (self)
+
+  82           LOAD_CONST               2 (('parent',))
+               CALL_KW                  3
+               STORE_FAST               0 (ip)
+
+  84           LOAD_FAST_BORROW         0 (ip)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  85   L1:     LOAD_FAST_BORROW         0 (ip)
+               LOAD_ATTR                5 (strip + NULL|self)
+               CALL                     0
+               STORE_FAST               0 (ip)
+
+  86           LOAD_GLOBAL              0 (simpledialog)
+               LOAD_ATTR                2 (askstring)
+               PUSH_NULL
+               LOAD_CONST               0 ('Add Server')
+
+  87           LOAD_CONST               4 ('Label for this server:')
+               LOAD_DEREF               5 (self)
+
+  86           LOAD_CONST               2 (('parent',))
+               CALL_KW                  3
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L2)
+               NOT_TAKEN
+               POP_TOP
+
+  87           LOAD_FAST                0 (ip)
+
+  86   L2:     STORE_FAST               1 (label)
+
+  88           LOAD_GLOBAL              0 (simpledialog)
+               LOAD_ATTR                2 (askstring)
+               PUSH_NULL
+               LOAD_CONST               0 ('Add Server')
+
+  89           LOAD_CONST               5 ('Port (leave blank for 1757):')
+               LOAD_DEREF               5 (self)
+
+  88           LOAD_CONST               2 (('parent',))
+               CALL_KW                  3
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L3)
+               NOT_TAKEN
+               POP_TOP
+
+  89           LOAD_CONST               6 ('1757')
+
+  88   L3:     STORE_FAST               2 (port)
+
+  90           LOAD_GLOBAL              7 (load_cfg + NULL)
+               CALL                     0
+               STORE_FAST               3 (cfg)
+
+  91           LOAD_FAST_BORROW         3 (cfg)
+               LOAD_ATTR                9 (get + NULL|self)
+               LOAD_CONST               7 ('saved_servers')
+               BUILD_LIST               0
+               CALL                     2
+               STORE_FAST               4 (saved)
+
+  92           LOAD_FAST_BORROW         4 (saved)
+               LOAD_ATTR               11 (append + NULL|self)
+               LOAD_CONST               8 ('name')
+               LOAD_FAST_BORROW         1 (label)
+               LOAD_CONST               9 ('ip')
+               LOAD_FAST_BORROW         0 (ip)
+               LOAD_CONST              10 ('port')
+               LOAD_FAST_BORROW         2 (port)
+               BUILD_MAP                3
+               CALL                     1
+               POP_TOP
+
+  93           LOAD_FAST_BORROW_LOAD_FAST_BORROW 67 (saved, cfg)
+               LOAD_CONST               7 ('saved_servers')
+               STORE_SUBSCR
+
+  94           LOAD_GLOBAL             13 (save_cfg + NULL)
+               LOAD_FAST_BORROW         3 (cfg)
+               CALL                     1
+               POP_TOP
+
+  95           LOAD_DEREF               5 (self)
+               LOAD_ATTR               14 (fav_tree)
+               LOAD_ATTR               17 (insert + NULL|self)
+               LOAD_CONST              11 ('')
+               LOAD_CONST              12 ('end')
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (label, ip)
+               BUILD_TUPLE              2
+               LOAD_CONST              13 (('values',))
+               CALL_KW                  3
+               POP_TOP
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _build_recent_tab at 0x000001CD6BEF36B0, file "client\core\server_list_panel.py", line 104>:
+  --           MAKE_CELL                0 (self)
+
+ 104           RESUME                   0
+
+ 105           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (parent)
+               LOAD_GLOBAL              4 (BG)
+               LOAD_CONST               0 (('bg',))
+               CALL_KW                  2
+               STORE_FAST               2 (lf)
+
+ 106           LOAD_FAST_BORROW         2 (lf)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST               1 ('both')
+               LOAD_CONST               2 (True)
+               LOAD_SMALL_INT           8
+               LOAD_CONST              25 ((8, 4))
+               LOAD_CONST               3 (('fill', 'expand', 'padx', 'pady'))
+               CALL_KW                  4
+               POP_TOP
+
+ 107           LOAD_GLOBAL              9 (_mk_tree + NULL)
+               LOAD_FAST_BORROW         2 (lf)
+               LOAD_CONST              26 (('name', 'ip'))
+               LOAD_SMALL_INT         240
+               LOAD_SMALL_INT         200
+               BUILD_LIST               2
+               LOAD_SMALL_INT           9
+               LOAD_CONST               6 (('height',))
+               CALL_KW                  4
+               LOAD_DEREF               0 (self)
+               STORE_ATTR               5 (rec_tree)
+
+ 108           LOAD_GLOBAL             13 (load_cfg + NULL)
+               CALL                     0
+               STORE_FAST               3 (cfg)
+
+ 109           LOAD_FAST_BORROW         3 (cfg)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               7 ('recent_servers')
+               BUILD_LIST               0
+               CALL                     2
+               GET_ITER
+       L1:     FOR_ITER                83 (to L2)
+               STORE_FAST               4 (s)
+
+ 110           LOAD_DEREF               0 (self)
+               LOAD_ATTR               10 (rec_tree)
+               LOAD_ATTR               17 (insert + NULL|self)
+               LOAD_CONST               8 ('')
+               LOAD_CONST               9 ('end')
+               LOAD_FAST_BORROW         4 (s)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               4 ('name')
+               LOAD_FAST_BORROW         4 (s)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               5 ('ip')
+               LOAD_CONST               8 ('')
+               CALL                     2
+               CALL                     2
+               LOAD_FAST_BORROW         4 (s)
+               LOAD_ATTR               15 (get + NULL|self)
+               LOAD_CONST               5 ('ip')
+               LOAD_CONST               8 ('')
+               CALL                     2
+               BUILD_TUPLE              2
+               LOAD_CONST              10 (('values',))
+               CALL_KW                  3
+               POP_TOP
+               JUMP_BACKWARD           85 (to L1)
+
+ 109   L2:     END_FOR
+               POP_ITER
+
+ 112           LOAD_GLOBAL              0 (tk)
+               LOAD_ATTR                2 (Frame)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (parent)
+               LOAD_GLOBAL              4 (BG)
+               LOAD_CONST               0 (('bg',))
+               CALL_KW                  2
+               STORE_FAST               5 (br)
+
+ 113           LOAD_FAST_BORROW         5 (br)
+               LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              11 ('x')
+               LOAD_SMALL_INT           8
+               LOAD_CONST              27 ((0, 8))
+               LOAD_CONST              12 (('fill', 'padx', 'pady'))
+               CALL_KW                  3
+               POP_TOP
+
+ 115           LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              13 (<code object connect at 0x000001CD6C018640, file "client\core\server_list_panel.py", line 115>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               6 (connect)
+
+ 124           LOAD_FAST_BORROW         0 (self)
+               BUILD_TUPLE              1
+               LOAD_CONST              14 (<code object save_fav at 0x000001CD6C029140, file "client\core\server_list_panel.py", line 124>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               STORE_FAST               7 (save_fav)
+
+ 143           LOAD_GLOBAL             19 (_btn + NULL)
+               LOAD_FAST_BORROW         5 (br)
+               LOAD_CONST              15 ('Connect')
+               LOAD_FAST_BORROW         6 (connect)
+               LOAD_CONST              16 ('primary')
+
+ 144           LOAD_CONST              28 (('Georgia', 10, 'bold'))
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          14
+
+ 143           LOAD_CONST              17 (('font', 'pady', 'padx'))
+               CALL_KW                  7
+
+ 144           LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              18 ('left')
+               LOAD_CONST              19 (('side',))
+               CALL_KW                  1
+               POP_TOP
+
+ 145           LOAD_GLOBAL             19 (_btn + NULL)
+               LOAD_FAST_BORROW         5 (br)
+               LOAD_CONST              20 ('★ Save as Fav')
+               LOAD_FAST_BORROW         7 (save_fav)
+               LOAD_CONST              21 ('normal')
+
+ 146           LOAD_CONST              29 (('Segoe UI', 9))
+               LOAD_SMALL_INT           6
+               LOAD_SMALL_INT          10
+
+ 145           LOAD_CONST              22 (('style', 'font', 'pady', 'padx'))
+               CALL_KW                  7
+
+ 146           LOAD_ATTR                7 (pack + NULL|self)
+               LOAD_CONST              18 ('left')
+               LOAD_SMALL_INT           6
+               LOAD_CONST              23 (('side', 'padx'))
+               CALL_KW                  2
+               POP_TOP
+               LOAD_CONST              24 (None)
+               RETURN_VALUE
+
+Disassembly of <code object connect at 0x000001CD6C018640, file "client\core\server_list_panel.py", line 115>:
+  --           COPY_FREE_VARS           1
+               MAKE_CELL                3 (ip)
+
+ 115           RESUME                   0
+
+ 116           LOAD_DEREF               4 (self)
+               LOAD_ATTR                0 (rec_tree)
+               LOAD_ATTR                3 (selection + NULL|self)
+               CALL                     0
+               STORE_FAST               0 (sel)
+
+ 117           LOAD_FAST_BORROW         0 (sel)
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 118   L1:     LOAD_DEREF               4 (self)
+               LOAD_ATTR                0 (rec_tree)
+               LOAD_ATTR                5 (item + NULL|self)
+               LOAD_FAST_BORROW         0 (sel)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               LOAD_CONST               1 ('values')
+               CALL                     2
+               STORE_FAST               1 (vals)
+
+ 119           LOAD_FAST_BORROW         1 (vals)
+               LOAD_SMALL_INT           1
+               BINARY_OP               26 ([])
+               STORE_DEREF              3 (ip)
+
+ 120           LOAD_GLOBAL              7 (next + NULL)
+               LOAD_FAST_BORROW         3 (ip)
+               BUILD_TUPLE              1
+               LOAD_CONST               2 (<code object <genexpr> at 0x000001CD6BD2EAF0, file "client\core\server_list_panel.py", line 120>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_GLOBAL              9 (load_cfg + NULL)
+               CALL                     0
+               LOAD_ATTR               11 (get + NULL|self)
+               LOAD_CONST               3 ('recent_servers')
+               BUILD_LIST               0
+               CALL                     2
+               GET_ITER
+               CALL                     0
+
+ 121           BUILD_MAP                0
+
+ 120           CALL                     2
+               STORE_FAST               2 (entry)
+
+ 122           LOAD_DEREF               4 (self)
+               LOAD_ATTR               13 (_on_select + NULL|self)
+               LOAD_DEREF               3 (ip)
+               LOAD_FAST_BORROW         1 (vals)
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               LOAD_FAST_BORROW         2 (entry)
+               LOAD_ATTR               11 (get + NULL|self)
+               LOAD_CONST               4 ('port')
+               LOAD_CONST               5 ('1757')
+               CALL                     2
+               CALL                     3
+               POP_TOP
+               LOAD_DEREF               4 (self)
+               LOAD_ATTR               15 (destroy + NULL|self)
+               CALL                     0
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x000001CD6BD2EAF0, file "client\core\server_list_panel.py", line 120>:
+  --           COPY_FREE_VARS           1
+
+ 120           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                31 (to L5)
+               STORE_FAST               1 (s)
+
+ 121           LOAD_FAST_BORROW         1 (s)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               0 ('ip')
+               CALL                     1
+               LOAD_DEREF               2 (ip)
+               COMPARE_OP              88 (bool(==))
+
+ 120   L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           27 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (s)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           33 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object save_fav at 0x000001CD6C029140, file "client\core\server_list_panel.py", line 124>:
+  --            COPY_FREE_VARS           1
+                MAKE_CELL                6 (ip)
+
+ 124            RESUME                   0
+
+ 125            LOAD_DEREF               7 (self)
+                LOAD_ATTR                0 (rec_tree)
+                LOAD_ATTR                3 (selection + NULL|self)
+                CALL                     0
+                STORE_FAST               0 (sel)
+
+ 126            LOAD_FAST_BORROW         0 (sel)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L1)
+                NOT_TAKEN
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 127    L1:     LOAD_DEREF               7 (self)
+                LOAD_ATTR                0 (rec_tree)
+                LOAD_ATTR                5 (item + NULL|self)
+                LOAD_FAST_BORROW         0 (sel)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_CONST               1 ('values')
+                CALL                     2
+                STORE_FAST               1 (vals)
+
+ 128            LOAD_FAST_BORROW         1 (vals)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         1 (vals)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                SWAP                     2
+                STORE_DEREF              6 (ip)
+                STORE_FAST               2 (name)
+
+ 130            LOAD_FAST_BORROW         2 (name)
+                LOAD_DEREF               6 (ip)
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_TRUE         9 (to L2)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         2 (name)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        40 (to L4)
+                NOT_TAKEN
+
+ 131    L2:     LOAD_GLOBAL              6 (simpledialog)
+                LOAD_ATTR                8 (askstring)
+                PUSH_NULL
+                LOAD_CONST               2 ('Save Favourite')
+
+ 132            LOAD_CONST               3 ('Label for ')
+                LOAD_DEREF               6 (ip)
+                FORMAT_SIMPLE
+                LOAD_CONST               4 (':')
+                BUILD_STRING             3
+                LOAD_DEREF               7 (self)
+
+ 131            LOAD_CONST               5 (('parent',))
+                CALL_KW                  3
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L3)
+                NOT_TAKEN
+                POP_TOP
+
+ 132            LOAD_DEREF               6 (ip)
+
+ 131    L3:     STORE_FAST               2 (name)
+
+ 133    L4:     LOAD_GLOBAL             11 (next + NULL)
+                LOAD_FAST_BORROW         6 (ip)
+                BUILD_TUPLE              1
+                LOAD_CONST               6 (<code object <genexpr> at 0x000001CD6C2C0EA0, file "client\core\server_list_panel.py", line 133>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_GLOBAL             13 (load_cfg + NULL)
+                CALL                     0
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST               7 ('recent_servers')
+                BUILD_LIST               0
+                CALL                     2
+                GET_ITER
+                CALL                     0
+
+ 134            LOAD_CONST               8 ('1757')
+
+ 133            CALL                     2
+                STORE_FAST               3 (port)
+
+ 135            LOAD_GLOBAL             13 (load_cfg + NULL)
+                CALL                     0
+                STORE_FAST               4 (cfg)
+
+ 136            LOAD_FAST_BORROW         4 (cfg)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST               9 ('saved_servers')
+                BUILD_LIST               0
+                CALL                     2
+                STORE_FAST               5 (saved)
+
+ 137            LOAD_GLOBAL             16 (any)
+                COPY                     1
+                LOAD_COMMON_CONSTANT     4 (<built-in function any>)
+                IS_OP                    0 (is)
+                POP_JUMP_IF_FALSE       31 (to L8)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW         6 (ip)
+                BUILD_TUPLE              1
+                LOAD_CONST              10 (<code object <genexpr> at 0x000001CD6C32FCC0, file "client\core\server_list_panel.py", line 137>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         5 (saved)
+                GET_ITER
+                CALL                     0
+        L5:     FOR_ITER                12 (to L7)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           11 (to L5)
+        L6:     POP_ITER
+                LOAD_CONST              11 (True)
+                JUMP_FORWARD            20 (to L9)
+        L7:     END_FOR
+                POP_ITER
+                LOAD_CONST              12 (False)
+                JUMP_FORWARD            16 (to L9)
+        L8:     PUSH_NULL
+                LOAD_FAST_BORROW         6 (ip)
+                BUILD_TUPLE              1
+                LOAD_CONST              10 (<code object <genexpr> at 0x000001CD6C32FCC0, file "client\core\server_list_panel.py", line 137>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         5 (saved)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+        L9:     TO_BOOL
+                POP_JUMP_IF_TRUE        70 (to L10)
+                NOT_TAKEN
+
+ 138            LOAD_FAST_BORROW         5 (saved)
+                LOAD_ATTR               19 (append + NULL|self)
+                LOAD_CONST              13 ('name')
+                LOAD_FAST_BORROW         2 (name)
+                LOAD_CONST              14 ('ip')
+                LOAD_DEREF               6 (ip)
+                LOAD_CONST              15 ('port')
+                LOAD_FAST_BORROW         3 (port)
+                BUILD_MAP                3
+                CALL                     1
+                POP_TOP
+
+ 139            LOAD_FAST_BORROW_LOAD_FAST_BORROW 84 (saved, cfg)
+                LOAD_CONST               9 ('saved_servers')
+                STORE_SUBSCR
+
+ 140            LOAD_GLOBAL             21 (save_cfg + NULL)
+                LOAD_FAST_BORROW         4 (cfg)
+                CALL                     1
+                POP_TOP
+
+ 141            LOAD_GLOBAL             22 (messagebox)
+                LOAD_ATTR               24 (showinfo)
+                PUSH_NULL
+                LOAD_CONST              16 ('Saved')
+                LOAD_CONST              17 ("'")
+                LOAD_FAST_BORROW         2 (name)
+                FORMAT_SIMPLE
+                LOAD_CONST              18 ("' added to favourites.")
+                BUILD_STRING             3
+                LOAD_DEREF               7 (self)
+                LOAD_CONST               5 (('parent',))
+                CALL_KW                  3
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 137   L10:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x000001CD6C2C0EA0, file "client\core\server_list_panel.py", line 133>:
+  --           COPY_FREE_VARS           1
+
+ 133           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                47 (to L5)
+               STORE_FAST               1 (s)
+
+ 134           LOAD_FAST_BORROW         1 (s)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               0 ('ip')
+               CALL                     1
+               LOAD_DEREF               2 (ip)
+               COMPARE_OP              88 (bool(==))
+
+ 133   L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           27 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (s)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               1 ('port')
+               LOAD_CONST               2 ('1757')
+               CALL                     2
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           49 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               3 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object <genexpr> at 0x000001CD6C32FCC0, file "client\core\server_list_panel.py", line 137>:
+  --           COPY_FREE_VARS           1
+
+ 137           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                16 (to L3)
+               STORE_FAST_LOAD_FAST    17 (s, s)
+               LOAD_CONST               0 ('ip')
+               BINARY_OP               26 ([])
+               LOAD_DEREF               2 (ip)
+               COMPARE_OP              72 (==)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           18 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
