@@ -1,0 +1,36 @@
+# Local assembly-inspection tools (not build dependencies)
+/tools/ilspycmd/
+/tools/ilspycmd.zip
+
+# Decompiled/extracted third-party research, for local inspection only
+/setup-v1.8.3/research/
+
+# Generated test fixtures, logs and screenshots; curated images live in docs/assets
+/setup-v1.8.3/tests/gui-process-test.txt
+/setup-v1.8.3/tests/setup-window.png
+/setup-v1.8.3/tests/release-smoke-*/
+/setup-v1.8.3/tests/social-integration-*/
+/setup-v1.8.3/social-server/tests/artifacts/
+/setup-v1.8.3/social-server/tests/host-render-data/
+/setup-v1.8.3/social-server/tests/host-smoke/
+/setup-v1.8.3/social-server/tests/host-window.png
+__pycache__/
+*.py[cod]
+
+# Runtime identities, server credentials and local recovery files
+**/UserData/
+**/TavernSocial.json*
+**/TavernNativeSocialServer.json*
+**/social-data.json*
+*.log
+*.log.previous
+
+# Editor and OS files
+.vs/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Keep the project's own distributable EXE/DLL/ZIP files tracked.
+# Do not use blanket *.dll or *.exe rules: setup embeds the built mod payload.
