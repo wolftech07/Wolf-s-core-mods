@@ -1,6 +1,0 @@
-stdout FIRST:space ' & [bracket] é \
-stderr ERR-LIVE
-stdout LAST-NO-NEWLINE
-PASS: embedded payload, quoted paths/Unicode, stdout/stderr, trailing line and failure status (1157 ms).
-[OK] Done
-PASS: success exit code.
