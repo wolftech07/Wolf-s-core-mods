@@ -8,7 +8,7 @@ $destination = Join-Path $PSScriptRoot 'payload\TavernNativeMenu.dll'
 if (!(Test-Path -LiteralPath (Join-Path $managed 'Root.Township.dll'))) { throw 'GameFolder must contain the compatible game Managed assemblies.' }
 $references = @('mscorlib.dll','System.dll','System.Core.dll','System.Net.Http.dll','netstandard.dll',
     'Newtonsoft.Json.dll','Root.Township.dll','UnityEngine.dll','UnityEngine.CoreModule.dll',
-    'UnityEngine.PhysicsModule.dll','UnityEngine.InputLegacyModule.dll','UnityEngine.IMGUIModule.dll',
+    'UnityEngine.PhysicsModule.dll','UnityEngine.InputLegacyModule.dll','UnityEngine.IMGUIModule.dll','UnityEngine.ImageConversionModule.dll',
     'UnityEngine.TextRenderingModule.dll','UnityEngine.UI.dll','UnityEngine.InputSystem.dll',
     'Alta.Api.Client.dll','Alta.Api.DataTransferModels.dll','Alta.Core.Runtime.dll','Alta.Build.dll',
     'Alta.CommandLine.dll','Alta.Coroutines.dll','Township.Core.Runtime.dll','Alta.Platform.dll',
@@ -24,6 +24,7 @@ foreach ($reference in @('MelonLoader.dll','0Harmony.dll')) { $compile += '/refe
 if ([string]::IsNullOrWhiteSpace($TavernLib)) { $TavernLib = Join-Path $GameFolder 'Plugins\TavernLib.dll' }
 if (!(Test-Path -LiteralPath $TavernLib -PathType Leaf)) { throw 'Supply -TavernLib with the compatible Tavern Launcher 1.8.3 Patch/TavernLib.dll file.' }
 $compile += '/reference:' + [IO.Path]::GetFullPath($TavernLib)
+$compile += '/resource:' + (Join-Path $PSScriptRoot 'mod-assets\tavern-badge-hires.png') + ',TavernNativeMenu.Badge.png'
 $compile += @(Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot 'mod-src') -File -Filter '*.cs' | ForEach-Object FullName)
 & $compiler @compile
 if ($LASTEXITCODE -ne 0) { throw 'The updated mod failed to compile.' }

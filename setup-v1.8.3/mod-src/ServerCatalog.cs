@@ -49,13 +49,24 @@ namespace TavernNativeMenu
 
         internal async Task<IEnumerable<GameServerInfo>> GetServers(ServerBoardType board)
         {
-            if (!NativeFriendsMenu.ChoosingInvitation && (board == ServerBoardType.PublicServer || board == ServerBoardType.DiscoverServers))
+            if (!NativeFriendsMenu.ChoosingInvitation)
             {
                 if (refreshTask == null || (refreshTask.IsCompleted && DateTime.UtcNow - refreshed > TimeSpan.FromSeconds(25)))
                     refreshTask = RefreshCommunity();
                 await refreshTask;
             }
             var saved = Settings.Servers.Concat(Profile.Servers).Where(ValidEntry).ToList();
+            foreach (ServerEntry entry in saved)
+            {
+                if (entry.Private) continue;
+                ServerEntry latest = community.FirstOrDefault(x => String.Equals(Key(x), Key(entry), StringComparison.OrdinalIgnoreCase));
+                if (latest == null) continue;
+                entry.Description = latest.Description;
+                entry.PlayerCount = latest.PlayerCount;
+                entry.PlayerLimit = latest.PlayerLimit;
+                entry.HasPassword = latest.HasPassword;
+                entry.Kind = latest.Kind;
+            }
             IEnumerable<ServerEntry> selected;
             if (NativeFriendsMenu.ChoosingInvitation) selected = saved;
             else if (board == ServerBoardType.MyServers) selected = saved.Where(x => x.Favorite);
@@ -155,7 +166,7 @@ namespace TavernNativeMenu
             var info = new MenuServer { Entry = entry, Identifier = id,
                 Name = (NativeFriendsMenu.ChoosingInvitation ? "Invite " + NativeFriendsMenu.InvitationName + ": " : "") + MenuMod.SafeText(entry.Name ?? entry.Host), Target = 0, SceneIndex = 0,
                 OnlinePlayers = new UserInfo[0], Playability = 0.5f,
-                Description = MenuMod.SafeText(entry.Host) + ":" + entry.GamePort
+                Description = (String.IsNullOrWhiteSpace(entry.Description) ? "" : MenuMod.SafeText(entry.Description) + "\n\n") + MenuMod.SafeText(entry.Host) + ":" + entry.GamePort
                     + (entry.PlayerCount.HasValue ? "\nPlayers: " + entry.PlayerCount + (entry.PlayerLimit.HasValue ? "/" + entry.PlayerLimit : "") : "")
                     + (entry.HasPassword ? "\nPassword required." : "")
                     + (entry.Private ? "\nPrivate saved entry (not published by this mod)." : "")

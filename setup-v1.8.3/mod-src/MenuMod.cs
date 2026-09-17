@@ -15,7 +15,7 @@ using MelonLoader;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(TavernNativeMenu.MenuMod), "Tavern Native Menu", "1.0.2", "TavernNativeMenu contributors")]
+[assembly: MelonInfo(typeof(TavernNativeMenu.MenuMod), "Tavern Native Menu", "1.0.5", "TavernNativeMenu contributors")]
 [assembly: MelonGame(null, "A Township Tale")]
 
 namespace TavernNativeMenu
@@ -44,6 +44,7 @@ namespace TavernNativeMenu
                 Hook(typeof(ServerBoard), "LoadServers", "BeforeLoadServers", null);
                 Hook(typeof(ServerSelectionMenu), "Start", "BeforeMenuStart", "AfterMenuStart");
                 Hook(typeof(ServerElement), "SetupForServer", null, "AfterElementSetup");
+                Hook(typeof(ServerSelectionOrb), "Awake", null, "AfterSelectionOrbAwake");
                 Hook(typeof(VrMainMenu), "JoinServer", "BeforeJoin", null);
                 Hook(typeof(Features.ServerBoardFilter), "Filter", "BeforeFilter", null);
                 LifecycleHooks.Install(patches);
@@ -63,6 +64,7 @@ namespace TavernNativeMenu
         {
             NativePrompt.CheckLifetime();
             if (startupError != null || Catalog == null) return;
+            MenuBranding.Tick();
             TavernSocialClient.Tick();
             NativeFriendsMenu.Tick();
         }
@@ -88,9 +90,13 @@ namespace TavernNativeMenu
 
         private static void AfterMenuStart(ServerSelectionMenu __instance)
         {
+            foreach (var orb in UnityEngine.Object.FindObjectsOfType<ServerSelectionOrb>()) JoinVisibility.Configure(orb);
+            MenuBranding.Begin(__instance);
             if (__instance.CurrentBoard == null) AccessTools.Method(typeof(ServerSelectionMenu), "Setup").Invoke(__instance, null);
             MelonLogger.Msg("[Tavern Native Menu] Native picker initialized: community, favorites, saved servers, and discovery.");
         }
+
+        private static void AfterSelectionOrbAwake(ServerSelectionOrb __instance) { JoinVisibility.Configure(__instance); }
 
         private static string Heading(ServerBoardType type)
         {
@@ -169,6 +175,13 @@ namespace TavernNativeMenu
             if (item == null) return;
             var text = Get<TextRenderer>(__instance, "numberOfPlayersText");
             if (text != null) text.Text = item.MenuAction != null ? "+" : item.Entry.PlayerCount.HasValue ? item.Entry.PlayerCount.Value.ToString() : "?";
+            // The native list reuses selected elements without a selection-change event.
+            var menu = UnityEngine.Object.FindObjectOfType<ServerSelectionMenu>();
+            if (menu != null && menu.CurrentBoard != null && menu.CurrentBoard.Display.CurrentSelection == __instance)
+            {
+                var info = Get<ServerInfoBoard>(menu, "serverInfoBoard");
+                if (info != null) info.SetServer(server);
+            }
         }
 
         private static bool BeforeJoin(VrMainMenu __instance, GameServerInfo serverInfo)
@@ -178,12 +191,14 @@ namespace TavernNativeMenu
             if (item == null) return true;
             if (joining) return false;
             joining = true;
+            JoinVisibility.RestoreMenu();
             joinTask = Join(__instance, item);
             return false;
         }
 
         private static async Task Join(VrMainMenu menu, MenuServer item)
         {
+            bool nativeJoinStarted = false;
             try
             {
                 if (item.MenuAction == "add") { await AddServer(); return; }
@@ -227,7 +242,7 @@ namespace TavernNativeMenu
                         string result = (string)response["status"];
                         if (result == "needs_password" || result == "wrong_password")
                         {
-                            password = await NativePrompt.Ask("Server password", result == "wrong_password" ? "That password was rejected. Try again or close this board." : "This server requires a password.", true);
+                            password = await NativePrompt.Ask("Server password", result == "wrong_password" ? "That password was rejected. Try again or touch Cancel." : "This server requires a password.", true);
                             if (password == null) return;
                             continue;
                         }
@@ -251,6 +266,7 @@ namespace TavernNativeMenu
                 target.OnlinePlayers = new UserInfo[0];
                 // Use the original fade, loading scene, networking pipeline and failure return.
                 allowNativeJoin = true;
+                nativeJoinStarted = true;
                 try { menu.JoinServer(target); }
                 finally { allowNativeJoin = false; }
                 var starting = Get<Task>(menu, "startingGameTask");
@@ -265,7 +281,13 @@ namespace TavernNativeMenu
                     PlayerController.Current.ScreenFader.FadeBackIn(0);
                 RecoverMenu(menu);
             }
-            finally { joining = false; }
+            finally
+            {
+                joining = false;
+                // Includes Cancel, failed prompts and rejected passwords. Never
+                // clear the loading fade after handing off to the native join.
+                if (!nativeJoinStarted && menu != null) JoinVisibility.RestoreMenu();
+            }
         }
 
         private static void RecoverMenu(VrMainMenu menu)

@@ -5,8 +5,14 @@ $paths = @((Join-Path $GamePath 'A Township Tale_Data\Managed\Root.Township.dll'
 if ($AlternateRoot) { $paths += $AlternateRoot }
 $requirements = @{
     ServerBoard = @{ Methods=@('RefreshServersList','LoadServers','FilterServers','ResumeUpdate'); Fields=@('lastReceivedServers','OnRefreshFinished','headingText','loadServers','updateCountdownText') }
-    ServerSelectionMenu = @{ Methods=@('Start','Setup'); Fields=@('startingBoard','boards') }
+    ServerSelectionMenu = @{ Methods=@('Start','Setup'); Fields=@('startingBoard','boards','serverInfoBoard') }
+    ServerInfoBoard = @{ Methods=@('SetServer'); Fields=@('descriptionText') }
+    TouchScreenKeyboard = @{ Methods=@('AddExtraKey','get_MappedFunctionKeys'); Fields=@() }
+    TouchScreenMenuBase = @{ Methods=@('MapButtons'); Fields=@() }
     ServerElement = @{ Methods=@('SetupForServer'); Fields=@('numberOfPlayersText') }
+    ServerSelectionOrb = @{ Methods=@('Awake'); Fields=@('actionOrb') }
+    ActionOrb = @{ Methods=@('StartScreenFade'); Fields=@('hasScreenFade') }
+    PlayerScreenFader = @{ Methods=@('FadeInIfNotLocked'); Fields=@() }
     VrMainMenu = @{ Methods=@('JoinServer'); Fields=@('startingGameTask','serverSelection') }
     ApplicationStartupManager = @{ Methods=@('RunStartupActions'); Fields=@() }
     GameModeManager = @{ Methods=@('StopCurrentModeAsync','JoinServer'); Fields=@() }

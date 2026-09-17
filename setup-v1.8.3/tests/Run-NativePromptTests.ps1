@@ -7,7 +7,7 @@ $testRoot = Join-Path ([IO.Path]::GetTempPath()) ('TavernNativePrompt-tests-' + 
 [IO.Directory]::CreateDirectory($testRoot) | Out-Null
 try {
     $exe = Join-Path $testRoot 'NativePromptTests.exe'
-    & $compiler /nologo /target:exe /langversion:5 /warn:4 "/out:$exe" (Join-Path $PSScriptRoot 'NativePromptTests.cs') (Join-Path $PSScriptRoot '..\mod-src\NativePrompt.cs')
+    & $compiler /nologo /target:exe /langversion:5 /warn:4 "/out:$exe" (Join-Path $PSScriptRoot 'NativePromptTests.cs') (Join-Path $PSScriptRoot '..\mod-src\NativePrompt.cs') (Join-Path $PSScriptRoot '..\mod-src\MenuArtworkRules.cs')
     if ($LASTEXITCODE -ne 0) { throw 'NativePrompt fixture compilation failed.' }
     & $exe
     if ($LASTEXITCODE -ne 0) { throw 'NativePrompt regression tests failed.' }

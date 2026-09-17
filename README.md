@@ -7,7 +7,7 @@
 Bring Tavern's community servers, private bookmarks and friends into **A Township Tale's original menus**.
 
 ![Launcher 1.8.3](https://img.shields.io/badge/Tavern_Launcher-1.8.3-356fa3?style=flat-square)
-![Mod 1.0.2](https://img.shields.io/badge/Menu_Mod-1.0.2-16806a?style=flat-square)
+![Mod 1.0.5](https://img.shields.io/badge/Menu_Mod-1.0.5-16806a?style=flat-square)
 ![Windows](https://img.shields.io/badge/Platform-Windows-687385?style=flat-square)
 ![VR testing build](https://img.shields.io/badge/Status-VR_testing_build-d99526?style=flat-square)
 

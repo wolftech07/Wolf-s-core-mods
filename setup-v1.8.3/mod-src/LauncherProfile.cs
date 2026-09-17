@@ -12,6 +12,7 @@ namespace TavernNativeMenu
     internal sealed class ServerEntry
     {
         public string Name;
+        public string Description;
         public string Host;
         public int GamePort = 1757;
         public int AuthPort = 1762;

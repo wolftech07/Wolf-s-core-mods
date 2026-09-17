@@ -11,8 +11,8 @@ using System.Windows.Forms;
 
 [assembly: AssemblyTitle("Tavern Native Menu Setup")]
 [assembly: AssemblyDescription("Graphical setup for Tavern Native Menu and Tavern Launcher Client 1.8.3")]
-[assembly: AssemblyVersion("1.1.1.0")]
-[assembly: AssemblyFileVersion("1.1.1.0")]
+[assembly: AssemblyVersion("1.1.4.0")]
+[assembly: AssemblyFileVersion("1.1.4.0")]
 
 namespace TavernNativeMenuSetup
 {

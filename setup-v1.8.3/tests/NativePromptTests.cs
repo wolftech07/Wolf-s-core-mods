@@ -50,6 +50,56 @@ internal static class NativePromptTests
     {
         try
         {
+            Run("Cancel moves right and touch map follows without accumulating offset", delegate
+            {
+                var task = Open(false);
+                var keyboard = TouchScreenKeyboard.Instance;
+                float x = keyboard.InstantiatedButtons[0].transform.localPosition.x;
+                Assert(x > 0 && x < 0.02f && keyboard.MappedPositions[0].x == x, "Rightward nudge must update touch mapping too.");
+                keyboard.EventSetUpNewKeyboard(1);
+                NativePrompt.CheckLifetime();
+                Assert(keyboard.InstantiatedButtons[0].transform.localPosition.x == x && keyboard.MappedPositions[0].x == x, "Layout change accumulated or lost Cancel's offset.");
+                keyboard.KeyPressed(KeyCode.Escape);
+                NativePrompt.CheckLifetime();
+                Assert(task.Result == null, "Shifted Cancel must still cancel.");
+            });
+            Run("artwork rules target sponsor and Vivox assets without touching other menu content", delegate
+            {
+                foreach (string name in new[] { "ScreenLogos", "ScreenQld", "ScreenNSW", "ScreenQLDLogo", "Vivox Logo", "ScreenLogos (Instance)" })
+                    Assert(MenuArtworkRules.Remove(name), "Missed sponsor asset " + name);
+                foreach (string name in new[] { "DiscordLogo", "Township Logo", "LogoBoard", "Server List", "VivoxController", "The Modded Tavern - menu artwork" })
+                    Assert(!MenuArtworkRules.Remove(name), "Overbroad artwork match " + name);
+                Assert(MenuArtworkRules.ReplaceBadge("Alta Logo Ridged") && !MenuArtworkRules.ReplaceBadge("AltaAccountName"), "Badge replacement scope changed.");
+                Assert(MenuArtworkRules.RemoveWholeBoard("LogoBoard", "Credits", "Static Models"), "Sponsor board backing was not targeted.");
+                Assert(MenuArtworkRules.RemoveWholeBoard("ScreenLogos", "Credits", "Static Models"), "White sponsor quad group was not targeted.");
+                Assert(!MenuArtworkRules.RemoveWholeBoard("LogoBoard", "Server Filter Board", "Menu") &&
+                    !MenuArtworkRules.RemoveWholeBoard("DiscordLogo", "Credits", "Static Models"), "Whole-board removal would hide unrelated menu content.");
+            });
+            Run("visible Cancel defers cleanup and restores existing Escape binding", delegate
+            {
+                var keyboard = TouchScreenKeyboard.Instance;
+                var original = new FunctionKeyDefinition();
+                keyboard.MappedFunctionKeys[KeyCode.Escape] = original;
+                var task = Open(true);
+                Type("private-password");
+                Assert(keyboard.MappedFunctionKeys[KeyCode.Escape].text == "Cancel" && keyboard.InstantiatedButtons.Count == 1, "Missing visible Cancel key.");
+                keyboard.KeyPressed(KeyCode.Escape);
+                Assert(!task.IsCompleted, "Cancel must not mutate the native key list during its input iteration.");
+                NativePrompt.CheckLifetime();
+                Assert(task.IsCompleted && task.Result == null && !NativePrompt.Active, "Cancel must discard input and release the prompt.");
+                Assert(ReferenceEquals(keyboard.MappedFunctionKeys[KeyCode.Escape], original) && keyboard.InstantiatedButtons.Count == 0, "Cancel must restore original bindings and remove its key.");
+            });
+            Run("Cancel returns after keyboard layout changes", delegate
+            {
+                var task = Open(false);
+                var keyboard = TouchScreenKeyboard.Instance;
+                keyboard.EventSetUpNewKeyboard(1);
+                NativePrompt.CheckLifetime();
+                Assert(keyboard.InstantiatedButtons.Count == 1, "Layout change lost the Cancel key.");
+                keyboard.KeyPressed(KeyCode.Escape);
+                NativePrompt.CheckLifetime();
+                Assert(task.Result == null && !keyboard.MappedFunctionKeys.ContainsKey(KeyCode.Escape), "Cancel binding leaked.");
+            });
             Run("popup callback waits for next frame before borrowing keyboard", delegate
             {
                 var keyboard = TouchScreenKeyboard.Instance;
@@ -259,11 +309,16 @@ public class ServerSelectionMenu : Component { }
 public class PlayerController { public static PlayerController Current; public Transform Head; }
 public class TouchScreenMenuBase : Component
 {
+    public readonly List<TouchScreenKeyboardKey> InstantiatedButtons = new List<TouchScreenKeyboardKey>();
+    public readonly List<Vector3> MappedPositions = new List<Vector3>();
+    public void MapButtons() { MappedPositions.Clear(); foreach (var key in InstantiatedButtons) MappedPositions.Add(key.transform.localPosition); }
     protected readonly Dictionary<int, Component> instantiatedSuggestionKeys = new Dictionary<int, Component>();
     public IDictionary Suggestions { get { return instantiatedSuggestionKeys; } }
 }
 public class TouchScreenKeyboard : TouchScreenMenuBase
 {
+    public readonly Dictionary<KeyCode, FunctionKeyDefinition> MappedFunctionKeys = new Dictionary<KeyCode, FunctionKeyDefinition>();
+    public TouchScreenKeyboardKey AddExtraKey(VirtualKeyInfo info, bool leftSide, int row) { var key = new TouchScreenKeyboardKey(); InstantiatedButtons.Add(key); return key; }
     private class OutputEvent
     {
         public readonly List<Action<string>> Handlers = new List<Action<string>>();
@@ -328,6 +383,8 @@ public class TouchScreenKeyboard : TouchScreenMenuBase
     public void TypeCustom(string text) { Input += text; }
     public void KeyPressed(KeyCode key)
     {
+        FunctionKeyDefinition definition;
+        if (MappedFunctionKeys.TryGetValue(key, out definition)) { definition.onPressed.Invoke(); return; }
         if (key >= KeyCode.A && key <= KeyCode.Z) { Input += key.ToString().ToLowerInvariant(); return; }
         if (key >= KeyCode.Alpha0 && key <= KeyCode.Alpha9) { Input += (int)(key - 48); return; }
         if (key == KeyCode.Return && NextPressed != null) NextPressed();
@@ -338,8 +395,12 @@ public class TouchScreenKeyboard : TouchScreenMenuBase
         }
     }
     public void ToggleSecret() { if (ToggleSecretDisplay != null) ToggleSecretDisplay(); }
-    public void EventSetUpNewKeyboard(int index) { }
+    public void EventSetUpNewKeyboard(int index) { foreach (var key in InstantiatedButtons) UnityEngine.Object.Destroy(key); InstantiatedButtons.Clear(); }
 }
+public class TouchScreenKeyboardKey : Component { }
+public class VirtualKeyInfo { public KeyCode key, shiftKey; public int row; }
+public class FunctionKeyDefinition { public KeyCode key; public bool hasVisual; public string text; public UnityEngine.Events.UnityEvent onPressed; }
+namespace UnityEngine.Events { public class UnityEvent { private event Action handlers; public void AddListener(Action action) { handlers += action; } public void Invoke() { if (handlers != null) handlers(); } } }
 public interface IPopupBoard
 {
     string Title { get; set; }
@@ -477,7 +538,7 @@ namespace UnityEngine
     public class Transform : Object
     {
         public Transform parent;
-        public Vector3 position, localScale = new Vector3(1, 1, 1);
+        public Vector3 position, localPosition, localScale = new Vector3(1, 1, 1);
         public Quaternion rotation;
         public Vector3 forward { get { return Vector3.forward; } }
         public void SetParent(Transform value, bool keepWorldPosition) { parent = value; }
@@ -502,5 +563,5 @@ namespace UnityEngine
         public static Quaternion operator *(Quaternion a, Quaternion b) { return new Quaternion(); }
     }
     public static class Resources { public static T[] FindObjectsOfTypeAll<T>() where T : Object { return Object.All.OfType<T>().Where(x => x != null).ToArray(); } }
-    public enum KeyCode { Backspace = 8, Return = 13, Alpha0 = 48, Alpha7 = 55, Alpha9 = 57, A = 97, B = 98, Z = 122 }
+    public enum KeyCode { Backspace = 8, Return = 13, Escape = 27, Alpha0 = 48, Alpha7 = 55, Alpha9 = 57, A = 97, B = 98, Z = 122 }
 }

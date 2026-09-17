@@ -27,6 +27,7 @@ namespace TavernNativeMenu
                 bool password;
                 Boolean.TryParse(Text(row["has_password"]), out password);
                 result.Add(new ServerEntry { Name = String.IsNullOrWhiteSpace(name) ? host : name,
+                    Description = Text(row["description"] ?? row["server_description"] ?? row["motd"]),
                     Host = host, GamePort = port, AuthPort = authPort, Kind = kind,
                     PlayerCount = Count(row["player_count"]), PlayerLimit = Count(row["player_limit"]), HasPassword = password });
             }

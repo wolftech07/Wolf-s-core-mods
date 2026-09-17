@@ -30,6 +30,9 @@ namespace TavernNativeMenu
         private FieldInfo outputField;
         private object previousOutput, isolatedOutput;
         private static NativePrompt current;
+        private TouchScreenKeyboardKey cancelKey;
+        private FunctionKeyDefinition cancelDefinition, previousEscape;
+        private bool cancelRequested;
         private static readonly string[] EventNames = { "InputChanged", "NextPressed", "BackPressedOnEmpty", "ToggleSecretDisplay" };
         public static bool Active { get { return current != null && !current.finished; } }
         public int MaxCharactersLimit { get { return secret ? 256 : 253; } }
@@ -64,11 +67,12 @@ namespace TavernNativeMenu
             if (prompt == null) return;
             try
             {
-                if (prompt.ownerMenu == null || prompt.lostFocus) { prompt.Finish(null); return; }
+                if (prompt.ownerMenu == null || prompt.lostFocus || prompt.cancelRequested) { prompt.Finish(null); return; }
                 if (prompt.openPending) { prompt.openPending = false; prompt.OpenKeyboard(); }
                 else if (prompt.borrowed && (prompt.popup == null || prompt.popup.Transform == null ||
                     prompt.keyboard == null || prompt.keyboard.CurrentUser != prompt || !prompt.keyboard.gameObject.activeInHierarchy))
                     prompt.Finish(null);
+                else if (prompt.borrowed) prompt.EnsureCancelKey();
             }
             catch (Exception error) { prompt.Fail(error); }
         }
@@ -137,7 +141,25 @@ namespace TavernNativeMenu
             keyboard.ToggleSecretDisplay += ToggleSecret;
             keyboard.EventSetUpNewKeyboard(0);
             keyboard.Input = "";
-            MelonLogger.Msg("[Tavern Native Menu] Native VR input opened. Touch keys and press Enter; close the board to cancel.");
+            EnsureCancelKey();
+            MelonLogger.Msg("[Tavern Native Menu] Native VR input opened. Touch Enter to continue or Cancel to go back.");
+        }
+
+        private void EnsureCancelKey()
+        {
+            if (cancelKey != null) return;
+            if (cancelDefinition == null)
+            {
+                keyboard.MappedFunctionKeys.TryGetValue(KeyCode.Escape, out previousEscape);
+                cancelDefinition = new FunctionKeyDefinition { key = KeyCode.Escape, hasVisual = true,
+                    text = "Cancel", onPressed = new UnityEngine.Events.UnityEvent() };
+                // Native input iterates the key collection. Remove it on the next update.
+                cancelDefinition.onPressed.AddListener(delegate { cancelRequested = true; });
+            }
+            keyboard.MappedFunctionKeys[KeyCode.Escape] = cancelDefinition;
+            cancelKey = keyboard.AddExtraKey(new VirtualKeyInfo { key = KeyCode.Escape, shiftKey = KeyCode.Escape, row = 0 }, true, 0);
+            cancelKey.transform.localPosition += new Vector3(MenuArtworkRules.CancelRightShift, 0, 0);
+            keyboard.MapButtons();
         }
 
         public void HandleKeyboardInput(string input) { if (!finished) { value = input ?? ""; UpdateMessage(); } }
@@ -160,7 +182,7 @@ namespace TavernNativeMenu
             if (popup == null) return;
             string shown = secret && !reveal ? new string('*', value.Length) : MenuMod.SafeText(value);
             popup.Message = instructions + "\n\n" + (shown.Length == 0 ? "[Type using the keyboard below]" : shown)
-                + "\n\nTouch the VR keys. Press Enter to continue.\nClose this board to cancel.";
+                + "\n\nTouch Enter to continue.\nTouch Cancel at the left of the keyboard to go back.";
         }
         private void Fail(Exception error)
         {
@@ -172,6 +194,19 @@ namespace TavernNativeMenu
         private void RestoreKeyboard()
         {
             if (!borrowed || keyboard == null) return;
+            if (cancelKey != null)
+            {
+                keyboard.InstantiatedButtons.Remove(cancelKey);
+                UnityEngine.Object.Destroy(cancelKey.gameObject);
+                cancelKey = null;
+                keyboard.MapButtons();
+            }
+            FunctionKeyDefinition mapped;
+            if (cancelDefinition != null && keyboard.MappedFunctionKeys.TryGetValue(KeyCode.Escape, out mapped) && ReferenceEquals(mapped, cancelDefinition))
+            {
+                if (previousEscape == null) keyboard.MappedFunctionKeys.Remove(KeyCode.Escape);
+                else keyboard.MappedFunctionKeys[KeyCode.Escape] = previousEscape;
+            }
             bool ownFocus = keyboard.CurrentUser == this;
             bool canRestore = ownFocus || (!lostFocus && keyboard.CurrentUser == null);
             keyboard.InputChanged -= HandleKeyboardInput;

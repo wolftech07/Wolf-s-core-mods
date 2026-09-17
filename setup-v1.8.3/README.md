@@ -68,7 +68,20 @@ These are placeholders, not folders to create literally:
 | `%APPDATA%\TheModdingTavern\tavern_launcher.json` | Tavern's existing username, game path, platform, and saved-server settings. |
 | `<GameFolder>\TavernNativeMenuSetup-1.8.3\` | Verified backups, installation record, and recovery data. Keep this folder until you have finished using Undo. |
 
-Setup **1.1.1** includes TavernNativeMenu **1.0.2** and a version 1.8.3 add-on. The bundled mod also honors version 1.8.3's `quest_scene_required` authentication response by choosing the corresponding scene for that join. The optional social host embeds TavernNativeSocialServer **1.0.0**.
+Setup **1.1.4** includes TavernNativeMenu **1.0.5** and a version 1.8.3 add-on. The bundled mod also honors version 1.8.3's `quest_scene_required` authentication response by choosing the corresponding scene for that join. The optional social host embeds TavernNativeSocialServer **1.0.0**.
+
+### Menu polish in 1.0.5
+
+- A visible **Cancel** key on the left of the VR keyboard dismisses password and address prompts without submitting them. It remains available after changing keyboard layouts, with the key and its touch area shifted 8 mm to the right in keyboard coordinates.
+- Server-selection orbs no longer dim the menu before Tavern authentication. Cancelling or leaving authentication restores visibility without grabbing the orb again. The native loading fade still runs after an approved join, and native fade locks are respected.
+- Refreshing a selected server also refreshes its details. Community descriptions are displayed when provided by the directory; otherwise the menu shows connection, player-count, and access information. Saved public servers reuse current directory metadata; private entries retain local details.
+- The server-picker scene replaces the identified Alta artwork with a separate 1254×1254 reconstruction of the T badge, positioned 3.5 cm beyond the original artwork surface. The original icon and launcher banner are unchanged. The replacement is embedded in the mod, so updating needs no extra asset-copy commands.
+- The Discord sign displays only **https://discord.gg/jNQUUDAYSj**, without a community-name heading. The complete Discord sign and adjacent wall badge are moved 6 cm to the viewer's left to provide wall clearance; the badge on the filter board retains its own layout.
+- The complete sponsor board and separate white sponsor panel are disabled, including frames, captions, backing surfaces and colliders. Vivox and Screen Queensland/NSW artwork is also hidden on matching materials and textures. Voice communication remains available. A few delayed passes also handle signs initialized after the menu opens.
+
+To update an existing installation, close the game and launcher, open **TavernNativeMenuSetup.exe**, select the same game and launcher paths, and use **Install / Update**. Keep your existing settings and original Undo backup. No uninstall is needed.
+
+The keyboard regression tests and builds cover code behavior; headset placement, touch reach, sign orientation, and legibility still require an in-game VR check. The high-resolution badge is an AI reconstruction of the supplied 32×32 icon, rather than an original high-resolution brand asset.
 
 ## Undo or move the installation
 
@@ -109,9 +122,10 @@ Verified during development:
 - Passed 70 installer fixture checks covering install, in-place updates, Undo, rollback, interrupted-operation recovery, damaged backups, locked files, and add-on settings preservation.
 - Passed nine launcher add-on tests covering the Play Game button, menu-only launch arguments, neutral identity, profile selection, platforms, console/debug settings, and failure handling.
 - Ran install/reinstall/check/Undo with copies of the real supplied launcher and compatible game dependencies.
-- Passed 56 native-method and field compatibility checks across the two supplied game assemblies after rebuilding the updated mod.
+- Passed 78 native-method and field compatibility checks across the two supplied game assemblies after rebuilding the updated mod.
 - Passed 22 wheel/rope checks executing the supplied game's method instructions with simulated Unity objects, including reproducing the original missing-lever failure.
-- Passed 12 keyboard regression scenarios for password submission, masking, cancellation, focus handoff and restoration.
+- Passed 16 keyboard/artwork regression scenarios for password submission, masking, cancellation, touch positioning, focus restoration and targeted sponsor removal.
+- Passed 15 join-visibility checks covering orb-fade suppression, cancellation recovery, native fade locks and preservation of the approved-join loading fade, including instruction checks in both supplied game assemblies.
 - Passed 80 social/card/transport binding checks, 46 relay/card-consent checks and 29 client HTTP checks. Tested credentials, private invitation recipients, one-use server tickets, persistence, reconnect identity and failed requests.
 - Passed eight integration checks using two isolated instances of the production social client against the real relay over local HTTP, including invitation acceptance and identity recovery after restart.
 - Started and stopped the actual host EXE in an isolated fixture, exercised its connection button and automatic log, and rendered both setup windows for layout review.
