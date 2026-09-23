@@ -1,6 +1,6 @@
 # Tavern In-Game Hub
 
-**Version 2.2.0 · Tavern Launcher 1.8.3 / 1.8.4 · Windows PC VR**
+**Version 2.2.1 · Tavern Launcher 1.8.3 / 1.8.4 · Windows PC VR**
 
 Choose servers and use friends, invitations, and the social tablet inside A Township Tale.
 
@@ -26,9 +26,9 @@ No commands or compiling required. Use **Check setup** to check compatibility or
 
 ## Update an existing installation
 
-Run the new setup EXE and choose **Install / Update**, using the same game and launcher folders. You do not need to uninstall first. Your settings, friends, saved servers, and original Undo backups are preserved.
+Run the new setup EXE and choose **Install / Update**, selecting your existing game and your current launcher EXE. A new launcher folder is supported. You do not need to uninstall first. Your settings, friends, saved servers, and original Undo backups are preserved.
 
-If upgrading Tavern Launcher to 1.8.4, update it in its existing folder, keep its `addons` folder, and apply its updated client patch first. Close it before running this setup.
+If upgrading Tavern Launcher to 1.8.4, apply its updated client patch first. Close it before running this setup. Setup installs its add-on into your selected launcher folder and leaves the old launcher folder unchanged. Undo restores the new folder's pre-update files; the original game backups are retained.
 
 Previously called **Tavern Native Menu**, this release keeps the existing mod filenames and recovery folders so updates and Undo continue to work. Do not rename those installed files or folders.
 

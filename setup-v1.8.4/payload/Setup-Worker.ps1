@@ -127,7 +127,7 @@ function Get-InstallPlan($Context) {
 function Write-AtomicBytes([string]$Destination, [byte[]]$Bytes) {
     Assert-NoReparse $Destination
     [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($Destination)) | Out-Null
-    $temporary = $Destination + '.setup-' + [Guid]::NewGuid().ToString('N') + '.tmp'
+    $temporary = Join-Path ([IO.Path]::GetDirectoryName($Destination)) ('.setup-' + [Guid]::NewGuid().ToString('N') + '.tmp')
     try {
         [IO.File]::WriteAllBytes($temporary,$Bytes)
         if (Test-Path -LiteralPath $Destination -PathType Leaf) { [IO.File]::Replace($temporary,$Destination,[NullString]::Value) }
@@ -157,12 +157,14 @@ function Get-EnableAddonChange($Context, $Current) {
     $source = New-AddonJsonSource $Context (@($Current.Names) + @('tavern_native_menu'))
     return [pscustomobject]@{Scope='enablement';Target='TheModdingTavern\client_enabled_addons.json';Source=$source;Hash=(Get-Digest $source);ExpectedBefore=$Current.Hash}
 }
-function Read-InstallRecord($Context) {
+function Read-InstallRecord($Context, [switch]$AllowLauncherChange) {
     if (!(Test-Path -LiteralPath $Context.Manifest -PathType Leaf)) { return $null }
     $record = [IO.File]::ReadAllText($Context.Manifest) | ConvertFrom-Json
-    if ($record.Format -ne 1 -or $record.GameExe -ne $Context.GameExe -or $record.LauncherExe -ne $Context.LauncherExe) {
-        throw 'The existing installation record belongs to another game/launcher selection or has an unsupported format. When updating the launcher, replace it in the same launcher folder used for this installation, keep its addons folder, and select that EXE again.'
+    if ($record.Format -ne 1 -or $record.GameExe -ne $Context.GameExe) {
+        throw ('The installation record has an unsupported format or belongs to a different game location. Recorded game: {0}. Selected game: {1}. Select the original game folder; do not delete its recovery records.' -f $record.GameExe,$Context.GameExe)
     }
+    if ([string]::IsNullOrWhiteSpace($record.LauncherExe) -or ![IO.Path]::IsPathRooted($record.LauncherExe)) { throw 'The installation record has an invalid launcher path.' }
+    if (!$AllowLauncherChange -and $record.LauncherExe -ne $Context.LauncherExe) { throw ('Select the recorded launcher for Undo: {0}. To switch launchers first, select the new launcher and click Install / Update.' -f $record.LauncherExe) }
     $seen = @{}
     foreach ($entry in @($record.Files)) {
         $target = Resolve-Target $Context $entry.Scope $entry.Target
@@ -181,11 +183,40 @@ function Read-InstallRecord($Context) {
     }
     return $record
 }
-function Assert-InstalledUnchanged($Context, $Record) {
+function Assert-InstalledUnchanged($Context, $Record, [switch]$SkipLauncher) {
     foreach ($entry in @($Record.Files)) {
+        if ($SkipLauncher -and $entry.Scope -eq 'launcher') { continue }
         $path = Resolve-Target $Context $entry.Scope $entry.Target
         if ((Get-Digest $path) -ne $entry.InstalledHash) { throw "An installed file changed or is missing: $path. Restore that file or keep a copy of your changes before retrying. Setup has left it untouched." }
     }
+}
+function Initialize-LauncherMigration($Context, $Record, [switch]$SaveBackups) {
+    if ($Record.LauncherExe -eq $Context.LauncherExe) { return }
+    $oldFolder = [IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Record.LauncherExe))
+    if ($oldFolder -ne $Context.LauncherRoot) {
+        # The game keeps its original baseline. The new launcher's add-on files
+        # get independent baselines; neither the old folder nor its backups change.
+        Assert-InstalledUnchanged $Context $Record -SkipLauncher
+        foreach ($entry in @($Record.Files)) {
+            if ($entry.Scope -ne 'launcher') { continue }
+            $path = Resolve-Target $Context $entry.Scope $entry.Target
+            $before = Get-Digest $path
+            $backup = $null
+            if ($before -and $SaveBackups) {
+                $backup = 'originals\' + [Guid]::NewGuid().ToString('N') + '\launcher.original'
+                $backupFile = Join-Contained $Context.StateRoot $backup
+                [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($backupFile)) | Out-Null
+                [IO.File]::Copy($path,$backupFile)
+                if ((Get-Digest $backupFile) -ne $before) { throw 'The new launcher backup failed verification. No installed files were changed.' }
+            }
+            $entry.Existed = [bool]$before
+            $entry.OriginalHash = $before
+            $entry.Backup = $backup
+            $entry.InstalledHash = $before
+        }
+        Write-Step INFO 'Switching launcher folders. The previous launcher is left unchanged; Undo will restore the new folder to its state before this update.'
+    }
+    $Record.LauncherExe = $Context.LauncherExe
 }
 function Get-ManagedFileChanges($Context, $Record, [array]$Plan) {
     $installed = @{}
@@ -311,8 +342,9 @@ function Invoke-SetupCore([string]$Action, [string]$Game, [string]$Launcher, [st
         if (Test-Path -LiteralPath $context.Journal) { throw 'An incomplete operation needs recovery. Close the game and launcher, then click Install or Undo to recover safely.' }
         Confirm-Compatibility $context
         $plan = @(Get-InstallPlan $context)
-        $record = Read-InstallRecord $context
+        $record = Read-InstallRecord $context -AllowLauncherChange
         if ($record) {
+            Initialize-LauncherMigration $context $record
             Assert-InstalledUnchanged $context $record
             $updates = @(Get-ManagedFileChanges $context $record $plan)
             if ($updates.Count) { Write-Step INFO ("An update is ready for {0} installed files. Install mod will keep the original Undo backups." -f $updates.Count) }
@@ -323,7 +355,7 @@ function Invoke-SetupCore([string]$Action, [string]$Game, [string]$Launcher, [st
     }
     Assert-ApplicationsClosed $context
     Undo-PendingTransaction $context
-    $record = Read-InstallRecord $context
+    $record = Read-InstallRecord $context -AllowLauncherChange:($Action -eq 'Install')
     if ($Action -eq 'Uninstall') {
         if (!$record) { Write-Step OK 'No installation record was found for these selections. Nothing was removed.'; return }
         Assert-InstalledUnchanged $context $record
@@ -358,6 +390,8 @@ function Invoke-SetupCore([string]$Action, [string]$Game, [string]$Launcher, [st
     Confirm-Compatibility $context
     $plan = @(Get-InstallPlan $context)
     if ($record) {
+        $launcherChanged = $record.LauncherExe -ne $context.LauncherExe
+        Initialize-LauncherMigration $context $record -SaveBackups
         Assert-InstalledUnchanged $context $record
         $changes = @(Get-ManagedFileChanges $context $record $plan)
         $updatedCount = $changes.Count
@@ -388,7 +422,8 @@ function Invoke-SetupCore([string]$Action, [string]$Game, [string]$Launcher, [st
             $record.Enablement.InstalledHash=$enableChange.Hash
             $changes += $enableChange
         }
-        if ($changes.Count) { Invoke-FileTransaction $context $changes $record }
+        if ($changes.Count -or $launcherChanged) { Invoke-FileTransaction $context $changes $record }
+        if ($launcherChanged) { Write-Step OK 'The installation now uses the selected launcher. Game settings and original game backups were retained.' }
         if ($enableChange) { Write-Step OK 'The Native Menu addon was enabled again; other addon settings were preserved.' }
         if ($updatedCount) {
             Write-Step OK ("Updated {0} installed files and verified them. The original Undo backups were retained." -f $updatedCount)
@@ -423,7 +458,7 @@ function Invoke-SetupCore([string]$Action, [string]$Game, [string]$Launcher, [st
     }
     $enableChange=Get-EnableAddonChange $context $current
     if ($enableChange) { $changes += $enableChange; $enableRecord.InstalledHash=$enableChange.Hash }
-    $newRecord = [ordered]@{Format=1;Product='Tavern In-Game Hub 2.2.0';GameExe=$context.GameExe;LauncherExe=$context.LauncherExe;Files=$entries;Enablement=$enableRecord}
+    $newRecord = [ordered]@{Format=1;Product='Tavern In-Game Hub 2.2.1';GameExe=$context.GameExe;LauncherExe=$context.LauncherExe;Files=$entries;Enablement=$enableRecord}
     Invoke-FileTransaction $context $changes $newRecord
     Write-Step OK 'Installation completed and every installed file was verified.'
     Write-Step INFO 'Reopen Tavern Launcher and use Play Game to choose a server inside the game. The Native Menu addon is enabled.'

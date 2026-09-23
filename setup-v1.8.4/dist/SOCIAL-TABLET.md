@@ -1,6 +1,6 @@
 # 📱 Tavern social tablet
 
-**Menu mod 2.2.0 · Server companion 2.2.0 · Setup 2.2.0**
+**Menu mod 2.2.0 · Server companion 2.2.0 · Setup 2.2.1**
 
 The game's physical social tablet now connects to the Tavern server and the same peer friends used by the main menu. It uses the existing tablet touch controls and player rows.
 

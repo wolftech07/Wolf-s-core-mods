@@ -1,6 +1,6 @@
 # Tavern In-Game Hub
 
-**v2.2.0 · A Township Tale · Tavern Launcher 1.8.3 / 1.8.4 · Windows PC VR**
+**v2.2.1 · A Township Tale · Tavern Launcher 1.8.3 / 1.8.4 · Windows PC VR**
 
 Choose a server, invite friends, and manage players from inside the game.
 
@@ -34,7 +34,7 @@ Tavern **moderators** and **owners** get the appropriate moderation controls. Fr
 
 ## Update or remove
 
-Run the latest setup and choose **Install / Update**. Use the same game and launcher folders; your settings, friends, and original backups are kept. If upgrading Tavern Launcher too, update it in its existing folder and apply its new patch before updating this mod.
+Run the latest setup and choose **Install / Update**. Select your existing game and the launcher you want to use, even if the new launcher is in a different folder. Your settings, friends, and original game backups are kept. If upgrading Tavern Launcher too, apply its new patch before updating this mod.
 
 To remove the integration, close the game and launcher and choose **Undo setup**. Hosts can use **Undo server support...**.
 

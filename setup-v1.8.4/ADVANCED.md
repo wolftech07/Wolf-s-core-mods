@@ -1,6 +1,6 @@
-# Tavern In-Game Hub Setup â€” Tavern Launcher Client 1.8.3 / 1.8.4
+# Tavern In-Game Hub Setup — Tavern Launcher Client 1.8.3 / 1.8.4
 
-**Menu mod 2.2.0 Â· Setup 2.2.0 Â· Windows x64**
+**Menu mod 2.2.0 · Setup 2.2.1 · Windows x64**
 
 A small, separate Windows setup app for the Tavern In-Game Hub mod. Double-click the EXE, choose your game and launcher, and click **Install / Update**. You do not need to run commands, install Python, or compile anything.
 
@@ -14,7 +14,7 @@ Setup adds **Play Game** to Tavern Launcher's main window. Click it to open A To
 
 If your game is not patched yet, open Tavern Launcher and use its **Patch** and **Mods** controls to complete its normal game setup first. This setup app installs the menu mod and launcher integration; it does not redistribute or install the game, Tavern Launcher, MelonLoader, or TavernLib.
 
-## Install and play â€” no commands
+## Install and play — no commands
 
 1. Extract Tavern Launcher Client 1.8.3 / 1.8.4 into the folder where you will keep it.
 2. Close A Township Tale and Tavern Launcher.
@@ -31,9 +31,9 @@ The launcher integration uses versions 1.8.3 and 1.8.4's external add-on support
 
 ## Updating an existing installation
 
-**Launcher 1.8.4:** this setup accepts both 1.8.3 and 1.8.4. If updating the launcher too, close it and extract the 1.8.4 release into the **same launcher folder** you previously selected, retaining its `addons` folder. Apply the updated client patch using Tavern Launcher's normal controls, close the launcher, then run **Install / Update** here. Keeping the launcher at the same path preserves the existing installer record and Undo backups. The recovery folder still ends in `-1.8.3` for compatibility; do not rename it.
+**Launcher 1.8.4:** setup accepts both 1.8.3 and 1.8.4. Apply the updated client patch through Tavern Launcher, close it, then select the existing game and your new launcher EXE in setup. Version 2.2.1 supports a different launcher folder: it verifies the game files, preserves their original backups, and backs up the new launcher's add-on files before replacing them. The old launcher folder is left unchanged. Undo restores the destination launcher's pre-update files. Interrupted updates restore the previous installation record and file contents. The recovery folder still ends in `-1.8.3` for compatibility; do not rename it.
 
-Close the game and launcher, open the new setup EXE, select the same game and launcher, and click **Install / Update**. There is no need to uninstall first. Setup verifies the previous installation, replaces changed mod/add-on files, and keeps the original Undo backups. Your launcher profile, login tokens, private server bookmarks and social identity remain in place. A failed update rolls back to the previously installed version.
+Close the game and launcher, open the new setup EXE, select the same game and your current launcher, and click **Install / Update**. There is no need to uninstall first. Setup verifies the previous installation, replaces changed mod/add-on files, and keeps the original Undo backups. Your launcher profile, login tokens, private server bookmarks and social identity remain in place. A failed update rolls back to the previously installed version.
 
 If you installed by manually copying files and have no setup record, setup creates a baseline backup of those files on the first managed installation. If managed files have been edited outside setup, it reports the conflict instead of silently discarding those edits.
 
@@ -96,7 +96,7 @@ These are placeholders, not folders to create literally:
 
 `<ServerFolder>` means the separate patched game-server folder selected for card support. Client updates preserve the original Undo backups while adding peer dependencies. Do not uninstall first.
 
-Setup **2.2.0** includes menu mod **2.2.0**, automatic peer networking, the compatible launcher add-on, and optional server card companion **2.2.0**. The mod continues to honor `quest_scene_required` when selecting the join scene.
+Setup **2.2.1** includes menu mod **2.2.0**, automatic peer networking, the compatible launcher add-on, and optional server card companion **2.2.0**. The mod continues to honor `quest_scene_required` when selecting the join scene.
 
 Launcher **1.8.4** was checked against its published client/server assets, TavernLib **1.5.2**, and CircuitsVoiceChat **1.0.8**. Its patched game assembly matches the already-supported game hash. Authentication, tablet bindings and voice mute remain compatible; the installer and Play Game compatibility lists now recognize the new launcher and TavernLib files.
 
@@ -105,13 +105,13 @@ Launcher **1.8.4** was checked against its published client/server assets, Taver
 - A visible **Cancel** key on the left of the VR keyboard dismisses password and address prompts without submitting them. It remains available after changing keyboard layouts, with the key and its touch area shifted 8 mm to the right in keyboard coordinates.
 - Server-selection orbs no longer dim the menu before Tavern authentication. Cancelling or leaving authentication restores visibility without grabbing the orb again. The native loading fade still runs after an approved join, and native fade locks are respected.
 - Refreshing a selected server also refreshes its details. Community descriptions are displayed when provided by the directory; otherwise the menu shows connection, player-count, and access information. Saved public servers reuse current directory metadata; private entries retain local details.
-- The server-picker scene replaces the identified Alta artwork with a separate 1254Ã—1254 reconstruction of the T badge, positioned 3.5 cm beyond the original artwork surface. The original icon and launcher banner are unchanged. The replacement is embedded in the mod, so updating needs no extra asset-copy commands.
+- The server-picker scene replaces the identified Alta artwork with a separate 1254×1254 reconstruction of the T badge, positioned 3.5 cm beyond the original artwork surface. The original icon and launcher banner are unchanged. The replacement is embedded in the mod, so updating needs no extra asset-copy commands.
 - The Discord sign displays only **https://discord.gg/jNQUUDAYSj**, without a community-name heading. The complete Discord sign and adjacent wall badge are moved 6 cm to the viewer's left to provide wall clearance; the badge on the filter board retains its own layout.
 - The complete sponsor board and separate white sponsor panel are disabled, including frames, captions, backing surfaces and colliders. Vivox and Screen Queensland/NSW artwork is also hidden on matching materials and textures. Voice communication remains available. A few delayed passes also handle signs initialized after the menu opens.
 
-To update an existing installation, close the game and launcher, open **TavernHubSetup.exe**, select the same game and launcher paths, and use **Install / Update**. Keep your existing settings and original Undo backup. No uninstall is needed.
+To update an existing installation, close the game and launcher, open **TavernHubSetup.exe**, select the same game and your current launcher, and use **Install / Update**. Keep your existing settings and original Undo backup. No uninstall is needed.
 
-The keyboard regression tests and builds cover code behavior; headset placement, touch reach, sign orientation, and legibility still require an in-game VR check. The high-resolution badge is an AI reconstruction of the supplied 32Ã—32 icon, rather than an original high-resolution brand asset.
+The keyboard regression tests and builds cover code behavior; headset placement, touch reach, sign orientation, and legibility still require an in-game VR check. The high-resolution badge is an AI reconstruction of the supplied 32×32 icon, rather than an original high-resolution brand asset.
 
 ## Undo or move the installation
 
@@ -149,7 +149,7 @@ Verified during development:
 
 - Compiled the standalone EXE and checked its window rendering.
 - Tested live stdout/stderr, output before process exit, trailing output, error exit status, and paths containing spaces, apostrophes, brackets, ampersands, and Unicode.
-- Passed 108 installer fixture checks covering install, in-place updates, Undo, rollback, interrupted-operation recovery, damaged backups, locked files, and add-on settings preservation.
+- Passed 138 installer fixture checks covering install, in-place updates, Undo, rollback, interrupted-operation recovery, damaged backups, locked files, launcher-folder migration, and add-on settings preservation.
 - Passed nine launcher add-on tests covering the Play Game button, menu-only launch arguments, neutral identity, profile selection, platforms, console/debug settings, and failure handling.
 - Ran install/reinstall/check/Undo separately with copies of the real 1.8.3 and 1.8.4 launcher releases and their TavernLib dependencies.
 - Passed 19 checks against the official 1.8.4 launcher source for add-on loading, controls, profile saving and token construction.

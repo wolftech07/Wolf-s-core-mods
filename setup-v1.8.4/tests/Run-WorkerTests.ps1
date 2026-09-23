@@ -376,6 +376,87 @@ try {
         Assert-Test ([IO.File]::ReadAllText($mod) -eq 'original before expanded upgrade' -and [IO.File]::ReadAllText($native) -eq 'previous independently installed dependency' -and !(Test-Path -LiteralPath $notice)) ('Undo after recovered expanded upgrade retains both original baselines; interrupted=' + $interrupted)
     }
 
+    foreach ($baseline in @('absent','copied','custom')) {
+        $c=New-Fixture ('launcher-migration-' + $baseline)
+        $mod=Join-Path $c.GameRoot 'Mods\TavernNativeMenu.dll'
+        $oldAddon=Join-Path $c.LauncherRoot 'addons\tavern_native_menu\client.py'
+        Put-Text $mod 'original game mod'
+        Run-Fixture $c Install
+        $oldRecord=Read-InstallRecord $c
+        $oldManifest=Get-Digest $c.Manifest
+        $oldAddonHash=Get-Digest $oldAddon
+        $newLauncher=Join-Path (Split-Path $c.LauncherRoot) 'Launcher 1.8.4\TavernLauncher - Client.exe'
+        Put-Text $newLauncher 'fixture new launcher'
+        $n=Get-Context $c.GameExe $newLauncher $c.PayloadRoot
+        $newAddon=Join-Path $n.LauncherRoot 'addons\tavern_native_menu\client.py'
+        if ($baseline -eq 'copied') { Put-Text $newAddon 'new addon' }
+        if ($baseline -eq 'custom') { Put-Text $newAddon 'preexisting new launcher addon' }
+        $newBefore=Get-Digest $newAddon
+        $stateCount=@(Get-ChildItem -LiteralPath $c.StateRoot -Recurse -File).Count
+        Run-Fixture $n Validate
+        Assert-Test ((Get-Digest $c.Manifest) -eq $oldManifest -and (Get-Digest $newAddon) -eq $newBefore -and @(Get-ChildItem -LiteralPath $c.StateRoot -Recurse -File).Count -eq $stateCount) ('Migration validation changes no files: ' + $baseline)
+        Assert-Fails { Run-Fixture $n Uninstall } ('Undo rejects an unregistered launcher selection: ' + $baseline)
+        # Removed launcher EXEs must not prevent migration from saved records.
+        Remove-Item -LiteralPath $c.LauncherExe
+        Run-Fixture $n Install
+        $newRecord=Read-InstallRecord $n
+        Assert-Test ($newRecord.LauncherExe -eq $newLauncher -and [IO.File]::ReadAllText($newAddon) -eq 'new addon') ('Migration registers and installs the new launcher: ' + $baseline)
+        Assert-Test ((Get-Digest $oldAddon) -eq $oldAddonHash) ('Migration leaves the old launcher add-on unchanged: ' + $baseline)
+        $priorGame=@($oldRecord.Files | Where-Object Scope -eq 'game')[0]
+        $newGame=@($newRecord.Files | Where-Object Scope -eq 'game')[0]
+        Assert-Test ($newGame.Backup -eq $priorGame.Backup -and $newGame.OriginalHash -eq $priorGame.OriginalHash) ('Migration preserves the original game backup: ' + $baseline)
+        $migratedHash=Get-Digest $n.Manifest
+        Run-Fixture $n Install
+        Assert-Test ((Get-Digest $n.Manifest) -eq $migratedHash) ('Migration retry is idempotent: ' + $baseline)
+        Run-Fixture $n Uninstall
+        Assert-Test ([IO.File]::ReadAllText($mod) -eq 'original game mod' -and (Get-Digest $newAddon) -eq $newBefore) ('Undo restores original game and destination launcher baseline: ' + $baseline)
+    }
+
+    foreach ($interrupted in @($false,$true)) {
+        $c=New-Fixture ('launcher-migration-recovery-' + $interrupted)
+        $mod=Join-Path $c.GameRoot 'Mods\TavernNativeMenu.dll'
+        Run-Fixture $c Install
+        $oldManifest=Get-Digest $c.Manifest
+        $newLauncher=Join-Path (Split-Path $c.LauncherRoot) 'Launcher 1.8.4\TavernLauncher - Client.exe'
+        Put-Text $newLauncher 'fixture new launcher'
+        $n=Get-Context $c.GameExe $newLauncher $c.PayloadRoot
+        $newAddon=Join-Path $n.LauncherRoot 'addons\tavern_native_menu\client.py'
+        Put-Text $newAddon 'destination baseline'
+        Put-Text (Join-Path $c.PayloadRoot 'TavernNativeMenu.dll') 'new migration mod'
+        $script:RealAtomic=${function:Write-AtomicBytes}
+        $script:RealRecovery=${function:Undo-PendingTransaction}
+        $script:Injected=$false
+        $script:FailureManifest=$c.Manifest
+        function Write-AtomicBytes([string]$Destination,[byte[]]$Bytes) {
+            & $script:RealAtomic $Destination $Bytes
+            if (!$script:Injected -and $Destination -eq $script:FailureManifest) { $script:Injected=$true; throw 'Injected migration commit failure.' }
+        }
+        if ($interrupted) {
+            function Undo-PendingTransaction($Context) {
+                if (Test-Path -LiteralPath $Context.Journal) { throw 'Injected exit before migration recovery.' }
+            }
+        }
+        try { Assert-Fails { Run-Fixture $n Install } ('Migration failure is reported: interrupted=' + $interrupted) }
+        finally { ${function:Write-AtomicBytes}=$script:RealAtomic; ${function:Undo-PendingTransaction}=$script:RealRecovery }
+        if ($interrupted) {
+            Assert-Fails { Run-Fixture $n Validate } 'Validate refuses an interrupted migration'
+            Undo-PendingTransaction $n | Out-Null
+        }
+        Assert-Test ((Get-Digest $c.Manifest) -eq $oldManifest -and [IO.File]::ReadAllText($mod) -eq 'new mod' -and [IO.File]::ReadAllText($newAddon) -eq 'destination baseline') ('Migration recovery restores old record and both file baselines: interrupted=' + $interrupted)
+        Run-Fixture $n Install
+        Assert-Test ((Read-InstallRecord $n).LauncherExe -eq $newLauncher -and [IO.File]::ReadAllText($mod) -eq 'new migration mod') ('Migration succeeds after recovery: interrupted=' + $interrupted)
+    }
+
+    $c=New-Fixture 'migration-rejects-changed-game'
+    Run-Fixture $c Install
+    $originalRecord=Get-Digest $c.Manifest
+    $newLauncher=Join-Path (Split-Path $c.LauncherRoot) 'Launcher 1.8.4\TavernLauncher - Client.exe'
+    Put-Text $newLauncher 'fixture new launcher'
+    $n=Get-Context $c.GameExe $newLauncher $c.PayloadRoot
+    Put-Text (Join-Path $c.GameRoot 'Mods\TavernNativeMenu.dll') 'external game mod change'
+    Assert-Fails { Run-Fixture $n Install } 'Migration still rejects independently changed game files'
+    Assert-Test ((Get-Digest $c.Manifest) -eq $originalRecord -and !(Test-Path (Join-Path $n.LauncherRoot 'addons'))) 'Rejected migration preserves the record and destination'
+
     $c=New-Fixture 'missing-payload'
     Remove-Item -LiteralPath (Join-Path $c.PayloadRoot 'TavernNativeMenu.dll')
     Assert-Fails { Run-Fixture $c Validate } 'Missing packaged mod rejected'
