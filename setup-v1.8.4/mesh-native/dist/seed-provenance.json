@@ -1,0 +1,9 @@
+{
+  "source": "https://nodes.tox.chat/json",
+  "retrieved_utc": "2026-09-17T20:47:34.5410733Z",
+  "source_sha256": "98e816a0529d29bf69c9d4aa2b1dbc1322b803ffbaf3cc304d33686c6309ca53",
+  "last_scan": 1789677781,
+  "last_refresh": 1789677541,
+  "selected_count": 12,
+  "note": "Filtered to currently listed healthy UDP/TCP nodes, valid public hosts/keys/ports, diverse locations. This is a discovery snapshot, not an uptime guarantee."
+}

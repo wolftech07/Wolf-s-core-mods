@@ -3,17 +3,18 @@
 /tools/ilspycmd.zip
 
 # Decompiled/extracted third-party research, for local inspection only
-/setup-v1.8.3/research/
+/setup-v1.8.4/research/
 
 # Generated test fixtures, logs and screenshots; curated images live in docs/assets
-/setup-v1.8.3/tests/gui-process-test.txt
-/setup-v1.8.3/tests/setup-window.png
-/setup-v1.8.3/tests/release-smoke-*/
-/setup-v1.8.3/tests/social-integration-*/
-/setup-v1.8.3/social-server/tests/artifacts/
-/setup-v1.8.3/social-server/tests/host-render-data/
-/setup-v1.8.3/social-server/tests/host-smoke/
-/setup-v1.8.3/social-server/tests/host-window.png
+/setup-v1.8.4/tests/gui-process-test.txt
+/setup-v1.8.4/tests/*-latest.txt
+/setup-v1.8.4/tests/setup-window.png
+/setup-v1.8.4/tests/release-smoke-*/
+/setup-v1.8.4/tests/social-integration-*/
+/setup-v1.8.4/social-server/tests/artifacts/
+/setup-v1.8.4/social-server/tests/host-render-data/
+/setup-v1.8.4/social-server/tests/host-smoke/
+/setup-v1.8.4/social-server/tests/host-window.png
 __pycache__/
 *.py[cod]
 
@@ -34,3 +35,21 @@ Desktop.ini
 
 # Keep the project's own distributable EXE/DLL/ZIP files tracked.
 # Do not use blanket *.dll or *.exe rules: setup embeds the built mod payload.
+
+# Native mesh dependency build caches; distribution and source package stay tracked.
+/setup-v1.8.4/mesh-native/downloads/
+/setup-v1.8.4/mesh-native/src/
+/setup-v1.8.4/mesh-native/build/
+/setup-v1.8.4/mesh-native/buildtrees/
+/setup-v1.8.4/mesh-native/installed/
+/setup-v1.8.4/mesh-native/packages/
+/setup-v1.8.4/mesh-native/registry-cache/
+/setup-v1.8.4/mesh-native/binary-cache/
+/setup-v1.8.4/mesh-native/source-package/
+**/TavernMesh.json*
+/setup-v1.8.4/tests/mesh-integration-*/
+/setup-v1.8.4/mesh-server/tests/artifacts/
+/setup-v1.8.4/tests/server-card-worker-*/
+**/TavernFriendCode.txt
+
+/setup-v1.8.4/mesh-native/rename-cache/

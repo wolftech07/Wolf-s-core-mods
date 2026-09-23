@@ -1,0 +1,25 @@
+Tavern peer networking dependencies
+
+c-toxcore 0.2.23 - GPL-3.0-or-later
+Copyright the Tox/TokTok contributors. See TOXCORE-LICENSE.txt.
+https://github.com/TokTok/c-toxcore
+
+libsodium 1.0.22 - ISC
+Copyright (c) 2013-2026 Frank Denis. See LIBSODIUM-LICENSE.txt.
+https://github.com/jedisct1/libsodium
+
+pthreads4w 3.0.0 - Apache-2.0
+Copyright its contributors. See PTHREADS-LICENSE.txt and upstream source notices.
+https://sourceforge.net/projects/pthreads4w/
+
+The native library statically includes libsodium and pthreads4w. Corresponding
+sources, applied dependency-port patches and build instructions are supplied in
+native-source.zip. No separate proprietary game code is contained in the helper.
+
+The automatically launched TavernMeshPeer.exe is GPL-3.0-or-later. Its source and
+build instructions are in mesh-peer-source.zip; see MESH-PEER-LICENSE.txt.
+Newtonsoft.Json is MIT licensed; see NEWTONSOFT-LICENSE.txt.
+
+Bootstrap seed addresses are from https://nodes.tox.chat/json. They are discovery
+points and public TCP connection helpers, not a shared Tavern friends database.
+See seed-provenance.json for the bundled snapshot. Availability can change.

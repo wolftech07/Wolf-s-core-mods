@@ -1,0 +1,21 @@
+{
+  "Entries": [
+    { "Source": "TavernNativeMenu.dll", "Scope": "game", "Target": "Mods/TavernNativeMenu.dll" },
+    { "Source": "addons/tavern_native_menu/__init__.py", "Scope": "launcher", "Target": "addons/tavern_native_menu/__init__.py" },
+    { "Source": "addons/tavern_native_menu/client.py", "Scope": "launcher", "Target": "addons/tavern_native_menu/client.py" },
+    { "Source": "addons/tavern_native_menu/author.json", "Scope": "launcher", "Target": "addons/tavern_native_menu/author.json" },
+    { "Source": "native/libtoxcore.dll", "Scope": "game", "Target": "TavernNativeMenu/native/libtoxcore.dll" },
+    { "Source": "native/bootstrap-nodes.json", "Scope": "game", "Target": "TavernNativeMenu/native/bootstrap-nodes.json" },
+    { "Source": "native/TavernMeshPeer.exe", "Scope": "game", "Target": "TavernNativeMenu/native/TavernMeshPeer.exe" },
+    { "Source": "native/Newtonsoft.Json.dll", "Scope": "game", "Target": "TavernNativeMenu/native/Newtonsoft.Json.dll" },
+    { "Source": "native/TOXCORE-LICENSE.txt", "Scope": "game", "Target": "TavernNativeMenu/native/TOXCORE-LICENSE.txt" },
+    { "Source": "native/LIBSODIUM-LICENSE.txt", "Scope": "game", "Target": "TavernNativeMenu/native/LIBSODIUM-LICENSE.txt" },
+    { "Source": "native/PTHREADS-LICENSE.txt", "Scope": "game", "Target": "TavernNativeMenu/native/PTHREADS-LICENSE.txt" },
+    { "Source": "native/MESH-PEER-LICENSE.txt", "Scope": "game", "Target": "TavernNativeMenu/native/MESH-PEER-LICENSE.txt" },
+    { "Source": "native/NEWTONSOFT-LICENSE.txt", "Scope": "game", "Target": "TavernNativeMenu/native/NEWTONSOFT-LICENSE.txt" },
+    { "Source": "native/THIRD-PARTY-NOTICES.txt", "Scope": "game", "Target": "TavernNativeMenu/native/THIRD-PARTY-NOTICES.txt" },
+    { "Source": "native/seed-provenance.json", "Scope": "game", "Target": "TavernNativeMenu/native/seed-provenance.json" },
+    { "Source": "native/native-source.zip", "Scope": "game", "Target": "TavernNativeMenu/native/native-source.zip" },
+    { "Source": "native/mesh-peer-source.zip", "Scope": "game", "Target": "TavernNativeMenu/native/mesh-peer-source.zip" }
+  ]
+}

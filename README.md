@@ -1,143 +1,56 @@
-<div align="center">
+# Tavern In-Game Hub
 
-# ⚓ Tavern Native Menu
+**v2.2.0 · A Township Tale · Tavern Launcher 1.8.3 / 1.8.4 · Windows PC VR**
 
-### Launch your game. Choose your server in VR.
+Choose a server, invite friends, and manage players from inside the game.
 
-Bring Tavern's community servers, private bookmarks and friends into **A Township Tale's original menus**.
+**[Download setup](setup-v1.8.4/dist/TavernHubSetup.zip)** · [Installation guide](setup-v1.8.4/README.md) · [Report a bug](https://github.com/wolftech07/Wolf-s-core-mods/issues)
 
-![Launcher 1.8.3](https://img.shields.io/badge/Tavern_Launcher-1.8.3-356fa3?style=flat-square)
-![Mod 1.0.5](https://img.shields.io/badge/Menu_Mod-1.0.5-16806a?style=flat-square)
-![Windows](https://img.shields.io/badge/Platform-Windows-687385?style=flat-square)
-![VR testing build](https://img.shields.io/badge/Status-VR_testing_build-d99526?style=flat-square)
+## What it does
 
-**[📦 Download package](setup-v1.8.3/dist/TavernNativeMenuSetup-for-1.8.3.zip)** · **[Installation guide](setup-v1.8.3/README.md)** · **[Host friends relay](setup-v1.8.3/social-server/SOCIAL-HOSTING.md)** · **[Report an issue](https://github.com/wolftech07/Wolf-s-core-mods/issues)**
+- Adds **Play Game** to Tavern Launcher so you can choose your server in VR.
+- Shows community servers and your saved or private servers in the original server picker.
+- Uses the game's VR keyboard for passwords, with a Cancel button.
+- Adds friends and invitations through friend codes, friendship cards, and the social tablet.
+- Lets you view players, mute or block people, and use **Kick**, **Ban**, and **Unban** when your server role allows it.
 
-</div>
+## Install and play
 
----
+You need **Tavern Launcher 1.8.3 or 1.8.4**, a compatible Windows copy of A Township Tale patched through Tavern Launcher, and **Mono MelonLoader**. Complete the launcher's normal **Patch** and **Mods** setup first.
 
-Click **Play Game** in Tavern Launcher to open the native server picker. Browse the community list, use your saved servers, and authenticate when you join—all without choosing a server before launch.
+1. Download and extract [TavernHubSetup.zip](setup-v1.8.4/dist/TavernHubSetup.zip).
+2. Close the game and launcher, then open **TavernHubSetup.exe**.
+3. Select your **A Township Tale.exe** and **TavernLauncher - Client.exe**.
+4. Click **Install / Update** and wait for the log to confirm completion.
+5. Open Tavern Launcher and click **Play Game**. Choose your server inside the game.
 
-<p align="center">
-  <img src="docs/assets/setup.png" alt="Tavern Native Menu setup window with game and launcher selectors, Install / Update, Undo setup, and a live log" width="820">
-</p>
+No commands or compiling required. The game, launcher, and MelonLoader are not included.
 
-> [!IMPORTANT]
-> This build targets **Tavern Launcher Client 1.8.3** and the compatible Windows/Mono game build. Automated checks pass, but headset controls, physical friend-card exchanges and invitations between two real game clients still need VR testing.
+## Server hosts
 
-## ✨ What’s included
+For friendship cards and the full social tablet, stop your game server and choose **Install server support...** in the same setup EXE. Select the patched game-server folder, then restart the server. Both players need the current client mod for friendship features.
 
-| Feature | What you can do |
-| :--- | :--- |
-| **Native server picker** | Browse Tavern community, saved and recent servers inside the game. |
-| **Play Game integration** | Open the picker directly from Tavern Launcher. |
-| **Wheel and rope repair** | Use native scrolling without the missing-lever startup failure. |
-| **VR password keyboard** | Enter passwords using the game's touch keyboard, with masked input. |
-| **Private servers** | Save an address locally without publishing it to the community dashboard. |
-| **Friends and invitations** | Use the native friends boards and cards with the optional shared relay and server companion. |
-| **Simple updates** | Install or update from one EXE, with live logs, backups and Undo. |
+Tavern **moderators** and **owners** get the appropriate moderation controls. Friend codes work without the server companion. Your group does not need to run a separate friends relay app.
 
-## 🚀 Start playing
+## Update or remove
 
-### 1 · Prepare your game
+Run the latest setup and choose **Install / Update**. Use the same game and launcher folders; your settings, friends, and original backups are kept. If upgrading Tavern Launcher too, update it in its existing folder and apply its new patch before updating this mod.
 
-Use Tavern Launcher's normal **Patch** and **Mods** controls to install the compatible Tavern client patch and Mono MelonLoader. Save your username, game path and platform in the launcher.
+To remove the integration, close the game and launcher and choose **Undo setup**. Hosts can use **Undo server support...**.
 
-You need Windows, **.NET Framework 4.8**, **Windows PowerShell 5.1**, and **Tavern Launcher Client 1.8.3**. The package does not include the game, launcher, MelonLoader or TavernLib.
+## Friends and private servers
 
-### 2 · Install the mod
+Use **Add a private server...** to save a server without submitting it to the community dashboard. Add friends with a friend code, friendship card, or the social tablet; requests must be accepted. Only accepted friends appear in your friends list.
 
-1. Download and extract **[TavernNativeMenuSetup-for-1.8.3.zip](setup-v1.8.3/dist/TavernNativeMenuSetup-for-1.8.3.zip)**. On GitHub's file page, use **Download raw file** if the ZIP does not download immediately.
-2. Close the game and Tavern Launcher.
-3. Run **TavernNativeMenuSetup.exe** and browse to your game EXE and version **1.8.3** launcher EXE.
-4. Click **Install / Update** and wait for the live log to confirm completion.
+Both games must be online for invitations to arrive. Networking starts automatically and uses the public Tox network for discovery and connection assistance. Server passwords and access rules still apply.
 
-**No commands, Python installation or compilation needed.**
+## Help
 
-### 3 · Choose a server in VR
+- **No Play Game button?** Restart the selected launcher and enable **Tavern In-Game Hub - Play Game** in Addons.
+- **Tablet actions unavailable?** Ask the host to install the current server support.
+- **Friends stay offline?** Keep both games open, allow time for discovery, and check the friends board's network status.
+- **Something failed?** Save the setup log or include relevant MelonLoader log lines in a bug report. Do not share account or identity files.
 
-Open Tavern Launcher, click **Play Game**, then select a server in the original game menu. Password and whitelist requirements still apply.
+[Friends guide](setup-v1.8.4/MESH-FRIENDS.md) · [Tablet guide](setup-v1.8.4/SOCIAL-TABLET.md) · [Technical details and build instructions](setup-v1.8.4/ADVANCED.md)
 
-| Updating? | Removing the integration? |
-| :--- | :--- |
-| Run the new setup EXE and choose **Install / Update**. Your settings and original Undo backups are retained. | Close the game and launcher, then choose **Undo setup**. The installer restores the files it backed up. |
-
-[Read the full installation and recovery guide →](setup-v1.8.3/README.md)
-
-## 🏡 Keep a server private
-
-Choose **Add a private server...** in the picker. Enter its hostname or IPv4 address, friendly name and ports using the VR keyboard.
-
-Your bookmark appears in **Favorites** and **Saved / Recent**. The default game port is **1757** and authentication port is **1762**. The mod does not submit this address to the community dashboard; the server owner's own listing settings still apply.
-
-## 🤝 Play with friends
-
-One person runs **TavernNativeSocialHost.exe** for the group. Players connect to that shared relay from **Connect friends service...** on the native friends board.
-
-| Step | In the game |
-| :---: | :--- |
-| **1** | Connect both clients to the same relay. |
-| **2** | Exchange native friendship cards on a game server with the companion installed. |
-| **3** | Select a friend and invite them to a saved or private server. |
-| **4** | Accept the invitation from the friends board or **Requests** tab. Normal join checks still apply. |
-
-Your client controls your presence: you appear offline within about a minute after it stops sending heartbeats. Invitations share the destination with the chosen recipient, without including passwords or login tokens. Existing Alta/Oculus friends are not imported.
-
-> [!NOTE]
-> Internet invitations require a **reachable HTTPS relay**. This package includes the host software, not a pre-hosted service. Adding friends through cards also requires the companion on the game server where you exchange them.
-
-[Set up the relay and server companion →](setup-v1.8.3/social-server/SOCIAL-HOSTING.md)
-
-## 🛠️ Need a hand?
-
-<details>
-<summary><strong>The launcher still shows “Join Server”</strong></summary>
-
-Close and reopen the version 1.8.3 launcher selected during setup. In its Addons window, enable **Tavern Native Menu - Play Game**. Running **Install / Update** again can re-enable it.
-
-</details>
-
-<details>
-<summary><strong>The relay reports an error</strong></summary>
-
-Click **Start relay**, then **Test connection** in the host app. Check its live log or the automatic log at `%LOCALAPPDATA%\TavernNativeSocialRelay\host.log`.
-
-`127.0.0.1` reaches only your own computer. Other players need the shared HTTPS address. The [hosting guide](setup-v1.8.3/social-server/SOCIAL-HOSTING.md#if-the-relay-shows-an-error) covers port conflicts, certificates and connection failures.
-
-</details>
-
-<details>
-<summary><strong>A server or friend card will not connect</strong></summary>
-
-Check the server's normal password and whitelist requirements. For card exchanges, both players must use the same relay and the game server must have the configured companion.
-
-For a bug report, include the action that failed, the exact error, and relevant setup or MelonLoader log lines. Review logs for personal paths before sharing. Keep credential files such as `TavernSocial.json` and `TavernNativeSocialServer.json` private.
-
-</details>
-
-[More troubleshooting →](setup-v1.8.3/README.md#troubleshooting)
-
-## 🧪 Verification and compatibility
-
-The release has been compiled against the inspected game assemblies and checked with installer fixtures, wheel/rope instruction tests, keyboard tests, native API binding checks, and relay/client integration tests. Two isolated instances of the production social client have exchanged invitations through the real local relay.
-
-**Those tests do not replace a two-player VR session.** Fly mode uses the original VR-oriented menu; there is no separate desktop picker. Launcher add-ons that need server-specific work before launch, such as custom-model syncing, are not integrated with in-game selection.
-
-[Detailed test coverage and limitations →](setup-v1.8.3/README.md#compatibility-and-testing)
-
-## 📁 For contributors
-
-```text
-setup-v1.8.3/
-├── mod-src/          In-game menu and social client
-├── src/              Windows setup interface
-├── payload/          Installer worker, mod DLL and launcher add-on
-├── social-server/    Relay host and game-server companion
-├── tests/            Automated checks
-└── dist/             Current distributable package
-```
-
-The build uses Windows' .NET Framework compiler; no NuGet restore or .NET SDK is required. Compatible game assemblies are needed to rebuild the mod and companion. See the **[maintainer instructions](setup-v1.8.3/README.md#for-maintainers)** for build commands.
-
-**ILSpy is optional:** `tools/ilspycmd/` is a local inspection tool, not a build dependency, and is excluded from Git along with decompiled research and generated test fixtures. The project's own release binaries remain tracked.
+**Testing status:** compiled and checked with automated tests; a two-player VR session still needs verification. This is a Windows PC mod, not a standalone Quest app. Launcher add-ons that require server-specific work before launch, such as custom-model syncing, are not integrated with this flow.
