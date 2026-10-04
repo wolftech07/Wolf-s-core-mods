@@ -15,6 +15,7 @@ internal sealed class PeerProcess : IDisposable
     private readonly object gate = new object();
     private readonly Dictionary<long, JObject> replies = new Dictionary<long, JObject>();
     private readonly List<JObject> verified = new List<JObject>();
+    private readonly List<JObject> paired = new List<JObject>();
     private readonly Process process;
     private JObject state = new JObject();
     private long next;
@@ -35,6 +36,14 @@ internal sealed class PeerProcess : IDisposable
                 JObject value = JObject.Parse(args.Data);
                 if ((string)value["type"] == "state") state = value;
                 else if ((string)value["type"] == "verified") verified.Add(value);
+                else if ((string)value["type"] == "paired")
+                {
+                    // Record the snapshot visible at this exact stdout boundary.
+                    // A later state message must not make an early event pass.
+                    JArray currentFriends = state["friends"] as JArray ?? new JArray();
+                    value["friend_published_before_event"] = currentFriends.OfType<JObject>().Any(x => (string)x["social_id"] == (string)value["key"]);
+                    paired.Add(value);
+                }
                 else if ((string)value["type"] == "reply") replies[(long)value["id"]] = value;
                 Monitor.PulseAll(gate);
             }
@@ -49,6 +58,8 @@ internal sealed class PeerProcess : IDisposable
     internal string Key { get { return Address.Substring(0, 64); } }
     internal int VerifiedCount { get { lock (gate) return verified.Count; } }
     internal bool Verified(string key, string nonce) { lock (gate) return verified.Any(x => (string)x["key"] == key && (string)x["nonce"] == nonce); }
+    internal bool Paired(string key, string nonce) { lock (gate) return paired.Any(x => (string)x["key"] == key && (string)x["nonce"] == nonce); }
+    internal bool PublishedBeforePair(string key, string nonce) { lock (gate) return paired.Where(x => (string)x["key"] == key && (string)x["nonce"] == nonce).All(x => (bool)x["friend_published_before_event"]); }
     internal JArray List(string name) { return State()[name] as JArray ?? new JArray(); }
     internal JObject Send(string action, params object[] values)
     {
@@ -144,6 +155,12 @@ internal static class MeshPeerProofTests
             Check(alice.List("friends").Count == 0 && bob.List("friends").Count == 0 && alice.List("requests").Count == 0 && bob.List("requests").Count == 0, "identity proof creates neither friendships nor incoming requests");
             Check(((JArray)alice.Profile()["Contacts"]).Count == 0 && ((JArray)bob.Profile()["Contacts"]).Count == 0, "identity proof does not create persistent social contacts");
             Wait(delegate { return alice.Verified(oid, alternate) && other.Verified(aid, alternate); }, "independent peer proof connects through another local bootstrap", 100);
+            string cardProof = new string('P', 43);
+            alice.Send("pair", "code", oCode, "name", "Other", "nonce", cardProof, "expires", Now + 120);
+            other.Send("pair", "code", aCode, "name", "Alice", "nonce", cardProof, "expires", Now + 120);
+            Wait(delegate { return alice.Paired(oid, cardProof) && other.Paired(aid, cardProof); }, "matching friend-card consent emits paired on both helpers", 30);
+            Check(alice.PublishedBeforePair(oid, cardProof) && other.PublishedBeforePair(aid, cardProof), "accepted friend snapshot precedes every card completion event on stdout");
+            alice.Send("remove", "key", oid); other.Send("remove", "key", aid);
             int aProofs = alice.VerifiedCount, bProofs = bob.VerifiedCount;
             alice.Verify(bCode, wrong, Now + 120); bob.Verify(aCode, alternate, Now + 120);
             other.Verify(aCode, wrong, Now + 120); alice.Verify(oCode, proof, Now + 120);

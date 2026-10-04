@@ -43,6 +43,8 @@ internal static class PairTests
             Check(AddressCodec.Normalize(null) == null && AddressCodec.Normalize("short") == null, "missing and short addresses rejected");
 
             var registry = new PairRegistry(); PairPeer left = Peer(10), right = Peer(20); PendingPair completed;
+            Check(registry.CreationFailure(left, right) == PairCreationFailure.None, "valid participants have no pairing rejection");
+            Check(registry.CreationFailure(new PairPeer { Connection = new object(), NativeId = 1 }, right) == PairCreationFailure.InvalidParticipant, "missing identity reports unavailable participant rather than pending pairing");
             Check(registry.Create(new PairPeer { Connection = new object(), NativeId = 1 }, right, null, now) == null, "null peer address rejected");
             PendingPair pair = registry.Create(left, right, new object(), now);
             Check(pair != null && pair.Nonce.Length == 43 && pair.Expires == now.AddSeconds(120), "pair gets random nonce and two minute lifetime");
@@ -50,6 +52,7 @@ internal static class PairTests
             Check(registry.Confirm(left.Connection, pair.Nonce, now, out completed) == PairConfirmation.Waiting && completed == null, "one participant cannot complete friendship");
             Check(registry.Confirm(left.Connection, pair.Nonce, now, out completed) == PairConfirmation.Waiting, "duplicate acknowledgement is not second participant");
             Check(registry.Create(left, Peer(40), null, now) == null, "one pending pair per participant");
+            Check(registry.CreationFailure(left, Peer(40)) == PairCreationFailure.Pending, "active pairing reports pending confirmation");
             Check(registry.Confirm(right.Connection, pair.Nonce, now, out completed) == PairConfirmation.Complete && ReferenceEquals(pair, completed), "both original connections complete pair");
             Check(registry.Count == 0 && registry.Confirm(right.Connection, pair.Nonce, now, out completed) == PairConfirmation.Rejected, "completion consumes nonce once");
             pair = registry.Create(left, right, null, now);
@@ -59,8 +62,10 @@ internal static class PairTests
             Check(registry.RemovePeer(right.Connection).Length == 1 && registry.Count == 0, "disconnect removes pair");
             Check(registry.Confirm(left.Connection, pair.Nonce, now, out completed) == PairConfirmation.Rejected, "disconnected pair cannot complete");
             PairPeer sameKey = Peer(30); sameKey.Address = Address(10, 9);
+            Check(registry.CreationFailure(left, sameKey) == PairCreationFailure.SameIdentity, "copied public identity reports duplicate profile rather than pending pairing");
             Check(registry.Create(left, sameKey, null, now) == null, "same public key with different nospam cannot friend itself");
             PairPeer sameNative = Peer(10);
+            Check(registry.CreationFailure(left, sameNative) == PairCreationFailure.SamePlayer && registry.CreationFailure(left, left) == PairCreationFailure.SamePlayer, "self and duplicate native player report self-target rejection");
             Check(registry.Create(left, sameNative, null, now) == null, "same native player cannot friend itself");
             string previous = null;
             for (int i = 0; i < PairRegistry.MaximumPairs; i++)
@@ -72,6 +77,7 @@ internal static class PairTests
             }
             Check(registry.Count == PairRegistry.MaximumPairs, "registry supports bounded maximum concurrent pairs");
             Check(registry.Create(Peer(4000), Peer(5000), null, now) == null, "excess pairs refused at capacity");
+            Check(registry.CreationFailure(Peer(4000), Peer(5000)) == PairCreationFailure.Capacity, "full registry reports server capacity rather than already-pending confirmation");
             Check(registry.RemoveAll().Length == PairRegistry.MaximumPairs && registry.Count == 0, "shutdown cleanup returns every pending pair");
             Console.WriteLine("Passed " + assertions + " mesh card checks."); return 0;
         }

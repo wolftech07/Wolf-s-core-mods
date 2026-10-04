@@ -7,7 +7,7 @@ $requirements=@{
  'Alta.Meta.UI.ServerManagement.FriendsRequestsPanel'=@{ Methods=@('SetupFriendsList','RefreshData'); Fields=@('listElement','uiList','emptyListText') }
  'Alta.Meta.UI.ServerManagement.InviteUserToGroupPanel'=@{ Methods=@('SetupForUser','SetupGroupsList','RefreshData'); Fields=@('elementTemplate','uiList') }
  'Alta.Meta.Friends.FriendsManager'=@{ Methods=@('UpdateFriends','GetUserInfoToDisplay','ConfigureTokenForTab','UpdateDisplay'); Fields=@('currentTab') }
- 'FriendRequestToken'=@{ Methods=@('AddFriend','RunEffects','SyncFriendRequestForPlayer','SyncFriendRequestForTokenOwner'); Fields=@('timelineEntry','otherTokenId','receivedOwnerToken','syncFriendshipRequestEffect') }
+ 'FriendRequestToken'=@{ Methods=@('AddFriend','RunEffects','Grabbed','SyncFriendRequestForPlayer','SyncFriendRequestForTokenOwner'); Fields=@('timelineEntry','otherTokenId','receivedOwnerToken','syncFriendshipRequestEffect') }
  'FriendshipManager'=@{ Methods=@('AddFriend','UpdateStatus','IsFriendsWith'); Fields=@() }
 }
 foreach($file in @((Join-Path $GameFolder 'A Township Tale_Data\Managed\Root.Township.dll'),$AlternateRoot)) {
@@ -19,6 +19,8 @@ foreach($file in @((Join-Path $GameFolder 'A Township Tale_Data\Managed\Root.Tow
    foreach($field in $requirements[$name].Fields){if(!@($type.Fields | Where-Object Name -eq $field).Count){throw "Missing social field $name.$field"};$checks++}
   }
   $card=$module.GetType('FriendRequestToken')
+  $grabbed=@($card.Methods | Where-Object Name -eq 'Grabbed')[0]
+  if ($grabbed.Parameters.Count -ne 2 -or $grabbed.Parameters[1].Name -ne 'interactor' -or $grabbed.Parameters[1].ParameterType.Name -ne 'Interactor') { throw 'Unexpected card pickup patch signature.' }; $checks++
   foreach($pair in @(@('SyncFriendRequestForPlayer','friendID'),@('SyncFriendRequestForTokenOwner','player'))) {
    $method=@($card.Methods | Where-Object Name -eq $pair[0])[0]
    if($method.Parameters.Count -ne 1 -or $method.Parameters[0].Name -ne $pair[1]){throw "Unexpected card patch argument $($pair[0])"};$checks++

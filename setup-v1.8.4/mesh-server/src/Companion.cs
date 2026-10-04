@@ -15,7 +15,7 @@ using MelonLoader;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-[assembly: MelonInfo(typeof(TavernNativeMeshServer.Companion), "Tavern In-Game Hub Server", "2.2.0", "Tavern In-Game Hub contributors")]
+[assembly: MelonInfo(typeof(TavernNativeMeshServer.Companion), "Tavern In-Game Hub Server", "2.3.1", "Tavern In-Game Hub contributors")]
 [assembly: MelonGame(null, "A Township Tale")]
 
 namespace TavernNativeMeshServer
@@ -193,8 +193,9 @@ namespace TavernNativeMeshServer
         internal bool Card(FriendRequestToken card)
         {
             if (Current != this || !NetworkSceneManager.IsServer) return true;
-            // Only intercept cards owned by a mesh connection. Another message-34
-            // owner retains its own card flow when both mods are installed.
+            // Intercept cards on connections whose native channel we own, even
+            // before client identity startup. Missing client support is denied;
+            // another message-34 owner retains its existing card flow.
             Session owner = sessions.Values.FirstOrDefault(x => x.Connection.Player != null && x.Connection.Player.UserInfo.Identifier == card.Owner);
             if (owner == null) return true;
             if (!pendingCards.Add(card)) return false;
@@ -206,17 +207,27 @@ namespace TavernNativeMeshServer
             AccessTools.Field(typeof(FriendRequestToken), "timelineEntry").SetValue(card, entry);
             AccessTools.Field(typeof(FriendRequestToken), "receivedOwnerToken").SetValue(card, false);
             AccessTools.Field(typeof(FriendRequestToken), "otherTokenId").SetValue(card, -1);
-            if (!physicalConsent || owner.Peer == null || other == null || other.Peer == null || !StillBound(owner.Peer) || !StillBound(other.Peer))
+            string unavailable = null;
+            if (other == null || owner.Connection.IsDisposed || other.Connection.IsDisposed || !owner.Connection.IsApproved || !other.Connection.IsApproved)
+                unavailable = "A player is no longer connected to this server's Hub card support. Rejoin the server and exchange the card again.";
+            else if (owner.Peer == null || other.Peer == null)
+                unavailable = MissingClientSupport(owner.Peer == null ? owner.Connection : other.Connection);
+            else if (!StillBound(owner.Peer) || !StillBound(other.Peer))
+                unavailable = "A player's server session changed before the card handoff finished. Rejoin the server and exchange the card again.";
+            else if (!physicalConsent)
+                unavailable = "The friend card handoff was incomplete or expired. Hand your card directly to the other player and try again.";
+            if (unavailable != null)
             {
-                Error(owner.Connection, "Both players need the mesh mod connected before exchanging friend cards.", rightId);
-                if (other != null) Error(other.Connection, "Both players need the mesh mod connected before exchanging friend cards.", card.Owner);
+                Error(owner.Connection, unavailable, rightId);
+                if (other != null) Error(other.Connection, unavailable, card.Owner);
                 FinishCard(card, 2); return false;
             }
             PendingPair pair = pairs.Create(owner.Peer, other.Peer, card, DateTime.UtcNow);
             if (pair == null)
             {
-                Error(owner.Connection, "A friend-card confirmation is already pending. Wait for it to finish, then try again.", rightId);
-                Error(other.Connection, "A friend-card confirmation is already pending. Wait for it to finish, then try again.", card.Owner);
+                string reason = PairUnavailable(pairs.CreationFailure(owner.Peer, other.Peer), "friend-card confirmation");
+                Error(owner.Connection, reason, rightId);
+                Error(other.Connection, reason, card.Owner);
                 FinishCard(card, 2); return false;
             }
             SendPair(pair.Left, pair.Right, pair); SendPair(pair.Right, pair.Left, pair);
@@ -226,6 +237,25 @@ namespace TavernNativeMeshServer
         { if (NetworkSceneManager.IsServer) consent.Owner(card.GetInstanceID(), card.Owner, friend, DateTime.UtcNow); }
         internal void RecordPeer(FriendRequestToken card, Alta.Networking.Scripts.Player.IPlayer peer)
         { if (NetworkSceneManager.IsServer && peer != null) consent.Peer(card.GetInstanceID(), card.Owner, peer.UserInfo.Identifier, DateTime.UtcNow); }
+        internal static string MissingClientSupport(Connection connection)
+        {
+            string name = connection == null || connection.Player == null ? "This player" : connection.Player.UserInfo.Username;
+            if (String.IsNullOrEmpty(name)) name = "This player";
+            name = new string(name.Where(c => !Char.IsControl(c) && c != '<' && c != '>').Take(48).ToArray());
+            return name + " has not connected Hub friends support. Both players need the current client mod with Friends networking enabled. If installed, wait for it to start and try again.";
+        }
+        internal static string PairUnavailable(PairCreationFailure failure, string action)
+        {
+            if (failure == PairCreationFailure.SameIdentity)
+                return "Both players are using the same saved friends identity. Each player needs their own Hub friends profile; do not copy another player's UserData.";
+            if (failure == PairCreationFailure.SamePlayer)
+                return "You cannot exchange a friend card or verify identity with your own player.";
+            if (failure == PairCreationFailure.Capacity)
+                return "The server has too many pending identity checks. Wait for some to finish, then try again.";
+            if (failure == PairCreationFailure.Pending)
+                return "A " + action + " is already pending for one of these players. Wait for it to finish, then try again.";
+            return "A player's friends identity is unavailable. Rejoin the server and try again.";
+        }
         private static void SendPair(PairPeer owner, PairPeer friend, PendingPair pair)
         {
             long expires = (long)(pair.Expires - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;

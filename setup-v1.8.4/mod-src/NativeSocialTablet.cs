@@ -48,6 +48,11 @@ namespace TavernNativeMenu
         private static string blockPath, storageError;
         private static bool stopped;
         private static DateTime nextMute;
+        private static string cardMessage;
+        private static string cardServer;
+        private static int cardPlayer;
+        private static long cardGeneration;
+        private static DateTime cardMessageUntil;
         private static readonly TabletMuteState forcedMutes = new TabletMuteState();
 
         internal static void Install(HarmonyLib.Harmony harmony, string gamePath)
@@ -62,6 +67,7 @@ namespace TavernNativeMenu
             harmony.Patch(AccessTools.Method(typeof(RecentPlayerElement), "UpdateView"), null,
                 new HarmonyMethod(typeof(NativeSocialTablet), "AfterRow"));
             MeshSocialClient.Changed += Changed;
+            MeshSocialTransport.CardStatus += CardStatus;
             stopped = false;
         }
         private static void Patch(HarmonyLib.Harmony harmony, Type type, string method, string patch)
@@ -88,6 +94,15 @@ namespace TavernNativeMenu
             return done.Task;
         }
         private static void Changed() { foreach (View view in Views.Values) view.NextRefresh = DateTime.MinValue; }
+        private static void CardStatus(int id, string message, bool showPopup)
+        {
+            cardMessage = Clean(message); cardPlayer = id; cardServer = MeshSocialTransport.CurrentServerKey;
+            cardGeneration = MeshSocialTransport.ConnectionGeneration;
+            cardMessageUntil = DateTime.UtcNow.AddMinutes(2);
+            foreach (View view in Views.Values)
+                if (Alive(view) && !view.Busy && view.Server == cardServer && (view.Selected == id || id == 0))
+                { view.Message = cardMessage; RenderActions(view); }
+        }
         private static void BeforeStart(SocialTablet __instance) { Ensure(__instance); }
         private static bool SkipNativeBanSetup(RecentPlayerActionPage __instance)
         { return Find(__instance) == null; }
@@ -171,7 +186,11 @@ namespace TavernNativeMenu
         private static bool BeforeSetup(RecentPlayerActionPage __instance, RecentPlayerInteractionInfo recentPlayer)
         {
             View view = Find(__instance); if (view == null) return true;
-            view.Selected = recentPlayer.UserInfo.Identifier; view.Message = ""; view.Pending = null; view.Generation++;
+            view.Selected = recentPlayer.UserInfo.Identifier;
+            view.Message = cardMessageUntil > DateTime.UtcNow && cardGeneration == MeshSocialTransport.ConnectionGeneration &&
+                cardServer == MeshSocialTransport.CurrentServerKey &&
+                (cardPlayer == view.Selected || cardPlayer == 0) ? cardMessage : "";
+            view.Pending = null; view.Generation++;
             Set(__instance, "recentPlayer", recentPlayer);
             foreach (RecentPlayerElement element in Field<RecentPlayerElement[]>(__instance, "recentPlayerElements")) element.Setup(recentPlayer);
             RenderActions(view); return false;
@@ -493,7 +512,7 @@ namespace TavernNativeMenu
         }
         internal static void Shutdown()
         {
-            stopped = true; MeshSocialClient.Changed -= Changed;
+            stopped = true; MeshSocialClient.Changed -= Changed; MeshSocialTransport.CardStatus -= CardStatus;
             forcedMutes.Restore();
             foreach (View view in Views.Values) view.Dead = true;
             Views.Clear(); lock (Main) Main.Clear();

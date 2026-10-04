@@ -34,10 +34,11 @@ namespace TavernNativeMenu
         internal static string LastError { get { lock (Gate) return error; } }
         internal static long Now { get { return (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds; } }
 
-        internal static void Initialize(string gamePath, string name)
+        internal static void Initialize(string gamePath, string name, bool enableNetworking = true)
         {
             if (started) return; started = true;
             MeshSocialTransport.Initialize();
+            if (!enableNetworking) { SetError(new InvalidOperationException("Friends networking is disabled in UserData/TavernNativeMenu.json. Server browsing and joining remain available.")); return; }
             try
             {
                 string native = Path.Combine(gamePath, "TavernNativeMenu", "native");

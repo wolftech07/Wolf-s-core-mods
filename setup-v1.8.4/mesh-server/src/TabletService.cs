@@ -176,13 +176,17 @@ namespace TavernNativeMeshServer
             int id = (int?)packet["target_id"] ?? 0;
             Connection target = Online().FirstOrDefault(x => x.Player.UserInfo.Identifier == id);
             PairPeer left = owner.TabletPeer(issuer), right = owner.TabletPeer(target);
-            if (left == null || right == null || ReferenceEquals(issuer, target))
-            { Reply(issuer, request, false, "Both players must have mesh connected to verify an identity.", null); return; }
+            if (target == null)
+            { Reply(issuer, request, false, "This player is no longer on the server. Refresh the player list.", null); return; }
+            if (ReferenceEquals(issuer, target))
+            { Reply(issuer, request, false, "You cannot verify your own player. Select another player.", null); return; }
+            if (left == null || right == null)
+            { Reply(issuer, request, false, Companion.MissingClientSupport(left == null ? issuer : target), null); return; }
             string expectedAddress = (string)packet["address"];
             if (expectedAddress != null && AddressCodec.Normalize(expectedAddress) != right.Address)
             { Reply(issuer, request, false, "The player's mesh identity changed. Refresh the player list.", null); return; }
             PendingPair pair = proofs.Create(left, right, new Verification { Issuer = issuer, Request = request }, DateTime.UtcNow);
-            if (pair == null) { Reply(issuer, request, false, "An identity check is already pending for one of these players.", null); return; }
+            if (pair == null) { Reply(issuer, request, false, Companion.PairUnavailable(proofs.CreationFailure(left, right), "identity check"), null); return; }
             requests[issuer].Pending.Add(request);
             SendProof(pair.Left, pair.Right, pair); SendProof(pair.Right, pair.Left, pair);
         }

@@ -6,6 +6,8 @@
 /setup-v1.8.4/research/
 
 # Generated test fixtures, logs and screenshots; curated images live in docs/assets
+/setup-v1.8.4/tests/artifacts/
+/setup-v1.8.4/dist/.setup-build-*/
 /setup-v1.8.4/tests/gui-process-test.txt
 /setup-v1.8.4/tests/*-latest.txt
 /setup-v1.8.4/tests/setup-window.png

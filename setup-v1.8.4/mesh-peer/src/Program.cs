@@ -24,7 +24,15 @@ namespace TavernNativeMenu
             {
                 if (String.IsNullOrWhiteSpace(game) || !Directory.Exists(game)) throw new InvalidDataException("The game folder is missing.");
                 MeshPeerRuntime.Changed += delegate { dirty = true; };
-                MeshPeerRuntime.PairVerified += delegate(string key, string nonce) { Write(new JObject { { "type", "paired" }, { "key", key }, { "nonce", nonce } }); };
+                MeshPeerRuntime.PairVerified += delegate(string key, string nonce)
+                {
+                    // The game can immediately acknowledge the card exchange
+                    // and receive the server's completion packet. Publish the
+                    // accepted contact before that event so its cached friends
+                    // list is ready when the server completes the exchange.
+                    Snapshot();
+                    Write(new JObject { { "type", "paired" }, { "key", key }, { "nonce", nonce } });
+                };
                 MeshPeerRuntime.PeerVerified += delegate(string key, string nonce) { Write(new JObject { { "type", "verified" }, { "key", key }, { "nonce", nonce } }); };
                 MeshPeerRuntime.Initialize(game, name);
                 var input = new Thread(ReadCommands) { IsBackground = true, Name = "Tavern mesh commands" }; input.Start();

@@ -15,7 +15,7 @@ using MelonLoader;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(TavernNativeMenu.MenuMod), "Tavern In-Game Hub", "2.2.0", "TavernNativeMenu contributors")]
+[assembly: MelonInfo(typeof(TavernNativeMenu.MenuMod), "Tavern In-Game Hub", "2.3.1", "TavernNativeMenu contributors")]
 [assembly: MelonGame(null, "A Township Tale")]
 
 namespace TavernNativeMenu
@@ -49,9 +49,19 @@ namespace TavernNativeMenu
                 Hook(typeof(Features.ServerBoardFilter), "Filter", "BeforeFilter", null);
                 LifecycleHooks.Install(patches);
                 MeshSocialClient.Diagnostic += delegate(string message) { MelonLogger.Warning("[Tavern peer friends] " + message); };
-                MeshSocialClient.Initialize(Path.GetDirectoryName(Application.dataPath), Catalog.Profile.Username);
+                MeshSocialClient.Initialize(Path.GetDirectoryName(Application.dataPath), Catalog.Profile.Username, Catalog.Settings.EnableFriendsNetworking);
                 NativeFriendsMenu.Install(patches);
+                NativeFriendCard.Install(patches);
+                MeshSocialTransport.CardStatus += delegate(int id, string message, bool showPopup)
+                {
+                    MelonLogger.Msg("[Tavern friend card] " + message);
+                    // Some world scenes have no native popup manager. The tablet
+                    // retains the result so it remains readable there as well.
+                    if (showPopup && UnityEngine.Object.FindObjectOfType<PopupManager>() != null)
+                        PopupManager.Show("Friend card", SafeText(message));
+                };
                 NativeSocialTablet.Install(patches, Path.GetDirectoryName(Application.dataPath));
+                NativeFriendshipState.Install(patches);
                 MelonLogger.Msg("[Tavern In-Game Hub] Ready. Community servers will appear in the original game picker.");
             }
             catch (Exception ex)
@@ -68,10 +78,11 @@ namespace TavernNativeMenu
             if (startupError != null || Catalog == null) return;
             MenuBranding.Tick();
             MeshSocialClient.Tick();
+            NativeFriendshipState.Tick();
             NativeFriendsMenu.Tick();
             NativeSocialTablet.Tick();
         }
-        public override void OnDeinitializeMelon() { NativeSocialTablet.Shutdown(); MeshSocialClient.Shutdown(); }
+        public override void OnDeinitializeMelon() { NativeFriendshipState.Shutdown(); NativeSocialTablet.Shutdown(); MeshSocialClient.Shutdown(); }
         public override void OnLateInitializeMelon()
         {
             if (startupError != null) PopupManager.Show("Tavern In-Game Hub could not start", SafeText(startupError));
@@ -127,9 +138,12 @@ namespace TavernNativeMenu
                 while (!refresh.IsCompleted && board != null) yield return null;
                 for (int remaining = 30; remaining > 0 && board != null; remaining--)
                 {
+                    if (!NativePrompt.Active && Catalog.ReloadLauncherServers()) break;
                     TextRenderer counter = Get<TextRenderer>(board, "updateCountdownText");
                     if (counter != null)
-                        counter.Text = Catalog.LastDirectoryError != null && (board.Type == ServerBoardType.PublicServer || board.Type == ServerBoardType.DiscoverServers)
+                        counter.Text = Catalog.LastProfileError != null && (board.Type == ServerBoardType.MyServers || board.Type == ServerBoardType.OpenServers)
+                            ? "PC server list unavailable; keeping saved entries."
+                            : Catalog.LastDirectoryError != null && (board.Type == ServerBoardType.PublicServer || board.Type == ServerBoardType.DiscoverServers)
                             ? "Directory unavailable. Retrying in " + remaining + "s; saved servers still available."
                             : "Updating in " + remaining + "s";
                     yield return new WaitForSeconds(1);

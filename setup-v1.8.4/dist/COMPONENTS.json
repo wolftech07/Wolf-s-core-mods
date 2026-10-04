@@ -1,0 +1,119 @@
+{
+  "Format": 1,
+  "Product": "Tavern In-Game Hub",
+  "Version": "2.3.1.0",
+  "SourceArchive": "TavernHubSource.zip",
+  "Components": [
+    {
+      "Path": "TavernHubSetup.exe",
+      "SHA256": "47b7208a09331c6571dc13d018a495a4d787c371fad693fa857f562b19d1e474",
+      "Source": "setup-v1.8.4/src/Setup.cs",
+      "SignatureStatus": "NotSigned"
+    },
+    {
+      "EmbeddedPath": "payload/addons/tavern_native_menu/__init__.py",
+      "SHA256": "7f3a88e2e70c87b7468a6730267e8fcca572cf1a51626e95a227cd7d3779c663",
+      "Source": "setup-v1.8.4/payload/addons/tavern_native_menu/__init__.py"
+    },
+    {
+      "EmbeddedPath": "payload/addons/tavern_native_menu/author.json",
+      "SHA256": "7501917574fb7aa69469b7f841b274aeb48bb33545e01ec35283e7a4004a66ee",
+      "Source": "setup-v1.8.4/payload/addons/tavern_native_menu/author.json"
+    },
+    {
+      "EmbeddedPath": "payload/addons/tavern_native_menu/client.py",
+      "SHA256": "65d7f7daaf4e78fb24df11e010a5594e3760497636405c18e0c91e2b6f05d3ef",
+      "Source": "setup-v1.8.4/payload/addons/tavern_native_menu/client.py"
+    },
+    {
+      "EmbeddedPath": "payload/integration-plan.json",
+      "SHA256": "72e6c0d63bb1b5776da0b90fe35bd36657b9d4bc18490c68dd25ae953fb2f082",
+      "Source": "setup-v1.8.4/payload/integration-plan.json"
+    },
+    {
+      "EmbeddedPath": "payload/native/bootstrap-nodes.json",
+      "SHA256": "cfe22f12b46b784f3b6f17868ffcb883804be13ca5906f37ab87157d64f95ff5",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/LIBSODIUM-LICENSE.txt",
+      "SHA256": "508a76d186356c0dd807a670ef510964f8724557024796a2c426c6c0e19ab683",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/libtoxcore.dll",
+      "SHA256": "0502fcfb83827a3cf700bf3abc755f870721ebf645492d1be69689de0da286f6",
+      "Source": "setup-v1.8.4/mesh-native/downloads/ and ports/"
+    },
+    {
+      "EmbeddedPath": "payload/native/MESH-PEER-LICENSE.txt",
+      "SHA256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/mesh-peer-source.zip",
+      "SHA256": "cdcb6276bbf0c564f12c8fa5d99976d7eecc4d78e080751c4742ab1445d08523",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/native-source.zip",
+      "SHA256": "c84941fd4e9d8ea2cff96517eef97ed9307fe06c84986d4c7f7faa6cdf9c7f95",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/NEWTONSOFT-LICENSE.txt",
+      "SHA256": "38c754284ae69a3948186022e428563cfbf515c15ff003955ded5932b7fa9fbd",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/Newtonsoft.Json.dll",
+      "SHA256": "87fa9a30e8406b0ccee1ac7f44b529228b4d76f7a3549b1a3817fdda0f5b5b2a",
+      "Source": "MIT dependency; https://github.com/JamesNK/Newtonsoft.Json"
+    },
+    {
+      "EmbeddedPath": "payload/native/PTHREADS-LICENSE.txt",
+      "SHA256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/seed-provenance.json",
+      "SHA256": "e9665bb60894f9c9b89eae9b77aa55c49cabc21617343f59cfa3216cf437f66d",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/TavernMeshPeer.exe",
+      "SHA256": "de9000b393c6b8ceded32258a2b0407b5b1d7ee7075c6056b1c42dd0aed1d1e5",
+      "Source": "setup-v1.8.4/mesh-peer/src/"
+    },
+    {
+      "EmbeddedPath": "payload/native/THIRD-PARTY-NOTICES.txt",
+      "SHA256": "75db827da801fe7a44b8160a863ede6c873af37a7763186445716163ed58d70c",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/native/TOXCORE-LICENSE.txt",
+      "SHA256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "Source": "setup-v1.8.4/mesh-native/ and mesh-peer/ dependency inputs"
+    },
+    {
+      "EmbeddedPath": "payload/server/TavernNativeSocialServer.dll",
+      "SHA256": "07588be63c983cc283df0e6bf7592ad0da9be8ba99412c93f069315967f99da1",
+      "Source": "setup-v1.8.4/mesh-server/src/"
+    },
+    {
+      "EmbeddedPath": "payload/Setup-ServerCards.ps1",
+      "SHA256": "d2baa2e04f4857e4217cf7c835ada3d12b0e1a0818ed584ad5711d3b254046f7",
+      "Source": "setup-v1.8.4/payload/Setup-ServerCards.ps1"
+    },
+    {
+      "EmbeddedPath": "payload/Setup-Worker.ps1",
+      "SHA256": "793fc24bec1a86db1bef322942e79e9a60f4bbf21c10715c8d743917257e9c23",
+      "Source": "setup-v1.8.4/payload/Setup-Worker.ps1"
+    },
+    {
+      "EmbeddedPath": "payload/TavernNativeMenu.dll",
+      "SHA256": "4e47e77a23f8d26bb0a5a2af5140f78fb7183e968d456fc4a73c13ae37f7f6ab",
+      "Source": "setup-v1.8.4/mod-src/"
+    }
+  ]
+}

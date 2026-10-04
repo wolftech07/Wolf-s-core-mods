@@ -34,6 +34,7 @@ namespace TavernNativeMenu
         public string SourcePath;
         public string TokenDirectory;
         public List<ServerEntry> Servers = new List<ServerEntry>();
+        private string serverSnapshot;
 
         public static LauncherProfile Load(string configOverride)
         {
@@ -46,9 +47,7 @@ namespace TavernNativeMenu
             if (!File.Exists(path))
                 throw new FileNotFoundException("Tavern Launcher settings were not found. Save your username and game path in Tavern Launcher first, or set LauncherConfigPath.", path);
 
-            JObject config;
-            try { config = JObject.Parse(File.ReadAllText(path)); }
-            catch (Exception ex) { throw new InvalidDataException("Cannot read Tavern Launcher settings at " + path + ".", ex); }
+            JObject config = ReadConfig(path);
             var profile = new LauncherProfile {
                 Username = Text(config, "username").Trim(),
                 GameExe = Text(config, "game_exe"),
@@ -59,12 +58,51 @@ namespace TavernNativeMenu
             if (String.IsNullOrWhiteSpace(profile.Username))
                 throw new InvalidDataException("Tavern Launcher has no saved username. Enter and save the username you use on your servers before starting the game.");
             if (String.IsNullOrWhiteSpace(profile.Platform)) profile.Platform = "SteamVR";
-            profile.ImportServers(config["saved_servers"] as JArray, true);
-            profile.ImportServers(config["recent_servers"] as JArray, false);
-            string lastHost = Text(config, "last_ip").Trim();
-            if (lastHost.Length > 0)
-                profile.AddServer(new ServerEntry { Name = lastHost, Host = lastHost, GamePort = Port(config["last_port"], 1757) });
+            profile.Servers = ParseServers(config);
+            profile.serverSnapshot = JsonConvert.SerializeObject(profile.Servers);
             return profile;
+        }
+
+        private static JObject ReadConfig(string path)
+        {
+            try
+            {
+                if (new FileInfo(path).Length > 4 * 1024 * 1024) throw new InvalidDataException("Launcher settings exceed the size limit.");
+                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+                using (var reader = new JsonTextReader(new StreamReader(stream)) { MaxDepth = 12 })
+                {
+                    JObject result = JObject.Load(reader);
+                    if (reader.Read()) throw new InvalidDataException("Unexpected data after launcher settings.");
+                    return result;
+                }
+            }
+            catch (Exception ex) { throw new InvalidDataException("Cannot read Tavern Launcher settings at " + path + ".", ex); }
+        }
+
+        private static List<ServerEntry> ParseServers(JObject config)
+        {
+            foreach (string name in new[] { "saved_servers", "recent_servers" })
+                if (config[name] != null && config[name].Type != JTokenType.Null && !(config[name] is JArray))
+                    throw new InvalidDataException("The launcher server list is not a JSON array.");
+            var temporary = new LauncherProfile();
+            temporary.ImportServers(config["saved_servers"] as JArray, true);
+            temporary.ImportServers(config["recent_servers"] as JArray, false);
+            string lastHost = Text(config, "last_ip").Trim();
+            if (lastHost.Length > 0 && Uri.CheckHostName(lastHost) != UriHostNameType.Unknown)
+                temporary.AddServer(new ServerEntry { Name = lastHost, Host = lastHost, GamePort = Port(config["last_port"], 1757) });
+            return temporary.Servers;
+        }
+
+        // Refresh only bookmarks. The running session's username and token
+        // directory must not change when the PC launcher edits its profile.
+        internal bool ReloadServers()
+        {
+            var replacement = ParseServers(ReadConfig(SourcePath));
+            string snapshot = JsonConvert.SerializeObject(replacement);
+            if (snapshot == serverSnapshot) return false;
+            Servers = replacement;
+            serverSnapshot = snapshot;
+            return true;
         }
 
         private void ImportServers(JArray entries, bool favorite)
@@ -75,10 +113,12 @@ namespace TavernNativeMenu
                 JObject entry = item as JObject;
                 if (entry == null) continue;
                 string host = Text(entry, "ip").Trim();
-                if (host.Length == 0) continue;
+                if (host.Length == 0 || Uri.CheckHostName(host) == UriHostNameType.Unknown) continue;
                 string name = Text(entry, "name").Trim();
                 AddServer(new ServerEntry { Name = name.Length == 0 ? host : name,
-                    Host = host, GamePort = Port(entry["port"], 1757), Favorite = favorite });
+                    Host = host, GamePort = Port(entry["port"], 1757), AuthPort = Port(entry["auth_port"], 1762),
+                    Kind = Text(entry, "kind") == "headless" ? "headless" : "official",
+                    Private = (bool?)entry["private"] == true, Favorite = favorite });
             }
         }
 
@@ -86,7 +126,7 @@ namespace TavernNativeMenu
         {
             foreach (ServerEntry existing in Servers)
             {
-                if (String.Equals(existing.Host, entry.Host, StringComparison.OrdinalIgnoreCase) && existing.GamePort == entry.GamePort)
+                if (String.Equals(existing.Host, entry.Host, StringComparison.OrdinalIgnoreCase) && existing.GamePort == entry.GamePort && existing.AuthPort == entry.AuthPort)
                 {
                     existing.Favorite = existing.Favorite || entry.Favorite;
                     return;

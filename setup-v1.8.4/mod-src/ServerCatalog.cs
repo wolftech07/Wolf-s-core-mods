@@ -16,6 +16,7 @@ namespace TavernNativeMenu
         public string LauncherConfig = null;
         public string DirectoryUrl = "http://themoddingtavern.com:1763/servers";
         public List<ServerEntry> Servers = new List<ServerEntry>();
+        public bool EnableFriendsNetworking = true;
     }
 
     internal sealed class MenuServer : DevGameServerInfo
@@ -29,10 +30,12 @@ namespace TavernNativeMenu
         internal LauncherProfile Profile;
         internal MenuSettingsFile Settings;
         internal string LastDirectoryError;
+        internal string LastProfileError;
         private readonly string settingsPath;
         private List<ServerEntry> community = new List<ServerEntry>();
         private DateTime refreshed = DateTime.MinValue;
         private Task refreshTask;
+        private DateTime nextProfileRead = DateTime.MinValue;
         private static readonly Dictionary<string, int> identifiers = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
         internal ServerCatalog(string gamePath)
@@ -49,13 +52,15 @@ namespace TavernNativeMenu
 
         internal async Task<IEnumerable<GameServerInfo>> GetServers(ServerBoardType board)
         {
+            ReloadLauncherServers();
+            bool localBoard = NativeFriendsMenu.ChoosingInvitation || board == ServerBoardType.MyServers || board == ServerBoardType.OpenServers;
             if (!NativeFriendsMenu.ChoosingInvitation)
             {
                 if (refreshTask == null || (refreshTask.IsCompleted && DateTime.UtcNow - refreshed > TimeSpan.FromSeconds(25)))
                     refreshTask = RefreshCommunity();
-                await refreshTask;
+                if (!localBoard) await refreshTask;
             }
-            var saved = Settings.Servers.Concat(Profile.Servers).Where(ValidEntry).ToList();
+            var saved = Profile.Servers.Concat(Settings.Servers).Where(ValidEntry).ToList();
             foreach (ServerEntry entry in saved)
             {
                 if (entry.Private) continue;
@@ -80,6 +85,23 @@ namespace TavernNativeMenu
             // Native SelectFirst chooses the final spline element. Let the
             // native reversal put the first actual server there, not Add Server.
             return list;
+        }
+
+        internal bool ReloadLauncherServers()
+        {
+            if (DateTime.UtcNow < nextProfileRead) return false;
+            nextProfileRead = DateTime.UtcNow.AddSeconds(2);
+            try
+            {
+                bool changed = Profile.ReloadServers();
+                LastProfileError = null;
+                return changed;
+            }
+            catch (Exception ex)
+            {
+                LastProfileError = ex.Message;
+                return false; // A partial PC save must not erase usable entries.
+            }
         }
 
         internal async Task ResolveKind(ServerEntry entry, string resolvedHost)

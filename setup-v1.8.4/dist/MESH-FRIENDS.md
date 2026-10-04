@@ -10,6 +10,8 @@ Open **My friend code / network status** on the native friends board, share your
 
 You can also exchange the game's physical friendship cards while together on a server with the current card companion. Both players must use the current client mod. The card exchange requires mutual consent; grabbing a card alone does not permanently add somebody.
 
+Hand your card directly to the other player while they take it; the native handoff has a short consent window. A player without this mod cannot be added to your peer friends list. Failed exchanges report which player's friends support is missing, an incomplete handoff, or an expired connection check. The result appears in the native popup when available and remains on that player's social-tablet action page for two minutes. If the server has no companion, share friend codes instead.
+
 The in-game social tablet also supports friend requests, acceptance, and personal blocking. Its server companion must be current. See [SOCIAL-TABLET.md](SOCIAL-TABLET.md) for tablet controls and moderation permissions.
 
 Accepted contacts remain saved on your computer when either player closes the game. Only their online status changes. Keep `UserData/TavernMesh.json` and its `.bak`, along with your other game `UserData` and backups when moving the installation; it contains your private identity and friends data. Do not distribute it with the mod.
@@ -50,5 +52,9 @@ The mod launches a small hidden networking helper with the game and stops it whe
 This removes the requirement to operate your own friends service. It does not remove the need for network discovery infrastructure, and direct connections are not guaranteed through every router or firewall. Public bootstrap/helper operators can observe connecting network addresses. Your identity file and friend list stay on your computer; only accepted peers receive social messages intended for them.
 
 If a friend stays offline, confirm both games are open, both players installed the current release and neither connection blocks the networking helper. Check the game log for the exact failure. Keep keys, saved-state files and private server addresses out of public bug reports.
+
+Version 2.3.1 fixes a card-confirmation race: the helper now sends the accepted friend list before its confirmation event, and the game records its acknowledgement before sending it to the server. This prevents a fast confirmation from being discarded while the local list is stale.
+
+The native card's friend status now follows accepted peer contacts with a verified player identity on the current server. The game's old account-service refresh cannot overwrite that status. Removing a friend or leaving the server clears the native projection without deleting your saved peer identity.
 
 Automated fixtures exercise identity, consent, persistence and setup recovery. Wide-area connections and physical card exchanges between two VR players still require live testing; a successful local test does not guarantee every internet route or headset interaction.

@@ -109,11 +109,14 @@ internal static class TransportTests
             var connection = new Connection(socket); socket.Add(connection);
             MeshSocialTransport.Initialize();
             Check(connection.HasHandler(34), "native client handler installed on existing connection");
+            Check(MeshSocialTransport.CardUnavailableReason.Contains("server support"), "unpatched server card offers setup or friend-code instructions");
             Receive(connection, new JObject { { "v", 2 }, { "kind", "mesh_hello" } });
             Check(Sent(connection, "mesh_identity") == 0, "identity waits for peer network startup");
+            Check(MeshSocialTransport.CardUnavailableReason.Contains("helper"), "card names unavailable local helper before handshake");
             MeshSocialClient.Configured = true; MeshSocialTransport.Tick();
             Check(Sent(connection, "mesh_identity") == 1 && (string)connection.Sent.Last()["address"] == MeshSocialClient.Address, "ready client binds global address over native connection");
             Receive(connection, new JObject { { "v", 2 }, { "kind", "mesh_bound" } });
+            Check(MeshSocialTransport.CardUnavailableReason == null, "ready card transport allows physical consent");
             MeshSocialTransport.Tick();
             Check(Sent(connection, "mesh_identity") == 1, "confirmed identity is not retransmitted");
             string nonce = new string('a', 43);
@@ -137,16 +140,25 @@ internal static class TransportTests
             Check(Player.Current.FriendshipManager.IsFriendsWith(20) && Player.Get(20).FriendshipManager.Status && linked == 1, "confirmed peer updates native card friendship once");
             Receive(connection, Friend(peer, 20));
             Check(linked == 1, "replayed success cannot duplicate native friendship event");
+            string fastAddress = Address(40), fastNonce = new string('f', 43);
+            new Player(40, "Fast peer");
+            MeshSocialClient.Friends.Add(new JObject { { "social_id", fastAddress.Substring(0, 64) }, { "name", "Fast peer" } });
+            Receive(connection, Pair(fastAddress, 40, fastNonce, MeshSocialClient.Now + 120));
+            connection.WhenSent = delegate(JObject packet)
+            { if ((string)packet["kind"] == "mesh_pair_confirm") Receive(connection, Friend(fastAddress, 40)); };
+            MeshSocialClient.Verify(fastAddress.Substring(0, 64), fastNonce);
+            connection.WhenSent = null;
+            Check(Player.Current.FriendshipManager.IsFriendsWith(40), "immediate card completion cannot race local acknowledgement flag");
             string nextNonce = new string('c', 43);
             Player.Get(30).FriendshipManager.Status = true;
             Receive(connection, Pair(later, 30, nextNonce, MeshSocialClient.Now + 120));
             MeshSocialClient.Now += 120; MeshSocialTransport.Tick();
             Check(!Player.Get(30).FriendshipManager.Status, "expired card clears optimistic grab status");
             MeshSocialClient.Verify(later.Substring(0, 64), nextNonce);
-            Check(Sent(connection, "mesh_pair_confirm") == 1, "expired pair cannot acknowledge later");
+            Check(Sent(connection, "mesh_pair_confirm") == 2, "expired pair cannot acknowledge later");
             Receive(connection, Pair(later, 30, new string('d', 43), MeshSocialClient.Now + 200));
             Receive(connection, Pair(later.Substring(0, 74) + "FF", 30, new string('e', 43), MeshSocialClient.Now + 120));
-            Check(MeshSocialClient.PairCalls == 2, "invalid expiry and checksum do not reach peer worker");
+            Check(MeshSocialClient.PairCalls == 3, "invalid expiry and checksum do not reach peer worker");
             Receive(connection, new JObject { { "v", 1 }, { "kind", "hello" }, { "relay_url", "https://old.example" } });
             Check(MeshSocialClient.ErrorText.Contains("old relay-based"), "old companion gets useful upgrade message");
             TabletTests(connection, peer, later);
@@ -267,6 +279,7 @@ namespace Alta.Networking
         public bool IsDisposed, IsApproved = true;
         public ISocket Socket;
         public readonly List<JObject> Sent = new List<JObject>();
+        public Action<JObject> WhenSent;
         public event ConnectionEventHandler Disconnected;
         public Connection(ISocket socket) { Socket = socket; }
         public bool HasHandler(int id) { return messageHandlers.ContainsKey((MessageType)id); }
@@ -274,7 +287,7 @@ namespace Alta.Networking
         public void SetHandler(MessageType id, SerializeConnectionMethod handler) { messageHandlers[id] = handler; }
         public void ClearHandler(MessageType id) { messageHandlers.Remove(id); }
         public void Send(object unused, MessageType id, SerializeConnectionMethod writer)
-        { var stream = new Alta.Serialization.Stream(); writer(this, stream); Sent.Add(JObject.Parse(stream.Text)); }
+        { var stream = new Alta.Serialization.Stream(); writer(this, stream); var packet = JObject.Parse(stream.Text); Sent.Add(packet); if (WhenSent != null) WhenSent(packet); }
         public void Receive(JObject packet) { messageHandlers[(MessageType)34](this, new Alta.Serialization.Stream { IsReading = true, Text = packet.ToString(Formatting.None) }); }
         public void Disconnect() { IsDisposed = true; if (Disconnected != null) Disconnected(this); }
     }

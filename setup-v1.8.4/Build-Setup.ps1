@@ -23,14 +23,27 @@ Copy-Item -LiteralPath $companion -Destination (Join-Path $payloadDir 'server\Ta
 $outDir = Join-Path $setupRoot 'dist'
 New-Item -ItemType Directory -Force -Path $outDir | Out-Null
 $destination = Join-Path $outDir 'TavernHubSetup.exe'
-$arguments = @('/nologo','/target:winexe','/platform:anycpu','/langversion:5','/optimize+',('/out:' + $destination),
+$buildStage = Join-Path $outDir ('.setup-build-'+[Guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $buildStage | Out-Null
+$compiledSetup = Join-Path $buildStage 'TavernHubSetup.exe'
+$arguments = @('/nologo','/target:winexe','/platform:anycpu','/langversion:5','/optimize+',('/out:' + $compiledSetup),
     '/reference:System.dll','/reference:System.Core.dll','/reference:System.Drawing.dll','/reference:System.Windows.Forms.dll','/reference:System.Web.Extensions.dll')
 foreach ($file in @(Get-ChildItem -LiteralPath $payloadDir -File -Recurse | Where-Object { $_.Extension -ne '.pyc' -and $_.FullName -notmatch '[\\/]__pycache__[\\/]' } | Sort-Object FullName)) {
     $relative = $file.FullName.Substring($payloadDir.Length + 1).Replace('\','/')
     $arguments += '/resource:' + $file.FullName + ',payload/' + $relative
 }
 $arguments += (Join-Path $setupRoot 'src\Setup.cs')
-& $compiler @arguments
-if ($LASTEXITCODE -ne 0) { throw "Setup compilation failed ($LASTEXITCODE)." }
+try {
+    & $compiler @arguments
+    if ($LASTEXITCODE -ne 0) { throw "Setup compilation failed ($LASTEXITCODE). The previous installer was retained." }
+    # Compile separately so a failed build cannot truncate the existing release.
+    if (Test-Path -LiteralPath $destination) { [IO.File]::Replace($compiledSetup,$destination,[System.Management.Automation.Language.NullString]::Value) }
+    else { [IO.File]::Move($compiledSetup,$destination) }
+} finally {
+    $resolvedStage = [IO.Path]::GetFullPath($buildStage)
+    $resolvedOutput = [IO.Path]::GetFullPath($outDir).TrimEnd('\')+'\'
+    if (!$resolvedStage.StartsWith($resolvedOutput,[StringComparison]::OrdinalIgnoreCase) -or [IO.Path]::GetFileName($resolvedStage) -notmatch '^\.setup-build-[0-9a-f]{32}$') { throw 'Unsafe setup build cleanup path.' }
+    if (Test-Path -LiteralPath $resolvedStage) { Remove-Item -LiteralPath $resolvedStage -Recurse -Force }
+}
 Write-Output ('Built: ' + $destination)
 Get-FileHash -LiteralPath $destination -Algorithm SHA256 | Format-List

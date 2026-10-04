@@ -17,6 +17,8 @@ namespace TavernNativeMenu
         private static Binding tabletBinding;
         private static string serverKey;
         internal static string CurrentServerKey { get { return tabletBinding != null && Current(tabletBinding) ? serverKey : null; } }
+        internal static int[] VerifiedPlayerIds
+        { get { return tabletBinding != null && Current(tabletBinding) ? tabletBinding.Verified.Keys.ToArray() : new int[0]; } }
         internal static string VerifiedAddress(int nativeId)
         {
             string value;

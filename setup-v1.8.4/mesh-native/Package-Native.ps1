@@ -14,8 +14,20 @@ $ports = @{
 }
 foreach ($name in $ports.Keys) {
     $target = Join-Path $source $name
+    $portName = $name -replace '-port$',''
+    $portInput = Join-Path $PSScriptRoot ('ports\'+$portName)
+    if (!(Test-Path -LiteralPath $portInput -PathType Container)) {
+        $portInput = Join-Path $PSScriptRoot ('registry-cache\git-trees\'+$ports[$name])
+    }
+    if (!(Test-Path -LiteralPath $portInput -PathType Container)) {
+        # A source release may retain these exact ports without the vcpkg cache.
+        $portInput = $target
+    }
+    if (!(Test-Path -LiteralPath (Join-Path $portInput 'portfile.cmake') -PathType Leaf)) { throw "The corresponding-source port is missing: $name." }
     New-Item -ItemType Directory -Force -Path $target | Out-Null
-    Get-ChildItem -LiteralPath (Join-Path $PSScriptRoot ('registry-cache\git-trees\'+$ports[$name])) -Force | Copy-Item -Destination $target -Recurse -Force
+    if (![String]::Equals([IO.Path]::GetFullPath($portInput),[IO.Path]::GetFullPath($target),[StringComparison]::OrdinalIgnoreCase)) {
+        Get-ChildItem -LiteralPath $portInput -Force | Copy-Item -Destination $target -Recurse -Force
+    }
 }
 foreach ($name in @('Build-Native.ps1','Package-Native.ps1','Refresh-Seeds.ps1','Native-Smoke.py','vcpkg.json','README.md','seed-provenance.json')) {
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot $name) -Destination $source -Force

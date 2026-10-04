@@ -11,8 +11,8 @@ using System.Windows.Forms;
 
 [assembly: AssemblyTitle("Tavern In-Game Hub Setup")]
 [assembly: AssemblyDescription("Graphical setup for Tavern In-Game Hub and Tavern Launcher Client 1.8.3 / 1.8.4")]
-[assembly: AssemblyVersion("2.2.1.0")]
-[assembly: AssemblyFileVersion("2.2.1.0")]
+[assembly: AssemblyVersion("2.3.1.0")]
+[assembly: AssemblyFileVersion("2.3.1.0")]
 
 namespace TavernNativeMenuSetup
 {
@@ -80,7 +80,7 @@ namespace TavernNativeMenuSetup
 
         internal static int Run(string script, string[] arguments, Action<string, bool> onLine)
         {
-            var command = new StringBuilder("-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File ");
+            var command = new StringBuilder("-NoLogo -NoProfile -NonInteractive -ExecutionPolicy RemoteSigned -File ");
             command.Append(Quote(script));
             foreach (string arg in arguments) command.Append(' ').Append(Quote(arg));
             var info = new ProcessStartInfo(PowerShell, command.ToString());
@@ -190,7 +190,7 @@ namespace TavernNativeMenuSetup
             Controls.Add(layout);
             var heading = new Panel { Dock = DockStyle.Fill };
             heading.Controls.Add(new Label { Text = "Choose your server in the game.", AutoSize = true, Location = new Point(0, 0), Font = new Font("Segoe UI", 20F, FontStyle.Bold) });
-            heading.Controls.Add(new Label { Text = "Tavern In-Game Hub v2.2.1  /  Tavern Launcher 1.8.3 / 1.8.4", AutoSize = true, Location = new Point(2, 43), ForeColor = Color.FromArgb(84, 100, 112) });
+            heading.Controls.Add(new Label { Text = "Tavern In-Game Hub v2.3.1  /  Tavern Launcher 1.8.3 / 1.8.4", AutoSize = true, Location = new Point(2, 43), ForeColor = Color.FromArgb(84, 100, 112) });
             layout.Controls.Add(heading, 0, 0);
             layout.Controls.Add(PathRow("1   A Township Tale game", "Select A Township Tale.exe in your patched game folder.", game, "A Township Tale.exe"), 0, 1);
             layout.Controls.Add(PathRow("2   Tavern Launcher client", "Select TavernLauncher - Client.exe from version 1.8.3 or 1.8.4.", launcher, "TavernLauncher - Client.exe"), 0, 2);
@@ -270,6 +270,7 @@ namespace TavernNativeMenuSetup
             Append("[INFO] Your game needs MelonLoader and the Tavern client patch installed first.", false);
             Append("[INFO] Install / Update keeps your settings and original Undo backups.", false);
             Append("[INFO] Mesh friends and the social tablet are included. Hosts install server support here for cards and tablet moderation.", false);
+            Append("[INFO] Friends use public Tox networking. TavernMeshPeer.exe runs only while the game is open.", false);
             Append("[INFO] Close the game and Tavern Launcher before Install or Undo.", false);
         }
 

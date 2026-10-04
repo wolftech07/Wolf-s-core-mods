@@ -458,7 +458,7 @@ function Invoke-SetupCore([string]$Action, [string]$Game, [string]$Launcher, [st
     }
     $enableChange=Get-EnableAddonChange $context $current
     if ($enableChange) { $changes += $enableChange; $enableRecord.InstalledHash=$enableChange.Hash }
-    $newRecord = [ordered]@{Format=1;Product='Tavern In-Game Hub 2.2.1';GameExe=$context.GameExe;LauncherExe=$context.LauncherExe;Files=$entries;Enablement=$enableRecord}
+    $newRecord = [ordered]@{Format=1;Product='Tavern In-Game Hub 2.3.1';GameExe=$context.GameExe;LauncherExe=$context.LauncherExe;Files=$entries;Enablement=$enableRecord}
     Invoke-FileTransaction $context $changes $newRecord
     Write-Step OK 'Installation completed and every installed file was verified.'
     Write-Step INFO 'Reopen Tavern Launcher and use Play Game to choose a server inside the game. The Native Menu addon is enabled.'

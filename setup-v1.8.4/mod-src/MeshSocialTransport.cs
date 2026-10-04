@@ -43,7 +43,25 @@ namespace TavernNativeMenu
         private static readonly FieldInfo Handlers = typeof(Connection).GetField("messageHandlers", BindingFlags.Instance | BindingFlags.NonPublic);
         private static bool initialized;
         private static long connectionGeneration;
+        internal static long ConnectionGeneration { get { return System.Threading.Interlocked.Read(ref connectionGeneration); } }
         internal static event Action<int, string, string> FriendLinked;
+        internal static event Action<int, string, bool> CardStatus;
+        internal static string CardUnavailableReason
+        {
+            get
+            {
+                Binding binding = Bindings.Values.FirstOrDefault(x => Current(x) && x.MeshServer) ?? Bindings.Values.FirstOrDefault(Current);
+                if (binding == null || !binding.MeshServer)
+                    return binding != null && binding.OldServerWarned
+                        ? "The server has the old friends companion. Its host must update server support in Setup."
+                        : "Friend cards need server support. Ask the host to install server support in Setup, or use friend codes in the menu.";
+                if (!MeshSocialClient.Configured) return "Your friends helper is unavailable or starting. Check My friend code / network status in the menu.";
+                if (!binding.Bound) return "Your friends connection is still starting. Wait a few seconds before handing over the card.";
+                return null;
+            }
+        }
+        internal static void NotifyCard(int nativeId, string message, bool showPopup = true)
+        { Action<int, string, bool> handler = CardStatus; if (handler != null) handler(nativeId, message, showPopup); }
         internal static void Initialize()
         {
             if (initialized) return;
@@ -111,7 +129,7 @@ namespace TavernNativeMenu
                 foreach (Pair pair in binding.Pairs.Values.Where(x => x.Expires <= MeshSocialClient.Now).ToArray())
                 {
                     binding.Pairs.Remove(pair.Nonce); UndoOptimisticFriend(pair.NativeId);
-                    Error("Friend-card confirmation expired. Exchange cards again when both peer clients are connected.");
+                    CardError(pair.NativeId, "Friend-card confirmation expired. Check both players' network status, then exchange cards again.");
                 }
             }
         }
@@ -160,7 +178,7 @@ namespace TavernNativeMenu
                 UndoOptimisticFriend(id);
                 string message = (string)packet["message"] ?? "The server could not complete that friend-card exchange.";
                 message = new string(message.Where(c => !Char.IsControl(c)).Take(240).ToArray());
-                Error(message); return;
+                CardError(id, message); return;
             }
             if (HandleTablet(binding, kind, packet)) return;
             if (!binding.Bound) return;
@@ -185,13 +203,14 @@ namespace TavernNativeMenu
                 string key = address.Substring(0, 64), nonce = (string)packet["pair_nonce"];
                 long expires = (long?)packet["expires_unix"] ?? 0;
                 int nativeId = (int?)packet["native_id"] ?? 0;
-                if (NativeSocialTablet.IsPlayerBlocked(nativeId)) { UndoOptimisticFriend(nativeId); Error("Unblock this player in your social tablet before exchanging friend cards."); return; }
+                if (NativeSocialTablet.IsPlayerBlocked(nativeId)) { UndoOptimisticFriend(nativeId); CardError(nativeId, "Unblock this player in your social tablet before exchanging friend cards."); return; }
                 if (key == MeshSocialClient.SocialId || nativeId <= 0 || Player.Current == null || nativeId == Player.Current.UserInfo.Identifier ||
                     !ValidNonce(nonce) || expires <= MeshSocialClient.Now || expires > MeshSocialClient.Now + 125 || binding.Pairs.ContainsKey(nonce) || binding.Pairs.Count >= 8) return;
                 // Only one pending exchange with a native player/key per connection.
                 if (binding.Pairs.Values.Any(x => x.NativeId == nativeId || x.Key == key)) return;
                 pair = new Pair { Nonce = nonce, Address = address, Key = key, NativeId = nativeId, Expires = expires, Name = (string)packet["name"] ?? "Friend" };
                 binding.Pairs.Add(nonce, pair);
+                NotifyCard(nativeId, "Card received. Connecting to this player; friendship appears after both clients confirm.", false);
                 await MeshSocialClient.PairCardAsync(address, pair.Name, nonce, expires).ConfigureAwait(false);
             }
             catch (Exception error)
@@ -201,7 +220,7 @@ namespace TavernNativeMenu
                 {
                     if (!Current(binding)) return;
                     if (failed != null) { binding.Pairs.Remove(failed.Nonce); UndoOptimisticFriend(failed.NativeId); }
-                    MeshSocialClient.SetError(error);
+                    CardError(failed == null ? 0 : failed.NativeId, error.Message);
                 });
             }
         }
@@ -213,8 +232,9 @@ namespace TavernNativeMenu
             {
                 Pair pair;
                 if (!Current(binding) || !binding.Pairs.TryGetValue(nonce, out pair) || pair.Key != key || pair.Expires <= MeshSocialClient.Now || pair.Acknowledged) continue;
-                Send(binding, new JObject { { "v", 2 }, { "kind", "mesh_pair_confirm" }, { "pair_nonce", nonce } });
                 pair.Acknowledged = true;
+                try { Send(binding, new JObject { { "v", 2 }, { "kind", "mesh_pair_confirm" }, { "pair_nonce", nonce } }); }
+                catch { pair.Acknowledged = false; throw; }
             }
         }
         private static async void CompletePair(Binding binding, JObject packet)
@@ -241,6 +261,7 @@ namespace TavernNativeMenu
                         local.FriendshipManager.AddFriend(new FriendshipInfo { Identifier = nativeId, Username = name, Type = FriendshipType.Accepted, CreatedAt = DateTime.UtcNow });
                     Action<int, string, string> handler = FriendLinked;
                     if (handler != null) handler(nativeId, pair.Key, name);
+                    NotifyCard(nativeId, "Friend added. This player is now saved on your friends board.");
                     MeshSocialClient.RequestRefresh();
                 });
             }
@@ -259,5 +280,7 @@ namespace TavernNativeMenu
             binding.Connection.Send(null, SocialMessage, delegate(Connection connection, Alta.Serialization.Stream stream) { stream.SerializeString(ref json, (Alta.Serialization.Stream.StringEncoding)0); });
         }
         private static void Error(string message) { MeshSocialClient.SetError(new InvalidOperationException(message)); }
+        private static void CardError(int nativeId, string message)
+        { Error(message); NotifyCard(nativeId, message); }
     }
 }

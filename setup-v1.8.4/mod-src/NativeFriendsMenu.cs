@@ -249,7 +249,7 @@ namespace TavernNativeMenu
 
         private static void ShowCardHelp()
         {
-            PopupManager.Show("Tavern friends", "Share friend codes and accept requests, or exchange friendship cards together on a server with current Tavern card support. Only accepted friends appear here. Choose a friend to invite them to a saved or private server; Requests shows incoming friend requests and invitations. Both games must be online together to deliver queued messages.");
+            PopupManager.Show("Tavern friends", "Both players need the current Hub client mod. Share friend codes and accept requests, or hand a friendship card directly to the other player on a server with current Hub server support. A player without this mod cannot join your peer friends list. Only accepted friends appear here. Both games must be online together to deliver queued messages.");
         }
 
         private static string ServiceLabel()

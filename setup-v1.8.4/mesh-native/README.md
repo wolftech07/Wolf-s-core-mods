@@ -12,6 +12,12 @@ Install Visual Studio Desktop development with C++, CMake and vcpkg. Run
 and uses `vcpkg.json`'s pinned baseline for its dependencies. `-SkipDependencies`
 uses a completed local vcpkg install. All paths derive from this folder.
 
+The complete source release supplies the original archives in `downloads` and
+their vcpkg ports in `ports`; the build uses these ports automatically. Extract
+it into a short folder such as `C:\TavernHubSource`. The upstream MSVC projects
+still have path-length limits; this native folder's full path must be no longer
+than 90 characters. `../Build-All.ps1` builds and packages the complete mod.
+
 The corresponding-source archive includes original source archives and the
 vcpkg port patches used for libsodium and pthreads. To rebuild without fetching
 these source archives, copy them into `downloads` before running the build.

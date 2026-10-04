@@ -1,6 +1,6 @@
 # Tavern In-Game Hub
 
-**Version 2.2.1 · Tavern Launcher 1.8.3 / 1.8.4 · Windows PC VR**
+**Version 2.3.1 · Tavern Launcher 1.8.3 / 1.8.4 · Windows PC VR**
 
 Choose servers and use friends, invitations, and the social tablet inside A Township Tale.
 
@@ -43,7 +43,8 @@ This enables friendship cards and full tablet support. Both players need the cur
 
 ## Using it
 
-- **Servers:** browse community servers, or choose **Add a private server...** to save your own address. Password and whitelist rules still apply.
+- **Servers on PC:** open the launcher's **Saved & Recent Servers**, choose **Favourites → + Add Server**, enter the host's address, game/auth ports, and server type, then click **Add**. It appears in VR Favorites and Saved / Recent shortly, including while the menu is already open.
+- **Servers in VR:** browse community servers, or choose **Add a private server...** to save your own address. Password and whitelist rules still apply.
 - **Friends:** share a friend code, exchange cards on a supported server, or select a player on the social tablet. The recipient must accept.
 - **Invitations:** select a friend and invite them to a saved server. Both games must be online for delivery.
 - **Tablet:** view players, mute or block them, and use moderation controls if your role allows it.
@@ -57,7 +58,14 @@ Close the game and launcher, then choose **Undo setup**. Server hosts can use **
 - **Missing Play Game button:** restart the selected launcher and enable **Tavern In-Game Hub - Play Game** in Addons.
 - **Missing tablet actions:** update the server companion using **Install server support...**.
 - **Friends offline:** keep both games open, allow discovery time, and check network status on the friends board.
+- **Friend card fails:** both players must install this mod, and the host must update server support. Hand the card directly to the other player. A player without the mod cannot be added to the peer friends list; use friend codes if the server has no companion.
 - **Setup error:** save the log and include the exact error in your bug report. Review personal paths before sharing logs; keep identity and credential files private.
+
+## Source and antivirus reports
+
+**TavernHubSource.zip** contains the readable mod, setup, add-on, server/helper source, build scripts, and pinned native dependency sources. See [SOURCE-AND-BUILD.md](SOURCE-AND-BUILD.md) to build it using your own compatible game references. `COMPONENTS.json` lists the embedded file hashes; `SHA256SUMS.txt` lists download hashes.
+
+The files are unsigned. If antivirus reports a “crypto” warning, capture the detection name and affected file or URL/IP. Friends networking uses Tox encryption; the precise reported Malwarebytes cause remains unconfirmed. See [SECURITY.md](SECURITY.md) for network behavior and the optional friends-network setting.
 
 ## More information
 

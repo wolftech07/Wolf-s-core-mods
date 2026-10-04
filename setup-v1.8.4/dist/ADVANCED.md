@@ -1,6 +1,6 @@
 # Tavern In-Game Hub Setup — Tavern Launcher Client 1.8.3 / 1.8.4
 
-**Menu mod 2.2.0 · Setup 2.2.1 · Windows x64**
+**Menu mod 2.3.1 · Setup 2.3.1 · Windows x64**
 
 A small, separate Windows setup app for the Tavern In-Game Hub mod. Double-click the EXE, choose your game and launcher, and click **Install / Update**. You do not need to run commands, install Python, or compile anything.
 
@@ -96,7 +96,7 @@ These are placeholders, not folders to create literally:
 
 `<ServerFolder>` means the separate patched game-server folder selected for card support. Client updates preserve the original Undo backups while adding peer dependencies. Do not uninstall first.
 
-Setup **2.2.1** includes menu mod **2.2.0**, automatic peer networking, the compatible launcher add-on, and optional server card companion **2.2.0**. The mod continues to honor `quest_scene_required` when selecting the join scene.
+Setup **2.3.1** includes menu mod **2.3.1**, automatic peer networking, the compatible launcher add-on, and optional server card companion **2.3.1**. The mod continues to honor `quest_scene_required` when selecting the join scene.
 
 Launcher **1.8.4** was checked against its published client/server assets, TavernLib **1.5.2**, and CircuitsVoiceChat **1.0.8**. Its patched game assembly matches the already-supported game hash. Authentication, tablet bindings and voice mute remain compatible; the installer and Play Game compatibility lists now recognize the new launcher and TavernLib files.
 
@@ -150,7 +150,7 @@ Verified during development:
 - Compiled the standalone EXE and checked its window rendering.
 - Tested live stdout/stderr, output before process exit, trailing output, error exit status, and paths containing spaces, apostrophes, brackets, ampersands, and Unicode.
 - Passed 138 installer fixture checks covering install, in-place updates, Undo, rollback, interrupted-operation recovery, damaged backups, locked files, launcher-folder migration, and add-on settings preservation.
-- Passed nine launcher add-on tests covering the Play Game button, menu-only launch arguments, neutral identity, profile selection, platforms, console/debug settings, and failure handling.
+- Passed 21 launcher add-on tests covering the Play Game button, menu-only launch arguments, neutral identity, profile selection, platforms, console/debug settings, and failure handling.
 - Ran install/reinstall/check/Undo separately with copies of the real 1.8.3 and 1.8.4 launcher releases and their TavernLib dependencies.
 - Passed 19 checks against the official 1.8.4 launcher source for add-on loading, controls, profile saving and token construction.
 - Passed 78 native-method and field compatibility checks across the two supplied game assemblies after rebuilding the updated mod.
@@ -164,6 +164,12 @@ Verified during development:
 - Passed 27 optional server-card installer checks for updates, original backups, Undo, rollback and crash recovery. The retired relay tests remain available as legacy reference only.
 
 **A live VR session, physical card exchange, or wide-area invitation between two real game clients has not been tested in this environment.** Successful compilation and automated checks do not verify headset physics, keyboard reach or all runtime mod combinations. Treat this as a build for in-game testing and include MelonLoader logs when reporting a failure.
+
+## PC servers and source release
+
+Version 2.3.0 enhances the launcher's existing Saved & Recent Servers panel with **+ Add Server**. Bookmarks retain the name, address, game port, authentication port and server type. Favorites/Saved lists reload the launcher profile while the VR picker is open. A partial or invalid profile save keeps the last usable list; live refresh does not switch the running username or rewrite tokens. Saved lists load without waiting for the community directory. Fourteen production-class checks cover these behaviors.
+
+See [SOURCE-AND-BUILD.md](SOURCE-AND-BUILD.md) for a clean build from the readable source archive, and [SECURITY.md](SECURITY.md) for component behavior and antivirus reporting. Setup now uses RemoteSigned and does not add antivirus exclusions.
 
 ## For maintainers
 
@@ -179,9 +185,10 @@ From this project folder, replace `<GameFolder>` with your compatible patched ga
 .\mesh-server\Build-MeshServer.ps1 -GamePath '<GameFolder>'
 .\Build-Mod.ps1 -GameFolder '<GameFolder>' -TavernLib '<LauncherFolder>\Patch\TavernLib.dll'
 .\Build-Setup.ps1
+.\Package-Source.ps1
 .\Package-Setup.ps1
 ```
 
 C# projects use Windows' .NET Framework compiler. Building the native library additionally requires Visual Studio Desktop development with C++, CMake and vcpkg. The standalone helper and c-toxcore are GPL-3.0-or-later; Newtonsoft.Json is MIT, libsodium ISC, and pthreads4w Apache-2.0. Keep the embedded notices and corresponding source archives with redistributed binaries. Unrelated project files retain their existing licensing.
 
-Share `dist/TavernHubSetup.zip`, containing **one setup EXE**, the quick-start README, this advanced guide, the mesh friends and social tablet guides, and SHA256 checksums. Do not include game binaries, launcher executables, decompiled research or personal `UserData` in releases.
+Share `dist/TavernHubSetup.zip`, containing **one setup EXE**, the readable source ZIP, quick-start README, build/security guides, this advanced guide, the friends/tablet guides, component hashes, and SHA256 checksums. Do not include game binaries, launcher executables, decompiled research or personal `UserData` in releases.

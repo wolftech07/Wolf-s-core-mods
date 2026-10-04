@@ -22,6 +22,7 @@ namespace TavernNativeMeshServer
         internal bool LeftConfirmed, RightConfirmed;
     }
     internal enum PairConfirmation { Rejected, Waiting, Complete }
+    internal enum PairCreationFailure { None, InvalidParticipant, SamePlayer, SameIdentity, Pending, Capacity }
     internal sealed class PairRegistry
     {
         internal const int MaximumPairs = 128;
@@ -29,9 +30,7 @@ namespace TavernNativeMeshServer
         internal int Count { get { return pairs.Count; } }
         internal PendingPair Create(PairPeer left, PairPeer right, object tag, DateTime now)
         {
-            if (!Valid(left) || !Valid(right) || ReferenceEquals(left.Connection, right.Connection) || left.NativeId == right.NativeId || left.Address.Substring(0, 64) == right.Address.Substring(0, 64) || pairs.Count >= MaximumPairs)
-                return null;
-            if (pairs.Values.Any(x => HasPeer(x, left.Connection) || HasPeer(x, right.Connection))) return null;
+            if (CreationFailure(left, right) != PairCreationFailure.None) return null;
             string nonce;
             using (var random = RandomNumberGenerator.Create())
             {
@@ -41,6 +40,14 @@ namespace TavernNativeMeshServer
             }
             var pair = new PendingPair { Nonce = nonce, Left = left, Right = right, Tag = tag, Expires = now.AddSeconds(120) };
             pairs.Add(nonce, pair); return pair;
+        }
+        internal PairCreationFailure CreationFailure(PairPeer left, PairPeer right)
+        {
+            if (!Valid(left) || !Valid(right)) return PairCreationFailure.InvalidParticipant;
+            if (ReferenceEquals(left.Connection, right.Connection) || left.NativeId == right.NativeId) return PairCreationFailure.SamePlayer;
+            if (left.Address.Substring(0, 64) == right.Address.Substring(0, 64)) return PairCreationFailure.SameIdentity;
+            if (pairs.Values.Any(x => HasPeer(x, left.Connection) || HasPeer(x, right.Connection))) return PairCreationFailure.Pending;
+            return pairs.Count >= MaximumPairs ? PairCreationFailure.Capacity : PairCreationFailure.None;
         }
         private static bool Valid(PairPeer peer)
         { return peer != null && peer.Connection != null && peer.NativeId > 0 && peer.Address != null && AddressCodec.Normalize(peer.Address) == peer.Address; }

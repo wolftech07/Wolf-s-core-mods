@@ -4,6 +4,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $meshRoot = $PSScriptRoot
+if ($meshRoot.Length -gt 90) {
+    throw 'The native source path is too long for the upstream MSVC projects. Extract the source into a shorter folder, for example C:\TavernHubSource, and retry. This check only affects building from source.'
+}
 
 function Invoke-NativeTool([string]$Executable, [string[]]$Arguments) {
     $start = New-Object System.Diagnostics.ProcessStartInfo
@@ -46,7 +49,12 @@ if (!$SkipDependencies) {
     $env:VCPKG_DOWNLOADS = Join-Path $meshRoot 'downloads'
     $env:VCPKG_DEFAULT_BINARY_CACHE = Join-Path $meshRoot 'binary-cache'
     $env:X_VCPKG_REGISTRIES_CACHE = Join-Path $meshRoot 'registry-cache'
-    Invoke-NativeTool $vcpkg @('install', '--triplet', 'x64-windows-static', '--host-triplet', 'x64-windows-static', "--x-manifest-root=$meshRoot", "--x-install-root=$meshRoot\installed", "--x-buildtrees-root=$meshRoot\buildtrees", "--x-packages-root=$meshRoot\packages", '--disable-metrics')
+    $dependencyArguments = @('install', '--triplet', 'x64-windows-static', '--host-triplet', 'x64-windows-static', "--x-manifest-root=$meshRoot", "--x-install-root=$meshRoot\installed", "--x-buildtrees-root=$meshRoot\buildtrees", "--x-packages-root=$meshRoot\packages", '--disable-metrics')
+    $sourcePorts = Join-Path $meshRoot 'ports'
+    if (Test-Path -LiteralPath $sourcePorts -PathType Container) {
+        $dependencyArguments += '--overlay-ports='+$sourcePorts
+    }
+    Invoke-NativeTool $vcpkg $dependencyArguments
 }
 $generator = if ((Split-Path (Split-Path $VisualStudioPath -Parent) -Leaf) -eq '18') { 'Visual Studio 18 2026' } else { 'Visual Studio 17 2022' }
 $arguments = @('--fresh', '-S', "$meshRoot\src", '-B', "$meshRoot\build", '-G', $generator, '-A', 'x64',
